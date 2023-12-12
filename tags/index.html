@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: essay, MYS109hqj">
+    <meta name="keywords" content="标签, MYS109hqj">
     <meta name="description" content="MYS109hqj">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: essay | MYS109hqj</title>
+    <title>标签 | MYS109hqj</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -387,96 +387,73 @@
 
     
 
-<div id="category-cloud" class="container chip-container">
+<div id="tags" class="container chip-container">
     <div class="card">
         <div class="card-content">
             <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
+                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
             </div>
             <div class="tag-chips">
                 
                 
-                
-                <a href="/categories/work/" title="work: 0">
+                <a href="/tags/study/" title="study: 0">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F9EBEA;">work
+                            data-tagname="study" style="background-color: #F9EBEA;">study
                         <span class="tag-length">0</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/essay/" title="essay: 1">
+                <a href="/tags/test/" title="test: 0">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F5EEF8;">essay
-                        <span class="tag-length">1</span>
+                             chip-default "
+                            data-tagname="test" style="background-color: #F5EEF8;">test
+                        <span class="tag-length">0</span>
                     </span>
                 </a>
                 
+                
+                <a href="/tags/daily/" title="daily: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="daily" style="background-color: #D5F5E3;">daily
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
                 
             </div>
         </div>
     </div>
 </div>
 
+    
+    <link rel="stylesheet" type="text/css" href="/libs/jqcloud/jqcloud.css">
+<style type="text/css">
+    #tag-wordcloud {
+        width: 100%;
+        height: 300px;
+    }
+</style>
+
+<div class="container" data-aos="fade-up">
+    <div class="card">
+        <div id="tag-wordcloud" class="card-content"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/libs/jqcloud/jqcloud-1.0.4.min.js"></script>
+<script type="text/javascript">
+    
+
+    $('#tag-wordcloud').jQCloud([{"text":"study","weight":0,"link":"/tags/study/"},{"text":"test","weight":0,"link":"/tags/test/"},{"text":"daily","weight":1,"link":"/tags/daily/"}], {
+        autoResize: true
+    });
+</script>
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/12/12/231212blog/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="a simple blog">
-                            
-                            <span class="card-title">a simple blog</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                (注：bing搜索随笔的英文，结果如下：随笔，英文称“essay”，词源来自法文动词“essayer”，意为“尝试”、“探索”。经过后继搜索，essay由短文，尝试的意思；也可作动词表企图试图所以这个category绝对不是正式的论文的意思
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-12-12
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/essay/" class="post-category">
-                                    essay
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/daily/">
-                            <span class="chip bg-color">daily</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-        </div>
-    </article>
 </main>
-
-
 
 
     <footer class="page-footer bg-color">
