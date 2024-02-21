@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Form with Multiple Questions</title>
+    <style>
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .popup_title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .popup_btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body onload="clearLocalStorage()">
+
+<body>
+//主要修改了selectoption和界面文本(div)并新增在“查看答案”按钮中被调用的showselection函数
+<button onclick="clearLocalStorage()">清除缓存</button>
+
+<p>问答单片：</p>
+Q1:
+<audio controls>
+  <source src="012.wav">
+  您的浏览器不支持 audio 元素。
+</audio><br>
+<div id="overlay1" class="overlay">
+  <div id="popup1" class="popup">
+    <p class="popup_title">歌词原文及答案</p>
+    <p class="popup_content" align="left">
+      <img src="012UntilDawn.jpg"  align="right" width="30%">
+    Story and atmosphere, 80s serial killer's reign,<br>
+    College kids on a mountain, where dangers remain,<br><br>
+    Survive or die trying, their fate intertwines,<br>
+    On this vacation, terror creeps and confines.<br><br>
+    Decisions weigh heavy, escape death's might,<br>
+    Survival's uncertain, in the face of the night.<br><br>
+    In this gripping tale, life hangs by a thread,<br>
+    Until the dawn breaks, hope clings to their breath.<br><br>
+    <div id="answerQ1"></div>
+</p>
+    <div class="popup_btn">
+      <button class="cancelBtn" onclick="hidePopup('popup1')">取消</button>
+      <button class="confirmBtn" onclick="hidePopup('popup1')">确认</button>
+    </div>
+  </div>
+</div>
+
+<p>Q2:</p>
+<audio controls>
+  <source src="your_audio_2.wav">
+  您的浏览器不支持 audio 元素。
+</audio><br>
+<div id="overlay2" class="overlay">
+  <div id="popup2" class="popup">
+    <p class="popup_title">歌词原文及答案</p>
+    <p class="popup_content" align="left">
+      <img src="your_image_2.jpg"  align="right" width="30%">
+    Story and atmosphere for question 2,<br>
+    More details about the second question.<br><br>
+    <div id="answerQ2"></div>
+</p>
+    <div class="popup_btn">
+      <button class="cancelBtn" onclick="hidePopup('popup2')">取消</button>
+      <button class="confirmBtn" onclick="hidePopup('popup2')">确认</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<p>//选项框单片</p>
+<table>
+  <tr>
+    <td><img src="012UntilDawn.jpg" alt="" width="30%"></td>
+    <td><img src="008slient hill.jpg" alt="" width="30%"></td>
+    <td><img src="003FNAF02.jpg" alt="" width="30%"></td>
+  </tr>
+  <tr>
+    <td><button class="Q1" onclick="selectOption('Q1', 'A')">A</button></td>
+    <td><button class="Q1" onclick="selectOption('Q1', 'B')">B</button></td>
+    <td><button class="Q1" onclick="selectOption('Q1', 'C')">C</button></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><img src="001resident evil.jpg" alt="" width="30%"></td>
+    <td><img src="001resident evil.jpg" alt="" width="30%"></td>
+    <td><img src="001resident evil.jpg" alt="" width="30%"></td>
+  </tr>
+  <tr>
+    <td><button class="Q2" onclick="selectOption('Q2', 'A')">A</button></td>
+    <td><button class="Q2" onclick="selectOption('Q2', 'B')">B</button></td>
+    <td><button class="Q2" onclick="selectOption('Q2', 'C')">C</button></td>
+  </tr>
+</table>
+
+<button id="showPopup1" onclick="showPopup('popup1');showSelection('Q1')">查看答案1</button>
+</br>
+<button id="showPopup2" onclick="showPopup('popup2');showSelection('Q2')">查看答案2</button>
+</br>
+
+
+
+<script>
+function showPopup(popupId) {
+    var overlay = document.getElementById("overlay" + popupId.substring(5));
+    overlay.style.display = "block";
+    if (popupId === 'popup1') {
+        document.getElementById("showPopup1").style.display = "none";
+        document.getElementById("showPopup2").style.display = "block";
+    } else if (popupId === 'popup2') {
+        document.getElementById("showPopup1").style.display = "block";
+        document.getElementById("showPopup2").style.display = "none";
+    }
+}
+
+function hidePopup(popupId) {
+    var overlay = document.getElementById("overlay" + popupId.substring(5));
+    overlay.style.display = "none";
+}
+
+function selectOption(questionId, option) {
+    // 禁用其他两个按钮
+    var buttons = document.getElementsByClassName(questionId);
+    var buttonsArray = Array.from(buttons);
+    buttonsArray.forEach(function(button) {
+        button.disabled = true;
+    });
+
+    // 在这里执行获取选项信息的操作
+    localStorage.setItem(questionId, option);
+    alert("您选择了问题 " + questionId + " 的选项 " + option);
+}
+
+function showSelection(questionId) {
+    var selectedOption = localStorage.getItem(questionId);
+    var answerDiv = document.getElementById("answer" + questionId);
+    if (selectedOption) {
+        answerDiv.innerText = "您选择的选项是：" + selectedOption;
+    } else {
+        answerDiv.innerText = "您尚未选择任何选项！";
+    }
+}
+
+function clearLocalStorage() {
+    localStorage.clear();
+    alert("成功清除缓存")
+}
+
+</script>
+
+</body>
+</html>

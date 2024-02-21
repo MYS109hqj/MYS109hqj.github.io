@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiple Popups</title>
+<style>
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.popup_title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.popup_content {
+  margin-top: 10px;
+}
+
+.popup_btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cancelBtn,
+.confirmBtn {
+  padding: 5px 10px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<button id="showPopup1" onclick="showPopup('popup1')">查看答案1</button>
+<button id="showPopup2" onclick="showPopup('popup2')">查看答案2</button>
+
+<div id="overlay1" class="overlay">
+  <div id="popup1" class="popup">
+    <p class="popup_title">弹窗1标题</p>
+    <p class="popup_content">弹窗1内容</p>
+    <div class="popup_btn">
+      <button class="cancelBtn" onclick="hidePopup('popup1')">取消</button>
+      <button class="confirmBtn" onclick="hidePopup('popup1')">确认</button>
+    </div>
+  </div>
+</div>
+
+<div id="overlay2" class="overlay">
+  <div id="popup2" class="popup">
+    <p class="popup_title">弹窗2标题</p>
+    <p class="popup_content">弹窗2内容</p>
+    <div class="popup_btn">
+      <button class="cancelBtn" onclick="hidePopup('popup2')">取消</button>
+      <button class="confirmBtn" onclick="hidePopup('popup2')">确认</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPopup(popupId){
+  var overlay = document.getElementById("overlay" + popupId.substring(5));
+  overlay.style.display = "block";
+}
+function hidePopup(popupId){
+  var overlay = document.getElementById("overlay" + popupId.substring(5));
+  overlay.style.display = "none";
+}
+</script>
+
+</body>
+</html>

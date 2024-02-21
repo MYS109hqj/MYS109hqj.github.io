@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .image-container {
+            width: 240px; /* 设置图片容器宽度 */
+            height: 320px; /* 设置图片容器高度 */
+            overflow: hidden; /* 隐藏溢出部分 */
+        }
+        .image-container img {
+            width: 240px; /* 设置图片宽度为容器宽度 */
+            height: 320px; /* 设置图片高度为容器高度 */
+            object-fit: fill; /* 填充满容器，不保持宽高比 */
+            object-position: center; /* 图片居中 */
+        }
+          /* 遮罩层 */
+  .overlay {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    /* IE9以下不支持rgba模式 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 兼容IE8及以下 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+    display: none;
+  }
+  /* 弹出框主体 */
+  .popup {
+    background-color: #ffffff;
+    max-width: 80%;
+    min-width: 50%;
+    height: auto;
+    border-radius: 5px;
+    margin: 100px auto;
+    text-align: center;
+  }
+  /* 弹出框的标题 */
+  .popup_title {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: solid 1px #cccccc;
+  }
+  /* 弹出框的内容 */
+  .popup_content {
+    height: 80%;
+    line-height: 50px;
+    padding: 15px 20px;
+  }
+  /* 弹出框的按钮栏 */
+  .popup_btn {
+    padding-bottom: 10px;
+  }
+  /* 弹出框的按钮 */
+  .popup_btn button {
+    color: #778899;
+    width: 40%;
+    height: 40px;
+    cursor: pointer;
+    border: solid 1px #cccccc;
+    border-radius: 5px;
+    margin: 5px 10px;
+    color: #ffffff;
+    background-color: #337ab7;
+  }
+  </style>
+</head>
+<body>
+  <body onload="clearLocalStorage()">
+
+    样式示例
+    <div class="image-container">
+        <img src="002Amnesia.jpg" alt="Amnesia" height="320" width="240">
+        <img src="003FNAF02.jpg" alt="FNAF" height="320" width="240">
+        <img src="005the last of us.jpeg" alt="Amnesia" height="320" width="240">
+        </div>
+    一个页面的body部分
+    
+    <p>游戏规则：
+      这里有十一张有关恐怖游戏的海报，以及为它们作出的歌词，但是它们被弄混了。
+      首先，你会看一段视频，接着回答八道题目。每一道题目都会三张备选的游戏海报，
+      你必须找出所听到的歌词描述的那张海报。一旦你确定答案，立刻进行抢答，
+      最快答对的玩家可以获得一分，累计分数最高的玩家获胜。
+      但是请注意，对于特定的游戏海报，为其而作出的曲子未必只有一首。
+      
+      在此之前，我会展示主题为“恐怖游戏的冰山一角”的短片，
+      它将介绍所有海报上的游戏。</p>
+
+      短片及海报栏：
+      <video width="480" height="320" controls>
+        <source src="part01-02版修正.mp4">
+        </video>
+            <table>
+                <tr>
+                    <td><img src="002Amnesia.jpg" alt="Amnesia" height="320" width="240"></td>
+                    <td><img src="003FNAF02.jpg" alt="FNAF" height="320" width="240">> </td>
+                    <td><img src="004Outlast.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                    <td><img src="005the last of us.jpeg" alt="Amnesia" height="320" width="240"></td>
+                </tr>
+                <tr>
+                    <td><img src="007bioshock.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                    <td><img src="008slient hill.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                    <td><img src="009heavy rain.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                    <td><img src="010earth bound.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                </tr>
+                <tr>
+                    <td><img src="011Majora's mask.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                    <td><img src="012UntilDawn.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                    <td><img src="013dying light.jpg" alt="Amnesia" height="320px" width="240px"></td>
+                    <td></td>
+                </tr>
+            </table>
+
+
+    问答单片：</br>
+    Q1:
+    <audio controls>
+      <source src="012.wav">
+      您的浏览器不支持 audio 元素。
+    </audio></br>
+    //选项框单片
+    <table>
+      <tr class="image-container">
+        <td><img src="012UntilDawn.jpg" alt="" width="30%"></td>
+        <td><img src="008slient hill.jpg" alt="" width="30%"></td>
+        <td><img src="003FNAF02.jpg" alt="" width="30%"></td>
+      </tr>
+      <tr>
+        <td><button class="Q1" onclick="selectOption('Q1', 'A')">A</button></td>
+        <td><button class="Q1" onclick="selectOption('Q1', 'B')">B</button></td>
+        <td><button class="Q1" onclick="selectOption('Q1', 'C')">C</button></td>
+      </tr>
+    </table>
+    <button id="showPopup1" onclick="showPopup('popup1');showSelection('Q1')">查看答案1</button>
+    </br>
+    <div id="overlay1" class="overlay">
+      <div id="popup1" class="popup">
+        <p class="popup_title">歌词原文及答案</p>
+        <p class="popup_content" align="left">
+          <img src="012UntilDawn.jpg" alt="UntilDawn" align="right" width="30%">
+        Story and atmosphere, 80s serial killer's reign,</br>
+        College kids on a mountain, where dangers remain,</br></br>
+        Survive or die trying, their fate intertwines,</br>
+        On this vacation, terror creeps and confines.</br></br>
+        Decisions weigh heavy, escape death's might,</br>
+        Survival's uncertain, in the face of the night.</br></br>
+        In this gripping tale, life hangs by a thread,</br>
+        Until the dawn breaks, hope clings to their breath.</br></br>
+        <div id="answerQ1"></div>
+        <div>正确答案是：A</div>
+</p>
+        <div class="popup_btn">
+          <button class="confirmBtn" onclick="hidePopup('popup1')">确认</button>
+        </div>
+      </div>
+    </div>
+
+
+
+  </br>
+    问答单片：</br>
+    Q2:
+    <audio controls>
+      <source src="004.wav">
+      您的浏览器不支持 audio 元素。
+    </audio>
+    <table>
+      <tr  class="image-container">
+        <td><img src="011Majora's mask.jpg" alt="" width="30%"></td>
+        <td><img src="005the last of us.jpeg" alt="" width="30%"></td>
+        <td><img src="004Outlast.jpg" alt="" width="30%"></td>
+      </tr>
+      <tr>
+          <td><button class="Q2" onclick="selectOption('Q2', 'A')">A</button></td>
+          <td><button class="Q2" onclick="selectOption('Q2', 'B')">B</button></td>
+          <td><button class="Q2" onclick="selectOption('Q2', 'C')">C</button></td>
+        </form>
+      </tr>
+    </table>
+    </br>
+    <div id="overlay2" class="overlay">
+      <div id="popup2" class="popup">
+        <p class="popup_title">歌词原文及答案</p>
+        <p class="popup_content" align="left">
+          <img src="004Outlast.jpg" alt="Outlast" align="right" width="30%">
+          No way to fight, just helpless prey,</br>
+          Facing the attacker, at the end of each day.</br></br>
+          Investigate through pages, journal unfolds,</br>
+          Mental hospital's secrets, stories untold,</br></br>
+          Another journey, to find his lost wife,</br>
+          Surviving the madness, an unyielding strife.</br></br>
+          A new trial awaits, escape is the aim,</br>
+          Outlast's sequel, a test of survival's flame.</br></br> 
+          <div id="answerQ2"></div>
+          <div>正确答案是：B</div>
+</p>
+        <div class="popup_btn">
+
+          <button class="confirmBtn" onclick="hidePopup('popup2')">确认</button>
+        </div>
+      </div>
+    </div>
+    <button id="showPopup2" onclick="showPopup('popup2');showSelection('Q2')">查看答案2</button>
+</br>
+    问答单片：</br>
+Q3:
+<audio controls>
+  <source src="010.wav">
+  您的浏览器不支持 audio 元素。
+</audio></br>
+//选项框单片
+<table>
+  <tr class="image-container">
+    <td><img src="013dying light.jpg" alt="" width="30%"></td>
+    <td><img src="010earth bound.jpg" alt="" width="30%"></td>
+    <td><img src="002Amnesia.jpg" alt="" width="30%"></td>
+  </tr>
+  <tr>
+    <td><button class="Q3" onclick="selectOption('Q3', 'A')">A</button></td>
+    <td><button class="Q3" onclick="selectOption('Q3', 'B')">B</button></td>
+    <td><button class="Q3" onclick="selectOption('Q3', 'C')">C</button></td>
+  </tr>
+</table>
+</br>
+<div id="overlay3" class="overlay">
+  <div id="popup3" class="popup">
+    <p class="popup_title">歌词原文及答案</p>
+    <p class="popup_content" align="left">
+      <img src="010earth bound.jpg" alt="Earth Bound" align="right" width="30%">
+    A classic RPG tale, a journey begins,</br>
+    Unveiling a world where darkness and light thins,</br></br>
+    From childhood's torment, a masterpiece arose,</br>
+    Inspiring countless games, where fear overflows,</br></br>
+    In a wrong turn theater, a scene so raw,</br>
+    Bloody horror's grip, an unsettling awe.</br></br>
+    In a world unknown, darkness sends its signs,</br>
+     Final boss Giygas, Earthbound's epic final binds.</br></br>
+     <div id="answerQ3"></div>
+     <div>正确答案是：B</div>
+</p>
+    <div class="popup_btn">
+      <button class="confirmBtn" onclick="hidePopup('popup3')">确认</button>
+    </div>
+  </div>
+</div>
+<button id="showPopup3" onclick="showPopup('popup3');showSelection('Q3')">查看答案3</button>
+
+
+    <script>
+      function showPopup(popupId) {
+          var overlay = document.getElementById("overlay" + popupId.substring(5));
+          overlay.style.display = "block";
+      }
+      
+      function hidePopup(popupId) {
+          var overlay = document.getElementById("overlay" + popupId.substring(5));
+          overlay.style.display = "none";
+      }
+      
+      function selectOption(questionId, option) {
+          // 禁用其他两个按钮
+          var buttons = document.getElementsByClassName(questionId);
+          var buttonsArray = Array.from(buttons);
+          buttonsArray.forEach(function(button) {
+              button.disabled = true;
+          });
+      
+          // 在这里执行获取选项信息的操作
+          localStorage.setItem(questionId, option);
+          alert("您选择了问题 " + questionId + " 的选项 " + option);
+      }
+      function showSelection(questionId) {
+    var selectedOption = localStorage.getItem(questionId);
+    var answerDiv = document.getElementById("answer" + questionId);
+    if (selectedOption) {
+        answerDiv.innerText = "您选择的选项是：" + selectedOption;
+    } else {
+        answerDiv.innerText = "您尚未选择任何选项！";
+    }
+  }
+  function clearLocalStorage() {
+    localStorage.clear();
+    alert("成功清除缓存")
+  }
+      </script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS 样式 */
+    </style>
+</head>
+<body>
+<body onload="clearLocalStorage()">
+
+<!-- 第一个问答单片 -->
+<div class="question">
+    <p>问答单片1：</p>
+    <audio id="audio1" controls>
+      <source src="012.wav">
+      您的浏览器不支持 audio 元素。
+    </audio>
+    <table>
+        <tr class="image-container">
+            <td><img src="012UntilDawn.jpg" alt="" width="30%"></td>
+            <td><img src="008slient hill.jpg" alt="" width="30%"></td>
+            <td><img src="003FNAF02.jpg" alt="" width="30%"></td>
+        </tr>
+        <tr>
+            <td><button class="Q1" onclick="selectOption('Q1', 'A', 'audio1')">A</button></td>
+            <td><button class="Q1" onclick="selectOption('Q1', 'B', 'audio1')">B</button></td>
+            <td><button class="Q1" onclick="selectOption('Q1', 'C', 'audio1')">C</button></td>
+        </tr>
+    </table>
+    <button onclick="showPopup('popup1'); showSelection('Q1')">查看答案1</button>
+    <div id="overlay1" class="overlay">
+        <!-- 弹出框内容 -->
+    </div>
+</div>
+
+问答单片：</br>
+    Q2:
+    <audio controls>
+      <source src="004.wav">
+      您的浏览器不支持 audio 元素。
+    </audio>
+    <table>
+      <tr  class="image-container">
+        <td><img src="011Majora's mask.jpg" alt="" width="30%"></td>
+        <td><img src="005the last of us.jpeg" alt="" width="30%"></td>
+        <td><img src="004Outlast.jpg" alt="" width="30%"></td>
+      </tr>
+      <tr>
+          <td><button class="Q2" onclick="selectOption('Q2', 'A')">A</button></td>
+          <td><button class="Q2" onclick="selectOption('Q2', 'B')">B</button></td>
+          <td><button class="Q2" onclick="selectOption('Q2', 'C')">C</button></td>
+        </form>
+      </tr>
+    </table>
+    </br>
+    <div id="overlay2" class="overlay">
+      <div id="popup2" class="popup">
+        <p class="popup_title">歌词原文及答案</p>
+        <p class="popup_content" align="left">
+          <img src="004Outlast.jpg" alt="Outlast" align="right" width="30%">
+          No way to fight, just helpless prey,</br>
+          Facing the attacker, at the end of each day.</br></br>
+          Investigate through pages, journal unfolds,</br>
+          Mental hospital's secrets, stories untold,</br></br>
+          Another journey, to find his lost wife,</br>
+          Surviving the madness, an unyielding strife.</br></br>
+          A new trial awaits, escape is the aim,</br>
+          Outlast's sequel, a test of survival's flame.</br></br> 
+          <div id="answerQ2"></div>
+          <div>正确答案是：B</div>
+</p>
+        <div class="popup_btn">
+
+          <button class="confirmBtn" onclick="hidePopup('popup2')">确认</button>
+        </div>
+      </div>
+    </div>
+    <button id="showPopup2" onclick="showPopup('popup2');showSelection('Q2')">查看答案2</button>
+</br>
+
+<!-- JavaScript 部分 -->
+<script>
+    var timer;
+    var startTime; // 存储开始时间
+
+    function startTimer() {
+        startTime = new Date(); // 记录开始时间
+        timer = setInterval(updateTimer, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timer);
+    }
+
+    function selectOption(questionId, option, audioId) {
+        var buttons = document.getElementsByClassName(questionId);
+        var buttonsArray = Array.from(buttons);
+        buttonsArray.forEach(function(button) {
+            button.disabled = true;
+        });
+      
+        localStorage.setItem(questionId, option);
+        alert("您选择了问题 " + questionId + " 的选项 " + option);
+
+        document.getElementById(audioId).removeEventListener('play', startTimer);
+        stopTimer();
+
+        // 计算时间间隔并存储
+        var endTime = new Date();
+        var elapsedTime = endTime - startTime; // 计算时间间隔
+        localStorage.setItem(questionId + "_time", elapsedTime); // 存储时间间隔
+    }
+
+    function showPopup(popupId) {
+        var overlay = document.getElementById("overlay" + popupId.substring(5));
+        overlay.style.display = "block";
+    }
+
+    function showSelection(questionId) {
+        var selectedOption = localStorage.getItem(questionId);
+        var answerDiv = document.getElementById("answer" + questionId);
+        if (selectedOption) {
+            answerDiv.innerText = "您选择的选项是：" + selectedOption;
+        } else {
+            answerDiv.innerText = "您尚未选择任何选项！";
+        }
+
+        // 显示时间间隔
+        var elapsedTime = localStorage.getItem(questionId + "_time");
+        console.log("从点击播放按钮到点击答案按钮的时间间隔：" + elapsedTime + "毫秒");
+    }
+
+    function clearLocalStorage() {
+        localStorage.clear();
+        alert("成功清除缓存");
+    }
+
+    document.querySelectorAll('audio').forEach(function(audio) {
+        audio.addEventListener('play', startTimer);
+    });
+
+    function updateTimer() {
+        console.log('Timer running...');
+    }
+</script>
+
+</body>
+</html>

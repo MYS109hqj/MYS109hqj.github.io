@@ -1,0 +1,42 @@
+问答单片：</br>
+Q3:
+<audio controls>
+  <source src="010.wav">
+  您的浏览器不支持 audio 元素。
+</audio></br>
+//选项框单片
+<table>
+  <tr>
+    <td><img src="013dying light.jpg" alt="" width="30%"></td>
+    <td><img src="010earth bound.jpg" alt="" width="30%"></td>
+    <td><img src="002Amnesia.jpg" alt="" width="30%"></td>
+  </tr>
+  <tr>
+    <td><button class="Q3" onclick="selectOption('Q3', 'A')">A</button></td>
+    <td><button class="Q3" onclick="selectOption('Q3', 'B')">B</button></td>
+    <td><button class="Q3" onclick="selectOption('Q3', 'C')">C</button></td>
+  </tr>
+</table>
+</br>
+<div id="overlay3" class="overlay">
+  <div id="popup3" class="popup">
+    <p class="popup_title">歌词原文及答案</p>
+    <p class="popup_content" align="left">
+      <img src="010earth bound.jpg" alt="Earth Bound" align="right" width="30%">
+    A classic RPG tale, a journey begins,</br>
+    Unveiling a world where darkness and light thins,</br></br>
+    From childhood's torment, a masterpiece arose,</br>
+    Inspiring countless games, where fear overflows,</br></br>
+    In a wrong turn theater, a scene so raw,</br>
+    Bloody horror's grip, an unsettling awe.</br></br>
+    In a world unknown, darkness sends its signs,</br>
+     Final boss Giygas, Earthbound's epic final binds.</br></br>
+     <div id="answerQ3"></div>
+     <div>正确答案是：B</div>
+</p>
+    <div class="popup_btn">
+      <button class="confirmBtn" onclick="hidePopup('popup3')">确认</button>
+    </div>
+  </div>
+</div>
+<button id="showPopup3" onclick="showPopup('popup3')">查看答案3</button>
