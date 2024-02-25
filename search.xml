@@ -368,7 +368,7 @@
     <content><![CDATA[<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>抢答游戏</title>
     <style>
         .image-container {
             width: 240px; /* 设置图片容器宽度 */
@@ -447,10 +447,8 @@
       但是请注意，对于特定的游戏海报，为其而作出的曲子未必只有一首。
       在此之前，我会展示主题为“恐怖游戏的冰山一角”的短片，
       它将介绍所有海报上的游戏。</p><br>
-      短片及海报栏：
-      <video width="480" height="320" controls>
-        <source src="information-video.mp4">
-        </video>
+      短片及海报栏：<br>
+<iframe src="//player.bilibili.com/player.html?aid=1051059492&bvid=BV1EH4y177DN&cid=1450590252&p=1" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe>
             <table>
                 <tr>
                     <td><img src="/2024/02/14/responder-game/002Amnesia.jpg" alt="Amnesia" height="320" width="240"></td>
