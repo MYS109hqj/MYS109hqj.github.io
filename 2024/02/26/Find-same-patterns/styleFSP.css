@@ -428,8 +428,8 @@ html {
     }
   }
   
-  /* 适用于 320px 以下的样式*/
-@media (max-width: 320px) {
+  /* 适用于 400px 以下的样式*/
+@media (max-width: 420px) {
     #card-deck {
         width: 85%;
       }
@@ -449,7 +449,7 @@ html {
   }
   
   /* 适用于 768px 以上的样式*/
-  @media (min-width: 768px) {
+  @media (min-width: 420px) {
     .container {
       font-size: 22px;
     }
