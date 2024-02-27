@@ -10,16 +10,22 @@
 <body>
     <div class="container">
         <header>
-            <h2>寻找相同图案</h2>
+            <h1>寻找相同图案 普通难度(4图案4色)</h2>
         </header>
-        <!-- <button onclick="Moveforward(1)">前进1</button>
-        <button onclick="Moveforward(2)">前进2</button>
-        <button onclick="Movebackward(1)">后退1</button>
-        <button onclick="Movebackward(2)">后退2</button> -->
+        <!-- <section>
+            <button onclick="Moveforward(1)">前进1</button>
+            <button onclick="Moveforward(2)">前进2</button>
+            <button onclick="Movebackward(1)">后退1</button>
+            <button onclick="Movebackward(2)">后退2</button>
+        </section> -->
+
         <section class="score-panel">
-            <span class="moves">0</span>
+            <button onclick="Showrules()">查看规则</button>
+            <button onclick="Showsets()">设置</button>
+            总共翻开卡牌次数：<span class="moves">0</span>
             <div class="timer"></div>
-            <div class="restart" onclick="startGame()">重新开始游戏</div>
+            <div class="restart" onclick="startGame()">
+                <button>重新开始游戏</button></div>
         </section>
         <div id="condition">轮到红方玩家翻开卡牌</div>
 
@@ -113,19 +119,54 @@
         <ul class="deck" id="target-card2"></ul>
         <div id="popup1" class="overlay">
             <div class="popup">
-                <h2>恭喜 🎉</h2>
-                <a class="close" href="#">×</a>
+                <h2>游戏结束 🎉</h2>
+                <a class="close" id="close1" href="#">×</a>
                 <div class="content-1">
-                恭喜你获得了胜利 🎉🎉
+                    <p><span id="brief"></p>  🎉🎉
                 </div>
                 <div class="content-2">
                   <p>游戏时长<span id="totalTime"> </span> </p>
-                  <p>总共翻开卡牌次数<span id="finalMove"> </span> 次 </p>   
-                  <p><span id="brief"></p>              
+                  <p>总共翻开卡牌次数<span id="finalMove"> </span> 次 </p>     
                 </div>
                 <button id="play-again"onclick="playAgain()">
                     展示终局界面 😄</a>
                 </button>
+            </div>
+        </div>
+        <div id="popup2" class="overlay">
+            <div class="popup">
+                <h2>游戏规则</h2>
+                <a class="close" id="close2" href="#">×</a>
+                <div class="content-1">
+                红蓝两方轮流翻牌。下面两个长条区域为红蓝各方需要寻找的图案。Current为玩家所在的板块，Next为所在板块的下一个板块，next板块上是玩家目前需要寻找的图案，即目标图案。<br>
+                若找到目标图案，则该玩家前进到目标图案上，继续寻找下一个图案。若翻开的图案与目标图案不一致，目标栏会出现一个新的待寻找的图案，目标栏整体后退，并轮到对手翻牌。<br>
+                每次翻完牌后，该卡牌将正面展示5秒，随后翻回背面。玩家待卡牌翻回背面后才能继续翻牌。
+                </div>
+                </br>
+                <div class="content-2">
+                在以下两种情况下结束游戏：<br>
+                1.一名玩家由于多次翻开错误图案，所在板块后退乃至移出目标栏（即后退到Eliminate处后再次翻开错误图案），该玩家失利，对手获胜。<br>
+                2.一名玩家成功前进到终点（到达Finish处），该玩家立即获胜。<br>
+                </div>
+            </div>
+        </div>
+        <div id="popup3" class="overlay">
+            <div class="popup">
+                <h2>游戏规则</h2>
+                <a class="close" id="close3" href="#">×</a>
+                <div class="content-1">
+                    被翻面卡牌正面显示时间：
+                    <select id="settime">
+                        <option value="3000">3秒</option>
+                        <option value="5000">5秒</option>
+                        <option value="7000">7秒</option>
+                      </select>
+                    </br>
+                </div>
+                </br>
+                <div class="content-2">
+                    <button onclick="getSetsOption()">保存</button>
+                </div>
             </div>
         </div>
     </div>

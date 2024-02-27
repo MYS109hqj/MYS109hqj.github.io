@@ -33,7 +33,7 @@ html {
     font-family: 'Gloria Hallelujah', cursive;
   }
   
-  #card-deck ,#test-deck{
+  #card-deck {
     width: 85%;
     background: #716F71;
     padding: 1rem;
@@ -46,7 +46,7 @@ html {
     margin: 0 0 0.5em; /*边距 第三项下边距*/
   }
   
-  #card-deck .card,  #test-deck .test-card {
+  #card-deck .card {
     height: 3.7rem;
     width: 3.7rem;
     margin: 0.2rem 0.2rem;
@@ -113,41 +113,30 @@ html {
       width: 90%;
       height: 90%;
     }
-    /* 测试用 */
-    #test-deck .open .icon{
-      width: 90%;
-      height: 90%;
-    }
-    #test-deck .test-card:not(.open) .icon{
-      width: 0;
-      height: 0;
-    }
+
 
 
   /* 边框设置 */
-
-  #test-deck .test-card.redcurrent::after {
-    content: 'Current';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: red;
-    color: white;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-size: 12px;
-  }  
-  #test-deck .test-card.redcurrent {
-    border: 2px solid red;
-    border-radius: 5px;
+  #card-deck.redaction{
+    border: 5px solid red;
+  }
+  #card-deck.blueaction{
+    border: 5px solid blue;
   }
 
   .card.redcurrent {
+    border: 0.5px solid red;
+    border-radius: 5px;
+  }
+  .card.rednext {
     border: 2px solid red;
     border-radius: 5px;
   }
   .card.bluecurrent {
+    border: 0.5px solid blue;
+    border-radius: 5px;
+  }
+  .card.bluenext{
     border: 2px solid blue;
     border-radius: 5px;
   }
@@ -174,6 +163,30 @@ html {
   }
   #target-card2 .card.bluecurrent::after {
     content: 'Current';
+    position: absolute;
+    top: -20px; /* 调整文本相对于容器的垂直位置 */
+    left: 50%; /* 将文本水平居中 */
+    transform: translateX(-50%); /* 通过平移来使文本水平居中 */
+    background: blue;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  #target-card1 .card.rednext::after {
+    content: 'Next';
+    position: absolute;
+    top: -20px; /* 调整文本相对于容器的垂直位置 */
+    left: 50%; /* 将文本水平居中 */
+    transform: translateX(-50%); /* 通过平移来使文本水平居中 */
+    background: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  #target-card2 .card.bluenext::after {
+    content: 'Next';
     position: absolute;
     top: -20px; /* 调整文本相对于容器的垂直位置 */
     left: 50%; /* 将文本水平居中 */

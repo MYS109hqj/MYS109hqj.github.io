@@ -10,12 +10,15 @@ let counter = document.querySelector(".moves");
 const stars = document.querySelectorAll(".fa-star");
 //声明 matchedCard 的变量
 let matchedCard = document.getElementsByClassName("match");
-//星级列表
-let starsList = document.querySelectorAll(".stars li");
 //模板中的关闭图标
-let closeicon = document.querySelector(".close");
+let closeicon = document.getElementById("close1");
+let closerulesicon = document.getElementById("close2");
+let closesetsicon = document.getElementById("close3");
+
 //声明 modal
 let modal = document.getElementById("popup1");
+let modal2 = document.getElementById("popup2");
+let modal3 = document.getElementById("popup3");
 //打开卡片的数组
 var openedCards = [];
 
@@ -29,6 +32,12 @@ var targetedHash1 = new Array(16);
 var targetedHash2 = new Array(16);
 var redcur = 8;
 var bluecur = 8;//均从第九张卡牌开始
+//声明增加新的卡牌使的两个下标变量
+var temp1 = 1;
+var temp2 = 1;
+
+//设置页面相关
+var lastingtime = 5000;
 
 
 
@@ -81,8 +90,6 @@ function initial(){
 
 //增删目标卡牌组的基本模块
 function appendCard(target){
-    var temp1 = 1;
-    var temp2 = 1;
     let index = 0;
     if(target===1){
         for(let i = 0;i < 16;i++)
@@ -91,17 +98,17 @@ function appendCard(target){
         }
         do{
             index = Math.floor(Math.random()*16);
-            console.log("index:"+index);
+            //console.log("index:"+index);
             if(!targetedHash1[index]){
                 targetedHash1[index] = temp1;
                 let tempNode = targetedCards1[index].cloneNode(true);
-                tempNode.classList.remove("eliminate","redcurrent","finish");//复制的同时前面的元素带eliminate会带到复制品上，因此类似标签都要删
+                tempNode.classList.remove("eliminate","redcurrent","finish","rednext");//复制的同时前面的元素带eliminate等会带到复制品上，因此类似标签都要删
                 target1.appendChild(tempNode);
-                console.log("test1");
+                //console.log("test1");
             }
-            console.log("test2");
+            //console.log("test2");
         }while(targetedHash1[index]!==temp1);
-        if(temp1!==4) temp1++;
+        if(temp1!==9) temp1++;
         else temp1 = 1;
     }
     else if(target===2){
@@ -111,21 +118,27 @@ function appendCard(target){
         }
         do{
             index = Math.floor(Math.random()*16);
-            console.log("index:"+index);
+            //console.log("index:"+index);
             if(!targetedHash2[index]){
                 targetedHash2[index] = temp2;
                 let tempNode = targetedCards2[index].cloneNode(true);
-                tempNode.classList.remove("eliminate","bluecurrent","finish");
+                tempNode.classList.remove("eliminate","bluecurrent","finish","bluenext");
                 target2.appendChild(tempNode);
-                console.log("test2");
+                //console.log("test2");
             }
-            console.log("test2");
+            //console.log("test2");
         }while(targetedHash2[index]!==temp2);
-        if(temp2!==4) temp2++;
+        if(temp2!==9) temp2++;
         else temp2 = 1;
     }
     else{console.log("error!传入target错误!");}
-
+    // console.log("index:"+index);
+    // for(let i = 0;i < 16;i++)
+    // {
+    //     console.log("第"+i+"个");
+    //     console.log(targetedHash1[i]);
+    // }
+    // console.log("That's all");
 }
 function deleteCard(target){
     if(target===1){
@@ -146,27 +159,41 @@ function deleteCard(target){
 function Moveforward(target){
     if(target===1){
     target1.children[redcur].classList.remove("redcurrent");
+    if(redcur!==19)
+    target1.children[redcur+1].classList.remove("rednext");
     if(redcur === 18) {
         //游戏结束
+        target1.children[redcur+1].classList.add("redcurrent");
         document.getElementById("brief").innerText = "红方成功前进到终点，红方获胜！";
         congratulations()
         //console.log("end of game");
     }
+    else{
     redcur++;
     //console.log(target1.children[redcur].outerHTML);
     target1.children[redcur].classList.add("redcurrent");
+    if(redcur!==19)
+    target1.children[redcur+1].classList.add("rednext");
+    }
     }
     else if(target===2){
     target2.children[bluecur].classList.remove("bluecurrent");
+    if(bluecur!==19)
+    target2.children[bluecur+1].classList.remove("bluenext");
     if(bluecur === 18) {
         //游戏结束
+        target2.children[bluecur+1].classList.add("bluecurrent");
         document.getElementById("brief").innerText = "蓝方成功前进到终点，蓝方获胜！";
         congratulations()
         //console.log("end of game");
     }
+    else{
     bluecur++;
     //console.log(target2.children[bluecur].outerHTML);
     target2.children[bluecur].classList.add("bluecurrent");
+    if(bluecur!==19)
+    target2.children[bluecur+1].classList.add("bluenext");
+    }
     }
 }
 function Movebackward(target){
@@ -180,7 +207,7 @@ function Movebackward(target){
         redcur--;
         //console.log(target1.children[redcur].outerHTML);
 
-        if(redcur === 0) {
+        if(redcur === -1) {
             //游戏结束
             document.getElementById("brief").innerText= "红方由于后退到淘汰区失败，蓝方获胜！";
             congratulations()
@@ -197,7 +224,7 @@ function Movebackward(target){
         bluecur--;
         //console.log(target2.children[bluecur].outerHTML);
 
-        if(bluecur === 0) {
+        if(bluecur === -1) {
             //游戏结束
             document.getElementById("brief").innerText = "蓝方由于后退到淘汰区失败，红方获胜！";
             congratulations()
@@ -235,8 +262,14 @@ function startGame(){
     for(var i = 0;i < cards.length; i++){
         cards[i].classList.remove("show","open","match","disabled");
         cards[i].classList.remove("D","O","N","A","J","G","T","P","U","B","I","K","Q","R","S","M");
-        targetedCards1[i].classList.remove("eliminate","redcurrent","finish");
-        targetedCards2[i].classList.remove("eliminate","bluecurrent","finish");
+        targetedCards1[i].classList.remove("eliminate","redcurrent","finish","rednext");
+        targetedCards2[i].classList.remove("eliminate","bluecurrent","finish","bluenext");
+    }
+    //重置添加目标卡牌的哈希记录表
+    for(let i = 0;i < 16;i++)
+    {
+        targetedHash1[i]=0;
+        targetedHash2[i]=0;
     }
 
     //add：为每张卡牌按顺序增加字母标识类
@@ -269,11 +302,17 @@ function startGame(){
     bluecur = 8;
     targetedCards1[redcur].classList.add("redcurrent");
     targetedCards2[bluecur].classList.add("bluecurrent");
+    targetedCards1[redcur+1].classList.add("rednext");
+    targetedCards2[bluecur+1].classList.add("bluenext");
     targetedCards1[0].classList.add("eliminate");
     targetedCards2[0].classList.add("eliminate");
     target1.children[19].classList.add("finish");
     target2.children[19].classList.add("finish");
 
+    //重置文本及顺序标记及边框颜色
+    round = 0;whoseaction.innerText="轮到红方玩家翻开卡牌";
+    deck.classList.remove("blueaction");
+    deck.classList.add("redaction");
     //重置moves
     moves = 0;
     counter.innerHTML = moves;
@@ -301,29 +340,27 @@ function cardOpen(){
     moveCounter();
     openedCards[0].classList.add("show");
     if(round===0){//红方
-        if(openedCards[0].type === target1.children[redcur].type){
+        if(openedCards[0].type === target1.children[redcur+1].type){
             matched();
         }else{
             unmatched();
         }
     }else if(round===1){//蓝方
-        if(openedCards[0].type === target2.children[bluecur].type){
+        if(openedCards[0].type === target2.children[bluecur+1].type){
             matched();
         }else{
             unmatched();
         }
     }
 
-
-    
 }
 
 function matched(){
     openedCards[0].classList.add("match","disabled");
     if(round===0){
-        target1.children[redcur].classList.add("match");
+        target1.children[redcur+1].classList.add("match");
     }else if(round===1){
-        target2.children[redcur].classList.add("match");
+        target2.children[bluecur+1].classList.add("match");
     }
     disable();
     setTimeout(function(){
@@ -332,37 +369,45 @@ function matched(){
         openedCards = [];
         // console.log("test!");
         if(round===0){
-            target1.children[redcur].classList.remove("match");
+            target1.children[redcur+1].classList.remove("match");
             Moveforward(1);
         }else if(round===1){
-            target2.children[redcur].classList.remove("match");
+            target2.children[bluecur+1].classList.remove("match");
             Moveforward(2);
         }
-    },5000)
+    },lastingtime)
 }
 
 function unmatched(){
     openedCards[0].classList.add("unmatched");
     if(round===0){
-        target1.children[redcur].classList.add("unmatched");
+        target1.children[redcur+1].classList.add("unmatched");
     }else if(round===1){
-        target2.children[bluecur].classList.add("unmatched");
+        target2.children[bluecur+1].classList.add("unmatched");
     }
     disable();
     setTimeout(function(){
         openedCards[0].classList.remove("show","open","no-event","unmatched");
         if(round===0){
-            target1.children[redcur].classList.remove("unmatched");
+            target1.children[redcur+1].classList.remove("unmatched");
             Movebackward(1);
         }else if(round===1){
-            target2.children[bluecur].classList.remove("unmatched");
+            target2.children[bluecur+1].classList.remove("unmatched");
             Movebackward(2);
         }
         enable();
         openedCards = [];
-        if(round===0) {round = 1;whoseaction.innerText="轮到蓝方玩家翻开卡牌";}
-        else if(round===1) {round = 0;whoseaction.innerText="轮到红方玩家翻开卡牌";}
-    },5000);
+        if(round===0) {
+            round = 1;whoseaction.innerText="轮到蓝方玩家翻开卡牌";
+            deck.classList.remove("redaction");
+            deck.classList.add("blueaction");
+        }
+        else if(round===1) {
+            round = 0;whoseaction.innerText="轮到红方玩家翻开卡牌";
+            deck.classList.remove("blueaction");
+            deck.classList.add("redaction");
+        }
+    },lastingtime);
 }
 
 function disable(){
@@ -449,9 +494,38 @@ function showdeck(){
     modal.classList.remove("show");
     for(let i = 0; i < 16;i++)
     {
-        deck.children[i].classList.add("open");
+        deck.children[i].classList.add("open","disabled");
     }
 }
+
+//显示规则部分
+function Showrules(){
+    modal2.classList.add("show");
+    Closerules()
+}
+function Closerules(){
+    closerulesicon.addEventListener("click",function(e){
+        modal2.classList.remove("show");
+    });
+}
+
+//调整设置部分
+function Showsets(){
+    modal3.classList.add("show");
+    Closesets()
+}
+function Closesets(){
+    closesetsicon.addEventListener("click",function(e){
+        modal3.classList.remove("show");
+    });
+}
+function getSetsOption() {
+    var settime = document.getElementById("settime");
+    lastingtime = settime.value;
+    modal3.classList.remove("show");
+    //console.log("目前持续时间:", lastingtime);
+    // 在这里你可以使用 selectedOption 的值进行其他操作
+  }
 
 //将事件侦听器添加到每张卡片
 for(var i = 0; i < cards.length; i++){
