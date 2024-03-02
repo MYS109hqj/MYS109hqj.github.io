@@ -145,14 +145,14 @@
   </entry>
   <entry>
     <title>burglebros</title>
-    <url>/2024/01/17/burglebros/</url>
+    <url>/2024/01/17/240117burglebros/</url>
     <content><![CDATA[<p>基础教学推荐bga中的教程：</p>
 <p>bga中的规则书链接：（Eng）<br><a href="https://tesera.ru/images/items/1085040/BBRuleBook[MarkIII-v2.02]-Spreads.pdf">https://tesera.ru/images/items/1085040/BBRuleBook[MarkIII-v2.02]-Spreads.pdf</a><br>Burgle Bros中文化卡表链接：（需要科学上网，繁体中文。包含角色能力介绍、事件event、赃物loot、工具tool的列表）<br><a href="https://gggjms.blogspot.com/2016/03/burgle-bros_30.html">https://gggjms.blogspot.com/2016/03/burgle-bros_30.html</a></p>
-<p>选定起始点<br>开局时，你可以知道一层警卫的初始位置，并选定起始点位。<br>格子位置的名称列为用字母ABCD表示，即分布为：<br>A1 B1 C1 D1<br>A2 B2 ……<br><img src="/2024/01/17/burglebros/001.png" alt="行列展示"></p>
-<p>注：行列指示物展示打开方式<br><img src="/2024/01/17/burglebros/002.png" alt="行列指示物展示打开方式"></p>
+<p>选定起始点<br>开局时，你可以知道一层警卫的初始位置，并选定起始点位。<br>格子位置的名称列为用字母ABCD表示，即分布为：<br>A1 B1 C1 D1<br>A2 B2 ……<br><img src="/2024/01/17/240117burglebros/001.png" alt="行列展示"></p>
+<p>注：行列指示物展示打开方式<br><img src="/2024/01/17/240117burglebros/002.png" alt="行列指示物展示打开方式"></p>
 <p>在玩家的第一回合，该玩家的角色出现到板块中。起始点位尽量现在路径开阔的地方。</p>
 <p>警卫的寻路逻辑为：<br>目的地为巡逻卡的终点板块，如果有警报则终点改为警报位置，若有多个警报，永远先前往最近的警报，若出现等距离则由玩家选择警卫先查看的警报。<br>永远寻找最短路径。如果有多条等长最短路径，则从左侧开始，选择最顺时针的路径。<br>（原文：The Guard always takes the shortest possible path to the destination. If more than one path is equally short, the Guard takes the path that is the most clockwise, starting from the Guard’s left）<br>一层的警卫初始为2动、二层3动、三层4动；巡逻牌耗尽重洗时基础移动速度加一，如一层警卫在一层巡逻卡耗尽重洗后变为3动。基础移动速度上限为6，速度为几则一次行动有几动。1动可以移动一个板块。若该层有警报，则在警卫原有速度基础上，每有一个警报增加1动。</p>
-<p>角色的个人技能：（以bga无进阶版本）<br>鹰眼：每轮可以免费查看一个相邻的隔墙板块。（探图神技）<br><img src="/2024/01/17/burglebros/THE_HAWK.png" alt="侦察专家 鹰眼 THE_HAWK"><br>渡鸦：可以在两步距离内放置一个乌鸦，警卫经过该格时多消耗一个步数。放置乌鸦的操作免费，如果不移动乌鸦乌鸦将在格子停留。注意：若乌鸦与警卫起点在同一格，警卫离开该格时乌鸦不起作用。若再次经过正常起作用。（控警卫技能）<br><img src="/2024/01/17/burglebros/THE_RAVEN.png" alt="渡鸦 THE_RAVEN"><br>观察者：可以花费一个行动点，查看本层警卫的下一张巡逻终点牌，并选择是否将其放到牌堆底部。（控警卫技能）<br><img src="/2024/01/17/burglebros/THE_SPOTTER.png" alt="观察者 THE_SPOTTER"><br>杂技演员：可以免费移动到一步内的警卫所在格，此操作不扣除隐秘标记。但是如果回合结束仍在警卫所在格，仍然正常扣除隐秘标记。（跑图神技）<br><img src="/2024/01/17/burglebros/THE_ACROBAT.png" alt="杂技演员 THE_ACROBAT"><br>主谋（骗子）：每回合可以花费一点行动，使一个同伴移动一格。移动仍要遵循基本规则，但（移动到激光检测与门栓时）不用耗费额外点数。（跑图技能）<br><img src="/2024/01/17/burglebros/THE_ROOK.png" alt="骗子 THE_ROOK"><br>小偷：在自己开保险箱或者数字门锁时可以多一个骰子。（更容易完成骰子检定）<br><img src="/2024/01/17/burglebros/THE_PETERMAN.png" alt="小偷 THE_PETERMAN"><br>钻机安装员：开始持有炸药（可以炸毁相邻墙壁，并在所在格发出警报）。所有玩家获得道具时可以查看两个道具之后保留一个（原本是直接抽一个）。（提供道具上的优势）<br><img src="/2024/01/17/burglebros/THE_RIGGER.png" alt="钻机安装员 THE_RIGGER"><br>照明专家：可以免费在相邻格制造一个警报。（控警卫技能）<br><img src="/2024/01/17/burglebros/THE_JUICER.png" alt="照明专家 THE_JUICER"><br>黑客：不会触发指纹、激光、动作检测警报（热感应警报与物品检测器仍正常触发），队友不会在自己所在格触发警报。<br><img src="/2024/01/17/burglebros/THE_HACKER.png" alt="黑客 THE_HACKER"></p>
+<p>角色的个人技能：（以bga无进阶版本）<br>鹰眼：每轮可以免费查看一个相邻的隔墙板块。（探图神技）<br><img src="/2024/01/17/240117burglebros/THE_HAWK.png" alt="侦察专家 鹰眼 THE_HAWK"><br>渡鸦：可以在两步距离内放置一个乌鸦，警卫经过该格时多消耗一个步数。放置乌鸦的操作免费，如果不移动乌鸦乌鸦将在格子停留。注意：若乌鸦与警卫起点在同一格，警卫离开该格时乌鸦不起作用。若再次经过正常起作用。（控警卫技能）<br><img src="/2024/01/17/240117burglebros/THE_RAVEN.png" alt="渡鸦 THE_RAVEN"><br>观察者：可以花费一个行动点，查看本层警卫的下一张巡逻终点牌，并选择是否将其放到牌堆底部。（控警卫技能）<br><img src="/2024/01/17/240117burglebros/THE_SPOTTER.png" alt="观察者 THE_SPOTTER"><br>杂技演员：可以免费移动到一步内的警卫所在格，此操作不扣除隐秘标记。但是如果回合结束仍在警卫所在格，仍然正常扣除隐秘标记。（跑图神技）<br><img src="/2024/01/17/240117burglebros/THE_ACROBAT.png" alt="杂技演员 THE_ACROBAT"><br>主谋（骗子）：每回合可以花费一点行动，使一个同伴移动一格。移动仍要遵循基本规则，但（移动到激光检测与门栓时）不用耗费额外点数。（跑图技能）<br><img src="/2024/01/17/240117burglebros/THE_ROOK.png" alt="骗子 THE_ROOK"><br>小偷：在自己开保险箱或者数字门锁时可以多一个骰子。（更容易完成骰子检定）<br><img src="/2024/01/17/240117burglebros/THE_PETERMAN.png" alt="小偷 THE_PETERMAN"><br>钻机安装员：开始持有炸药（可以炸毁相邻墙壁，并在所在格发出警报）。所有玩家获得道具时可以查看两个道具之后保留一个（原本是直接抽一个）。（提供道具上的优势）<br><img src="/2024/01/17/240117burglebros/THE_RIGGER.png" alt="钻机安装员 THE_RIGGER"><br>照明专家：可以免费在相邻格制造一个警报。（控警卫技能）<br><img src="/2024/01/17/240117burglebros/THE_JUICER.png" alt="照明专家 THE_JUICER"><br>黑客：不会触发指纹、激光、动作检测警报（热感应警报与物品检测器仍正常触发），队友不会在自己所在格触发警报。<br><img src="/2024/01/17/240117burglebros/THE_HACKER.png" alt="黑客 THE_HACKER"></p>
 <p>玩家在自己的回合内可以选择执行以下行动：<br>一般情况下，玩家有4动。可以选择花1动偷看相邻板块（不能隔墙看）；花1动移动到相邻板块（并进行进入板块的相关判定）；使用角色技能；免费使用道具卡（tool）；在保险箱（safe）板块花1动掷骰子或2动增加骰子；在机房板块进行黑客行动获取相应骇客标记。<br>在玩家的行动回合结束后，进行事件判定。当该轮玩家只使用2动及以下时，触发事件（持有赃物邮票stamp时是3动及以下都会触发事件）。抽取事件卡。之后移动角色结束时所在楼层的警卫。</p>
 <p>接下来是各个房间介绍：<br>黄色卡牌：<br>ATRIUM 中庭<br>在中庭板块，可以偷看上一层或下一层相同位置的板块。但同时可以被上一层或下一层的警卫走到对应板块发现。<br>FOYER 门厅</p>
 <blockquote>
@@ -163,14 +163,14 @@
     <tr>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/atrium.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/atrium.png" width="60%">
                 <br>
                 <font color="AAAAAA">atrium</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/foyer.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/foyer.png" width="60%">
                 <br>
                 <font color="AAAAAA">foyer</font>
             </center>
@@ -183,21 +183,21 @@
     <tr>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/laboratory.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/laboratory.png" width="60%">
                 <br>
                 <font color="AAAAAA">laboratory</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/lavatory.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/lavatory.png" width="60%">
                 <br>
                 <font color="AAAAAA">lavatory</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/walkway.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/walkway.png" width="60%">
                 <br>
                 <font color="AAAAAA">walkway</font>
             </center>
@@ -210,14 +210,14 @@
     <tr>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/secret_door.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/secret_door.png" width="60%">
                 <br>
                 <font color="AAAAAA">secret_door</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/service_duct.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/service_duct.png" width="60%">
                 <br>
                 <font color="AAAAAA">service_duct</font>
             </center>
@@ -230,42 +230,42 @@
     <tr>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/camera.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/camera.png" width="60%">
                 <br>
                 <font color="AAAAAA">camera</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/detector.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/detector.png" width="60%">
                 <br>
                 <font color="AAAAAA">detector</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/thermo.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/thermo.png" width="60%">
                 <br>
                 <font color="AAAAAA">thermo</font>
             </center>
         </td>
                 <td>
             <center>
-                <img src="/2024/01/17/burglebros/fingerprint.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/fingerprint.png" width="60%">
                 <br>
                 <font color="AAAAAA">fingerprint</font>
             </center>
         </td>
                 <td>
             <center>
-                <img src="/2024/01/17/burglebros/laser.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/laser.png" width="60%">
                 <br>
                 <font color="AAAAAA">laser</font>
             </center>
         </td>
                 <td>
             <center>
-                <img src="/2024/01/17/burglebros/motion.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/motion.png" width="60%">
                 <br>
                 <font color="AAAAAA">motion</font>
             </center>
@@ -279,21 +279,21 @@
     <tr>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/hack_fingerprint.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/hack_fingerprint.png" width="60%">
                 <br>
                 <font color="AAAAAA">hack_fingerprint</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/hack_laser.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/hack_laser.png" width="60%">
                 <br>
                 <font color="AAAAAA">hack_laser</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/hack_motion.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/hack_motion.png" width="60%">
                 <br>
                 <font color="AAAAAA">hack_motion</font>
             </center>
@@ -306,14 +306,14 @@
     <tr>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/stairs.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/stairs.png" width="60%">
                 <br>
                 <font color="AAAAAA">stairs</font>
             </center>
         </td>
         <td>
             <center>
-                <img src="/2024/01/17/burglebros/safe.png" width="60%">
+                <img src="/2024/01/17/240117burglebros/safe.png" width="60%">
                 <br>
                 <font color="AAAAAA">safe</font>
             </center>
@@ -322,7 +322,7 @@
 </table>
 
 <blockquote>
-<p>赃物列表<br><a href="https://gggjms.blogspot.com/2016/03/burgle-bros-loot.html">https://gggjms.blogspot.com/2016/03/burgle-bros-loot.html</a><br><img src="/2024/01/17/burglebros/loot.png" height="30%"><br>工具列表<br><a href="https://gggjms.blogspot.com/2016/03/tool-event-loot-tool-blueprints-crowbar.html">https://gggjms.blogspot.com/2016/03/tool-event-loot-tool-blueprints-crowbar.html</a><br><img src="/2024/01/17/burglebros/tool.png" height="30%"><br>事件列表<br><a href="https://gggjms.blogspot.com/2016/03/burgle-bros_30.html">https://gggjms.blogspot.com/2016/03/burgle-bros_30.html</a><br><img src="/2024/01/17/burglebros/event.png" height="30%"></p>
+<p>赃物列表<br><a href="https://gggjms.blogspot.com/2016/03/burgle-bros-loot.html">https://gggjms.blogspot.com/2016/03/burgle-bros-loot.html</a><br><img src="/2024/01/17/240117burglebros/loot.png" height="30%"><br>工具列表<br><a href="https://gggjms.blogspot.com/2016/03/tool-event-loot-tool-blueprints-crowbar.html">https://gggjms.blogspot.com/2016/03/tool-event-loot-tool-blueprints-crowbar.html</a><br><img src="/2024/01/17/240117burglebros/tool.png" height="30%"><br>事件列表<br><a href="https://gggjms.blogspot.com/2016/03/burgle-bros_30.html">https://gggjms.blogspot.com/2016/03/burgle-bros_30.html</a><br><img src="/2024/01/17/240117burglebros/event.png" height="30%"></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -334,25 +334,25 @@
   </entry>
   <entry>
     <title>Faraway：短时轻策桌游推荐 介绍/教程</title>
-    <url>/2024/02/07/faraway/</url>
+    <url>/2024/02/07/240207faraway/</url>
     <content><![CDATA[<h2 id="Faraway游戏介绍"><a href="#Faraway游戏介绍" class="headerlink" title="Faraway游戏介绍"></a>Faraway游戏介绍</h2><h3 id="游戏简介"><a href="#游戏简介" class="headerlink" title="游戏简介"></a>游戏简介</h3><p>Faraway是2023年新上线的桌游，是一款<strong>轻度策略</strong>的，<strong>支持2-6人游玩</strong>的桌游。玩家一同前往阿鲁拉岛屿，争取在岛民中取得更多的名誉。<strong>游戏时长2-3人时5-15分钟，人数多时20-30分钟</strong>。<br>这个桌游<strong>“顺序放置——逆向结算”的基本玩法</strong>十分新颖；游戏过程中需要在<strong>保持数字顺序、满足居民的计分条件与区域卡牌的优先选择权</strong>三者相互制衡。<br>在了解基本的计分规则后，新手也能打出一定的combo，很好上手；对于老手，不同组合、追求分数上限也让这个游戏有可玩性和重开性。<br><strong>游戏有一定运气成分</strong>，<strong>在3人及以上的游戏中选牌的交涉尤为突出</strong>，线下玩也有追求合作共赢的空间。<br>线下玩这个游戏有个缺点，就是计分极其繁琐，线上网站结算阶段“公开处刑”，简化了繁琐的计分过程。</p>
 <p>bga上游戏链接：<a href="https://boardgamearena.com/gamepanel?game=faraway">https://boardgamearena.com/gamepanel?game=faraway</a><br>注：bga为免费在线桌游平台，注册时别用qq邮箱就行。</p>
 <p>下面部分是自拟图文教程，以及其它教程的参考链接</p>
 <h3 id="基础教程部分"><a href="#基础教程部分" class="headerlink" title="基础教程部分"></a>基础教程部分</h3><p>（本部分结尾有规则书pdf；内容结构为：游戏设定补充、图文教程、其它教程链接）<br><strong>游戏设定补充：</strong>（参照规则书Page1-2）<br>ALULA（阿鲁拉）的岛屿位置可以任意变化，使得任何行动路线都有可能。探索的方式只有行走。<br>这里的岛民有些说原住民，有些是定居的探索者。他们各自独立看守一个岛屿，他们热情招待到来的探索者，并且喜欢谈论有关Uddu（矿产资源，即蓝色标志），Okiko（动物，即红色标志），Goldlog（植物，即绿色标志）的最新发现。（因此获得名誉值的条件会和返回路上岛屿上的这些标志内容有关。）<br>阿鲁拉有四种生物群系：河流（红色区域）、城市（黄色区域）、森林（红色区域）、(岩石)沙漠（蓝色区域）。每个生物群系都有自己独特的季节规律。<strong>（因此获得名誉值的条件会和返回路上的岛屿的生物群系有关。）</strong></p>
-<img src="/2024/02/07/faraway/001.png" width="50%" hegiht="auto">
-<img src="/2024/02/07/faraway/002.png" width="50%" hegiht="auto">
-<img src="/2024/02/07/faraway/003.png" width="50%" hegiht="auto">
-<img src="/2024/02/07/faraway/004.png" width="50%" hegiht="auto">
-<img src="/2024/02/07/faraway/005.png" width="50%" hegiht="auto">
-<img src="/2024/02/07/faraway/006.png" width="50%" hegiht="auto">
-<img src="/2024/02/07/faraway/007.png" width="50%" hegiht="auto">
-<img src="/2024/02/07/faraway/008.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/001.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/002.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/003.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/004.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/005.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/006.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/007.png" width="50%" hegiht="auto">
+<img src="/2024/02/07/240207faraway/008.png" width="50%" hegiht="auto">
 
 <p><strong>这个游戏也有进阶选项，开局每位玩家分别分到5张区域牌，每位玩家自由进行5选3，即放弃两张区域牌。被放弃的区域牌洗回区域牌堆中。熟悉游戏基本机制后建议启用，可以提升游戏体验。</strong></p>
 <p>其它的中文教程推荐：<br>视频教程：（b站）<br><a href="https://www.bilibili.com/video/BV1694y1h7Yp">https://www.bilibili.com/video/BV1694y1h7Yp</a><br>图文教程：（b站）<br><a href="https://www.bilibili.com/read/cv27286594/">https://www.bilibili.com/read/cv27286594/</a><br>规则书链接：<br><a href="Faraway-rules-EN.pdf">规则书(en)pdf</a></p>
-<h3 id="个人向Faraway进阶部分（附区域-圣殿图片集）"><a href="#个人向Faraway进阶部分（附区域-圣殿图片集）" class="headerlink" title="个人向Faraway进阶部分（附区域&#x2F;圣殿图片集）"></a>个人向Faraway进阶部分（附区域&#x2F;圣殿图片集）</h3><h4 id="个人游戏理解"><a href="#个人游戏理解" class="headerlink" title="个人游戏理解"></a>个人游戏理解</h4><p><strong>在2人对局中，选牌阶段的干扰相对较少</strong>（毕竟是总数N+1，N个人选，2人也是理论干扰最小的），很容易拿到自己想要的牌。经常出现每有干扰的局面。游戏也进行地非常迅速，可以把它称为“自由刷分”的局面，无疑容易出现高分对决的情景。<br>但要是涉及到对抗，那就有“长考”（较长地思考）了:);<br><strong>人数越多，对抗越激烈，你也更有可能没法拿到想要的牌。在这时候小数字先拿牌的优势就体现出来了</strong><br><img src="/2024/02/07/faraway/009.png" alt="自由刷分示例" width="50%" hegiht="auto"><br><strong>保持区域卡数字的升序，可以拿到尽可能多的圣殿卡</strong>，圣殿卡可以提供额外资源（即三色标志、线索）与区域（四色+夜晚），提供额外的计分项目。足够数量的圣殿卡能让你取得更高的分数。<br><img src="/2024/02/07/faraway/010理论升序.png" alt="升序数字理论" width="50%" height="auto"><br><strong>起手牌数字小并</strong>且<strong>得分条件有一定上限</strong>，<strong>数字小又可以优先选牌</strong>。不过“理论升序”拿满7张圣殿牌也得有一定运气了。<br><img src="/2024/02/07/faraway/011起手大牌升序.png" alt="大牌起手理论上限" width="50%" height="auto"><br>虽然<strong>理论上限高</strong>，但<strong>风险在于圣殿不刷植物（需要的标志）与对手的争夺（数字太大了，多人游戏最后选牌，想要的经常被选走）</strong>。在这个例子中如果别人不跟你抢，植物（绿标志）刷的适中，就可以打出效果。（<strong>风险就是（绿标志）原本就少还刷的少+被对手针对抢牌；居民的要求迟迟不能满足时就得考虑保下限了</strong>）</p>
+<h3 id="个人向Faraway进阶部分（附区域-圣殿图片集）"><a href="#个人向Faraway进阶部分（附区域-圣殿图片集）" class="headerlink" title="个人向Faraway进阶部分（附区域&#x2F;圣殿图片集）"></a>个人向Faraway进阶部分（附区域&#x2F;圣殿图片集）</h3><h4 id="个人游戏理解"><a href="#个人游戏理解" class="headerlink" title="个人游戏理解"></a>个人游戏理解</h4><p><strong>在2人对局中，选牌阶段的干扰相对较少</strong>（毕竟是总数N+1，N个人选，2人也是理论干扰最小的），很容易拿到自己想要的牌。经常出现每有干扰的局面。游戏也进行地非常迅速，可以把它称为“自由刷分”的局面，无疑容易出现高分对决的情景。<br>但要是涉及到对抗，那就有“长考”（较长地思考）了:);<br><strong>人数越多，对抗越激烈，你也更有可能没法拿到想要的牌。在这时候小数字先拿牌的优势就体现出来了</strong><br><img src="/2024/02/07/240207faraway/009.png" alt="自由刷分示例" width="50%" hegiht="auto"><br><strong>保持区域卡数字的升序，可以拿到尽可能多的圣殿卡</strong>，圣殿卡可以提供额外资源（即三色标志、线索）与区域（四色+夜晚），提供额外的计分项目。足够数量的圣殿卡能让你取得更高的分数。<br><img src="/2024/02/07/240207faraway/010理论升序.png" alt="升序数字理论" width="50%" height="auto"><br><strong>起手牌数字小并</strong>且<strong>得分条件有一定上限</strong>，<strong>数字小又可以优先选牌</strong>。不过“理论升序”拿满7张圣殿牌也得有一定运气了。<br><img src="/2024/02/07/240207faraway/011起手大牌升序.png" alt="大牌起手理论上限" width="50%" height="auto"><br>虽然<strong>理论上限高</strong>，但<strong>风险在于圣殿不刷植物（需要的标志）与对手的争夺（数字太大了，多人游戏最后选牌，想要的经常被选走）</strong>。在这个例子中如果别人不跟你抢，植物（绿标志）刷的适中，就可以打出效果。（<strong>风险就是（绿标志）原本就少还刷的少+被对手针对抢牌；居民的要求迟迟不能满足时就得考虑保下限了</strong>）</p>
 <h4 id="区域-圣殿图片集"><a href="#区域-圣殿图片集" class="headerlink" title="区域&#x2F;圣殿图片集"></a>区域&#x2F;圣殿图片集</h4><blockquote>
-<p>图片来源链接:<a href="https://imgur.com/paAf8ih">https://imgur.com/paAf8ih</a>与<a href="https://imgur.com/KOvyJSP">https://imgur.com/KOvyJSP</a>（需要科学上网访问）<br><img src="/2024/02/07/faraway/place.jpeg" alt="区域卡牌集合"><br><img src="/2024/02/07/faraway/shelter.jpeg" alt="圣殿卡牌集合"><br>68张区域卡中，一共只有10个绿标志（植物），14个红标志（动物），18个蓝标志（矿产），18条线索，数字20-40是夜晚；46张圣殿卡中，一共只有5个绿标志（植物），6个红标志（动物），9个蓝标志（矿产），8条线索，4张夜晚。<br>至于板块颜色（景观&#x2F;生物群系）方面，颜色分布均匀，区域卡中四色各17张，圣殿卡中四色各5张。<br>由此可以建立对游戏更深的、定量的认识。与朋友一同游玩时一起参考集合图片也未尝不可。</p>
+<p>图片来源链接:<a href="https://imgur.com/paAf8ih">https://imgur.com/paAf8ih</a>与<a href="https://imgur.com/KOvyJSP">https://imgur.com/KOvyJSP</a>（需要科学上网访问）<br><img src="/2024/02/07/240207faraway/place.jpeg" alt="区域卡牌集合"><br><img src="/2024/02/07/240207faraway/shelter.jpeg" alt="圣殿卡牌集合"><br>68张区域卡中，一共只有10个绿标志（植物），14个红标志（动物），18个蓝标志（矿产），18条线索，数字20-40是夜晚；46张圣殿卡中，一共只有5个绿标志（植物），6个红标志（动物），9个蓝标志（矿产），8条线索，4张夜晚。<br>至于板块颜色（景观&#x2F;生物群系）方面，颜色分布均匀，区域卡中四色各17张，圣殿卡中四色各5张。<br>由此可以建立对游戏更深的、定量的认识。与朋友一同游玩时一起参考集合图片也未尝不可。</p>
 </blockquote>
 ]]></content>
       <categories>
@@ -363,8 +363,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Find same patterns</title>
+    <url>/2024/02/26/240226Find-same-patterns/</url>
+    <content><![CDATA[<p>2403021056更新版本<br>注：已知问题:关闭各窗口后0-5秒后才完全关闭，在此期间窗口覆盖部分可能暂时无法点击<br>设置可以调卡牌正面显示时间与难度；切换难度自动重新开始游戏。</p>
+<script type="text/javascript">
+function SetCwinHeight(){
+  var iframeid = document.getElementById("iframeid"); //iframe id
+  if (document.getElementById) {
+    if (iframeid && !window.opera) {
+      if (iframeid.contentDocument && iframeid.contentDocument.body.offsetHeight) {
+        iframeid.height = iframeid.contentDocument.body.offsetHeight + 50;
+      } else if (iframeid.Document && iframeid.Document.body.scrollHeight) {
+        iframeid.height = iframeid.Document.body.scrollHeight + 50;
+      }
+    }
+  }
+}
+</script>
+
+<iframe width="100%" id="iframeid" onload="Javascript:SetCwinHeight()" scrolling="yes" height="1300" frameborder="0" src=".\Find_same_patterns.html"></iframe>
+]]></content>
+      <categories>
+        <category>game</category>
+      </categories>
+      <tags>
+        <tag>game</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>responder game 抢答游戏</title>
-    <url>/2024/02/14/responder-game/</url>
+    <url>/2024/02/14/240214responder-game/</url>
     <content><![CDATA[<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -450,21 +478,21 @@
 <iframe src="//player.bilibili.com/player.html?aid=1051059492&bvid=BV1EH4y177DN&cid=1450590252&p=1" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"> </iframe>
             <table>
                 <tr>
-                    <td><img src="/2024/02/14/responder-game/002Amnesia.jpg" alt="Amnesia" height="320" width="240"></td>
-                    <td><img src="/2024/02/14/responder-game/003FNAF02.jpg" alt="FNAF" height="320" width="240"> </td>
-                    <td><img src="/2024/02/14/responder-game/004Outlast.jpg" alt="Outlast" height="320px" width="240px"></td>
-                    <td><img src="/2024/02/14/responder-game/005the last of us.jpeg" alt="The Last Of Us" height="320" width="240"></td>
+                    <td><img src="/2024/02/14/240214responder-game/002Amnesia.jpg" alt="Amnesia" height="320" width="240"></td>
+                    <td><img src="/2024/02/14/240214responder-game/003FNAF02.jpg" alt="FNAF" height="320" width="240"> </td>
+                    <td><img src="/2024/02/14/240214responder-game/004Outlast.jpg" alt="Outlast" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/005the last of us.jpeg" alt="The Last Of Us" height="320" width="240"></td>
                 </tr>
                 <tr>
-                    <td><img src="/2024/02/14/responder-game/007bioshock.jpg" alt="Bioshock" height="320px" width="240px"></td>
-                    <td><img src="/2024/02/14/responder-game/008slient hill.jpg" alt="Slient Hill" height="320px" width="240px"></td>
-                    <td><img src="/2024/02/14/responder-game/009heavy rain.jpg" alt="Heavy Rain" height="320px" width="240px"></td>
-                    <td><img src="/2024/02/14/responder-game/010earth bound.jpg" alt="Earth Bound" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/007bioshock.jpg" alt="Bioshock" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/008slient hill.jpg" alt="Slient Hill" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/009heavy rain.jpg" alt="Heavy Rain" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/010earth bound.jpg" alt="Earth Bound" height="320px" width="240px"></td>
                 </tr>
                 <tr>
-                    <td><img src="/2024/02/14/responder-game/011Majora's mask.jpg" alt="Majora's Mask" height="320px" width="240px"></td>
-                    <td><img src="/2024/02/14/responder-game/012UntilDawn.jpg" alt="UntilDawn" height="320px" width="240px"></td>
-                    <td><img src="/2024/02/14/responder-game/013dying light.jpg" alt="Dying Light" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/011Majora's mask.jpg" alt="Majora's Mask" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/012UntilDawn.jpg" alt="UntilDawn" height="320px" width="240px"></td>
+                    <td><img src="/2024/02/14/240214responder-game/013dying light.jpg" alt="Dying Light" height="320px" width="240px"></td>
                     <td></td>
                 </tr>
             </table>
@@ -476,9 +504,9 @@
     </audio><br>
     <table>
       <tr class="image-container">
-        <td><img src="/2024/02/14/responder-game/012UntilDawn.jpg" alt width="30%"></td>
-        <td><img src="/2024/02/14/responder-game/008slient hill.jpg" alt width="30%"></td>
-        <td><img src="/2024/02/14/responder-game/003FNAF02.jpg" alt width="30%"></td>
+        <td><img src="/2024/02/14/240214responder-game/012UntilDawn.jpg" alt width="30%"></td>
+        <td><img src="/2024/02/14/240214responder-game/008slient hill.jpg" alt width="30%"></td>
+        <td><img src="/2024/02/14/240214responder-game/003FNAF02.jpg" alt width="30%"></td>
       </tr>
       <tr>
         <td><button class="Q1" onclick="selectOption('Q1', 'A')">A</button></td>
@@ -492,7 +520,7 @@
       <div id="popup1" class="popup">
         <p class="popup_title">歌词原文及答案</p>
         <p class="popup_content" align="left">
-          <img src="/2024/02/14/responder-game/012UntilDawn.jpg" alt="UntilDawn" align="right" width="30%">
+          <img src="/2024/02/14/240214responder-game/012UntilDawn.jpg" alt="UntilDawn" align="right" width="30%">
         Story and atmosphere, 80s serial killer's reign,<br>
         College kids on a mountain, where dangers remain,<br><br>
         Survive or die trying, their fate intertwines,<br>
@@ -518,9 +546,9 @@
     </audio>
     <table>
       <tr class="image-container">
-        <td><img src="/2024/02/14/responder-game/011Majora's mask.jpg" alt width="30%"></td>
-        <td><img src="/2024/02/14/responder-game/005the last of us.jpeg" alt width="30%"></td>
-        <td><img src="/2024/02/14/responder-game/004Outlast.jpg" alt width="30%"></td>
+        <td><img src="/2024/02/14/240214responder-game/011Majora's mask.jpg" alt width="30%"></td>
+        <td><img src="/2024/02/14/240214responder-game/005the last of us.jpeg" alt width="30%"></td>
+        <td><img src="/2024/02/14/240214responder-game/004Outlast.jpg" alt width="30%"></td>
       </tr>
       <tr>
           <td><button class="Q2" onclick="selectOption('Q2', 'A')">A</button></td>
@@ -534,7 +562,7 @@
       <div id="popup2" class="popup">
         <p class="popup_title">歌词原文及答案</p>
         <p class="popup_content" align="left">
-          <img src="/2024/02/14/responder-game/004Outlast.jpg" alt="Outlast" align="right" width="30%">
+          <img src="/2024/02/14/240214responder-game/004Outlast.jpg" alt="Outlast" align="right" width="30%">
           No way to fight, just helpless prey,<br>
           Facing the attacker, at the end of each day.<br><br>
           Investigate through pages, journal unfolds,<br>
@@ -561,9 +589,9 @@ Q3:
 </audio><br>
 <table>
   <tr class="image-container">
-    <td><img src="/2024/02/14/responder-game/013dying light.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/010earth bound.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/002Amnesia.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/013dying light.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/010earth bound.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/002Amnesia.jpg" alt width="30%"></td>
   </tr>
   <tr>
     <td><button class="Q3" onclick="selectOption('Q3', 'A')">A</button></td>
@@ -576,7 +604,7 @@ Q3:
   <div id="popup3" class="popup">
     <p class="popup_title">歌词原文及答案</p>
     <p class="popup_content" align="left">
-      <img src="/2024/02/14/responder-game/010earth bound.jpg" alt="Earth Bound" align="right" width="30%">
+      <img src="/2024/02/14/240214responder-game/010earth bound.jpg" alt="Earth Bound" align="right" width="30%">
     A classic RPG tale, a journey begins,<br>
     Unveiling a world where darkness and light thins,<br><br>
     From childhood's torment, a masterpiece arose,<br>
@@ -604,9 +632,9 @@ Q4:
 </audio><br>
 <table>
   <tr class="image-container">
-    <td><img src="/2024/02/14/responder-game/009heavy rain.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/008slient hill.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/007bioshock.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/009heavy rain.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/008slient hill.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/007bioshock.jpg" alt width="30%"></td>
   </tr>
   <tr>
     <td><button class="Q4" onclick="selectOption('Q4', 'A')">A</button></td>
@@ -619,7 +647,7 @@ Q4:
   <div id="popup4" class="popup">
     <p class="popup_title">歌词原文及答案</p>
     <p class="popup_content" align="left">
-      <img src="/2024/02/14/responder-game/007bioshock.jpg" alt="Bioshock" align="right" width="30%">
+      <img src="/2024/02/14/240214responder-game/007bioshock.jpg" alt="Bioshock" align="right" width="30%">
       Jack on a plane, crashes through ocean tide,<br>
       Lost in the waves, secrets stirring inside,<br><br>
       Plasmids empower, superhuman might prevails,<br>
@@ -647,9 +675,9 @@ Q5:
 </audio><br>
 <table>
   <tr class="image-container">
-    <td><img src="/2024/02/14/responder-game/008slient hill.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/004Outlast.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/013dying light.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/008slient hill.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/004Outlast.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/013dying light.jpg" alt width="30%"></td>
   </tr>
   <tr>
     <td><button class="Q5" onclick="selectOption('Q5', 'A')">A</button></td>
@@ -662,7 +690,7 @@ Q5:
   <div id="popup5" class="popup">
     <p class="popup_title">歌词原文及答案</p>
     <p class="popup_content" align="left">
-      <img src="/2024/02/14/responder-game/008slient hill.jpg" alt="Slient Hill" align="right" width="30%">
+      <img src="/2024/02/14/240214responder-game/008slient hill.jpg" alt="Slient Hill" align="right" width="30%">
       Here come an iconic survival series,<br>
       Where psychological horror pierces and freezes,<br><br>
       Enter the second game, a journey through despair,<br>
@@ -690,9 +718,9 @@ Q6:
 </audio><br>
 <table>
   <tr class="image-container">
-    <td><img src="/2024/02/14/responder-game/005the last of us.jpeg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/013dying light.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/012UntilDawn.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/005the last of us.jpeg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/013dying light.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/012UntilDawn.jpg" alt width="30%"></td>
   </tr>
   <tr>
     <td><button class="Q6" onclick="selectOption('Q6', 'A')">A</button></td>
@@ -705,7 +733,7 @@ Q6:
   <div id="popup6" class="popup">
     <p class="popup_title">歌词原文及答案</p>
     <p class="popup_content" align="left">
-      <img src="/2024/02/14/responder-game/005the last of us.jpeg" alt="The Last Of Us" align="right" width="30%">
+      <img src="/2024/02/14/240214responder-game/005the last of us.jpeg" alt="The Last Of Us" align="right" width="30%">
       A fungus-born plague, infecting all around,<br>
       Survival is the game, in this post-apocalyptic ground.<br><br>
       Zombie apocalypse, relentless storm,<br>
@@ -733,9 +761,9 @@ Q7:
 </audio><br>
 <table>
   <tr class="image-container">
-    <td><img src="/2024/02/14/responder-game/003FNAF02.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/007bioshock.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/011Majora's mask.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/003FNAF02.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/007bioshock.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/011Majora's mask.jpg" alt width="30%"></td>
   </tr>
   <tr>
     <td><button class="Q7" onclick="selectOption('Q7', 'A')">A</button></td>
@@ -748,7 +776,7 @@ Q7:
   <div id="popup7" class="popup">
     <p class="popup_title">歌词原文及答案</p>
     <p class="popup_content" align="left">
-      <img src="/2024/02/14/responder-game/003FNAF02.jpg" alt="Five Nights At Freddy's" align="right" width="30%">
+      <img src="/2024/02/14/240214responder-game/003FNAF02.jpg" alt="Five Nights At Freddy's" align="right" width="30%">
       Scott Cawthon's fright, a hop takes flight,<br>
       Previous game characters, reborn in fright.<br><br>
       Jump scares in pizzeria, dread fills the air,<br>
@@ -776,9 +804,9 @@ Q8:
 </audio><br>
 <table>
   <tr class="image-container">
-    <td><img src="/2024/02/14/responder-game/011Majora's mask.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/002Amnesia.jpg" alt width="30%"></td>
-    <td><img src="/2024/02/14/responder-game/009heavy rain.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/011Majora's mask.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/002Amnesia.jpg" alt width="30%"></td>
+    <td><img src="/2024/02/14/240214responder-game/009heavy rain.jpg" alt width="30%"></td>
   </tr>
   <tr>
     <td><button class="Q8" onclick="selectOption('Q8', 'A')">A</button></td>
@@ -791,7 +819,7 @@ Q8:
   <div id="popup8" class="popup">
     <p class="popup_title">歌词原文及答案</p>
     <p class="popup_content" align="left">
-      <img src="/2024/02/14/responder-game/011Majora's mask.jpg" alt="Majora's Mask" align="right" width="30%">
+      <img src="/2024/02/14/240214responder-game/011Majora's mask.jpg" alt="Majora's Mask" align="right" width="30%">
       In a countdown's grasp, time's running low,<br>
       Complete tasks in three days, before shadows grow.<br><br>
       Flute of Time, months pass, secrets unfold,<br>
@@ -949,9 +977,41 @@ Q8:
       </tags>
   </entry>
   <entry>
-    <title>Find same patterns</title>
-    <url>/2024/02/26/Find-same-patterns/</url>
-    <content><![CDATA[<p>2402271713更新版本<br>注：已知问题:关闭各窗口后0-5秒后才完全关闭，在此期间窗口覆盖部分可能暂时无法点击<br>下一次更新暂定新增选择难度功能，即提供困难模式，即原版的难度（8图案*2色(每个图案从红黄蓝绿中分别4选2)）</p>
-<iframe width="100%" height="1200" frameborder="0" src=".\Find_same_patterns.html"></iframe>]]></content>
+    <title>Find-same-patterns-notes</title>
+    <url>/2024/02/28/240228Find-same-patterns-notes/</url>
+    <content><![CDATA[<p>目标：<br>1.理解翻牌游戏的内在逻辑<br>2.学习建立html游戏的基本思路，实践基本流程</p>
+<h2 id="1-关于Element-classList"><a href="#1-关于Element-classList" class="headerlink" title="1. 关于Element.classList"></a>1. 关于Element.classList</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/classList">https://developer.mozilla.org/zh-CN/docs/Web/API/Element/classList</a><br>它是一个只读属性，可以返回一个元素的动态DOMTokenList集合，可用于操作class集合。<br>可以用add()，remove()，replace()，toggle()方法修改DOMTokenList：<br>示例：<br>const div &#x3D; document.createElement(“div”);<br>div.className &#x3D; “foo”;<br>console.log(div.outerHTML); &#x2F;&#x2F;&lt; div class&#x3D;”foo”&gt;&lt;&#x2F; div&gt;<br>&#x2F;&#x2F;使用classList API<br>div.classList.remove(“foo”);<br>div.classList.add(“anotherclass”);<br>&#x2F;&#x2F;…class&#x3D;”anotherclass”…<br>div.classList.toggle(“visible”); &#x2F;&#x2F;toggle切换；如果该类值已存在则移除它，否则添加它。</p>
+<blockquote>
+<p>[toggle(class, true|false)	在元素中切换类名。<br>第一个参数为要在元素中移除的类名，并返回 false。<br>如果该类名不存在则会在元素中添加类名，并返回 true。<br>第二个是可选参数，是个布尔值用于设置元素是否强制添加或移除类，不管该类名是否存 在。例如：</p>
+</blockquote>
+<p>移除一个 class: element.classList.toggle(“classToRemove”, false);<br>添加一个 class: element.classList.toggle(“classToAdd”, true);</p>
+<p>注意： Internet Explorer 或 Opera 12 及其更早版本不支持第二个参数。]<br>div.classList.toggle(“visible”,i&lt;10);<br>console.log(dic.classList.contains(“foo”))<br>&#x2F;&#x2F;添加删除多个类值<br>div.classListadd&#x2F;remove(“foo”,”bar”,…);<br>&#x2F;&#x2F;使用展开语法添加或移除多个类值<br>const cls &#x3D; [“foo”,”bar”];<br>div.classList.add(…cls);<br>div.classList.remove(…cls);<br>div.classList.replace(“foo”,”bar”);</p>
+<p>翻牌游戏的js代码中主要就是通过classList这个API添加删除类值，改变卡牌的状态。</p>
+<h2 id="2-关于API-应用程序编程接口"><a href="#2-关于API-应用程序编程接口" class="headerlink" title="2.关于API 应用程序编程接口"></a>2.关于API 应用程序编程接口</h2><p>API(Application Programming Interface)程序之间的接口，程序之间的合约。<br>可以理解为：服务商通过API提供服务，进行利益交换&#x2F;互助。</p>
+<h2 id="3-Node-appendChild-方法"><a href="#3-Node-appendChild-方法" class="headerlink" title="3.Node.appendChild()方法"></a>3.Node.appendChild()方法</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild">https://developer.mozilla.org/zh-CN/docs/Web/API/Node/appendChild</a><br>将一个结点附加到指定父节点的子节点列表的末尾处；如有该结点本身存在，只会移动而非新建（不用事先删除要移动的结点）<br>若要保留原有结点，可通过Node.cloneNode()方法创造副本（即复制），再对副本操作。<br>如果给定的子节点是 DocumentFragment，那么 DocumentFragment 的全部内容将转移到指定父节点的子节点列表中。<br>备注： 有更加新的 API 可供使用！ &gt; ParentNode.append() (en-US) 方法支持多个参数，接受字符串作为参数，会将字符串转换为文本节点再附加。<br>语法<br>element.appendChild(aChild)<br>参数<br>aChild<br>要追加给父节点（通常为一个元素）的节点。<br>返回值<br>返回追加后的子节点（aChild），除非 aChild 是一个文档片段（DocumentFragment），这种情况下将返回空文档片段（DocumentFragment）。</p>
+<p>对数组有push、pop操作。</p>
+<p>使板块背面为字母，就是改变.deck .card背后的background元素，给每个type单独赋值一个，但是为了满足字母位置不变的需求，应当让背面的字母与类数组的下标对应。<br>appendChild会移除原对象，需要使用cloneNode()等方法复制原对象后对副本操作。但对于本项目的需求，复制cards数组对三个独立的“cards”数组操作更为便捷。<br>经过实践，复制cards数组的过程中还是需要使用cloneNode()复制DOM结点，否则数组内都是同个DOM结点，只是存有指针的顺序不同，仍然只有最后一个有效。为此我添加了initial()函数用于在页面加载时复制结点到两个target-card数组中。</p>
+<h2 id="4-slice-和concat-在JS中复制数组时的常用方法"><a href="#4-slice-和concat-在JS中复制数组时的常用方法" class="headerlink" title="4.slice()和concat() 在JS中复制数组时的常用方法"></a>4.slice()和concat() 在JS中复制数组时的常用方法</h2><p>slice()方法：array.slice(start,end)<br>slice返回一个新数组，从start位置到end位置（不包括end）的元素；若省略end参数则会一直复制到数组的末尾。<br>示例：<br>const array &#x3D; [1, 2, 3, 4, 5];<br>const newArray &#x3D; array.slice(1, 3); &#x2F;&#x2F; 返回 [2, 3]<br>concat()方法：array.concat(value1,value2,…,valueN)<br>concat用于合并两个或多个数组，并返回一个新数组。<br>示例：<br>const array1 &#x3D; [1, 2, 3];<br>const array2 &#x3D; [4, 5, 6];<br>const newArray &#x3D; array1.concat(array2); &#x2F;&#x2F; 返回 [1, 2, 3, 4, 5, 6]</p>
+<p>逗号分隔元素单元：<br>#target-card1 .card,#target-card2 .card<br>同时执行多个函数的方法：<br>document.body.onload &#x3D; function(){initial();startGame();}</p>
+<p>removeChild()与appendChild()相对。主要使用这两个方法增添减少deck中的card。<br>firstChild DOM中的方法，获取该元素的第一个孩子结点，没有孩子则返回null。</p>
+<p>类似于appendChild的属性有：</p>
+<p>insertBefore: 这个方法将一个节点插入到指定节点之前的位置。<br>replaceChild: 这个方法替换指定父节点的子节点。<br>append: 这是一个比较新的方法，它允许将一个或多个节点追加到父节点的子节点列表的末尾。<br>prepend: 与append类似，但是它会将节点插入到父节点的子节点列表的开头。<br>insertAdjacentElement: 这个方法允许在指定元素的相对位置插入一个HTML元素节点。<br>这些方法都用于动态地向文档中添加新的节点或对现有节点进行操作。</p>
+<p>原有样例的翻面是由“原本字体大小为0”+“反转动画”+“对class::open的字体样式进行设置，即设置font-size: 33px”完成的。因此，要使卡牌”正面显示“，只需要设置font-size的大小。（注意：ID选择器优先级高于类选择器，注意覆盖问题）</p>
+<p>在替换图标时，由于之前使用的是字体，可以直接对字体大小font-size操作；而使用svg后要对width和height操作，因此要重新设定样式。<br>经过不断地尝试，我利用id选择器优先级高的特点，利用后代选择器为#card-deck里面的svg图像设置样式。<br>#card-deck .open .icon可以在翻开卡片时被使用；<br>而#card-deck .card:not(.open) .icon会在卡片没被翻开时使用。<br>其余部分都只用直接展示，使用svg标签选择。<br>接下来就是用自选的图案svg机械替换原有文本。（当然SVG标签也可以选择卡片背面的字母）<br>在测试的过程中，unmatched时的红把红色图案融入其中，无法观察，因此修改了unmatched状态下的background-color。<br>废弃了一个图案。指纹的svg代码太长了，给GPT转url都要continue两次……</p>
+<p>关于需要找的图案上的标识，debug了半天，发现问题在于：使用……::after{positon: absolute}时，其包含块即父元素（此处是card）的定位属性必须设置为非 static 属性，比如 relative、absolute 或者 fixed。否则，它会继续往父元素的父元素寻找（作为包含块），直到定位到具有非static定位属性的元素（或者到达根元素html）。当到达根元素html伪元素的位置属性top、right、bottom、left都是相对于html网页的。当你的位置属性给出个负值，很有可能会移除视口（viewport）之外，导致无法看见这个元素。</p>
+<p>unmatched的动画现在匹配不到targetcard数组<br>学习html内嵌博客的不同方法。。。。。。<br>设置起始位置下拉选项框<br>设置介绍游戏规则的按钮及浮窗<br>难度的切换？（可以另做，最好内嵌）<br>新增next标识，修改代码<br>为了更加贴合原游戏的设定，添加了游戏规则按钮与两色next标识。需要寻找的图案为next标识对应的图案。因此，match相关的一系列代码传参都要改成cur+1，游戏结束判定条件也有所更改。<br>考虑到游戏后期5秒的显示时间可能过长，我添加了设置显示时间的设置。并发现已知性能问题：若保存设置，content2会过一小段时间再消失。<br>问题：保存设置时，content2会过一小段时间再消失</p>
+<h2 id="5-设置下拉框dropdown并获取选中项"><a href="#5-设置下拉框dropdown并获取选中项" class="headerlink" title="5.设置下拉框dropdown并获取选中项"></a>5.设置下拉框dropdown并获取选中项</h2><p>示例：<br>&lt; select id&#x3D;”myDropdown”&gt;<br>  &lt; option value&#x3D;”option1”&gt;Option 1&lt;&#x2F; option&gt;<br>  &lt; option value&#x3D;”option2”&gt;Option 2&lt;&#x2F; option&gt;<br>  &lt; option value&#x3D;”option3”&gt;Option 3&lt;&#x2F; option&gt;<br>&lt;&#x2F; select&gt;</p>
+<p>&lt; button onclick&#x3D;”getSelectedOption()”&gt;Get Selected Option&lt;&#x2F; button&gt;</p>
+<p>&lt; script&gt;<br>function getSelectedOption() {<br>  var dropdown &#x3D; document.getElementById(“myDropdown”);<br>  var selectedOption &#x3D; dropdown.options[dropdown.selectedIndex].value;<br>  console.log(“Selected option:”, selectedOption);<br>  &#x2F;&#x2F; 在这里你可以使用 selectedOption 的值进行其他操作<br>}<br>&lt; &#x2F;script&gt;</p>
+<p>dropdown的方法：<br>selectedIndex： 获取或设置下拉框中当前选中项的索引值。<br>var selectedIndex &#x3D; dropdown.selectedIndex; &#x2F;&#x2F; 获取当前选中项的索引值<br>dropdown.selectedIndex &#x3D; 2; &#x2F;&#x2F; 设置选中索引为第3个选项<br>value： 获取或设置下拉框中当前选中项的值。<br>var selectedValue &#x3D; dropdown.value; &#x2F;&#x2F; 获取当前选中项的值<br>dropdown.value &#x3D; “option2”; &#x2F;&#x2F; 设置选中值为 “option2”<br>options： 获取下拉框中所有选项的集合。<br>var options &#x3D; dropdown.options; &#x2F;&#x2F; 获取所有选项的集合<br>var firstOptionValue &#x3D; options[0].value; &#x2F;&#x2F; 获取第一个选项的值<br>add() 和 remove()： 向下拉框中添加或移除选项。<br>&#x2F;&#x2F; 向下拉框中添加新选项<br>dropdown.add(new Option(“Option 4”, “option4”));<br>&#x2F;&#x2F; 从下拉框中移除指定索引的选项<br>dropdown.remove(1); &#x2F;&#x2F; 移除第2个选项<br>onchange 事件： 当下拉框的选中项发生变化时触发。<br>dropdown.onchange &#x3D; function() {<br>    console.log(“选中项发生变化”);<br>};</p>
+<p>6.使用iframe标签在博客中嵌套html页面<br>&lt; iframe width&#x3D;”100%” height&#x3D;”100%”  src&#x3D;”.\Find_same_patterns.html”&gt;&lt;&#x2F; iframe&gt;<br>iframe标签中scrolling属性默认为”yes”，即允许滚动，当高度不足以展示页面内容时显示滚动条。<br>博客嵌套html页面主要的问题是height&#x3D;”100%”这个属性不使用于博客页面。博客里面有其它元素，直接设置百分比只会填充预留区域（此时如在matery中下方会有“文章作者”等内容会挤占页面空间，导致height值实际上很小，如下图hegiht&#x3D;154）<br><img src="/2024/02/28/240228Find-same-patterns-notes/001.png" alt="示例图片" width="50%"><br>因此，在博客中内嵌html，height值不能使用百分比设置，只要设定足够的、能够展示完整页面的height就行了。例如针对图中示例，height&#x3D;910px时就能展示完全，此时滚动条也消失了。（但是这无法自适应浏览器尺寸变化导致的html高度的变化。）<br><img src="/2024/02/28/240228Find-same-patterns-notes/002.png" alt="示例图片" width="50%"><br>但是，可以看到现在iframe界面有边框，不够美观，经检测可以发现这是源自user agent stylesheet，也就是浏览器默认样式（见下图）。手动设置边框样式就可以覆盖掉默认样式，如使用style&#x3D;”border: 0px”加上内联样式。也可以使用到html属性frameborder，即frameborder&#x3D;”0”。但这里用到了外部CSS文件设置样式，所以更推荐后者。<br><img src="/2024/02/28/240228Find-same-patterns-notes/003.png" alt="示例图片" width="80%"><br>至于参考文章<a href="https://www.haoyizebo.com/posts/e9071e74/">https://www.haoyizebo.com/posts/e9071e74/</a>中的获取高度的函数，没看懂。测试了下会让iframe的height比设置时多50像素，在手机中显示不完全。但我的理解是这个函数要获取到嵌套的html的高度，但好像没有实现。所以我为了显示全部内容干脆scrolling &#x3D; yes了。</p>
+<p>24&#x2F;03&#x2F;01<br>修改的基本原理是：所有展示的卡牌改为cloneNode()产生的复制品；在废弃后借助JavaScript引擎的垃圾回收机制自行删除。initial()时进行复制。<br>首先，在设置中添加切换难度的单选框。若成功切换难度要重置card-deck与两个target-card，并立刻重启游戏。<br> <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> var setversion = document.getElementById(&quot;setversion&quot;).value;</span><br><span class="line"> if(setversion != version)&#123;</span><br><span class="line">     version = setversion;</span><br><span class="line">     initial(version);</span><br><span class="line">     startGame();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>接下来更改initial()与startGame()函数。<br>更改时，将cards命名为空数组，用total_cards装有全部图案。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">document.body.onload = function()&#123;initial(0);&#125;</span><br><span class="line">//主要作用：复制cards数组</span><br><span class="line">function initial(version)&#123;</span><br><span class="line">    //先删除cards中原有内容</span><br><span class="line">    cards.forEach(function(item)&#123;</span><br><span class="line">        item.remove();</span><br><span class="line">    &#125;);</span><br><span class="line">    //洗牌，确定使用图案的顺序</span><br><span class="line">    let usedImages = shuffle([0,1,2,3,4,5,6,7]);</span><br><span class="line">    if(version === 0)</span><br><span class="line">    &#123;//普通难度直接使用前四种图案，用i遍历usedImages；j用于遍历选中的图案(偏移量)</span><br><span class="line">        for(let i = 0;i &lt; 4;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(let j = 0;j &lt; 4;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                cards.push(total_cards[usedImages[i]*4+j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else if(version === 1)&#123;</span><br><span class="line">        for(let i = 0;i &lt; 4;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cards.push(total_cards[usedImages[i]*4 + i%4]);</span><br><span class="line">            cards.push(total_cards[usedImages[i]*4 + (i+1)%4]);</span><br><span class="line">            cards.push(total_cards[usedImages[i+4]*4 + (i+2)%4]);</span><br><span class="line">            cards.push(total_cards[usedImages[i+4]*4 + (i+3)%4]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //目标栏删除全部元素后复制</span><br><span class="line">    targetedCards1 = [];</span><br><span class="line">    targetedCards2 = [];</span><br><span class="line">    [].forEach.call(cards,function(item)&#123;</span><br><span class="line">        let clone1 = item.cloneNode(true);</span><br><span class="line">        let clone2 = item.cloneNode(true);</span><br><span class="line">        targetedCards1.push(clone1);</span><br><span class="line">        targetedCards2.push(clone2);</span><br><span class="line">        console.log(&quot;Test3&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    startGame();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在实现过程中，曾错误地使用DOM方法remove来清空数组。这里的targetedcard并非DOM对象，remove无法清除。因此会出现每使用一次targetcard中原有元素不消失的错误。正确方法使用数组方法清除，如targetedCards1 &#x3D; [];<br>另外，发现version一开始是num类型，由于setversion是str类型，version也变为str类型，导致version&#x3D;&#x3D;&#x3D;0&#x2F;1的判断式失效。</p>
+<h2 id="6-从HTML中获取值时，javaScript都会将它们解析为字符串"><a href="#6-从HTML中获取值时，javaScript都会将它们解析为字符串" class="headerlink" title="6.从HTML中获取值时，javaScript都会将它们解析为字符串"></a>6.从HTML中获取值时，javaScript都会将它们解析为字符串</h2><p>如果想要更改类型，可以使用js内置函数parseInt()或parseFloat()</p>
+]]></content>
+      <tags>
+        <tag>study</tag>
+      </tags>
   </entry>
 </search>

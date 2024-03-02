@@ -1,7 +1,11 @@
 //卡牌数组包含所有卡片
 let card = document.getElementsByClassName("card");
-let cards = [...card];
-//游戏中所有卡片
+//cards中只含有游戏中使用的16个卡片
+let cards = [];
+//total_cards含有全部的卡片
+let total_cards = [...card];
+
+//使用的ul标签，即放置卡牌的区域
 const deck = document.getElementById("card-deck");
 //声明 moves 变量
 let moves = 0;
@@ -36,29 +40,152 @@ var bluecur = 8;//均从第九张卡牌开始
 var temp1 = 1;
 var temp2 = 1;
 
-//设置页面相关
+//设置卡牌翻开时间
 var lastingtime = 5000;
+//设置难度
+let version = 0;
 
 
-
-
-//纯测试
-let testcards = [...document.getElementsByClassName("test-card")];
-
-for(var i = 0; i < testcards.length; i++){
-    let testcard = testcards[i];
-    testcard.addEventListener("click",function(){
-        testcard.classList.toggle("open");
-        testcard.classList.toggle("show");
-        console.log("trigger!");
-    });
-
-}
-//测试时展示现在是哪方行动的div
+//展示现在是哪方行动的div
 var round = 0;//0表示红方，1表示蓝方
 var whoseaction = document.getElementById("condition");
+//默认设置为简单难度
+document.body.onload = function(){initial(version);}
+
+//主要作用：复制cards数组
+function initial(version){
+    //先删除cards中原有内容
+    cards=[];
+
+    //洗牌，确定使用图案的顺序
+    let usedImages = shuffle([0,1,2,3,4,5,6,7]);
+    if(version === 0)
+    {//普通难度直接使用前四种图案，用i遍历usedImages；j用于遍历选中的图案(偏移量)
+        for(let i = 0;i < 4;i++)
+        {
+            for(let j = 0;j < 4;j++)
+            {
+                cards.push(total_cards[usedImages[i]*4+j]);
+            }
+        }
+    }else if(version === 1){
+        for(let i = 0;i < 4;i++)
+        {
+            cards.push(total_cards[usedImages[i]*4 + i%4]);
+            cards.push(total_cards[usedImages[i]*4 + (i+1)%4]);
+            cards.push(total_cards[usedImages[i+4]*4 + (i+2)%4]);
+            cards.push(total_cards[usedImages[i+4]*4 + (i+3)%4]);
+        }
+    }
+
+    //目标栏删除全部元素后复制
+    targetedCards1 = [];
+    targetedCards2 = [];
+
+    [].forEach.call(cards,function(item){
+        let clone1 = item.cloneNode(true);
+        let clone2 = item.cloneNode(true);
+        targetedCards1.push(clone1);
+        targetedCards2.push(clone2);
+    });
+
+    startGame();
+}
+
+//重新开始/开始游戏
+function startGame(){
+    console.log("start game!");
+
+    //清空onpenCards
+    openedCards=[];
+
+    //洗牌
+    cards = shuffle(cards);
+    deck.innerHTML = "";
+    targetedCards1 = shuffle(targetedCards1);
+    target1.innerHTML = "";
+    targetedCards2 = shuffle(targetedCards2);
+    target2.innerHTML = "";
+
+    //将洗完的牌从cards放入deck中
+    [].forEach.call(cards,function(item){
+        deck.appendChild(item); 
+    });
+    [].forEach.call(targetedCards1,function(item){
+        target1.appendChild(item); 
+    });
+    [].forEach.call(targetedCards2,function(item){
+        target2.appendChild(item); 
+    });
+
+    //从每张卡片中删除所有现有的类
+    for(var i = 0;i < cards.length; i++){
+        cards[i].classList.remove("show","open","match","disabled");
+        cards[i].classList.remove("D","O","N","A","J","G","T","P","U","B","I","K","Q","R","S","M");
+        targetedCards1[i].classList.remove("eliminate","redcurrent","finish","rednext");
+        targetedCards2[i].classList.remove("eliminate","bluecurrent","finish","bluenext");
+    }
+    //重置添加目标卡牌的哈希记录表
+    for(let i = 0;i < 16;i++)
+    {
+        targetedHash1[i]=0;
+        targetedHash2[i]=0;
+    }
+
+    //add：为每张卡牌按顺序增加字母标识类
+    cards[0].classList.add("D");
+    cards[1].classList.add("O");
+    cards[2].classList.add("N");
+    cards[3].classList.add("A");
+    cards[4].classList.add("J");
+    cards[5].classList.add("G");
+    cards[6].classList.add("T");
+    cards[7].classList.add("P");
+    cards[8].classList.add("U");
+    cards[9].classList.add("B");
+    cards[10].classList.add("I");
+    cards[11].classList.add("K");
+    cards[12].classList.add("Q");
+    cards[13].classList.add("R");
+    cards[14].classList.add("S");
+    cards[15].classList.add("M");
+
+    //把卡牌补齐到20张
+    for(let i = 0; i < 4;i++){
+        appendCard(1);
+        appendCard(2);
+    }
+    target1 = document.getElementById("target-card1");
+    target2 = document.getElementById("target-card2");
+    //设置current、eliminate和finish
+    redcur = 8;
+    bluecur = 8;
+    targetedCards1[redcur].classList.add("redcurrent");
+    targetedCards2[bluecur].classList.add("bluecurrent");
+    targetedCards1[redcur+1].classList.add("rednext");
+    targetedCards2[bluecur+1].classList.add("bluenext");
+    targetedCards1[0].classList.add("eliminate");
+    targetedCards2[0].classList.add("eliminate");
+    target1.children[19].classList.add("finish");
+    target2.children[19].classList.add("finish");
+
+    //重置文本及顺序标记及边框颜色
+    round = 0;whoseaction.innerText="轮到红方玩家翻开卡牌";
+    deck.classList.remove("blueaction");
+    deck.classList.add("redaction");
+    //重置moves
+    moves = 0;
+    counter.innerHTML = moves;
+    //重置timer
+    second = 0;
+    minute = 0 ;
+    hour = 0;
+    var timer = document.querySelector(".timer");
+    timer.innerHTML = "0 分 0 秒";
+    clearInterval(interval);
 
 
+};
 
 //洗牌功能
 function shuffle(array){
@@ -76,17 +203,6 @@ function shuffle(array){
     return array;
 };
 
-document.body.onload = function(){initial();startGame();}
-
-function initial(){
-    //复制cards数组
-    [].forEach.call(cards,function(item){
-        let clone1 = item.cloneNode(true);
-        let clone2 = item.cloneNode(true);
-        targetedCards1.push(clone1);
-        targetedCards2.push(clone2);
-    });
-}
 
 //增删目标卡牌组的基本模块
 function appendCard(target){
@@ -232,100 +348,6 @@ function Movebackward(target){
         }
         }
 }
-
-
-
-function startGame(){
-    //清空onpenCards
-    openedCards=[];
-
-    //洗牌
-    cards = shuffle(cards);
-    deck.innerHTML = "";
-    targetedCards1 = shuffle(targetedCards1);
-    target1.innerHTML = "";
-    targetedCards2 = shuffle(targetedCards2);
-    target2.innerHTML = "";
-
-    //将洗完的牌从cards放入deck中
-    [].forEach.call(cards,function(item){
-        deck.appendChild(item); 
-    });
-    [].forEach.call(targetedCards1,function(item){
-        target1.appendChild(item); 
-    });
-    [].forEach.call(targetedCards2,function(item){
-        target2.appendChild(item); 
-    });
-
-    //从每张卡片中删除所有现有的类
-    for(var i = 0;i < cards.length; i++){
-        cards[i].classList.remove("show","open","match","disabled");
-        cards[i].classList.remove("D","O","N","A","J","G","T","P","U","B","I","K","Q","R","S","M");
-        targetedCards1[i].classList.remove("eliminate","redcurrent","finish","rednext");
-        targetedCards2[i].classList.remove("eliminate","bluecurrent","finish","bluenext");
-    }
-    //重置添加目标卡牌的哈希记录表
-    for(let i = 0;i < 16;i++)
-    {
-        targetedHash1[i]=0;
-        targetedHash2[i]=0;
-    }
-
-    //add：为每张卡牌按顺序增加字母标识类
-    cards[0].classList.add("D");
-    cards[1].classList.add("O");
-    cards[2].classList.add("N");
-    cards[3].classList.add("A");
-    cards[4].classList.add("J");
-    cards[5].classList.add("G");
-    cards[6].classList.add("T");
-    cards[7].classList.add("P");
-    cards[8].classList.add("U");
-    cards[9].classList.add("B");
-    cards[10].classList.add("I");
-    cards[11].classList.add("K");
-    cards[12].classList.add("Q");
-    cards[13].classList.add("R");
-    cards[14].classList.add("S");
-    cards[15].classList.add("M");
-
-    //把卡牌补齐到20张
-    for(let i = 0; i < 4;i++){
-        appendCard(1);
-        appendCard(2);
-    }
-    target1 = document.getElementById("target-card1");
-    target2 = document.getElementById("target-card2");
-    //设置current、eliminate和finish
-    redcur = 8;
-    bluecur = 8;
-    targetedCards1[redcur].classList.add("redcurrent");
-    targetedCards2[bluecur].classList.add("bluecurrent");
-    targetedCards1[redcur+1].classList.add("rednext");
-    targetedCards2[bluecur+1].classList.add("bluenext");
-    targetedCards1[0].classList.add("eliminate");
-    targetedCards2[0].classList.add("eliminate");
-    target1.children[19].classList.add("finish");
-    target2.children[19].classList.add("finish");
-
-    //重置文本及顺序标记及边框颜色
-    round = 0;whoseaction.innerText="轮到红方玩家翻开卡牌";
-    deck.classList.remove("blueaction");
-    deck.classList.add("redaction");
-    //重置moves
-    moves = 0;
-    counter.innerHTML = moves;
-    //重置timer
-    second = 0;
-    minute = 0 ;
-    hour = 0;
-    var timer = document.querySelector(".timer");
-    timer.innerHTML = "0 分 0 秒";
-    clearInterval(interval);
-
-
-};
 
 //显示卡片
 var displayCard = function(){
@@ -522,14 +544,25 @@ function Closesets(){
 function getSetsOption() {
     var settime = document.getElementById("settime");
     lastingtime = settime.value;
+    let setversion = parseInt(document.getElementById("setversion").value);
+    console.log(typeof version);
+    console.log(typeof setversion);
+    if(setversion !== version){
+        version = setversion;
+        initial(version);
+        console.log(version);
+        if(version===1) document.getElementById("version").innerText="困难难度(8图案各随机2色)";
+        else if(version===0) document.getElementById("version").innerText="普通难度(4图案4色)";
+    }
+
     modal3.classList.remove("show");
     //console.log("目前持续时间:", lastingtime);
     // 在这里你可以使用 selectedOption 的值进行其他操作
   }
 
 //将事件侦听器添加到每张卡片
-for(var i = 0; i < cards.length; i++){
-    card = cards[i];
+for(var i = 0; i < total_cards.length; i++){
+    card = total_cards[i];
     card.addEventListener("click",displayCard);
     card.addEventListener("click",cardOpen);
 }

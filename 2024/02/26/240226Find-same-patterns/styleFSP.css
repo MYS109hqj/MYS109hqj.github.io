@@ -33,6 +33,10 @@ html {
     font-family: 'Gloria Hallelujah', cursive;
   }
   
+  #total-deck{
+    display: none;
+  }
+
   #card-deck {
     width: 85%;
     background: #716F71;
