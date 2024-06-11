@@ -323,8 +323,12 @@
         }
 
         function changeGridSize() {
-            N = parseInt(document.getElementById('gridSize').value);
+            let newSize = parseInt(document.getElementById('gridSize').value);
+            if(newSize < 2) newSize = 2;
+            if(newSize > 10) newSize = 10;
+            N = newSize;
             minMoves = '∞';
+            randomPuzzle = null;
             updateMinMovesText();
             resetGrid();
         }
