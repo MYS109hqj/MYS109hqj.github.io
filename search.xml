@@ -1394,4 +1394,276 @@ function SetCwinHeight(){
         <tag>study</tag>
       </tags>
   </entry>
+  <entry>
+    <title>241122论文阅读</title>
+    <url>/2024/11/22/241122%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</url>
+    <content><![CDATA[<p>论文代码阅读——手打版</p>
+<p>论文链接：</p>
+<p>github仓库链接：<br><a href="https://github.com/qingzhenduyu/TAMER">https://github.com/qingzhenduyu/TAMER</a></p>
+<p>这里会更多地关注该项目用到的模型架构和训练流程。</p>
+<p>从 <code>tamer</code> 文件夹中的 <code>lit_tamer.py</code> 开始阅读。</p>
+<p>在 <code>class LitTAMER(pl.LightningModule)</code> 中，定义了模型为 <code>self.tamer_model = TAMER(...)</code>，并定义了 <code>self.exprate_recorder = ExpRateRecorder()</code>。</p>
+<p>TAMER 模型（<code>tamer.py</code>）由 <code>Encoder(encoder.py)</code> 和 <code>Decoder(decoder.py)</code> 组成。在定义的 <code>beam_search</code> 函数中，除了 <code>self.encoder</code>，还调用了 <code>self.decoder.beam_search</code>。</p>
+<p>关于 <code>beam_search</code>，下面是 GPT 对它的介绍：</p>
+<details>
+<summary>点击查看 Beam Search 的详细介绍</summary>
+
+<h3 id="Beam-Search-的原理与方法"><a href="#Beam-Search-的原理与方法" class="headerlink" title="Beam Search 的原理与方法"></a><strong>Beam Search 的原理与方法</strong></h3><h4 id="1-Beam-Search-是什么？"><a href="#1-Beam-Search-是什么？" class="headerlink" title="1. Beam Search 是什么？"></a>1. <strong>Beam Search 是什么？</strong></h4><p>Beam Search 是一种序列解码算法，通常用于自然语言生成任务（如机器翻译、文本摘要、图像字幕生成等）。它在逐步生成序列时，不是只选择一个最优候选，而是维护一个固定大小的候选集合，从中寻找全局最优的生成结果。</p>
+<hr>
+<h4 id="2-核心思想"><a href="#2-核心思想" class="headerlink" title="2. 核心思想"></a>2. <strong>核心思想</strong></h4><ul>
+<li><p><strong>扩展搜索树</strong>：<br>将序列生成问题看作树的扩展，每次扩展节点时，基于模型预测的概率，选择前几个（如 beam size &#x3D; 3）概率最高的候选。</p>
+</li>
+<li><p><strong>权衡搜索空间和效率</strong>：<br>相比贪婪搜索（一次只保留最优路径），Beam Search 能探索更多路径，避免局部最优；相比暴力穷举（尝试所有可能路径），它限制了搜索宽度，提升效率。</p>
+</li>
+</ul>
+<hr>
+<h4 id="3-工作流程"><a href="#3-工作流程" class="headerlink" title="3. 工作流程"></a>3. <strong>工作流程</strong></h4><p>以下是逐步生成序列的过程：</p>
+<ol>
+<li><p><strong>初始化</strong>：</p>
+<ul>
+<li>起始标记（如 <code>&lt;SOS&gt;</code>）作为初始序列，分数为 0。</li>
+<li>初始化候选集合（称为 Beam），大小为 <code>beam_size</code>。</li>
+</ul>
+</li>
+<li><p><strong>扩展 Beam</strong>：</p>
+<ul>
+<li>对当前 Beam 中的每个序列，用模型预测下一个词的概率分布。</li>
+<li>将每个候选序列与其可能的扩展（即词）组合，计算总得分。</li>
+<li>保留总得分最高的 <code>beam_size</code> 个候选序列。</li>
+</ul>
+</li>
+<li><p><strong>终止条件</strong>：</p>
+<ul>
+<li>所有候选序列都生成了终止标记 <code>&lt;EOS&gt;</code>。</li>
+<li>或生成的序列长度达到预设最大值 <code>max_len</code>。</li>
+</ul>
+</li>
+<li><p><strong>输出结果</strong>：</p>
+<ul>
+<li>从最终的候选集合中，选择分数最高的序列作为输出。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="4-关键公式"><a href="#4-关键公式" class="headerlink" title="4. 关键公式"></a>4. <strong>关键公式</strong></h4><p><strong>总得分计算</strong>：<br>[<br>\text{Score} &#x3D; \frac{\sum_{t&#x3D;1}^L \log P(y_t | y_{1:t-1})}{L^\alpha}<br>]</p>
+<ul>
+<li>( L )：序列长度。</li>
+<li>( \alpha )：长度惩罚系数（( \alpha &gt; 0 ) 时，惩罚短序列）。</li>
+</ul>
+<p><strong>长度惩罚的作用</strong>：</p>
+<ul>
+<li>防止模型过于偏向短序列（短序列的得分累积更高）。</li>
+<li>调整模型对不同长度的偏好。</li>
+</ul>
+<h4 id="5-优势与不足"><a href="#5-优势与不足" class="headerlink" title="5. 优势与不足"></a>5. <strong>优势与不足</strong></h4><ul>
+<li><p><strong>优势</strong>：</p>
+<ul>
+<li>在可接受的计算开销下，生成质量较高的序列。</li>
+<li>能发现更优解，避免陷入局部最优。</li>
+</ul>
+</li>
+<li><p><strong>不足</strong>：</p>
+<ul>
+<li>生成的序列仍可能不是全局最优（近似搜索）。</li>
+<li>Beam Size 过大会显著增加计算量。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="6-与-TAMER-的关系"><a href="#6-与-TAMER-的关系" class="headerlink" title="6. 与 TAMER 的关系"></a>6. <strong>与 TAMER 的关系</strong></h4><p>在 TAMER 中：</p>
+<ul>
+<li><p><strong>Encoder</strong>：<br>提取图像特征，作为解码器的上下文信息。</p>
+</li>
+<li><p><strong>Decoder 的 Beam Search</strong>：</p>
+<ul>
+<li>使用解码器 <code>beam_search</code>，根据编码器输出的特征，逐步生成序列。</li>
+<li>每个时间步中扩展候选序列，保留 <code>beam_size</code> 个得分最高的序列，直到生成完成。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="7-Beam-Search-的改进方向"><a href="#7-Beam-Search-的改进方向" class="headerlink" title="7. Beam Search 的改进方向"></a>7. <strong>Beam Search 的改进方向</strong></h4><ul>
+<li><strong>加速优化</strong>：采用动态 Beam Size 或并行化实现，减少计算负担。</li>
+<li><strong>多样性增强</strong>：引入随机性（如 Top-K 或采样）来生成更具多样性的候选序列。</li>
+<li><strong>混合方法</strong>：结合贪婪搜索和 Beam Search，平衡速度与质量。</li>
+</ul>
+<hr>
+</details><br>
+
+<p>Encoder中，主要使用了<code>DenseNet-B</code>的架构。给出的can项目代码的encoder也使用到了 <code>DenseNet-B</code>。</p>
+<p>笔记图片</p>
+<p>Decoder中，使用到了<code>Transformer 解码器</code>以及结构相似性计算模块（<code>StructSim</code>）等组件。其中对Transformer相关部分的定义调用了<code>Transformer</code>文件夹中封装的encoder 、decoder等。</p>
+<details>
+<summary>点击查看 GPT对 Decoder.py 的详细介绍</summary>
+
+
+<h3 id="decoder-py-的模块和主要原理"><a href="#decoder-py-的模块和主要原理" class="headerlink" title="decoder.py 的模块和主要原理"></a><code>decoder.py</code> 的模块和主要原理</h3><p><code>decoder.py</code> 定义了 <strong>Decoder</strong> 模块，该模块实现了目标序列生成的核心功能，使用了 <strong>Transformer 解码器</strong>、结构相似性计算模块（<code>StructSim</code>）等组件。以下是各模块及其原理的详细解释：</p>
+<hr>
+<h4 id="1-主要组件和功能"><a href="#1-主要组件和功能" class="headerlink" title="1. 主要组件和功能"></a>1. <strong>主要组件和功能</strong></h4><h5 id="1-LBR-Linear-BatchNorm-ReLU"><a href="#1-LBR-Linear-BatchNorm-ReLU" class="headerlink" title="(1) LBR (Linear + BatchNorm + ReLU)"></a>(1) <strong>LBR (Linear + BatchNorm + ReLU)</strong></h5><ul>
+<li>模块定义：<ul>
+<li>线性变换 + 层归一化（LayerNorm）+ 激活函数（ReLU）。</li>
+</ul>
+</li>
+<li>功能：作为一种轻量的预处理单元，对输入进行简单变换，增强非线性表达能力。</li>
+</ul>
+<h5 id="2-StructSim-和-StructSimOneDir"><a href="#2-StructSim-和-StructSimOneDir" class="headerlink" title="(2) StructSim 和 StructSimOneDir"></a>(2) <strong>StructSim 和 StructSimOneDir</strong></h5><ul>
+<li>模块定义：<ul>
+<li><code>StructSim</code> 包含两个方向的相似性计算模块：<strong>从左到右（l2r）</strong>和<strong>从右到左（r2l）</strong>。</li>
+<li>每个方向使用 <code>TransformerEncoder</code> 提取表示，并通过 <code>q + k</code> 的方式计算结构相似性。</li>
+</ul>
+</li>
+<li>功能：<ul>
+<li><strong>结构相似性计算</strong>：用来评估序列在目标方向上的一致性，确保生成序列结构合理。</li>
+<li>输出一个矩阵，表示目标序列内部的相似性分布。</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-build-transformer-decoder"><a href="#3-build-transformer-decoder" class="headerlink" title="(3) _build_transformer_decoder"></a>(3) <strong>_build_transformer_decoder</strong></h5><ul>
+<li>模块定义：<ul>
+<li>基于 <code>nn.TransformerDecoder</code>，结合 <code>AttentionRefinementModule</code>（ARM）进一步增强解码器性能。</li>
+</ul>
+</li>
+<li>功能：<ul>
+<li><strong>ARM 模块</strong>：通过自监督（self-coverage）或交叉覆盖（cross-coverage）的方式，改善注意力权重的分布，从而生成更加准确的序列。</li>
+<li><strong>Transformer 解码器层</strong>：实现目标序列的生成逻辑。</li>
+</ul>
+</li>
+</ul>
+<h5 id="4-Decoder-类"><a href="#4-Decoder-类" class="headerlink" title="(4) Decoder 类"></a>(4) <strong>Decoder 类</strong></h5><ul>
+<li>主要模块：<ul>
+<li>**词嵌入 (word_embed)**：将目标序列的单词 ID 映射为向量表示。</li>
+<li>**位置编码 (pos_enc)**：通过 <code>WordPosEnc</code> 为嵌入添加位置信息。</li>
+<li>**Transformer 解码器 (model)**：通过多层 Transformer 解码序列。</li>
+<li>**输出投影 (proj)**：将解码结果映射回词汇表空间，输出每个单词的概率分布。</li>
+<li>**结构相似性模块 (struct_sim)**：通过 <code>StructSim</code> 评估解码器的输出序列。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2-主要原理"><a href="#2-主要原理" class="headerlink" title="2. 主要原理"></a>2. <strong>主要原理</strong></h4><p>Decoder 模块采用 <strong>Transformer 解码器</strong> 的架构，结合目标任务需求，增加了结构相似性和注意力优化模块。以下是核心原理：</p>
+<h5 id="1-Transformer-解码器"><a href="#1-Transformer-解码器" class="headerlink" title="(1) Transformer 解码器"></a>(1) <strong>Transformer 解码器</strong></h5><ul>
+<li>解码器由多层堆叠的解码器层组成，每一层包括：<ul>
+<li>**自注意力机制 (Self-Attention)**：关注目标序列已生成部分的内部关系。</li>
+<li>**交叉注意力机制 (Cross-Attention)**：关注输入特征（图片编码）与目标序列之间的关系。</li>
+<li>**前馈网络 (Feedforward Neural Network)**：对注意力结果进一步提取非线性特征。</li>
+</ul>
+</li>
+<li>解码器通过 mask 限制模型只能看到当前时间步之前的输出。</li>
+</ul>
+<h5 id="2-ARM-Attention-Refinement-Module"><a href="#2-ARM-Attention-Refinement-Module" class="headerlink" title="(2) ARM (Attention Refinement Module)"></a>(2) <strong>ARM (Attention Refinement Module)</strong></h5><ul>
+<li>通过调整注意力权重的分布，解决：<ul>
+<li><strong>自监督问题</strong>（自注意力的权重集中问题）。</li>
+<li><strong>交叉覆盖问题</strong>（输入特征未充分利用问题）。</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-结构相似性"><a href="#3-结构相似性" class="headerlink" title="(3) 结构相似性"></a>(3) <strong>结构相似性</strong></h5><ul>
+<li><code>StructSim</code> 模块引入两种相似性度量：<ul>
+<li>从左到右生成的结构是否合理。</li>
+<li>从右到左生成的结构是否一致。</li>
+</ul>
+</li>
+<li>通过 Transformer Encoder 学习表示，并通过加和查询 (<code>q</code>) 和键 (<code>k</code>) 的方式计算相似性。</li>
+</ul>
+<h5 id="4-目标序列生成过程"><a href="#4-目标序列生成过程" class="headerlink" title="(4) 目标序列生成过程"></a>(4) <strong>目标序列生成过程</strong></h5><ol>
+<li><strong>词嵌入和位置编码</strong>：目标序列转换为向量，并加入位置信息。</li>
+<li><strong>Transformer 解码</strong>：<ul>
+<li>自注意力机制理解序列上下文。</li>
+<li>交叉注意力与图片特征交互。</li>
+</ul>
+</li>
+<li><strong>输出预测</strong>：通过全连接层输出词汇表上的概率分布。</li>
+<li><strong>相似性评估</strong>：计算生成序列的结构一致性，提供额外的监督信号。</li>
+</ol>
+<hr>
+<h4 id="3-函数解析"><a href="#3-函数解析" class="headerlink" title="3. 函数解析"></a>3. <strong>函数解析</strong></h4><p>以下是模块主要函数及其功能：</p>
+<h5 id="Decoder-forward"><a href="#Decoder-forward" class="headerlink" title="Decoder.forward"></a><strong><code>Decoder.forward</code></strong></h5><ul>
+<li>输入：图片特征（<code>src</code>）、目标序列（<code>tgt</code>）。</li>
+<li>输出：词汇表概率分布（<code>out</code>）和结构相似性（<code>sim</code>）。</li>
+<li>过程：<ol>
+<li>对目标序列 <code>tgt</code> 进行词嵌入和位置编码。</li>
+<li>构造目标序列的掩码（<code>tgt_mask</code> 和 <code>tgt_pad_mask</code>）。</li>
+<li>使用 Transformer 解码器处理 <code>tgt</code> 和 <code>src</code>。</li>
+<li>计算目标序列的结构相似性。</li>
+<li>投影到词汇表空间输出概率分布。</li>
+</ol>
+</li>
+</ul>
+<h5 id="Decoder-build-attention-mask"><a href="#Decoder-build-attention-mask" class="headerlink" title="Decoder._build_attention_mask"></a><strong><code>Decoder._build_attention_mask</code></strong></h5><ul>
+<li>构造一个<strong>因果掩码</strong>，确保生成序列时只能看到当前时间步之前的内容。</li>
+</ul>
+<h5 id="Decoder-transform"><a href="#Decoder-transform" class="headerlink" title="Decoder.transform"></a><strong><code>Decoder.transform</code></strong></h5><ul>
+<li>封装 <code>forward</code>，专用于生成任务的调用，接收图片特征和输入 ID。</li>
+</ul>
+<hr>
+<h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. <strong>总结</strong></h4><p><code>decoder.py</code> 实现了一个面向图文序列生成任务的解码器，核心特点包括：</p>
+<ol>
+<li><strong>Transformer 架构</strong>：高效处理序列生成任务。</li>
+<li><strong>ARM 和结构相似性模块</strong>：解决注意力分布不均和生成结构不一致问题。</li>
+<li><strong>多功能设计</strong>：支持训练和推理过程（如 <code>beam search</code>）。</li>
+</ol>
+</details><br>
+
+
+<details>
+<summary>某人偷懒没修改的pos_enc.py功能简介</summary>
+这段代码定义了几种**位置编码（Positional Encoding）**方法，主要用于为输入特征添加位置信息，从而在模型中保留顺序或空间信息。这些编码方式被应用在不同类型的数据上，如序列数据（单词）或二维图像数据。
+
+<h3 id="功能分类"><a href="#功能分类" class="headerlink" title="功能分类"></a>功能分类</h3><ol>
+<li><p><strong>基于正弦和余弦的绝对位置编码</strong>：</p>
+<ul>
+<li>**<code>WordPosEnc</code>**：<ul>
+<li>实现了用于序列输入（如文本）的标准正弦和余弦位置编码。</li>
+<li>被用于给序列特征（形状 <code>[b, l, d]</code>）添加位置感知信息。</li>
+</ul>
+</li>
+<li>**<code>ImgPosEnc</code>**：<ul>
+<li>将绝对位置编码扩展到二维图像特征，处理形状 <code>[b, h, w, d]</code> 的输入。</li>
+<li>通过累积mask反转计算生成二维位置坐标，并添加正弦和余弦的编码值。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>基于旋转变换的相对位置编码（Rotary Positional Embedding）</strong>：</p>
+<ul>
+<li>**<code>WordRotaryEmbed</code>**：<ul>
+<li>应用于序列输入，结合正弦和余弦，通过旋转操作实现相对位置编码。</li>
+<li>提供更灵活的位置感知能力，适合更复杂的上下文关联建模。</li>
+</ul>
+</li>
+<li>**<code>ImageRotaryEmbed</code>**：<ul>
+<li>处理二维图像特征，支持旋转的二维位置编码。</li>
+<li>类似于<code>WordRotaryEmbed</code>，但扩展到二维输入（形状 <code>[b, h, w, d]</code>）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>工具函数</strong>：</p>
+<ul>
+<li>**<code>rotate_every_two</code>**：实现二维旋转，用于旋转嵌入的偶数和奇数维度的值。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="在前述代码中的调用"><a href="#在前述代码中的调用" class="headerlink" title="在前述代码中的调用"></a>在前述代码中的调用</h3><p>这些位置编码模块被用在以下地方：</p>
+<ul>
+<li>**<code>Decoder</code> 类中的 <code>self.pos_enc</code>**：<ul>
+<li><code>WordPosEnc</code> 用于对目标序列（<code>tgt</code>）添加位置编码，以增强 Transformer 解码器对序列顺序的感知。</li>
+</ul>
+</li>
+<li><strong>可能的其他调用场景</strong>（未直接展示）：  <ul>
+<li>对图像或序列数据进行位置编码（如<code>ImgPosEnc</code>或<code>ImageRotaryEmbed</code>）可在编码器或解码器的预处理阶段使用，尤其是在 CAN 项目中对图像-文本跨模态任务可能需要的场景。</li>
+</ul>
+</li>
+</ul>
+<p>总结：这段代码提供了多种灵活的位置编码方案，可根据输入数据的维度和模型需求灵活选择合适的方法，以增强输入的位置信息表达能力。</p>
+</details><br>
+
+
+<p>对于transformer文件夹，里面包含了支持AttentionRefinementModule（注意力精细化模块）的transformer解码器，也包含MaskBatchNorm2d（自定义掩码批标准化）、AttentionRefinementModule（注意力精细化模块）、MultiheadAttention（多头注意力模块）的具体实现。</p>
+<p><code>utils</code> 文件夹是 “utilities”（工具）的缩写，通常在其中存放封装好的各个辅助功能或工具函数。</p>
+<details>
+<summary>某人偷懒没修改的pos_enc.py功能简介</summary>
+</details><br>]]></content>
+  </entry>
 </search>
