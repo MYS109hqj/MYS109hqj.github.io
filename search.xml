@@ -17,12 +17,12 @@
     <title>数据结构个人复习总结</title>
     <url>/2023/12/13/231216DataStructureRecovery02/</url>
     <content><![CDATA[<p>注:<a href="http://t.csdnimg.cn/HQvqN">markdown语法参考</a></p>
-<p>231217第三次更新，更新完全覆盖之前的内容，查询可以GitHub历史记录<br>单纯个人复习输出，很多图片参考<a href="https://www.icourse163.org/learn/ZJU-93001">MOOC浙江大学数据结构</a>的课件<br>同时参考任课老师<strong>吕建明</strong>的课件内容<br>由于是个人输出，基于对生疏概念复习的需求，只是<strong>有选择性</strong>的做记录，很多内容都没有包含，仅供参考。<br><strong>如果有出错或者疑问的，我愿意一同探究解惑。</strong>按道理能看到这篇博客就有我的联系方式。没有就发邮件。考虑到可能承担未妥善管控不当言论的风险，暂不考虑开评论区&#x2F;留言板。</p>
+<p>231217第三次更新，更新完全覆盖之前的内容，查询可以GitHub历史记录<br>（25&#x2F;03&#x2F;01优化部分叙述）<br>单纯个人复习输出，很多图片参考<a href="https://www.icourse163.org/learn/ZJU-93001">MOOC浙江大学数据结构</a>的课件<br>同时参考任课老师<strong>吕建明</strong>的课件内容<br>由于是个人输出，基于对生疏概念复习的需求，只是<strong>有选择性</strong>的做记录，很多内容都没有包含，仅供参考。<br><strong>如果有出错或者疑问的，我愿意一同探究解惑。</strong>按道理能看到这篇博客就有我的联系方式。没有就发邮件。考虑到可能承担未妥善管控不当言论的风险，暂不考虑开评论区&#x2F;留言板。</p>
 <h2 id="一、时间复杂度"><a href="#一、时间复杂度" class="headerlink" title="一、时间复杂度"></a>一、时间复杂度</h2><p>1.时间复杂度的符号（上界下界确界）<br>参考文章：<a href="https://blog.csdn.net/anshuai_aw1/article/details/108449000">https://blog.csdn.net/anshuai_aw1/article/details/108449000</a><br><img src="/2023/12/13/231216DataStructureRecovery02/018.png" alt="时间复杂度的相关符号"><br>2.常见操作时间复杂度：<br>参考<a href="http://t.csdnimg.cn/oAog6">http://t.csdnimg.cn/oAog6</a><br>链表、堆栈、队列：插入删除O(1)；查找O(n)<br>二叉搜索树：都是O(logN)<br><img src="/2023/12/13/231216DataStructureRecovery02/002.png" alt="二叉堆时间复杂度"><br><img src="/2023/12/13/231216DataStructureRecovery02/003.png" alt="邻接列表的时间复杂度"></p>
 <h2 id="二、链表"><a href="#二、链表" class="headerlink" title="二、链表"></a>二、链表</h2><p> 1.fence:课件中的定义：”The position of a list to execute operations is defined as a fence.”栅栏体现的是当前操作的位置。不同操作对应位置会有区别，结合下图更好理解。<br><img src="/2023/12/13/231216DataStructureRecovery02/004.png" alt="操作实例"></p>
 <h2 id="三、树"><a href="#三、树" class="headerlink" title="三、树"></a>三、树</h2><p>1.树的深度与高度<br>教材定义：结点的深度是从根到结点的距离(The depth of a node M in the tree is the length of the path from the root of the tree to M)，高度比最大深度大一；<br>设总层数为n，则height&#x3D;n; depth_max&#x3D;n-1。<br>网上查阅时，有些教材定义根所在层数为1的，但按用的教材定义是根所在层数是0，导致最大深度是n-1，高度不受影响还是n。（顺带一提，2-3树也一样，注意根的深度是0）<br>2.满(<strong>full</strong>)二叉树与完全(<strong>complete</strong>)二叉树<br><strong>full binary tree</strong>，满二叉树要求每层都达到最大结点树，即结点个数是2^n-1；<br><strong>complete binary tree</strong>，完全二叉树要求最后一层的结点必须从左到右连续，尤其以数组存储时最大结点下标为n，则n以前的有效下标都得有数据<br>(至于下标为0的就看怎么构建了，注意一下在堆中0有没有放哨兵，0不存有效数据是父子下标对应关系会变的，不过课上讲的好像没用哨兵；哨兵放比数据范围更大或更小的值，比较时哨兵就可以起到防止越界的作用)<br>3.注：普通树考点有集合union</p>
 <h2 id="四、图"><a href="#四、图" class="headerlink" title="四、图"></a>四、图</h2><p>1.最短路径问题：<br>单源最短路径：从某固定源点出发，求其到所有其它顶点的最短路径<br>多源最短路径：求任意两顶点间的最短路径<br>有权图的单源最短路算法：Dijkstra算法<br><img src="/2023/12/13/231216DataStructureRecovery02/005.png" alt="源自MOOC浙江大学数据结构课件"><br><img src="/2023/12/13/231216DataStructureRecovery02/006.png" alt="源自MOOC浙江大学数据结构课件"><br>（多源最短路算法：Floyd算法，教材上没有，思想差不多）<br><img src="/2023/12/13/231216DataStructureRecovery02/007.png" alt="源自MOOC浙江大学数据结构课件"><br><img src="/2023/12/13/231216DataStructureRecovery02/008.png" alt="源自MOOC浙江大学数据结构课件"><br>2.最小生成树问题<br>(1)Prim算法：贪心法，每次取与邻接点间的边中的最短边<br><img src="/2023/12/13/231216DataStructureRecovery02/009.png" alt="源自MOOC浙江大学数据结构课件"><br>(2)Kruskal算法：将森林合并成树，每次取所有边中的最短边，如果不构成回路就加入。（用并查集，跟集合差不多。根结点存放-n，n表示所在集合中的元素个数；非根元素存放父亲结点，即父亲结点的下标）<br><img src="/2023/12/13/231216DataStructureRecovery02/010.png" alt="源自MOOC浙江大学数据结构课件"></p>
-<h2 id="五、散列-哈希"><a href="#五、散列-哈希" class="headerlink" title="五、散列&#x2F;哈希"></a>五、散列&#x2F;哈希</h2><p>1.open hashing，简单来说，指针存储，无限空间。别的都是closed hashing，只能在有限的哈希表里。<br>2.冲突处理Collision Resolution Methods<br>下面的都属于探测散列表(probing hash table)，对应的另一种方法是分离链接法(separate chaining)，就是存指针弄链表。<br>线性侦测法(Linear Probing)向后逐个试探,主要还是看它给的p(K,i)是什么，一般是用h(K)+p(K,i)作为下标检测是否为空&#x2F;命中。<br>对于平方探测法(quadratic probing)，课本里给的形式是通用的，可以理解为p(K,i)是二次函数，课本原话p(K,i)&#x3D;i^2是最简单平方探测法的例子。考的话应该会给p(K,i)的。（写代码用的话我是用正负i^2的）<br>（什么时候可能正负都要试，见下图：源自浙江大学MOOC数据结构的讲义）<br><img src="/2023/12/13/231216DataStructureRecovery02/011.png" alt="源自MOOC浙江大学数据结构课件"><br>（使用平方探测仍会产生二次聚集(secondary clustering)，大致就是h(x)一致，为解决这个缺憾引出了双散列(double hashing)）<br>3.注：删除时要设墓碑。（但对散列要求没这么高吧，不过掌握没坏事）</p>
+<h2 id="五、散列-哈希"><a href="#五、散列-哈希" class="headerlink" title="五、散列&#x2F;哈希"></a>五、散列&#x2F;哈希</h2><p>1.open hashing，简单来说，指针存储，无限空间。别的都是closed hashing，只能在有限的哈希表里。<br>2.冲突处理Collision Resolution Methods<br>下面的都属于探测散列表(probing hash table)，与之相对的另一类方法是分离链接法(separate chaining)，就是存指针弄链表。<br>线性侦测法(Linear Probing)向后逐个试探,主要还是看它给的p(K,i)是什么，一般是用h(K)+p(K,i)作为下标检测是否为空&#x2F;命中。<br>对于平方探测法(quadratic probing)，课本里给的形式是通用的，可以理解为p(K,i)是二次函数，课本原话p(K,i)&#x3D;i^2是最简单平方探测法的例子。考的话应该会给p(K,i)的。（写代码用的话我是用正负i^2的）<br>（什么时候可能正负都要试，见下图：源自浙江大学MOOC数据结构的讲义）<br><img src="/2023/12/13/231216DataStructureRecovery02/011.png" alt="源自MOOC浙江大学数据结构课件"><br>（使用平方探测仍会产生二次聚集(secondary clustering)，大致就是h(x)一致，为解决这个缺憾引出了双散列(double hashing)）<br>3.注：删除时要设墓碑。（但对散列要求没这么高吧，不过掌握没坏事）</p>
 <h2 id="六、索引"><a href="#六、索引" class="headerlink" title="六、索引"></a>六、索引</h2><p>1.2-3树<br>具体操作可以参考下面这篇文章<br><a href="https://blog.csdn.net/kexuanxiu1163/article/details/87887529">https://blog.csdn.net/kexuanxiu1163/article/details/87887529</a><br>2.B-树与B+树（区分：B+分别索引结点和叶子结点，所有数据都保存在叶子结点中）<br><a href="https://blog.csdn.net/u014453898/article/details/112469113">https://blog.csdn.net/u014453898/article/details/112469113</a></p>
 <h2 id="七、排序"><a href="#七、排序" class="headerlink" title="七、排序"></a>七、排序</h2><p>（基本术语：内部排序Internal Sorting 给内存里的排序、外部排序External Sorting 给磁盘里的排序）<br>1.简单排序<br>冒泡排序、插入排序都稳定；选择排序不稳定<br>选择排序可以优化为堆排序(O(nlogn))，快速找到最小值。<br>2.Shellsort希尔排序<br><img src="/2023/12/13/231216DataStructureRecovery02/012.png" alt="源自MOOC浙江大学数据结构课件"><br><img src="/2023/12/13/231216DataStructureRecovery02/013.png" alt="源自MOOC浙江大学数据结构课件"><br>（有归并排序mergesort这个东西，二分法思想）<br>3.快速排序QuickSort<br><img src="/2023/12/13/231216DataStructureRecovery02/014.png" alt="源自MOOC浙江大学数据结构课件"><br><img src="/2023/12/13/231216DataStructureRecovery02/015.png" alt="源自MOOC浙江大学数据结构课件"><br>4.箱&#x2F;桶排序BinSort：很像哈希（散列）的开放定址法，都是空间换时间，T(N,M)&#x3D;O(M+N)<br>5.基排序RadixSort，次位优先主位优先<br><img src="/2023/12/13/231216DataStructureRecovery02/016.png" alt="源自MOOC浙江大学数据结构课件"><br><img src="/2023/12/13/231216DataStructureRecovery02/017.png" alt="源自MOOC浙江大学数据结构课件"></p>
 ]]></content>
@@ -1703,6 +1703,1357 @@ function SetCwinHeight(){
 <p>如果在配置nginx的过程中遇到了错误，在CentOS7的环境下，可以输入以下指令查看日志：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tail -n 50 /var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>major</category>
+      </categories>
+      <tags>
+        <tag>study</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>250303前端复健记录-附录</title>
+    <url>/2025/03/03/250303%E5%89%8D%E7%AB%AF%E5%A4%8D%E5%81%A5%E8%AE%B0%E5%BD%95-%E9%99%84%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="提问01：-html的css中可以添加注释吗？javascript部分呢？（单独两问）"><a href="#提问01：-html的css中可以添加注释吗？javascript部分呢？（单独两问）" class="headerlink" title="提问01： html的css中可以添加注释吗？javascript部分呢？（单独两问）"></a>提问01： html的css中可以添加注释吗？javascript部分呢？（单独两问）</h2><p>是的，在HTML和CSS中都可以添加注释。</p>
+<h4 id="在HTML中添加注释"><a href="#在HTML中添加注释" class="headerlink" title="在HTML中添加注释"></a>在HTML中添加注释</h4><p>HTML注释使用 <code>&lt;!--</code> 和 <code>--&gt;</code> 包裹，例如：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这是一个HTML注释 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="在CSS中添加注释"><a href="#在CSS中添加注释" class="headerlink" title="在CSS中添加注释"></a>在CSS中添加注释</h4><p>CSS注释使用 <code>/*</code> 和 <code>*/</code> 包裹，例如：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 这是一个CSS注释 */</span></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>在 JavaScript (JS) 中也可以添加注释。JavaScript 支持两种注释方式：<strong>单行注释</strong>和<strong>多行注释</strong>。</p>
+<hr>
+<h4 id="1-单行注释"><a href="#1-单行注释" class="headerlink" title="1. 单行注释"></a>1. <strong>单行注释</strong></h4><p>单行注释以 <code>//</code> 开头，注释内容从 <code>//</code> 开始到行尾结束。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这是一个单行注释</span></span><br><span class="line"><span class="keyword">let</span> x = <span class="number">10</span>; <span class="comment">// 这是另一个单行注释</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-多行注释"><a href="#2-多行注释" class="headerlink" title="2. 多行注释"></a>2. <strong>多行注释</strong></h4><p>多行注释以 <code>/*</code> 开头，以 <code>*/</code> 结尾，注释内容可以跨越多行。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这是一个多行注释</span></span><br><span class="line"><span class="comment">可以跨越多行</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">let</span> y = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>HTML注释不会显示在浏览器中，但用户可以通过查看源代码看到。</li>
+<li>CSS注释同样不会影响样式渲染，且不会出现在最终页面中。</li>
+</ul>
+<p>合理使用注释有助于代码的可读性和维护性。</p>
+<h2 id="提问02：-margin-0-auto会导致水平居中吗？"><a href="#提问02：-margin-0-auto会导致水平居中吗？" class="headerlink" title="提问02： margin: 0 auto会导致水平居中吗？"></a>提问02： margin: 0 auto会导致水平居中吗？</h2><p>是的，<code>margin: 0 auto;</code> <strong>会导致水平居中</strong>，但需要满足一定的条件。以下是详细解析：</p>
+<hr>
+<h4 id="1-margin-0-auto-的作用"><a href="#1-margin-0-auto-的作用" class="headerlink" title="1. margin: 0 auto; 的作用"></a>1. <strong><code>margin: 0 auto;</code> 的作用</strong></h4><ul>
+<li><code>margin: 0 auto;</code> 是以下属性的简写：<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">margin-top</span>: <span class="number">0</span>;</span><br><span class="line"><span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line"><span class="attribute">margin-left</span>: auto;</span><br><span class="line"><span class="attribute">margin-right</span>: auto;</span><br></pre></td></tr></table></figure></li>
+<li><code>auto</code> 值会让浏览器自动计算左右外边距，使元素在其父容器中水平居中。</li>
+</ul>
+<hr>
+<h4 id="2-实现水平居中的条件"><a href="#2-实现水平居中的条件" class="headerlink" title="2. 实现水平居中的条件"></a>2. <strong>实现水平居中的条件</strong></h4><p>要使 <code>margin: 0 auto;</code> 生效，元素必须满足以下条件：</p>
+<h5 id="条件-1：元素必须是块级元素"><a href="#条件-1：元素必须是块级元素" class="headerlink" title="条件 1：元素必须是块级元素"></a>条件 1：元素必须是<strong>块级元素</strong></h5><ul>
+<li>块级元素（如 <code>&lt;div&gt;</code>、<code>&lt;p&gt;</code>、<code>&lt;h1&gt;</code> 等）默认宽度为父容器的 100%。</li>
+<li>如果是行内元素（如 <code>&lt;span&gt;</code>、<code>&lt;a&gt;</code>），需要将其设置为块级元素：<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">display</span>: block;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="条件-2：元素必须有明确的宽度"><a href="#条件-2：元素必须有明确的宽度" class="headerlink" title="条件 2：元素必须有明确的宽度"></a>条件 2：元素必须有<strong>明确的宽度</strong></h5><ul>
+<li>如果元素的宽度是 <code>auto</code>（默认值），它会占据父容器的整个宽度，此时 <code>margin: 0 auto;</code> 不会有效果。</li>
+<li>需要为元素设置一个明确的宽度（如 <code>width: 50%;</code> 或 <code>width: 600px;</code>）。</li>
+</ul>
+<h5 id="条件-3：父容器必须有足够的空间"><a href="#条件-3：父容器必须有足够的空间" class="headerlink" title="条件 3：父容器必须有足够的空间"></a>条件 3：父容器必须有<strong>足够的空间</strong></h5><ul>
+<li>父容器的宽度必须大于元素的宽度，否则元素无法居中。</li>
+</ul>
+<hr>
+<h4 id="3-示例代码"><a href="#3-示例代码" class="headerlink" title="3. 示例代码"></a>3. <strong>示例代码</strong></h4><p>以下是一个使用 <code>margin: 0 auto;</code> 实现水平居中的示例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span>&gt;</span></span><br><span class="line">        这个内容会水平居中</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>; <span class="comment">/* 父容器宽度 */</span></span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black; <span class="comment">/* 为了可视化 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>; <span class="comment">/* 明确的宽度 */</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto; <span class="comment">/* 水平居中 */</span></span><br><span class="line">    <span class="attribute">background-color</span>: lightblue;</span><br><span class="line">    <span class="attribute">text-align</span>: center; <span class="comment">/* 内容水平居中 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4. 注意事项"></a>4. <strong>注意事项</strong></h4><ul>
+<li><code>margin: 0 auto;</code> 只能实现<strong>水平居中</strong>，无法实现垂直居中。</li>
+<li>如果需要垂直居中，可以使用 Flexbox 或 Grid 布局：<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: center; <span class="comment">/* 水平居中 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: center; <span class="comment">/* 垂直居中 */</span></span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>; <span class="comment">/* 父容器高度 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li><code>margin: 0 auto;</code> 可以实现水平居中，但需要元素是块级元素，并且有明确的宽度。</li>
+<li>如果内容没有居中，请检查是否满足上述条件。</li>
+</ul>
+<h2 id="提问03-本身是行内元素，对吗？"><a href="#提问03-本身是行内元素，对吗？" class="headerlink" title="提问03 &lt;label&gt;本身是行内元素，对吗？"></a>提问03 <code>&lt;label&gt;</code>本身是行内元素，对吗？</h2><p>是的，<code>&lt;label&gt;</code> 元素<strong>默认是行内元素</strong>（inline element）。以下是详细解析：</p>
+<hr>
+<h4 id="1-的默认显示属性"><a href="#1-的默认显示属性" class="headerlink" title="1. &lt;label&gt; 的默认显示属性"></a>1. <strong><code>&lt;label&gt;</code> 的默认显示属性</strong></h4><ul>
+<li>默认情况下，<code>&lt;label&gt;</code> 是一个<strong>行内元素</strong>，其 <code>display</code> 属性值为 <code>inline</code>。</li>
+<li>行内元素的特点：<ul>
+<li>不会独占一行，会与其他行内元素共享同一行。</li>
+<li>无法设置宽度（<code>width</code>）和高度（<code>height</code>），其大小由内容决定。</li>
+<li>上下外边距（<code>margin-top</code> 和 <code>margin-bottom</code>）无效。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2-为什么设置-display-block-？"><a href="#2-为什么设置-display-block-？" class="headerlink" title="2. 为什么设置 display: block;？"></a>2. <strong>为什么设置 <code>display: block;</code>？</strong></h4><p>在你的代码中，将 <code>&lt;label&gt;</code> 设置为 <code>display: block;</code>，使其变为<strong>块级元素</strong>：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">label</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="块级元素的特点："><a href="#块级元素的特点：" class="headerlink" title="块级元素的特点："></a>块级元素的特点：</h5><ul>
+<li>独占一行，前后会自动换行。</li>
+<li>可以设置宽度（<code>width</code>）和高度（<code>height</code>）。</li>
+<li>上下外边距（<code>margin-top</code> 和 <code>margin-bottom</code>）有效。</li>
+</ul>
+<h5 id="这样做的目的："><a href="#这样做的目的：" class="headerlink" title="这样做的目的："></a>这样做的目的：</h5><ul>
+<li>使每个 <code>&lt;label&gt;</code> 独占一行，避免与其他行内元素（如 <code>&lt;input&gt;</code>）在同一行显示。</li>
+<li>可以通过 <code>margin-bottom</code> 设置标签与输入框之间的间距，提升表单的可读性。</li>
+</ul>
+<hr>
+<h4 id="3-示例对比"><a href="#3-示例对比" class="headerlink" title="3. 示例对比"></a>3. <strong>示例对比</strong></h4><h5 id="默认情况（display-inline）"><a href="#默认情况（display-inline）" class="headerlink" title="默认情况（display: inline）"></a>默认情况（<code>display: inline</code>）</h5><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;name&quot;</span>&gt;</span>Name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;email&quot;</span>&gt;</span>Email:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">id</span>=<span class="string">&quot;email&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>效果：<code>&lt;label&gt;</code> 和 <code>&lt;input&gt;</code> 会显示在同一行。</li>
+</ul>
+<h5 id="设置为-display-block"><a href="#设置为-display-block" class="headerlink" title="设置为 display: block;"></a>设置为 <code>display: block;</code></h5><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;name&quot;</span>&gt;</span>Name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;email&quot;</span>&gt;</span>Email:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">id</span>=<span class="string">&quot;email&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">label</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>效果：每个 <code>&lt;label&gt;</code> 独占一行，输入框会换行显示，并且标签与输入框之间有 5px 的间距。</li>
+</ul>
+<hr>
+<h4 id="4-其他常见的-display-值"><a href="#4-其他常见的-display-值" class="headerlink" title="4. 其他常见的 display 值"></a>4. <strong>其他常见的 <code>display</code> 值</strong></h4><p>除了 <code>block</code>，<code>&lt;label&gt;</code> 还可以设置为其他 <code>display</code> 值：</p>
+<ul>
+<li><code>inline-block</code>：行内块级元素，可以设置宽度和高度，但不会独占一行。</li>
+<li><code>flex</code>：使 <code>&lt;label&gt;</code> 成为 Flex 容器，可以更方便地控制内部内容的布局。</li>
+<li><code>inline-flex</code>：行内 Flex 容器。</li>
+</ul>
+<hr>
+<h4 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. <strong>总结</strong></h4><ul>
+<li><code>&lt;label&gt;</code> 默认是行内元素（<code>display: inline</code>）。</li>
+<li>设置为 <code>display: block;</code> 是为了让每个 <code>&lt;label&gt;</code> 独占一行，并能够设置上下外边距。</li>
+<li>这种设计常用于表单布局，以提升可读性和用户体验。</li>
+</ul>
+<h2 id="提问04-父元素指定max-width后，子元素width-100-会出现显示问题"><a href="#提问04-父元素指定max-width后，子元素width-100-会出现显示问题" class="headerlink" title="提问04 父元素指定max-width后，子元素width:100%会出现显示问题"></a>提问04 父元素指定max-width后，子元素width:100%会出现显示问题</h2><p>当窗口宽度小于 <code>.container</code> 的 <code>max-width: 600px</code> 时，子元素的 <code>width: 100%</code> 可能会导致显示问题（例如内容溢出或布局错乱）。以下是解决思路和具体方法：</p>
+<hr>
+<h4 id="1-问题分析"><a href="#1-问题分析" class="headerlink" title="1. 问题分析"></a>1. <strong>问题分析</strong></h4><ul>
+<li><code>.container</code> 设置了 <code>max-width: 600px;</code>，这意味着它的最大宽度为 600px，但当窗口宽度小于 600px 时，<code>.container</code> 的宽度会缩小到窗口宽度。</li>
+<li>如果子元素设置了 <code>width: 100%</code>，它的宽度会等于 <code>.container</code> 的宽度，这在小屏幕上可能导致内容溢出或布局问题。</li>
+</ul>
+<hr>
+<h4 id="2-解决思路"><a href="#2-解决思路" class="headerlink" title="2. 解决思路"></a>2. <strong>解决思路</strong></h4><p>以下是几种常见的解决方案：</p>
+<h5 id="方法-1：使用-box-sizing-border-box"><a href="#方法-1：使用-box-sizing-border-box" class="headerlink" title="方法 1：使用 box-sizing: border-box;"></a>方法 1：使用 <code>box-sizing: border-box;</code></h5><ul>
+<li>将 <code>.container</code> 和子元素的 <code>box-sizing</code> 设置为 <code>border-box</code>，确保内边距和边框不会增加元素的总宽度。</li>
+<li>这样可以避免内容溢出。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span>, <span class="selector-class">.container</span> * &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方法-2：限制子元素的最小宽度"><a href="#方法-2：限制子元素的最小宽度" class="headerlink" title="方法 2：限制子元素的最小宽度"></a>方法 2：限制子元素的最小宽度</h5><ul>
+<li>为子元素设置 <code>min-width</code>，防止其在小屏幕上变得过小。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.child-element</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">min-width</span>: <span class="number">200px</span>; <span class="comment">/* 根据实际情况调整 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方法-3：使用-CSS-媒体查询"><a href="#方法-3：使用-CSS-媒体查询" class="headerlink" title="方法 3：使用 CSS 媒体查询"></a>方法 3：使用 CSS 媒体查询</h5><ul>
+<li>使用媒体查询针对小屏幕调整布局。</li>
+<li>例如，在小屏幕上减少内边距或调整子元素的宽度。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@media</span> (<span class="attribute">max-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.container</span> &#123;</span><br><span class="line">        <span class="attribute">padding</span>: <span class="number">10px</span>; <span class="comment">/* 调整内边距 */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.child-element</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100%</span>; <span class="comment">/* 或其他适合的值 */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方法-4：使用-Flexbox-或-Grid-布局"><a href="#方法-4：使用-Flexbox-或-Grid-布局" class="headerlink" title="方法 4：使用 Flexbox 或 Grid 布局"></a>方法 4：使用 Flexbox 或 Grid 布局</h5><ul>
+<li>使用 Flexbox 或 Grid 布局可以更灵活地控制子元素的排列和大小。</li>
+<li>例如，在小屏幕上将子元素堆叠显示。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column; <span class="comment">/* 小屏幕上子元素堆叠 */</span></span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.container</span> &#123;</span><br><span class="line">        <span class="attribute">flex-direction</span>: row; <span class="comment">/* 大屏幕上子元素并排 */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方法-5：限制-container-的最小宽度"><a href="#方法-5：限制-container-的最小宽度" class="headerlink" title="方法 5：限制 .container 的最小宽度"></a>方法 5：限制 <code>.container</code> 的最小宽度</h5><ul>
+<li>为 <code>.container</code> 设置 <code>min-width</code>，防止其在小屏幕上变得过小。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">min-width</span>: <span class="number">300px</span>; <span class="comment">/* 根据实际情况调整 */</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-推荐解决方案"><a href="#3-推荐解决方案" class="headerlink" title="3. 推荐解决方案"></a>3. <strong>推荐解决方案</strong></h4><p>结合 <code>box-sizing</code> 和媒体查询是一个比较全面的解决方案：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span>, <span class="selector-class">.container</span> * &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>; <span class="comment">/* 根据需要调整 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">max-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.container</span> &#123;</span><br><span class="line">        <span class="attribute">padding</span>: <span class="number">10px</span>; <span class="comment">/* 小屏幕上减少内边距 */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.child-element</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100%</span>; <span class="comment">/* 确保子元素占满宽度 */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-示例代码"><a href="#4-示例代码" class="headerlink" title="4. 示例代码"></a>4. <strong>示例代码</strong></h4><p>以下是一个完整的示例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;child-element&quot;</span>&gt;</span></span><br><span class="line">        这是一个子元素，宽度为 100%。</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span>, <span class="selector-class">.container</span> * &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">600px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f9f9f9</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.child-element</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#e0e0e0</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">max-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.container</span> &#123;</span><br><span class="line">        <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.child-element</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="5-总结-1"><a href="#5-总结-1" class="headerlink" title="5. 总结"></a>5. <strong>总结</strong></h4><ul>
+<li>使用 <code>box-sizing: border-box;</code> 可以避免内容溢出。</li>
+<li>使用媒体查询针对小屏幕调整布局。</li>
+<li>结合 Flexbox 或 Grid 布局可以更灵活地控制子元素的排列和大小。</li>
+<li>根据实际需求选择合适的解决方案，确保在不同屏幕尺寸下都能正常显示。</li>
+</ul>
+<h2 id="提问05-box-sizing-border-box-跟-CSS盒子模型、弹性盒模型-这两个知识点的关联性"><a href="#提问05-box-sizing-border-box-跟-CSS盒子模型、弹性盒模型-这两个知识点的关联性" class="headerlink" title="提问05 box-sizing: border-box; 跟 CSS盒子模型、弹性盒模型  这两个知识点的关联性"></a>提问05 <code>box-sizing: border-box;</code> 跟 CSS盒子模型、弹性盒模型  这两个知识点的关联性</h2><p><code>box-sizing: border-box;</code> 和 <strong>CSS 盒子模型</strong>、<strong>弹性盒模型（Flexbox）</strong> 是 CSS 中非常重要的概念，它们之间有一定的关联性，但解决的问题和应用的场景不同。以下是它们的详细解析和关联性说明：</p>
+<hr>
+<h4 id="1-CSS-盒子模型"><a href="#1-CSS-盒子模型" class="headerlink" title="1. CSS 盒子模型"></a>1. <strong>CSS 盒子模型</strong></h4><p>CSS 盒子模型是 CSS 布局的基础，它定义了元素的尺寸计算方式。每个元素都被视为一个矩形盒子，由以下部分组成：</p>
+<ul>
+<li><strong>内容区域（content）</strong>：显示实际内容的区域。</li>
+<li><strong>内边距（padding）</strong>：内容区域与边框之间的空间。</li>
+<li><strong>边框（border）</strong>：围绕内容和内边距的边框。</li>
+<li><strong>外边距（margin）</strong>：盒子与其他元素之间的空间。</li>
+</ul>
+<h5 id="默认盒子模型（content-box）"><a href="#默认盒子模型（content-box）" class="headerlink" title="默认盒子模型（content-box）"></a>默认盒子模型（<code>content-box</code>）</h5><ul>
+<li>默认情况下，CSS 使用 <code>content-box</code> 盒子模型。</li>
+<li>在这种模型下，<strong>元素的宽度和高度仅包括内容区域，内边距和边框会增加元素的总尺寸</strong>。</li>
+<li>例如：<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">10px</span> solid black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实际宽度 &#x3D; 内容宽度（200px） + 内边距（20px * 2） + 边框（10px * 2） &#x3D; <strong>260px</strong>。</li>
+</ul>
+</li>
+</ul>
+<h5 id="box-sizing-border-box"><a href="#box-sizing-border-box" class="headerlink" title="box-sizing: border-box;"></a><code>box-sizing: border-box;</code></h5><ul>
+<li>使用 <code>border-box</code> 盒子模型时，<strong>元素的宽度和高度包括内容、内边距和边框</strong>。</li>
+<li>例如：<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">10px</span> solid black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实际宽度 &#x3D; 内容宽度（200px，包括内边距和边框）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2-弹性盒模型（Flexbox）"><a href="#2-弹性盒模型（Flexbox）" class="headerlink" title="2. 弹性盒模型（Flexbox）"></a>2. <strong>弹性盒模型（Flexbox）</strong></h4><p>弹性盒模型（Flexbox）是一种用于一维布局的 CSS 模块，旨在更高效地分配空间和对齐元素。它的核心概念包括：</p>
+<ul>
+<li><strong>容器（flex container）</strong>：通过 <code>display: flex;</code> 或 <code>display: inline-flex;</code> 创建。</li>
+<li><strong>项目（flex items）</strong>：容器内的子元素。</li>
+<li><strong>主轴（main axis）</strong> 和 <strong>交叉轴（cross axis）</strong>：定义了布局的方向。</li>
+</ul>
+<h5 id="Flexbox-的特点"><a href="#Flexbox-的特点" class="headerlink" title="Flexbox 的特点"></a>Flexbox 的特点</h5><ul>
+<li>可以轻松实现水平或垂直居中。</li>
+<li>可以动态分配剩余空间。</li>
+<li>支持项目的对齐、排序和伸缩。</li>
+</ul>
+<hr>
+<h4 id="3-box-sizing-border-box-和-Flexbox-的关联性"><a href="#3-box-sizing-border-box-和-Flexbox-的关联性" class="headerlink" title="3. box-sizing: border-box; 和 Flexbox 的关联性"></a>3. <strong><code>box-sizing: border-box;</code> 和 Flexbox 的关联性</strong></h4><p>虽然 <code>box-sizing</code> 和 Flexbox 是两个独立的概念，但它们在实际布局中可以结合使用，解决一些常见问题：</p>
+<h5 id="关联性-1：尺寸计算的一致性"><a href="#关联性-1：尺寸计算的一致性" class="headerlink" title="关联性 1：尺寸计算的一致性"></a>关联性 1：尺寸计算的一致性</h5><ul>
+<li>在 Flexbox 布局中，项目的尺寸（<code>flex-basis</code>、<code>width</code> 等）会受到盒子模型的影响。</li>
+<li>如果使用默认的 <code>content-box</code>，内边距和边框会增加项目的实际尺寸，可能导致布局错乱。</li>
+<li>使用 <code>box-sizing: border-box;</code> 可以确保项目的尺寸计算更加一致和可控。</li>
+</ul>
+<h5 id="关联性-2：避免布局溢出"><a href="#关联性-2：避免布局溢出" class="headerlink" title="关联性 2：避免布局溢出"></a>关联性 2：避免布局溢出</h5><ul>
+<li>在 Flexbox 容器中，项目的总宽度或高度可能会超出容器的范围，尤其是在设置了内边距和边框的情况下。</li>
+<li>通过 <code>box-sizing: border-box;</code>，可以确保项目的尺寸包括内边距和边框，避免溢出问题。</li>
+</ul>
+<h5 id="关联性-3：简化布局计算"><a href="#关联性-3：简化布局计算" class="headerlink" title="关联性 3：简化布局计算"></a>关联性 3：简化布局计算</h5><ul>
+<li>使用 <code>box-sizing: border-box;</code> 可以简化 Flexbox 布局中的尺寸计算，尤其是在需要精确控制项目大小的情况下。</li>
+</ul>
+<hr>
+<h4 id="4-示例代码-1"><a href="#4-示例代码-1" class="headerlink" title="4. 示例代码"></a>4. <strong>示例代码</strong></h4><p>以下是一个结合 <code>box-sizing: border-box;</code> 和 Flexbox 的示例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-container&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-item&quot;</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-item&quot;</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;flex-item&quot;</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 全局设置 box-sizing */</span></span><br><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-between; <span class="comment">/* 项目之间均匀分布 */</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f0f0f0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.flex-item</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">30%</span>; <span class="comment">/* 宽度包括内边距和边框 */</span></span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#e0e0e0</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="5-总结-2"><a href="#5-总结-2" class="headerlink" title="5. 总结"></a>5. <strong>总结</strong></h4><ul>
+<li>**<code>box-sizing: border-box;</code>**：用于控制元素的尺寸计算方式，确保宽度和高度包括内边距和边框。</li>
+<li><strong>CSS 盒子模型</strong>：定义了元素尺寸的组成部分（内容、内边距、边框、外边距）。</li>
+<li><strong>Flexbox</strong>：用于实现灵活的布局，支持项目的对齐、排序和空间分配。</li>
+<li><strong>关联性</strong>：<code>box-sizing: border-box;</code> 可以简化 Flexbox 布局中的尺寸计算，避免布局溢出问题，确保布局的一致性。</li>
+</ul>
+<p>在实际开发中，建议全局设置 <code>box-sizing: border-box;</code>，并结合 Flexbox 实现更灵活和可控的布局。</p>
+<h2 id="提问06-js中，函数可以通过var声明吗？请先指出我的误解，再具体说明。"><a href="#提问06-js中，函数可以通过var声明吗？请先指出我的误解，再具体说明。" class="headerlink" title="提问06 js中，函数可以通过var声明吗？请先指出我的误解，再具体说明。"></a>提问06 js中，函数可以通过var声明吗？请先指出我的误解，再具体说明。</h2><p>在 JavaScript 中，函数可以通过 <code>var</code> 声明，但你的问题中可能存在一些误解。以下是详细解析：</p>
+<hr>
+<h4 id="1-你的误解"><a href="#1-你的误解" class="headerlink" title="1. 你的误解"></a>1. <strong>你的误解</strong></h4><p>你可能认为：</p>
+<ul>
+<li><strong>函数只能通过 <code>function</code> 关键字声明</strong>，例如：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong><code>var</code> 只能用于声明变量</strong>，例如：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myVar = <span class="number">10</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>实际上，JavaScript 中的函数可以通过多种方式声明，包括使用 <code>var</code>、<code>let</code>、<code>const</code> 等关键字。</p>
+<hr>
+<h4 id="2-JavaScript-中函数的声明方式"><a href="#2-JavaScript-中函数的声明方式" class="headerlink" title="2. JavaScript 中函数的声明方式"></a>2. <strong>JavaScript 中函数的声明方式</strong></h4><p>在 JavaScript 中，函数可以通过以下几种方式声明：</p>
+<h5 id="方式-1：函数声明（Function-Declaration）"><a href="#方式-1：函数声明（Function-Declaration）" class="headerlink" title="方式 1：函数声明（Function Declaration）"></a>方式 1：函数声明（Function Declaration）</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这种方式会<strong>提升（hoist）</strong>函数，即在代码执行前，函数已经被定义，可以在声明前调用。</li>
+</ul>
+<h5 id="方式-2：函数表达式（Function-Expression）"><a href="#方式-2：函数表达式（Function-Expression）" class="headerlink" title="方式 2：函数表达式（Function Expression）"></a>方式 2：函数表达式（Function Expression）</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这种方式将函数赋值给一个变量（如 <code>myFunction</code>）。</li>
+<li>函数表达式不会被提升，只有在赋值后才能调用。</li>
+</ul>
+<h5 id="方式-3：箭头函数（Arrow-Function）"><a href="#方式-3：箭头函数（Arrow-Function）" class="headerlink" title="方式 3：箭头函数（Arrow Function）"></a>方式 3：箭头函数（Arrow Function）</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">myFunction</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>箭头函数是 ES6 引入的语法，通常用于匿名函数或简化函数写法。</li>
+</ul>
+<h5 id="方式-4：通过-var、let、const-声明函数"><a href="#方式-4：通过-var、let、const-声明函数" class="headerlink" title="方式 4：通过 var、let、const 声明函数"></a>方式 4：通过 <code>var</code>、<code>let</code>、<code>const</code> 声明函数</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>var</code>、<code>let</code> 或 <code>const</code> 声明函数时，实际上是将函数表达式赋值给一个变量。</li>
+</ul>
+<hr>
+<h4 id="3-var-声明函数的特点"><a href="#3-var-声明函数的特点" class="headerlink" title="3. var 声明函数的特点"></a>3. <strong><code>var</code> 声明函数的特点</strong></h4><ul>
+<li><p><strong>提升（Hoisting）</strong>：</p>
+<ul>
+<li>使用 <code>var</code> 声明的变量会被提升，但赋值不会被提升。</li>
+<li>例如：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myFunction); <span class="comment">// 输出：undefined</span></span><br><span class="line"><span class="keyword">var</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myFunction); <span class="comment">// 输出：function() &#123; console.log(&quot;Hello&quot;); &#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在赋值之前，<code>myFunction</code> 的值为 <code>undefined</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>作用域</strong>：</p>
+<ul>
+<li>使用 <code>var</code> 声明的函数具有函数作用域（function scope），而不是块级作用域（block scope）。</li>
+</ul>
+</li>
+<li><p><strong>重复声明</strong>：</p>
+<ul>
+<li>使用 <code>var</code> 可以重复声明同一个变量，后面的声明会覆盖前面的声明。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="4-let-和-const-声明函数的特点"><a href="#4-let-和-const-声明函数的特点" class="headerlink" title="4. let 和 const 声明函数的特点"></a>4. <strong><code>let</code> 和 <code>const</code> 声明函数的特点</strong></h4><ul>
+<li><p><strong>块级作用域</strong>：</p>
+<ul>
+<li>使用 <code>let</code> 和 <code>const</code> 声明的函数具有块级作用域。</li>
+<li>例如：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(myFunction); <span class="comment">// 报错：myFunction is not defined</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>不可重复声明</strong>：</p>
+<ul>
+<li>使用 <code>let</code> 和 <code>const</code> 不能重复声明同一个变量。</li>
+</ul>
+</li>
+<li><p><strong><code>const</code> 的特殊性</strong>：</p>
+<ul>
+<li>使用 <code>const</code> 声明的函数不能被重新赋值，但函数内部的属性或方法可以被修改。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="5-示例代码"><a href="#5-示例代码" class="headerlink" title="5. 示例代码"></a>5. <strong>示例代码</strong></h4><p>以下是使用 <code>var</code>、<code>let</code>、<code>const</code> 声明函数的示例：</p>
+<h5 id="使用-var"><a href="#使用-var" class="headerlink" title="使用 var"></a>使用 <code>var</code></h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello from var&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">myFunction</span>(); <span class="comment">// 输出：Hello from var</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="使用-let"><a href="#使用-let" class="headerlink" title="使用 let"></a>使用 <code>let</code></h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello from let&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">myFunction</span>(); <span class="comment">// 输出：Hello from let</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="使用-const"><a href="#使用-const" class="headerlink" title="使用 const"></a>使用 <code>const</code></h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello from const&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">myFunction</span>(); <span class="comment">// 输出：Hello from const</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. <strong>总结</strong></h4><ul>
+<li><strong>函数可以通过 <code>var</code> 声明</strong>，但实际上是使用函数表达式将函数赋值给一个变量。</li>
+<li><strong><code>var</code> 声明的函数会被提升，但赋值不会被提升</strong>。</li>
+<li><strong><code>let</code> 和 <code>const</code> 也可以用于声明函数</strong>，且具有块级作用域。</li>
+<li>推荐使用 <code>const</code> 声明函数，以避免意外的重新赋值。</li>
+</ul>
+<p>希望这能帮助你更好地理解 JavaScript 中函数的声明方式！</p>
+<h2 id="提问07-提升（Hoisting）是什么概念？是JS里的专有名词吗？"><a href="#提问07-提升（Hoisting）是什么概念？是JS里的专有名词吗？" class="headerlink" title="提问07 提升（Hoisting）是什么概念？是JS里的专有名词吗？"></a>提问07 提升（Hoisting）是什么概念？是JS里的专有名词吗？</h2><p><strong>提升（Hoisting）</strong> 是 JavaScript 中的一个专有名词，用于描述变量和函数声明在代码执行前的行为。以下是详细解析：</p>
+<hr>
+<h4 id="1-提升的概念"><a href="#1-提升的概念" class="headerlink" title="1. 提升的概念"></a>1. <strong>提升的概念</strong></h4><p>提升（Hoisting）是指 JavaScript 引擎在代码执行之前，会将变量和函数的声明<strong>提升到其作用域的顶部</strong>。这意味着你可以在声明之前使用这些变量或函数，而不会报错。</p>
+<p>需要注意的是：</p>
+<ul>
+<li><strong>只有声明会被提升，赋值不会被提升</strong>。</li>
+<li>提升是 JavaScript 引擎在编译阶段的行为，而不是代码的实际移动。</li>
+</ul>
+<hr>
+<h4 id="2-变量提升"><a href="#2-变量提升" class="headerlink" title="2. 变量提升"></a>2. <strong>变量提升</strong></h4><h5 id="使用-var-声明的变量"><a href="#使用-var-声明的变量" class="headerlink" title="使用 var 声明的变量"></a>使用 <code>var</code> 声明的变量</h5><ul>
+<li><code>var</code> 声明的变量会被提升到其作用域的顶部，但赋值不会被提升。</li>
+<li>在赋值之前访问变量，会得到 <code>undefined</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出：undefined</span></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出：10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>实际执行顺序相当于：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> x; <span class="comment">// 声明被提升</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出：undefined</span></span><br><span class="line">x = <span class="number">10</span>; <span class="comment">// 赋值不会被提升</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出：10</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="使用-let-和-const-声明的变量"><a href="#使用-let-和-const-声明的变量" class="headerlink" title="使用 let 和 const 声明的变量"></a>使用 <code>let</code> 和 <code>const</code> 声明的变量</h5><ul>
+<li><code>let</code> 和 <code>const</code> 声明的变量也会被提升，但不会被初始化为 <code>undefined</code>。</li>
+<li>在声明之前访问变量会触发 <strong>暂时性死区（Temporal Dead Zone, TDZ）</strong>，导致报错。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(y); <span class="comment">// 报错：Cannot access &#x27;y&#x27; before initialization</span></span><br><span class="line"><span class="keyword">let</span> y = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-函数提升"><a href="#3-函数提升" class="headerlink" title="3. 函数提升"></a>3. <strong>函数提升</strong></h4><h5 id="函数声明（Function-Declaration）"><a href="#函数声明（Function-Declaration）" class="headerlink" title="函数声明（Function Declaration）"></a>函数声明（Function Declaration）</h5><ul>
+<li>函数声明会被整体提升，包括函数体。</li>
+<li>你可以在声明之前调用函数。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">myFunction</span>(); <span class="comment">// 输出：Hello</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="函数表达式（Function-Expression）"><a href="#函数表达式（Function-Expression）" class="headerlink" title="函数表达式（Function Expression）"></a>函数表达式（Function Expression）</h5><ul>
+<li>函数表达式不会被提升，只有变量声明会被提升。</li>
+<li>在赋值之前访问变量会得到 <code>undefined</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">myFunction</span>(); <span class="comment">// 报错：myFunction is not a function</span></span><br><span class="line"><span class="keyword">var</span> myFunction = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-提升的作用域"><a href="#4-提升的作用域" class="headerlink" title="4. 提升的作用域"></a>4. <strong>提升的作用域</strong></h4><ul>
+<li>提升的作用域取决于变量或函数的声明位置。</li>
+<li>在全局作用域中声明的变量或函数会被提升到全局作用域的顶部。</li>
+<li>在函数作用域中声明的变量或函数会被提升到函数作用域的顶部。</li>
+</ul>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出：undefined</span></span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出：10</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="5-提升的注意事项"><a href="#5-提升的注意事项" class="headerlink" title="5. 提升的注意事项"></a>5. <strong>提升的注意事项</strong></h4><ul>
+<li><strong>避免在声明之前使用变量</strong>：虽然提升允许你在声明之前使用变量，但这会导致代码可读性差，容易引发错误。</li>
+<li>**优先使用 <code>let</code> 和 <code>const</code>**：<code>let</code> 和 <code>const</code> 的暂时性死区机制可以帮助你避免在声明之前使用变量。</li>
+<li><strong>函数声明优于函数表达式</strong>：如果需要提升函数，优先使用函数声明。</li>
+</ul>
+<hr>
+<h4 id="6-提升是-JavaScript-的专有名词吗？"><a href="#6-提升是-JavaScript-的专有名词吗？" class="headerlink" title="6. 提升是 JavaScript 的专有名词吗？"></a>6. <strong>提升是 JavaScript 的专有名词吗？</strong></h4><ul>
+<li><strong>提升（Hoisting）</strong> 是 JavaScript 中的一个专有名词，用于描述变量和函数声明在代码执行前的行为。</li>
+<li>其他编程语言（如 Python、Java）没有类似的概念，因为它们的变量和函数声明不会被提升。</li>
+</ul>
+<hr>
+<h4 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. <strong>总结</strong></h4><ul>
+<li><strong>提升</strong> 是 JavaScript 引擎在代码执行前将变量和函数声明移动到作用域顶部的行为。</li>
+<li><strong><code>var</code> 声明的变量</strong>会被提升并初始化为 <code>undefined</code>。</li>
+<li><strong><code>let</code> 和 <code>const</code> 声明的变量</strong>也会被提升，但在声明之前访问会触发暂时性死区。</li>
+<li><strong>函数声明</strong>会被整体提升，而 <strong>函数表达式</strong> 只有变量声明会被提升。</li>
+<li>提升是 JavaScript 的独特特性，理解它有助于避免常见的代码错误。</li>
+</ul>
+<h2 id="提问08-replace-s-g-去除所有空格-这是什么意思？-‘-‘有什么特殊含义吗？（两问）"><a href="#提问08-replace-s-g-去除所有空格-这是什么意思？-‘-‘有什么特殊含义吗？（两问）" class="headerlink" title="提问08 .replace(/\s+/g, &#39;&#39;) // 去除所有空格  这是什么意思？ ‘&#x2F;‘有什么特殊含义吗？（两问）"></a>提问08 <code>.replace(/\s+/g, &#39;&#39;) // 去除所有空格</code>  这是什么意思？ ‘&#x2F;‘有什么特殊含义吗？（两问）</h2><p><code>replace(/\s+/g, &#39;&#39;)</code> 是 JavaScript 中用于<strong>去除字符串中所有空格</strong>的代码。以下是详细解析：</p>
+<hr>
+<h4 id="1-replace-方法"><a href="#1-replace-方法" class="headerlink" title="1. replace 方法"></a>1. <strong><code>replace</code> 方法</strong></h4><ul>
+<li><code>replace</code> 是 JavaScript 字符串的一个方法，用于替换字符串中的某些内容。</li>
+<li>语法：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">str.<span class="title function_">replace</span>(searchValue, replaceValue);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>searchValue</code>：要查找的内容（可以是字符串或正则表达式）。</li>
+<li><code>replaceValue</code>：替换的内容（可以是字符串或函数）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2-正则表达式-s-g"><a href="#2-正则表达式-s-g" class="headerlink" title="2. 正则表达式 /\s+/g"></a>2. <strong>正则表达式 <code>/\s+/g</code></strong></h4><ul>
+<li>正则表达式（Regular Expression）是一种用于匹配字符串的模式。</li>
+<li><code>/\s+/g</code> 是一个正则表达式，具体含义如下：<ul>
+<li><code>\s</code>：匹配任意空白字符，包括：<ul>
+<li>空格（<code> </code>）</li>
+<li>制表符（<code>\t</code>）</li>
+<li>换行符（<code>\n</code>）</li>
+<li>回车符（<code>\r</code>）</li>
+</ul>
+</li>
+<li><code>+</code>：匹配前面的字符（<code>\s</code>）<strong>一次或多次</strong>。</li>
+<li><code>g</code>：全局匹配（global），表示匹配字符串中所有符合条件的内容，而不仅仅是第一个。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="3-replace-s-g-的作用"><a href="#3-replace-s-g-的作用" class="headerlink" title="3. replace(/\s+/g, &#39;&#39;) 的作用"></a>3. <strong><code>replace(/\s+/g, &#39;&#39;)</code> 的作用</strong></h4><ul>
+<li><code>/\s+/g</code>：匹配字符串中<strong>所有连续的空白字符</strong>。</li>
+<li><code>&#39;&#39;</code>：将匹配到的空白字符替换为空字符串（即删除）。</li>
+<li>因此，<code>replace(/\s+/g, &#39;&#39;)</code> 的作用是<strong>去除字符串中所有空白字符</strong>。</li>
+</ul>
+<hr>
+<h4 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. <strong>示例</strong></h4><p>假设有一个字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;Hello,  World! \n This is a test. &quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>replace(/\s+/g, &#39;&#39;)</code> 处理：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">replace</span>(<span class="regexp">/\s+/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 输出：Hello,World!Thisisatest.</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="处理过程："><a href="#处理过程：" class="headerlink" title="处理过程："></a>处理过程：</h5><ol>
+<li>匹配所有空白字符：<ul>
+<li><code> </code>（空格）</li>
+<li><code>\n</code>（换行符）</li>
+</ul>
+</li>
+<li>将这些空白字符替换为空字符串。</li>
+</ol>
+<hr>
+<h4 id="5-注意事项"><a href="#5-注意事项" class="headerlink" title="5. 注意事项"></a>5. <strong>注意事项</strong></h4><ul>
+<li>如果只想去除空格（不包括制表符、换行符等），可以使用 <code>replace(/ /g, &#39;&#39;)</code>。</li>
+<li>如果只想去除字符串开头和结尾的空白字符，可以使用 <code>trim()</code> 方法：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;  Hello, World!  &quot;</span>;</span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">trim</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 输出：Hello, World!</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="6-总结-1"><a href="#6-总结-1" class="headerlink" title="6. 总结"></a>6. <strong>总结</strong></h4><ul>
+<li><code>replace(/\s+/g, &#39;&#39;)</code> 用于去除字符串中<strong>所有空白字符</strong>，包括空格、制表符、换行符等。</li>
+<li>这是处理用户输入时常用的方法，可以确保字符串中没有多余的空白字符。</li>
+</ul>
+<p>希望这能帮助你更好地理解这段代码的作用！</p>
+<hr>
+<p>在 JavaScript 中，<code>/</code> 是<strong>正则表达式（Regular Expression）的界定符</strong>，用于表示正则表达式的开始和结束。它本身没有特殊含义，但在正则表达式中，<code>/</code> 用于包裹模式（pattern），告诉 JavaScript 这是一个正则表达式。</p>
+<hr>
+<h4 id="1-正则表达式的基本语法"><a href="#1-正则表达式的基本语法" class="headerlink" title="1. 正则表达式的基本语法"></a>1. <strong>正则表达式的基本语法</strong></h4><p>正则表达式通常以 <code>/</code> 开头和结尾，中间是模式（pattern）。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">/\s+/g</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一个 <code>/</code>：表示正则表达式的开始。</li>
+<li><code>\s+</code>：正则表达式的模式。</li>
+<li>第二个 <code>/</code>：表示正则表达式的结束。</li>
+<li><code>g</code>：正则表达式的标志（flag），表示全局匹配。</li>
+</ul>
+<hr>
+<h4 id="2-的作用"><a href="#2-的作用" class="headerlink" title="2. / 的作用"></a>2. <strong><code>/</code> 的作用</strong></h4><ul>
+<li><strong>界定符</strong>：<code>/</code> 用于包裹正则表达式的模式，告诉 JavaScript 这是一个正则表达式。</li>
+<li><strong>分隔符</strong>：在正则表达式中，<code>/</code> 将模式与标志（如 <code>g</code>、<code>i</code>、<code>m</code> 等）分开。</li>
+</ul>
+<hr>
+<h4 id="3-示例"><a href="#3-示例" class="headerlink" title="3. 示例"></a>3. <strong>示例</strong></h4><h5 id="示例-1：匹配空白字符"><a href="#示例-1：匹配空白字符" class="headerlink" title="示例 1：匹配空白字符"></a>示例 1：匹配空白字符</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;Hello,  World!&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">replace</span>(<span class="regexp">/\s+/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 输出：Hello,World!</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>/\s+/g</code> 是一个正则表达式：<ul>
+<li><code>/</code>：开始和结束正则表达式。</li>
+<li><code>\s+</code>：匹配一个或多个空白字符。</li>
+<li><code>g</code>：全局匹配。</li>
+</ul>
+</li>
+</ul>
+<h5 id="示例-2：匹配数字"><a href="#示例-2：匹配数字" class="headerlink" title="示例 2：匹配数字"></a>示例 2：匹配数字</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">&quot;abc123def456&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> result = str.<span class="title function_">replace</span>(<span class="regexp">/\d+/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 输出：abcdef</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>/\d+/g</code> 是一个正则表达式：<ul>
+<li><code>/</code>：开始和结束正则表达式。</li>
+<li><code>\d+</code>：匹配一个或多个数字。</li>
+<li><code>g</code>：全局匹配。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="4-的其他用途"><a href="#4-的其他用途" class="headerlink" title="4. / 的其他用途"></a>4. <strong><code>/</code> 的其他用途</strong></h4><p>在 JavaScript 中，<code>/</code> 除了用于正则表达式外，还可以用于：</p>
+<ul>
+<li><strong>除法运算符</strong>：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> result = <span class="number">10</span> / <span class="number">2</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 输出：5</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>注释</strong>（在正则表达式中无效）：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 这是单行注释</span></span><br><span class="line"><span class="comment">/* 这是多行注释 */</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="5-总结-3"><a href="#5-总结-3" class="headerlink" title="5. 总结"></a>5. <strong>总结</strong></h4><ul>
+<li>在正则表达式中，<code>/</code> 是界定符，用于包裹模式。</li>
+<li>它本身没有特殊含义，但在正则表达式中是必不可少的语法符号。</li>
+<li>在其他上下文中，<code>/</code> 可以用作除法运算符或注释符号。</li>
+</ul>
+<p>希望这能帮助你更好地理解 <code>/</code> 的作用！</p>
+<h2 id="提问09-js的正则表达式需要import之类的操作吗？"><a href="#提问09-js的正则表达式需要import之类的操作吗？" class="headerlink" title="提问09 js的正则表达式需要import之类的操作吗？"></a>提问09 js的正则表达式需要import之类的操作吗？</h2><p>在 JavaScript 中，<strong>正则表达式是语言内置的功能</strong>，不需要通过 <code>import</code> 或其他方式引入。你可以直接在代码中使用正则表达式，无需任何额外的操作。</p>
+<hr>
+<h4 id="1-正则表达式的使用方式"><a href="#1-正则表达式的使用方式" class="headerlink" title="1. 正则表达式的使用方式"></a>1. <strong>正则表达式的使用方式</strong></h4><p>JavaScript 提供了两种创建正则表达式的方式：</p>
+<h5 id="方式-1：字面量语法"><a href="#方式-1：字面量语法" class="headerlink" title="方式 1：字面量语法"></a>方式 1：字面量语法</h5><p>使用 <code>/</code> 包裹正则表达式模式：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> regex = <span class="regexp">/\d+/g</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方式-2：构造函数语法"><a href="#方式-2：构造函数语法" class="headerlink" title="方式 2：构造函数语法"></a>方式 2：构造函数语法</h5><p>使用 <code>RegExp</code> 构造函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> regex = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;\\d+&#x27;</span>, <span class="string">&#x27;g&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-正则表达式的应用场景"><a href="#2-正则表达式的应用场景" class="headerlink" title="2. 正则表达式的应用场景"></a>2. <strong>正则表达式的应用场景</strong></h4><p>正则表达式可以用于以下场景：</p>
+<ul>
+<li><strong>字符串匹配</strong>：检查字符串是否符合某种模式。</li>
+<li><strong>字符串替换</strong>：替换字符串中符合模式的部分。</li>
+<li><strong>字符串提取</strong>：从字符串中提取符合模式的部分。</li>
+</ul>
+<h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h5><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 检查字符串是否包含数字</span></span><br><span class="line"><span class="keyword">const</span> hasNumber = <span class="regexp">/\d/</span>.<span class="title function_">test</span>(<span class="string">&quot;Hello123&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(hasNumber); <span class="comment">// 输出：true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 替换字符串中的数字</span></span><br><span class="line"><span class="keyword">const</span> result = <span class="string">&quot;Hello123&quot;</span>.<span class="title function_">replace</span>(<span class="regexp">/\d+/g</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 输出：Hello</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 提取字符串中的数字</span></span><br><span class="line"><span class="keyword">const</span> numbers = <span class="string">&quot;Hello123World456&quot;</span>.<span class="title function_">match</span>(<span class="regexp">/\d+/g</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(numbers); <span class="comment">// 输出：[&quot;123&quot;, &quot;456&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-不需要-import-的原因"><a href="#3-不需要-import-的原因" class="headerlink" title="3. 不需要 import 的原因"></a>3. <strong>不需要 <code>import</code> 的原因</strong></h4><ul>
+<li>正则表达式是 JavaScript 的<strong>核心功能</strong>，属于语言标准的一部分。</li>
+<li>无论是浏览器环境还是 Node.js 环境，都可以直接使用正则表达式，无需引入额外的库或模块。</li>
+</ul>
+<hr>
+<h4 id="4-与其他语言的对比"><a href="#4-与其他语言的对比" class="headerlink" title="4. 与其他语言的对比"></a>4. <strong>与其他语言的对比</strong></h4><ul>
+<li>在一些编程语言（如 Python）中，正则表达式功能需要通过 <code>import re</code> 引入。</li>
+<li>在 JavaScript 中，正则表达式是内置的，开箱即用。</li>
+</ul>
+<hr>
+<h4 id="5-总结-4"><a href="#5-总结-4" class="headerlink" title="5. 总结"></a>5. <strong>总结</strong></h4><ul>
+<li>JavaScript 的正则表达式是语言内置功能，**不需要 <code>import</code>**。</li>
+<li>你可以直接使用字面量语法（<code>/pattern/</code>）或构造函数语法（<code>new RegExp()</code>）创建正则表达式。</li>
+<li>正则表达式在字符串处理中非常强大，是 JavaScript 开发中的常用工具。</li>
+</ul>
+<p>希望这能解答你的疑问！如果还有其他问题，欢迎继续提问！</p>
+<h2 id="提问10-JS中的DOM操作let-ele1-document-getElementById-id-ele1-value的访问操作，与Vue3的cosnt-ele2-ref-ele2-value的访问操作有什么内在联系吗？"><a href="#提问10-JS中的DOM操作let-ele1-document-getElementById-id-ele1-value的访问操作，与Vue3的cosnt-ele2-ref-ele2-value的访问操作有什么内在联系吗？" class="headerlink" title="提问10 JS中的DOM操作let ele1 = document.getElementById(&#39;id&#39;);  ele1.value的访问操作，与Vue3的cosnt ele2 = ref(&#39;&#39;) ; ele2.value的访问操作有什么内在联系吗？"></a>提问10 JS中的DOM操作<code>let ele1 = document.getElementById(&#39;id&#39;);  ele1.value</code>的访问操作，与Vue3的<code>cosnt ele2 = ref(&#39;&#39;) ; ele2.value</code>的访问操作有什么内在联系吗？</h2><p>（注：此提问开始，使用到的是ChatGpt，输出的第一级标题就是h2）</p>
+<p>JavaScript 原生 DOM 操作和 Vue3 的 <code>ref</code> 都涉及到对数据的访问和操作，但它们的内部机制和用途有很大不同。我们可以从<strong>响应式系统</strong>和<strong>访问机制</strong>两个方面来分析它们的内在联系和区别。</p>
+<hr>
+<h3 id="1-访问机制对比"><a href="#1-访问机制对比" class="headerlink" title="1. 访问机制对比"></a><strong>1. 访问机制对比</strong></h3><h4 id="（1）原生-DOM-操作"><a href="#（1）原生-DOM-操作" class="headerlink" title="（1）原生 DOM 操作"></a><strong>（1）原生 DOM 操作</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> ele1 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;id&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ele1.<span class="property">value</span>); <span class="comment">// 获取输入框的值</span></span><br><span class="line">ele1.<span class="property">value</span> = <span class="string">&quot;Hello&quot;</span>; <span class="comment">// 修改输入框的值</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>document.getElementById(&#39;id&#39;)</code> 获取的是 <strong>DOM 元素对象</strong>，可以直接访问或修改其 <code>value</code> 属性。</li>
+<li><code>ele1.value</code> 直接操作的是 <strong>HTML 元素的属性值</strong>，不会有额外的逻辑处理。</li>
+</ul>
+<hr>
+<h4 id="（2）Vue3-的-ref"><a href="#（2）Vue3-的-ref" class="headerlink" title="（2）Vue3 的 ref"></a><strong>（2）Vue3 的 <code>ref</code></strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ele2 = <span class="title function_">ref</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(ele2.<span class="property">value</span>); <span class="comment">// 读取 ref 的值</span></span><br><span class="line">ele2.<span class="property">value</span> = <span class="string">&quot;Hello&quot;</span>; <span class="comment">// 修改 ref 的值</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ref(&#39;&#39;)</code> 创建的是一个<strong>响应式对象</strong>，它本质上是一个<strong>对象</strong>，其中的 <code>.value</code> 作为代理访问数据。</li>
+<li>访问 <code>ele2.value</code> 时，Vue <strong>拦截</strong>了 <code>.value</code> 的读取和修改，以实现<strong>响应式更新</strong>。</li>
+</ul>
+<hr>
+<h3 id="2-内部机制对比"><a href="#2-内部机制对比" class="headerlink" title="2. 内部机制对比"></a><strong>2. 内部机制对比</strong></h3><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>原生 DOM 操作</strong></th>
+<th><strong>Vue3 <code>ref</code></strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据存储</strong></td>
+<td>直接存储在 HTML 元素的 <code>value</code> 属性中</td>
+<td>存储在 Vue 内部的响应式对象中</td>
+</tr>
+<tr>
+<td><strong>数据访问方式</strong></td>
+<td>直接访问 <code>ele1.value</code></td>
+<td>通过 <code>ele2.value</code> 访问响应式数据</td>
+</tr>
+<tr>
+<td><strong>数据变更后果</strong></td>
+<td>仅仅修改了 DOM，不会触发额外的逻辑</td>
+<td>触发 Vue 响应式系统，更新 UI</td>
+</tr>
+<tr>
+<td><strong>作用范围</strong></td>
+<td>仅限于 DOM</td>
+<td>可用于 Vue 组件中的数据管理</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-它们的内在联系"><a href="#3-它们的内在联系" class="headerlink" title="3. 它们的内在联系"></a><strong>3. 它们的内在联系</strong></h3><p>从本质上看，Vue3 的 <code>ref</code> 其实是对原生 DOM 数据访问模式的一种<strong>封装和扩展</strong>：</p>
+<ul>
+<li><strong>相同点</strong>：两者的 <code>.value</code> 都用于获取和修改数据。</li>
+<li><strong>不同点</strong>：<ul>
+<li><strong>Vue3 <code>ref</code> 是响应式的</strong>，可以触发 UI 更新，而 DOM <code>value</code> 仅仅是数据存储，不会自动更新 UI。</li>
+<li><strong>Vue3 <code>ref</code> 适用于组件的状态管理</strong>，而原生 DOM <code>value</code> 主要用于操作具体的 HTML 元素。</li>
+</ul>
+</li>
+</ul>
+<p>可以理解为：</p>
+<blockquote>
+<p><code>ref.value</code> 让 Vue <strong>模拟了</strong> DOM 操作，但它其实是一个 <strong>可追踪的响应式变量</strong>，并不直接作用于 DOM，而是用于数据管理。</p>
+</blockquote>
+<hr>
+<h3 id="4-结合示例分析"><a href="#4-结合示例分析" class="headerlink" title="4. 结合示例分析"></a><strong>4. 结合示例分析</strong></h3><p>假设我们有一个输入框：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;input1&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="原生-JavaScript-操作"><a href="#原生-JavaScript-操作" class="headerlink" title="原生 JavaScript 操作"></a><strong>原生 JavaScript 操作</strong></h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> inputEle = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;input1&#x27;</span>);</span><br><span class="line">inputEle.<span class="property">value</span> = <span class="string">&quot;Hello&quot;</span>; <span class="comment">// 直接修改 DOM</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(inputEle.<span class="property">value</span>); <span class="comment">// 读取 DOM 的值</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里是直接操作 DOM，没有额外的逻辑。</li>
+</ul>
+<h5 id="Vue3-ref-方式"><a href="#Vue3-ref-方式" class="headerlink" title="Vue3 ref 方式"></a><strong>Vue3 <code>ref</code> 方式</strong></h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; ref &#125; from &#x27;vue&#x27;;</span><br><span class="line"></span><br><span class="line">const inputValue = ref(&#x27;&#x27;);</span><br><span class="line"></span><br><span class="line">const updateValue = () =&gt; &#123;</span><br><span class="line">  inputValue.value = &quot;Hello&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;input v-model=&quot;inputValue&quot;&gt;</span><br><span class="line">  &lt;button @click=&quot;updateValue&quot;&gt;修改值&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Vue 通过 <code>v-model</code> 绑定 <code>inputValue</code>，当 <code>updateValue</code> 修改 <code>inputValue.value</code> 时，Vue <strong>自动更新 UI</strong>，而不需要手动操作 DOM。</li>
+</ul>
+<hr>
+<h3 id="5-总结-5"><a href="#5-总结-5" class="headerlink" title="5. 总结"></a><strong>5. 总结</strong></h3><h4 id="联系"><a href="#联系" class="headerlink" title="联系"></a><strong>联系</strong></h4><ul>
+<li>Vue3 的 <code>ref.value</code> 和 DOM 的 <code>element.value</code> 在访问方式上类似，都是 <code>.value</code> 取值。</li>
+<li><code>ref</code> 让数据访问方式看起来像 DOM 操作，但它实际上是 Vue 响应式系统的一部分。</li>
+</ul>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a><strong>区别</strong></h4><ul>
+<li><code>element.value</code> 直接作用于 HTML 元素，而 <code>ref.value</code> 是一个响应式对象，能触发 UI 更新。</li>
+<li><code>ref.value</code> 不是 DOM 属性，而是 Vue 代理的数据存储。</li>
+</ul>
+<p>所以，Vue3 的 <code>ref</code> 机制可以看作是<strong>对原生 DOM 操作的一种抽象和增强</strong>，让数据驱动 UI，而不是直接操作 DOM。</p>
+<h2 id="提问11-nums1-nums1-split-按英文逗号切割-nums1-nums1-map-Number-转换为数字-涉及到的主要方法是什么？请也介绍其相关方法"><a href="#提问11-nums1-nums1-split-按英文逗号切割-nums1-nums1-map-Number-转换为数字-涉及到的主要方法是什么？请也介绍其相关方法" class="headerlink" title="提问11 nums1 = nums1.split(&#39;,&#39;); // 按英文逗号切割 nums1 = nums1.map(Number); // 转换为数字 涉及到的主要方法是什么？请也介绍其相关方法"></a>提问11 <code>nums1 = nums1.split(&#39;,&#39;); // 按英文逗号切割 nums1 = nums1.map(Number); // 转换为数字</code> 涉及到的主要方法是什么？请也介绍其相关方法</h2><p>这段代码涉及到 JavaScript 中 <code>split()</code> 和 <code>map()</code> 这两个常用方法。下面详细介绍它们及相关的方法。</p>
+<hr>
+<h3 id="1-split-方法"><a href="#1-split-方法" class="headerlink" title="1. split() 方法"></a><strong>1. <code>split()</code> 方法</strong></h3><h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a><strong>作用</strong></h4><p><code>split()</code> 方法用于将字符串按照指定的分隔符拆分成一个数组。</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a><strong>语法</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">string.<span class="title function_">split</span>(separator, limit)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>separator</code>（可选）：用于分割字符串的字符或正则表达式。如果省略，则整个字符串作为一个数组的单个元素返回。</li>
+<li><code>limit</code>（可选）：控制返回的数组最多包含多少个元素。</li>
+</ul>
+<h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">&quot;apple,banana,orange&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> arr = str.<span class="title function_">split</span>(<span class="string">&quot;,&quot;</span>); <span class="comment">// [&#x27;apple&#x27;, &#x27;banana&#x27;, &#x27;orange&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="相关方法"><a href="#相关方法" class="headerlink" title="相关方法"></a><strong>相关方法</strong></h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>join(separator)</code></td>
+<td>将数组转换为字符串，以 <code>separator</code> 作为连接符</td>
+</tr>
+<tr>
+<td><code>slice(start, end)</code></td>
+<td>截取数组的一部分，返回新数组</td>
+</tr>
+<tr>
+<td><code>substring(start, end)</code></td>
+<td>截取字符串的一部分，返回新字符串</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-map-方法"><a href="#2-map-方法" class="headerlink" title="2. map() 方法"></a><strong>2. <code>map()</code> 方法</strong></h3><h4 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a><strong>作用</strong></h4><p><code>map()</code> 方法用于对数组中的每个元素执行提供的回调函数，并返回一个新的数组。</p>
+<h4 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a><strong>语法</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">array.<span class="title function_">map</span>(<span class="title function_">callback</span>(currentValue, index, array))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>callback</code> 是一个执行数组中每个元素的函数，该函数接收：<ul>
+<li><code>currentValue</code>：当前处理的元素</li>
+<li><code>index</code>（可选）：当前元素的索引</li>
+<li><code>array</code>（可选）：正在处理的数组本身</li>
+</ul>
+</li>
+</ul>
+<h4 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>];</span><br><span class="line"><span class="keyword">let</span> numArray = numbers.<span class="title function_">map</span>(<span class="title class_">Number</span>); <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：<code>map(Number)</code> 是一种简写方式，等价于 <code>map(x =&gt; Number(x))</code>。</p>
+</blockquote>
+<h4 id="相关方法-1"><a href="#相关方法-1" class="headerlink" title="相关方法"></a><strong>相关方法</strong></h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>forEach(callback)</code></td>
+<td>遍历数组但不返回新数组</td>
+</tr>
+<tr>
+<td><code>filter(callback)</code></td>
+<td>过滤数组中的元素，返回符合条件的元素组成的新数组</td>
+</tr>
+<tr>
+<td><code>reduce(callback, initialValue)</code></td>
+<td>归纳数组，计算出一个最终值</td>
+</tr>
+<tr>
+<td><code>map()</code> vs <code>forEach()</code></td>
+<td><code>map()</code> 返回新数组，<code>forEach()</code> 只是遍历，<strong>不返回新数组</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-代码解析"><a href="#3-代码解析" class="headerlink" title="3. 代码解析"></a><strong>3. 代码解析</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">nums1 = nums1.<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);  <span class="comment">// 按英文逗号切割成数组</span></span><br><span class="line">nums1 = nums1.<span class="title function_">map</span>(<span class="title class_">Number</span>); <span class="comment">// 将字符串数组转换为数字数组</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>split(&#39;,&#39;)</code> 将 <code>&quot;1,2,3&quot;</code> 转换为 <code>[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</code></li>
+<li><code>map(Number)</code> 将 <code>[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</code> 转换为 <code>[1, 2, 3]</code></li>
+</ul>
+<h4 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a><strong>完整示例</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> nums1 = <span class="string">&quot;10,20,30,40&quot;</span>;</span><br><span class="line">nums1 = nums1.<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>);  </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(nums1); <span class="comment">// [&quot;10&quot;, &quot;20&quot;, &quot;30&quot;, &quot;40&quot;]</span></span><br><span class="line"></span><br><span class="line">nums1 = nums1.<span class="title function_">map</span>(<span class="title class_">Number</span>);  </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(nums1); <span class="comment">// [10, 20, 30, 40]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a><strong>总结</strong></h4><ul>
+<li><code>split()</code> 用于<strong>字符串拆分</strong></li>
+<li><code>map(Number)</code> 用于<strong>字符串数组转换为数字数组</strong></li>
+<li>这两者结合，常用于处理用户输入的字符串数据</li>
+</ul>
+<p>这样，我们就可以从 <code>input</code> 输入框中获取逗号分隔的数字，并将其转换成一个数字数组，方便后续计算！ 🚀</p>
+<h2 id="提问12-请解析nums1-nums1-filter-num-isNaN-num-过滤掉无效值-中filter与num-isNaN-num-的具体语法"><a href="#提问12-请解析nums1-nums1-filter-num-isNaN-num-过滤掉无效值-中filter与num-isNaN-num-的具体语法" class="headerlink" title="提问12 请解析nums1 = nums1.filter(num =&gt; !isNaN(num)); //过滤掉无效值   中filter与num =&gt; !isNaN(num)的具体语法"></a>提问12 请解析<code>nums1 = nums1.filter(num =&gt; !isNaN(num)); //过滤掉无效值</code>   中filter与<code>num =&gt; !isNaN(num)</code>的具体语法</h2><p>这行代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">nums1 = nums1.<span class="title function_">filter</span>(<span class="function"><span class="params">num</span> =&gt;</span> !<span class="built_in">isNaN</span>(num)); <span class="comment">// 过滤掉无效值</span></span><br></pre></td></tr></table></figure>
+<p>主要涉及到 <strong><code>filter()</code> 方法</strong> 和 **箭头函数 (<code>num =&gt; !isNaN(num)</code>)**，我们分别解析它们的语法和原理。</p>
+<hr>
+<h3 id="1-filter-方法"><a href="#1-filter-方法" class="headerlink" title="1. filter() 方法"></a><strong>1. <code>filter()</code> 方法</strong></h3><h4 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a><strong>作用</strong></h4><p><code>filter()</code> 方法用于<strong>筛选数组中的元素</strong>，返回满足条件的新数组，不修改原数组。</p>
+<h4 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a><strong>语法</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">array.<span class="title function_">filter</span>(<span class="title function_">callback</span>(element, index, array))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>callback</code>：返回 <code>true</code> 的元素会被保留，返回 <code>false</code> 的元素会被过滤掉。<ul>
+<li><code>element</code>：当前正在处理的元素</li>
+<li><code>index</code>（可选）：当前元素的索引</li>
+<li><code>array</code>（可选）：当前操作的数组</li>
+</ul>
+</li>
+</ul>
+<h4 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">10</span>, -<span class="number">5</span>, <span class="number">0</span>, <span class="number">8</span>, -<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> positiveNumbers = numbers.<span class="title function_">filter</span>(<span class="function"><span class="params">num</span> =&gt;</span> num &gt; <span class="number">0</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(positiveNumbers); <span class="comment">// [10, 8]</span></span><br></pre></td></tr></table></figure>
+<p><strong>解释：</strong></p>
+<ul>
+<li><code>filter()</code> 遍历数组中的每个元素</li>
+<li>只有 <code>num &gt; 0</code> 为 <code>true</code> 的元素才会保留</li>
+<li>最终返回 <code>[10, 8]</code></li>
+</ul>
+<hr>
+<h3 id="2-num-isNaN-num-解析"><a href="#2-num-isNaN-num-解析" class="headerlink" title="2. num =&gt; !isNaN(num) 解析"></a><strong>2. <code>num =&gt; !isNaN(num)</code> 解析</strong></h3><h4 id="作用-3"><a href="#作用-3" class="headerlink" title="作用"></a><strong>作用</strong></h4><p>这部分是 <strong>箭头函数</strong>，用于 <code>filter()</code> 的回调，目的是<strong>剔除 NaN（非数字）元素</strong>。</p>
+<h4 id="拆解分析"><a href="#拆解分析" class="headerlink" title="拆解分析"></a><strong>拆解分析</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">num =&gt; !<span class="built_in">isNaN</span>(num)</span><br></pre></td></tr></table></figure>
+<p>等价于：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> !<span class="built_in">isNaN</span>(num);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="语法解析"><a href="#语法解析" class="headerlink" title="语法解析"></a><strong>语法解析</strong></h4><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>num =&gt; &#123;&#125;</code></td>
+<td>箭头函数 (<code>num</code> 是参数)</td>
+</tr>
+<tr>
+<td><code>isNaN(num)</code></td>
+<td>判断 <code>num</code> 是否是 <code>NaN</code></td>
+</tr>
+<tr>
+<td><code>!isNaN(num)</code></td>
+<td>取反，只有 <strong>不是 <code>NaN</code> 的值</strong> 才返回 <code>true</code>，保留在数组中</td>
+</tr>
+</tbody></table>
+<h4 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a><strong>相关概念</strong></h4><h5 id="（1）箭头函数"><a href="#（1）箭头函数" class="headerlink" title="（1）箭头函数"></a><strong>（1）箭头函数</strong></h5><p>箭头函数 <code>num =&gt; !isNaN(num)</code> 是 <code>function(num) &#123; return !isNaN(num); &#125;</code> 的简写。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 普通函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isValidNumber</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> !<span class="built_in">isNaN</span>(num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 箭头函数等价于</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">isValidNumber</span> = num =&gt; !<span class="built_in">isNaN</span>(num);</span><br></pre></td></tr></table></figure>
+
+<p><strong>箭头函数的特性：</strong></p>
+<ul>
+<li>省略 <code>function</code> 关键字</li>
+<li>只有一个参数时，括号 <code>()</code> 可以省略</li>
+<li>只有一条 <code>return</code> 语句时，大括号 <code>&#123;&#125;</code> 和 <code>return</code> 也可以省略</li>
+</ul>
+<h5 id="（2）isNaN-方法"><a href="#（2）isNaN-方法" class="headerlink" title="（2）isNaN() 方法"></a><strong>（2）<code>isNaN()</code> 方法</strong></h5><p><code>isNaN(num)</code> 判断某个值是否为 <code>NaN</code>（即“不是一个数字”）。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">isNaN</span>(<span class="string">&quot;123&quot;</span>));  <span class="comment">// false （&quot;123&quot; 可以转换为数字）</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">isNaN</span>(<span class="string">&quot;abc&quot;</span>));  <span class="comment">// true  （&quot;abc&quot; 不是数字）</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">isNaN</span>(<span class="number">42</span>));     <span class="comment">// false （42 是有效数字）</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">isNaN</span>(<span class="title class_">NaN</span>));    <span class="comment">// true  （NaN 本身是无效数字）</span></span><br></pre></td></tr></table></figure>
+<p>所以 <code>!isNaN(num)</code> 只保留 <strong>可以转换为数字的值</strong>。</p>
+<hr>
+<h3 id="3-代码执行过程"><a href="#3-代码执行过程" class="headerlink" title="3. 代码执行过程"></a><strong>3. 代码执行过程</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> nums1 = [<span class="string">&quot;10&quot;</span>, <span class="string">&quot;20&quot;</span>, <span class="string">&quot;abc&quot;</span>, <span class="string">&quot;30&quot;</span>, <span class="string">&quot;xyz&quot;</span>, <span class="string">&quot;40&quot;</span>];</span><br><span class="line">nums1 = nums1.<span class="title function_">filter</span>(<span class="function"><span class="params">num</span> =&gt;</span> !<span class="built_in">isNaN</span>(num));</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(nums1); <span class="comment">// [&quot;10&quot;, &quot;20&quot;, &quot;30&quot;, &quot;40&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="执行步骤"><a href="#执行步骤" class="headerlink" title="执行步骤"></a><strong>执行步骤</strong></h4><ol>
+<li><code>filter()</code> 遍历 <code>nums1</code> 的每个元素：<ul>
+<li><code>isNaN(&quot;10&quot;)</code> → <code>false</code> → <code>!false</code> → <code>true</code> → <strong>保留</strong></li>
+<li><code>isNaN(&quot;20&quot;)</code> → <code>false</code> → <code>true</code> → <strong>保留</strong></li>
+<li><code>isNaN(&quot;abc&quot;)</code> → <code>true</code> → <code>false</code> → <strong>过滤掉</strong></li>
+<li><code>isNaN(&quot;30&quot;)</code> → <code>false</code> → <code>true</code> → <strong>保留</strong></li>
+<li><code>isNaN(&quot;xyz&quot;)</code> → <code>true</code> → <code>false</code> → <strong>过滤掉</strong></li>
+<li><code>isNaN(&quot;40&quot;)</code> → <code>false</code> → <code>true</code> → <strong>保留</strong></li>
+</ul>
+</li>
+<li>只保留了 <code>[&quot;10&quot;, &quot;20&quot;, &quot;30&quot;, &quot;40&quot;]</code>，无效字符 <code>&quot;abc&quot;</code> 和 <code>&quot;xyz&quot;</code> 被移除。</li>
+</ol>
+<hr>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a><strong>4. 总结</strong></h3><ul>
+<li><strong><code>filter()</code></strong> 遍历数组，保留返回 <code>true</code> 的元素。</li>
+<li><strong>箭头函数 <code>num =&gt; !isNaN(num)</code></strong> 是 <code>function(num) &#123; return !isNaN(num); &#125;</code> 的简写。</li>
+<li><strong><code>isNaN(num)</code></strong> 用于判断某个值是否为 <code>NaN</code>，<code>!isNaN(num)</code> 只保留有效数字。</li>
+<li><strong>最终效果</strong>：过滤掉无效的非数字值，确保数组只包含数值或可转换成数值的字符串。</li>
+</ul>
+<hr>
+<h3 id="5-进一步优化"><a href="#5-进一步优化" class="headerlink" title="5. 进一步优化"></a><strong>5. 进一步优化</strong></h3><h4 id="使用-Number-isNaN"><a href="#使用-Number-isNaN" class="headerlink" title="使用 Number.isNaN()"></a><strong>使用 <code>Number.isNaN()</code></strong></h4><p><code>isNaN()</code> 在某些情况下会有不准确的问题，比如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">isNaN</span>(<span class="string">&quot;&quot;</span>));      <span class="comment">// false，空字符串会被转换成 `0`</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">isNaN</span>(<span class="string">&quot; &quot;</span>));     <span class="comment">// false，空格也会被转换成 `0`</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">isNaN</span>([]));      <span class="comment">// false，空数组 `[]` 也会被转换成 `0`</span></span><br></pre></td></tr></table></figure>
+<p>改用 <strong><code>Number.isNaN()</code></strong> 以避免这些问题：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">nums1 = nums1.<span class="title function_">filter</span>(<span class="function"><span class="params">num</span> =&gt;</span> !<span class="title class_">Number</span>.<span class="built_in">isNaN</span>(<span class="title class_">Number</span>(num)));</span><br></pre></td></tr></table></figure>
+<p>这样可以更严格地筛选有效数字。</p>
+<hr>
+<p>希望这份解析能帮助你理解 <code>filter()</code> 和箭头函数的底层原理！🚀</p>
+<h2 id="提问13-html块的运行逻辑"><a href="#提问13-html块的运行逻辑" class="headerlink" title="提问13 html&lt;script&gt;块的运行逻辑"></a>提问13 html<code>&lt;script&gt;</code>块的运行逻辑</h2><p>在 HTML 中，<code>&lt;script&gt;</code> 标签用于在网页中嵌入 JavaScript 代码。它的运行逻辑受 <strong>HTML 解析流程</strong>、<strong>浏览器执行顺序</strong> 和 <strong>不同属性（如 <code>defer</code> 和 <code>async</code>）</strong> 的影响。以下是详细解析：</p>
+<hr>
+<h3 id="1-块的运行逻辑"><a href="#1-块的运行逻辑" class="headerlink" title="1. &lt;script&gt; 块的运行逻辑"></a><strong>1. <code>&lt;script&gt;</code> 块的运行逻辑</strong></h3><h4 id="（1）普通-块（默认行为）"><a href="#（1）普通-块（默认行为）" class="headerlink" title="（1）普通 &lt;script&gt; 块（默认行为）"></a><strong>（1）普通 <code>&lt;script&gt;</code> 块（默认行为）</strong></h4><p>如果 <code>&lt;script&gt;</code> 标签<strong>不带 <code>defer</code> 或 <code>async</code> 属性</strong>，它的执行逻辑如下：</p>
+<ol>
+<li><strong>HTML 解析器（浏览器）按顺序解析 HTML 代码</strong>。</li>
+<li><strong>遇到 <code>&lt;script&gt;</code> 标签时，HTML 解析会暂停</strong>：<ul>
+<li><strong>下载并执行 JavaScript 代码</strong>。</li>
+<li><strong>执行完毕后，HTML 解析才会继续</strong>。</li>
+</ul>
+</li>
+<li>如果有多个 <code>&lt;script&gt;</code> 标签，它们会<strong>按顺序同步执行</strong>。</li>
+</ol>
+<h4 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Script in head&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello, World!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Script in body&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a><strong>执行顺序</strong></h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Script in head</span><br><span class="line">Script in body</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当浏览器解析 <code>&lt;head&gt;</code> 内的 <code>&lt;script&gt;</code> 时，它会暂停解析，执行 JavaScript，然后继续解析 HTML。</li>
+<li>解析到 <code>&lt;body&gt;</code> 的 <code>&lt;script&gt;</code>，同样会暂停 HTML 解析，执行 JavaScript，然后继续。</li>
+</ul>
+<hr>
+<h3 id="2-defer-属性（推荐用于外部-JS-文件）"><a href="#2-defer-属性（推荐用于外部-JS-文件）" class="headerlink" title="2. defer 属性（推荐用于外部 JS 文件）"></a><strong>2. <code>defer</code> 属性（推荐用于外部 JS 文件）</strong></h3><h4 id="运行逻辑"><a href="#运行逻辑" class="headerlink" title="运行逻辑"></a><strong>运行逻辑</strong></h4><ol>
+<li><strong><code>defer</code> 允许浏览器继续解析 HTML</strong>，不会阻塞页面加载。</li>
+<li><strong>所有 <code>defer</code> 脚本会按照它们在 HTML 中的顺序执行</strong>，但<strong>等到 HTML 解析完成后</strong>再执行。</li>
+</ol>
+<h4 id="示例-6"><a href="#示例-6" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">defer</span> <span class="attr">src</span>=<span class="string">&quot;script1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">defer</span> <span class="attr">src</span>=<span class="string">&quot;script2.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello, World!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="执行顺序-1"><a href="#执行顺序-1" class="headerlink" title="执行顺序"></a><strong>执行顺序</strong></h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">HTML 解析完成后，按顺序执行：</span><br><span class="line">script1.js</span><br><span class="line">script2.js</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>defer</code> <strong>不会阻塞 HTML 解析</strong>。</li>
+<li><strong>脚本按顺序执行</strong>，即使 <code>script2.js</code> 先加载完成，也必须等 <code>script1.js</code> 执行完。</li>
+</ul>
+<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a><strong>适用场景</strong></h4><ul>
+<li><strong>推荐用于外部 JS 文件</strong>，尤其是<strong>需要操作 DOM 的脚本</strong>，确保 HTML 结构先加载完成。</li>
+</ul>
+<hr>
+<h3 id="3-async-属性（异步加载并立即执行）"><a href="#3-async-属性（异步加载并立即执行）" class="headerlink" title="3. async 属性（异步加载并立即执行）"></a><strong>3. <code>async</code> 属性（异步加载并立即执行）</strong></h3><h4 id="运行逻辑-1"><a href="#运行逻辑-1" class="headerlink" title="运行逻辑"></a><strong>运行逻辑</strong></h4><ol>
+<li><strong><code>async</code> 让脚本在后台异步下载，不阻塞 HTML 解析</strong>。</li>
+<li><strong>下载完成后，立即执行脚本（可能会打断 HTML 解析）</strong>。</li>
+<li><strong>多个 <code>async</code> 脚本的执行顺序与它们的下载完成顺序有关</strong>，而<strong>不是它们在 HTML 中的顺序</strong>。</li>
+</ol>
+<h4 id="示例-7"><a href="#示例-7" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;script1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;script2.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello, World!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="可能的执行顺序"><a href="#可能的执行顺序" class="headerlink" title="可能的执行顺序"></a><strong>可能的执行顺序</strong></h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（取决于哪个脚本先下载完成）</span><br><span class="line">script2.js</span><br><span class="line">script1.js</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>脚本不会按 HTML 书写顺序执行</strong>，而是哪个<strong>先下载完成，哪个先执行</strong>。</li>
+<li>可能会打断 HTML 解析，导致不稳定的 DOM 操作。</li>
+</ul>
+<h4 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a><strong>适用场景</strong></h4><ul>
+<li><strong>适用于不依赖 DOM、不会影响其他脚本的独立功能</strong>（如统计代码、广告加载、第三方 SDK）。</li>
+</ul>
+<hr>
+<h3 id="4-document-write-的特殊情况"><a href="#4-document-write-的特殊情况" class="headerlink" title="4. document.write() 的特殊情况"></a><strong>4. <code>document.write()</code> 的特殊情况</strong></h3><p>如果 <code>&lt;script&gt;</code> 内使用 <code>document.write()</code>，会<strong>直接往 HTML 流中插入内容</strong>，影响 HTML 解析。</p>
+<h4 id="示例-8"><a href="#示例-8" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;p&gt;This is inserted by JavaScript.&lt;/p&gt;&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="运行逻辑-2"><a href="#运行逻辑-2" class="headerlink" title="运行逻辑"></a><strong>运行逻辑</strong></h5><ol>
+<li><strong>HTML 解析到 <code>&lt;script&gt;</code> 时，暂停解析</strong>。</li>
+<li>**执行 <code>document.write()</code>**，立即向页面插入 HTML 内容。</li>
+<li><strong>插入的内容被解析并渲染</strong>，然后继续解析 HTML。</li>
+</ol>
+<p><strong>⚠️ 注意：</strong></p>
+<ul>
+<li>在 <strong>页面加载完成后（比如在 <code>setTimeout</code> 里）使用 <code>document.write()</code></strong> 会清空整个页面：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;This will erase everything!&quot;</span>);</span><br><span class="line">&#125;, <span class="number">2000</span>);</span><br></pre></td></tr></table></figure></li>
+<li>**现代开发不推荐 <code>document.write()</code>**，更好的方式是 <code>innerHTML</code> 或 <code>appendChild()</code>。</li>
+</ul>
+<hr>
+<h3 id="5-放在-还是-？"><a href="#5-放在-还是-？" class="headerlink" title="5. &lt;script&gt; 放在 &lt;head&gt; 还是 &lt;body&gt;？"></a><strong>5. <code>&lt;script&gt;</code> 放在 <code>&lt;head&gt;</code> 还是 <code>&lt;body&gt;</code>？</strong></h3><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>&lt;head&gt;</code> 内部</strong></td>
+<td>脚本可能会阻塞 HTML 解析，影响页面加载速度。</td>
+</tr>
+<tr>
+<td><strong><code>&lt;/body&gt;</code> 之前</strong></td>
+<td>推荐方式，先解析 HTML，最后加载 JS，提高性能。</td>
+</tr>
+<tr>
+<td><strong><code>defer</code> + <code>&lt;head&gt;</code></strong></td>
+<td>推荐用于外部 JS，HTML 解析完成后再执行，不会影响渲染。</td>
+</tr>
+<tr>
+<td><strong><code>async</code> + <code>&lt;head&gt;</code></strong></td>
+<td>适用于独立脚本，可能会影响执行顺序。</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="6-总结-2"><a href="#6-总结-2" class="headerlink" title="6. 总结"></a><strong>6. 总结</strong></h3><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>HTML 解析</th>
+<th>执行顺序</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>普通 <code>&lt;script&gt;</code></strong></td>
+<td><strong>阻塞</strong></td>
+<td>按 HTML 书写顺序执行</td>
+<td>适用于少量简单 JS</td>
+</tr>
+<tr>
+<td><strong><code>defer</code></strong></td>
+<td><strong>不阻塞</strong></td>
+<td>按 HTML 书写顺序，等 HTML 解析完成后执行</td>
+<td><strong>推荐方式</strong>，适用于外部 JS</td>
+</tr>
+<tr>
+<td><strong><code>async</code></strong></td>
+<td><strong>不阻塞</strong></td>
+<td><strong>下载完成后立即执行，顺序不固定</strong></td>
+<td>适用于独立脚本（如广告、统计代码）</td>
+</tr>
+<tr>
+<td><strong><code>document.write()</code></strong></td>
+<td><strong>阻塞</strong></td>
+<td>直接插入 HTML</td>
+<td><strong>不推荐</strong>，可能影响性能</td>
+</tr>
+</tbody></table>
+<h4 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a><strong>最佳实践</strong></h4><p>✅ <strong>推荐方式</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">defer</span> <span class="attr">src</span>=<span class="string">&quot;main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>🚫 <strong>避免直接在 <code>&lt;head&gt;</code> 里写 <code>&lt;script&gt;</code>（没有 <code>defer</code> 或 <code>async</code>）</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> <span class="comment">&lt;!-- 可能会阻塞 HTML 解析 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="总结一句话"><a href="#总结一句话" class="headerlink" title="总结一句话"></a><strong>总结一句话</strong></h4><p>如果你的脚本<strong>依赖 HTML 结构</strong>（如 DOM 操作），推荐 <strong><code>defer</code><strong>；如果你的脚本</strong>独立运行</strong>，可以使用 **<code>async</code>**。🚀</p>
+<h2 id="提问-14-请解析const-resultDiv-document-getElementById-result-resultDiv-textContent-nums1-nums1-join-‘-‘-m-m-涉及的div相关操作与-。"><a href="#提问-14-请解析const-resultDiv-document-getElementById-result-resultDiv-textContent-nums1-nums1-join-‘-‘-m-m-涉及的div相关操作与-。" class="headerlink" title="提问 14 请解析const resultDiv = document.getElementById(&#39;result&#39;);  resultDiv.textContent = nums1: ${nums1.join(‘, ‘)}, m:${m};涉及的div相关操作与${}。"></a>提问 14 请解析<code>const resultDiv = document.getElementById(&#39;result&#39;);  resultDiv.textContent = </code>nums1: ${nums1.join(‘, ‘)}, m:${m}<code>;</code>涉及的div相关操作与${}。</h2><p>这段代码涉及 <strong>DOM 操作</strong> 和 <strong>模板字符串（<code>template literals</code>）</strong>，我们分别解析它们的工作原理。</p>
+<hr>
+<h3 id="1-DOM-操作解析"><a href="#1-DOM-操作解析" class="headerlink" title="1. DOM 操作解析"></a><strong>1. DOM 操作解析</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> resultDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="document-getElementById-id"><a href="#document-getElementById-id" class="headerlink" title="document.getElementById(id)"></a><strong><code>document.getElementById(id)</code></strong></h4><ul>
+<li><strong>作用</strong>：获取 <strong><code>id</code> 为 <code>&#39;result&#39;</code> 的 DOM 元素</strong>，返回一个 <code>HTMLElement</code> 对象。</li>
+<li><strong>参数</strong>：<code>id</code>（字符串）—— 要查找的元素的 <code>id</code>。</li>
+<li><strong>返回值</strong>：匹配的 <strong>HTML 元素对象</strong>，如果找不到返回 <code>null</code>。</li>
+</ul>
+<h4 id="示例-9"><a href="#示例-9" class="headerlink" title="示例"></a><strong>示例</strong></h4><p>假设 HTML 结构如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> resultDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(resultDiv); <span class="comment">// &lt;div id=&quot;result&quot;&gt;&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里 <code>resultDiv</code> <strong>存储了对 <code>&lt;div id=&quot;result&quot;&gt;</code> 元素的引用</strong>，我们可以通过它修改内容。</p>
+<hr>
+<h3 id="2-textContent-修改元素内容"><a href="#2-textContent-修改元素内容" class="headerlink" title="2. textContent 修改元素内容"></a><strong>2. <code>textContent</code> 修改元素内容</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">resultDiv.<span class="property">textContent</span> = <span class="string">`nums1: <span class="subst">$&#123;nums1.join(<span class="string">&#x27;, &#x27;</span>)&#125;</span>, m:<span class="subst">$&#123;m&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="element-textContent"><a href="#element-textContent" class="headerlink" title="element.textContent"></a><strong><code>element.textContent</code></strong></h4><ul>
+<li><strong>作用</strong>：用于设置或获取 HTML 元素的<strong>文本内容</strong>，不会解析 HTML 标签。</li>
+<li><strong>特点</strong>：<ul>
+<li><code>textContent</code> <strong>只处理纯文本，不解析 HTML</strong>。</li>
+<li>如果元素内有 <strong>子元素</strong>，使用 <code>textContent</code> 会 <strong>移除所有子元素</strong>，替换成纯文本。</li>
+</ul>
+</li>
+</ul>
+<h4 id="示例-10"><a href="#示例-10" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span>Old Text<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>).<span class="property">textContent</span> = <span class="string">&quot;&lt;b&gt;New Text&lt;/b&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>最终：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span><span class="symbol">&amp;lt;</span>b<span class="symbol">&amp;gt;</span>New Text<span class="symbol">&amp;lt;</span>/b<span class="symbol">&amp;gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>  <span class="comment">&lt;!-- 纯文本，不解析HTML --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="与-innerHTML-的区别"><a href="#与-innerHTML-的区别" class="headerlink" title="与 innerHTML 的区别"></a><strong>与 <code>innerHTML</code> 的区别</strong></h5><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">resultDiv.<span class="property">innerHTML</span> = <span class="string">&quot;&lt;b&gt;New Text&lt;/b&gt;&quot;</span>;  <span class="comment">// 解析HTML</span></span><br></pre></td></tr></table></figure>
+<p>最终：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">b</span>&gt;</span>New Text<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>  <span class="comment">&lt;!-- 解析HTML并显示加粗 --&gt;</span></span><br></pre></td></tr></table></figure>
+<p>✅ <strong><code>textContent</code> 推荐用于纯文本，<code>innerHTML</code> 适用于动态 HTML 插入</strong>。</p>
+<hr>
+<h3 id="3-模板字符串（Template-Literals）"><a href="#3-模板字符串（Template-Literals）" class="headerlink" title="3. 模板字符串（Template Literals）"></a><strong>3. 模板字符串（Template Literals）</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">`nums1: <span class="subst">$&#123;nums1.join(<span class="string">&#x27;, &#x27;</span>)&#125;</span>, m:<span class="subst">$&#123;m&#125;</span>`</span></span><br></pre></td></tr></table></figure>
+<h4 id="模板字符串（反引号-）"><a href="#模板字符串（反引号-）" class="headerlink" title="模板字符串（反引号 ``）"></a><strong>模板字符串（反引号 <code>``</code>）</strong></h4><ul>
+<li><strong>作用</strong>：允许在字符串中嵌入变量和表达式，增强可读性。</li>
+<li><strong>语法</strong>：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="string">`文本 <span class="subst">$&#123;变量&#125;</span> 其他文本`</span></span><br></pre></td></tr></table></figure></li>
+<li><strong><code>$&#123;&#125;</code> 语法</strong>：<ul>
+<li><strong>插入变量</strong>：<code>$&#123;变量名&#125;</code></li>
+<li><strong>插入表达式</strong>：<code>$&#123;表达式&#125;</code>，如 <code>nums1.join(&#39;, &#39;)</code></li>
+<li><strong>支持多行字符串</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="示例-11"><a href="#示例-11" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&quot;Alice&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hello, <span class="subst">$&#123;name&#125;</span>!`</span>);  <span class="comment">// &quot;Hello, Alice!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Sum: <span class="subst">$&#123;a + b&#125;</span>`</span>);    <span class="comment">// &quot;Sum: 30&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="nums1-join-解析"><a href="#nums1-join-解析" class="headerlink" title="nums1.join(&#39;, &#39;) 解析"></a><strong><code>nums1.join(&#39;, &#39;)</code> 解析</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">nums1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(nums1.<span class="title function_">join</span>(<span class="string">&#x27;, &#x27;</span>)); <span class="comment">// &quot;1, 2, 3&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><code>join(&#39;, &#39;)</code></strong> 把 <code>nums1</code> 数组转换成 <strong>以 <code>, </code> 分隔的字符串</strong>，方便显示。</li>
+</ul>
+<h4 id="完整示例-1"><a href="#完整示例-1" class="headerlink" title="完整示例"></a><strong>完整示例</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> nums1 = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>];</span><br><span class="line"><span class="keyword">let</span> m = <span class="number">3</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>).<span class="property">textContent</span> = <span class="string">`nums1: <span class="subst">$&#123;nums1.join(<span class="string">&#x27;, &#x27;</span>)&#125;</span>, m:<span class="subst">$&#123;m&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+<p>HTML：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最终渲染：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span>nums1: 10, 20, 30, m:3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-代码整体解析"><a href="#4-代码整体解析" class="headerlink" title="4. 代码整体解析"></a><strong>4. 代码整体解析</strong></h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> resultDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>); </span><br><span class="line">resultDiv.<span class="property">textContent</span> = <span class="string">`nums1: <span class="subst">$&#123;nums1.join(<span class="string">&#x27;, &#x27;</span>)&#125;</span>, m:<span class="subst">$&#123;m&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>执行流程</strong></p>
+<ol>
+<li><code>document.getElementById(&#39;result&#39;)</code> 获取 <code>id=&quot;result&quot;</code> 的 <code>&lt;div&gt;</code> 元素。</li>
+<li><code>resultDiv.textContent = ...</code> 修改 <code>&lt;div&gt;</code> 的文本内容：<ul>
+<li><code>nums1.join(&#39;, &#39;)</code> 转换数组为字符串。</li>
+<li><code>m</code> 直接插入。</li>
+<li><strong>模板字符串</strong> 拼接并赋值。</li>
+</ul>
+</li>
+</ol>
+<p><strong>最终效果</strong></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span>nums1: 10, 20, 30, m:3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-进一步优化-1"><a href="#5-进一步优化-1" class="headerlink" title="5. 进一步优化"></a><strong>5. 进一步优化</strong></h3><h4 id="如果-resultDiv-可能不存在"><a href="#如果-resultDiv-可能不存在" class="headerlink" title="如果 resultDiv 可能不存在"></a><strong>如果 <code>resultDiv</code> 可能不存在</strong></h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> resultDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (resultDiv) &#123;</span><br><span class="line">    resultDiv.<span class="property">textContent</span> = <span class="string">`nums1: <span class="subst">$&#123;nums1.join(<span class="string">&#x27;, &#x27;</span>)&#125;</span>, m:<span class="subst">$&#123;m&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样<strong>避免 <code>getElementById</code> 返回 <code>null</code> 时报错</strong>。</p>
+<hr>
+<h3 id="6-总结-3"><a href="#6-总结-3" class="headerlink" title="6. 总结"></a><strong>6. 总结</strong></h3><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>document.getElementById(id)</code></td>
+<td>获取 <code>id</code> 对应的 HTML 元素</td>
+</tr>
+<tr>
+<td><code>element.textContent</code></td>
+<td>设置&#x2F;获取元素的纯文本内容（不会解析 HTML）</td>
+</tr>
+<tr>
+<td><code>element.innerHTML</code></td>
+<td>设置&#x2F;获取元素的 HTML 内容（会解析 HTML）</td>
+</tr>
+<tr>
+<td><code>`Text $&#123;变量&#125;`</code></td>
+<td><strong>模板字符串</strong>，支持变量插值和表达式</td>
+</tr>
+<tr>
+<td><code>join(&#39;, &#39;)</code></td>
+<td>把数组转换成以 <code>, </code> 分隔的字符串</td>
+</tr>
+</tbody></table>
+<p><strong>最佳实践</strong></p>
+<ul>
+<li><strong>使用 <code>textContent</code> 代替 <code>innerHTML</code>，防止 XSS 攻击</strong>。</li>
+<li><strong>使用模板字符串 (&#96;&#96;&#96;&#96;) 让字符串拼接更清晰</strong>。</li>
+<li><strong>先 <code>getElementById()</code>，再检查 <code>null</code> 以避免报错</strong>。</li>
+</ul>
+<p>💡 <strong>这样，代码更安全、更高效、更易读！🚀</strong></p>
+<h2 id="提问15-XSS-攻击是什么？-如果-resultDiv-可能不存在，document-getElementById-‘result’-的返回值会是什么？"><a href="#提问15-XSS-攻击是什么？-如果-resultDiv-可能不存在，document-getElementById-‘result’-的返回值会是什么？" class="headerlink" title="提问15 XSS 攻击是什么？ 如果 resultDiv 可能不存在，document.getElementById(‘result’)的返回值会是什么？"></a>提问15 XSS 攻击是什么？ 如果 resultDiv 可能不存在，document.getElementById(‘result’)的返回值会是什么？</h2><h3 id="1-什么是-XSS-攻击？（跨站脚本攻击-Cross-Site-Scripting）"><a href="#1-什么是-XSS-攻击？（跨站脚本攻击-Cross-Site-Scripting）" class="headerlink" title="1. 什么是 XSS 攻击？（跨站脚本攻击 - Cross-Site Scripting）"></a><strong>1. 什么是 XSS 攻击？（跨站脚本攻击 - Cross-Site Scripting）</strong></h3><p><strong>XSS（Cross-Site Scripting）攻击</strong>是一种<strong>注入恶意脚本</strong>的安全漏洞，攻击者利用 XSS <strong>在网页中执行恶意 JavaScript 代码</strong>，从而窃取用户数据、篡改页面内容或执行其他恶意操作。</p>
+<h4 id="XSS-攻击的分类"><a href="#XSS-攻击的分类" class="headerlink" title="XSS 攻击的分类"></a><strong>XSS 攻击的分类</strong></h4><ol>
+<li><p><strong>存储型（Stored XSS）</strong>  </p>
+<ul>
+<li>恶意代码被存入数据库，每次用户访问页面时都会执行。</li>
+<li>例如，在评论系统中提交一条包含 <code>&lt;script&gt;alert(&#39;XSS!&#39;)&lt;/script&gt;</code> 的评论，所有查看该评论的用户都会弹出提示框。</li>
+</ul>
+</li>
+<li><p><strong>反射型（Reflected XSS）</strong>  </p>
+<ul>
+<li>恶意代码作为<strong>请求参数</strong>传输，并在网页中原样返回。</li>
+<li>例如，攻击者诱导用户访问 <code>https://example.com?q=&lt;script&gt;alert(&#39;Hacked&#39;)&lt;/script&gt;</code>，如果服务器直接在 HTML 里插入 <code>q</code> 的值，就会执行恶意脚本。</li>
+</ul>
+</li>
+<li><p><strong>DOM 型（DOM-based XSS）</strong>  </p>
+<ul>
+<li>发生在浏览器端，攻击者利用 JavaScript 修改 DOM，使页面执行恶意代码。</li>
+<li>例如：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(<span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">search</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">innerHTML</span> = params.<span class="title function_">get</span>(<span class="string">&#x27;msg&#x27;</span>); <span class="comment">// 如果 msg= &lt;script&gt;alert(1)&lt;/script&gt;，会执行恶意代码</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h4 id="如何防御-XSS？"><a href="#如何防御-XSS？" class="headerlink" title="如何防御 XSS？"></a><strong>如何防御 XSS？</strong></h4><p>✅ <strong>安全做法</strong></p>
+<ul>
+<li>**使用 <code>textContent</code> 代替 <code>innerHTML</code>**，防止注入 HTML 代码：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">resultDiv.<span class="property">textContent</span> = <span class="string">`&lt;b&gt;Safe&lt;/b&gt;`</span>;  <span class="comment">// 显示 &quot;&lt;b&gt;Safe&lt;/b&gt;&quot; 纯文本，而不会加粗</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>转义用户输入（服务器端防护）</strong><ul>
+<li><strong>存储前</strong>：<code>&lt;script&gt;</code> 转义成 <code>&amp;lt;script&amp;gt;</code>，让浏览器不会执行。</li>
+<li><strong>输出时</strong>：使用 <code>escape()</code> 或 <code>sanitize-html</code> 处理用户输入。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-document-getElementById-result-如果找不到元素会返回什么？"><a href="#2-document-getElementById-result-如果找不到元素会返回什么？" class="headerlink" title="2. document.getElementById(&#39;result&#39;) 如果找不到元素会返回什么？"></a><strong>2. <code>document.getElementById(&#39;result&#39;)</code> 如果找不到元素会返回什么？</strong></h3><p>如果 <code>id=&quot;result&quot;</code> 的元素不存在，<code>document.getElementById(&#39;result&#39;)</code> **会返回 <code>null</code>**，而不会报错。</p>
+<h4 id="示例-12"><a href="#示例-12" class="headerlink" title="示例"></a><strong>示例</strong></h4><p>假设 HTML 里<strong>没有</strong> <code>&lt;div id=&quot;result&quot;&gt;&lt;/div&gt;</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> resultDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(resultDiv); <span class="comment">// 输出 null</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="如何避免报错？"><a href="#如何避免报错？" class="headerlink" title="如何避免报错？"></a><strong>如何避免报错？</strong></h4><p>如果 <code>resultDiv</code> 为 <code>null</code>，直接访问 <code>resultDiv.textContent</code> 会报错：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ❌ 直接操作可能报错：Cannot set properties of null</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>).<span class="property">textContent</span> = <span class="string">&quot;Hello&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>✅ <strong>正确方式（先检查 <code>null</code>）</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> resultDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;result&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (resultDiv) &#123;</span><br><span class="line">    resultDiv.<span class="property">textContent</span> = <span class="string">&quot;Hello, safe update!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样可以<strong>避免操作 <code>null</code> 导致的 JavaScript 运行错误</strong>。</p>
+<hr>
+<h3 id="3-关键点总结"><a href="#3-关键点总结" class="headerlink" title="3. 关键点总结"></a><strong>3. 关键点总结</strong></h3><table>
+<thead>
+<tr>
+<th>主题</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>XSS 攻击</strong></td>
+<td>恶意 JavaScript 代码被插入页面，窃取数据或破坏网站</td>
+</tr>
+<tr>
+<td><strong>XSS 防御</strong></td>
+<td><strong>使用 <code>textContent</code>，避免 <code>innerHTML</code> 直接插入不受信任的内容</strong></td>
+</tr>
+<tr>
+<td><strong><code>document.getElementById()</code></strong></td>
+<td><strong>如果找不到元素，会返回 <code>null</code>，不会报错</strong></td>
+</tr>
+<tr>
+<td><strong>防止 <code>null</code> 错误</strong></td>
+<td><strong>在操作前检查 <code>if (resultDiv) &#123;&#125;</code></strong></td>
+</tr>
+</tbody></table>
+<p>✨ <strong>记住：<code>textContent</code> 让你安全，<code>null</code> 先检查避免崩溃！🚀</strong></p>
+<h2 id="提问16-标签一般在什么情况下使用？标签有哪些type？"><a href="#提问16-标签一般在什么情况下使用？标签有哪些type？" class="headerlink" title="提问16 &lt;label&gt;标签一般在什么情况下使用？&lt;input&gt;标签有哪些type？"></a>提问16 <code>&lt;label&gt;</code>标签一般在什么情况下使用？<code>&lt;input&gt;</code>标签有哪些type？</h2><h3 id="1-标签的使用场景"><a href="#1-标签的使用场景" class="headerlink" title="1. &lt;label&gt; 标签的使用场景"></a><strong>1. <code>&lt;label&gt;</code> 标签的使用场景</strong></h3><p><code>&lt;label&gt;</code> 标签用于<strong>为表单控件（如 <code>&lt;input&gt;</code>）提供可点击的文本</strong>，增强用户体验和可访问性（Accessibility）。</p>
+<h4 id="主要作用"><a href="#主要作用" class="headerlink" title="主要作用"></a><strong>主要作用</strong></h4><p>✅ <strong>点击 <code>&lt;label&gt;</code> 让相关 <code>&lt;input&gt;</code> 获得焦点</strong><br>✅ <strong>提升无障碍访问（屏幕阅读器支持）</strong><br>✅ <strong>增强表单可用性</strong></p>
+<h4 id="两种正确的用法"><a href="#两种正确的用法" class="headerlink" title="两种正确的用法"></a><strong>两种正确的用法</strong></h4><h5 id="（1）使用-for-关联-id"><a href="#（1）使用-for-关联-id" class="headerlink" title="（1）使用 for 关联 id"></a><strong>（1）使用 <code>for</code> 关联 <code>id</code></strong></h5><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;username&quot;</span>&gt;</span>用户名：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;username&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>for=&quot;username&quot;</code> 关联 <code>id=&quot;username&quot;</code> 的输入框，点击“用户名”时，光标会进入输入框。</li>
+</ul>
+<h5 id="（2）直接包裹-input"><a href="#（2）直接包裹-input" class="headerlink" title="（2）直接包裹 input"></a><strong>（2）直接包裹 <code>input</code></strong></h5><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;agree&quot;</span>&gt;</span> 我同意条款</span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>点击整个文本和复选框都能触发选择</strong>，更方便用户操作。</li>
+</ul>
+<h4 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a><strong>适用场景</strong></h4><ul>
+<li><strong>文本输入框</strong>：用户名、密码、邮箱等。</li>
+<li><strong>单选按钮（radio）和复选框（checkbox）</strong>：增强点击区域，提高可用性。</li>
+<li><strong>提升可访问性</strong>：屏幕阅读器更容易识别表单控件。</li>
+</ul>
+<hr>
+<h3 id="2-标签的-type-属性"><a href="#2-标签的-type-属性" class="headerlink" title="2. &lt;input&gt; 标签的 type 属性"></a><strong>2. <code>&lt;input&gt;</code> 标签的 <code>type</code> 属性</strong></h3><p><code>&lt;input&gt;</code> 标签是 HTML 表单的核心元素，<code>type</code> 属性决定了输入控件的行为和样式。</p>
+<h4 id="常见-type-类型"><a href="#常见-type-类型" class="headerlink" title="常见 type 类型"></a><strong>常见 <code>type</code> 类型</strong></h4><table>
+<thead>
+<tr>
+<th><code>type</code> 值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>text</code></strong></td>
+<td>单行文本输入框</td>
+</tr>
+<tr>
+<td><strong><code>password</code></strong></td>
+<td>隐藏输入内容（如密码）</td>
+</tr>
+<tr>
+<td><strong><code>email</code></strong></td>
+<td>电子邮件地址（验证格式）</td>
+</tr>
+<tr>
+<td><strong><code>number</code></strong></td>
+<td>只能输入数字（带增减按钮）</td>
+</tr>
+<tr>
+<td><strong><code>tel</code></strong></td>
+<td>电话号码输入</td>
+</tr>
+<tr>
+<td><strong><code>url</code></strong></td>
+<td>网址输入（需符合 URL 格式）</td>
+</tr>
+<tr>
+<td><strong><code>search</code></strong></td>
+<td>搜索框（可能带清除按钮）</td>
+</tr>
+</tbody></table>
+<h4 id="选择类"><a href="#选择类" class="headerlink" title="选择类"></a><strong>选择类</strong></h4><table>
+<thead>
+<tr>
+<th><code>type</code> 值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>radio</code></strong></td>
+<td>单选按钮（多个选项中选一个）</td>
+</tr>
+<tr>
+<td><strong><code>checkbox</code></strong></td>
+<td>复选框（可多选）</td>
+</tr>
+<tr>
+<td><strong><code>select</code>（下拉框）</strong></td>
+<td>不是 <code>input</code> 但也用于选择</td>
+</tr>
+</tbody></table>
+<h4 id="日期-时间"><a href="#日期-时间" class="headerlink" title="日期 &amp; 时间"></a><strong>日期 &amp; 时间</strong></h4><table>
+<thead>
+<tr>
+<th><code>type</code> 值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>date</code></strong></td>
+<td>选择日期（YYYY-MM-DD）</td>
+</tr>
+<tr>
+<td><strong><code>time</code></strong></td>
+<td>选择时间（HH:MM）</td>
+</tr>
+<tr>
+<td><strong><code>datetime-local</code></strong></td>
+<td>日期 + 时间（无时区）</td>
+</tr>
+<tr>
+<td><strong><code>month</code></strong></td>
+<td>选择月份</td>
+</tr>
+<tr>
+<td><strong><code>week</code></strong></td>
+<td>选择周</td>
+</tr>
+</tbody></table>
+<h4 id="按钮-文件上传"><a href="#按钮-文件上传" class="headerlink" title="按钮 &amp; 文件上传"></a><strong>按钮 &amp; 文件上传</strong></h4><table>
+<thead>
+<tr>
+<th><code>type</code> 值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>submit</code></strong></td>
+<td>提交表单</td>
+</tr>
+<tr>
+<td><strong><code>reset</code></strong></td>
+<td>重置表单</td>
+</tr>
+<tr>
+<td><strong><code>button</code></strong></td>
+<td>普通按钮（无默认行为）</td>
+</tr>
+<tr>
+<td><strong><code>file</code></strong></td>
+<td>选择文件上传</td>
+</tr>
+<tr>
+<td><strong><code>image</code></strong></td>
+<td>作为提交按钮的图片</td>
+</tr>
+</tbody></table>
+<h4 id="特殊输入"><a href="#特殊输入" class="headerlink" title="特殊输入"></a><strong>特殊输入</strong></h4><table>
+<thead>
+<tr>
+<th><code>type</code> 值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>color</code></strong></td>
+<td>颜色选择器</td>
+</tr>
+<tr>
+<td><strong><code>range</code></strong></td>
+<td>滑动条选择数值</td>
+</tr>
+<tr>
+<td><strong><code>hidden</code></strong></td>
+<td>隐藏字段，不显示在页面上</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-综合示例"><a href="#3-综合示例" class="headerlink" title="3. 综合示例"></a><strong>3. 综合示例</strong></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;email&quot;</span>&gt;</span>邮箱：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">id</span>=<span class="string">&quot;email&quot;</span> <span class="attr">name</span>=<span class="string">&quot;email&quot;</span> <span class="attr">required</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;subscribe&quot;</span>&gt;</span> 订阅新闻</span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;color&quot;</span>&gt;</span>选择颜色：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;color&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="4-重点总结"><a href="#4-重点总结" class="headerlink" title="4. 重点总结"></a><strong>4. 重点总结</strong></h3><p>✅ <strong><code>&lt;label&gt;</code> 让表单更易用，使用 <code>for=&quot;id&quot;</code> 关联或包裹 <code>input</code></strong><br>✅ <strong><code>input</code> 的 <code>type</code> 决定输入行为，如 <code>text</code>、<code>password</code>、<code>email</code>、<code>date</code> 等</strong><br>✅ <strong>推荐使用 <code>required</code>、<code>pattern</code> 等属性，提升表单体验</strong>  </p>
+<p>🔹 <strong>正确使用 <code>&lt;label&gt;</code> 和 <code>&lt;input&gt;</code> 可以提高用户体验和无障碍支持！ 🚀</strong></p>
+<h2 id="提问17-订阅新闻-中的name是什么字段？"><a href="#提问17-订阅新闻-中的name是什么字段？" class="headerlink" title="提问17   订阅新闻 中的name是什么字段？"></a>提问17  <input type="checkbox" name="subscribe"> 订阅新闻 中的name是什么字段？</h2><p>在 <code>&lt;input type=&quot;checkbox&quot; name=&quot;subscribe&quot;&gt;</code> 这段代码中，<code>name=&quot;subscribe&quot;</code> 代表的是 <strong>表单字段的名称（name 属性）</strong>，它的作用如下：  </p>
+<hr>
+<h3 id="1-name-属性的作用"><a href="#1-name-属性的作用" class="headerlink" title="1. name 属性的作用"></a><strong>1. <code>name</code> 属性的作用</strong></h3><ol>
+<li><p><strong>用于表单提交时标识数据</strong>  </p>
+<ul>
+<li>当用户提交表单时，表单会将 <code>name</code> 作为 <strong>键（Key）</strong>，将用户选择的值作为 <strong>值（Value）</strong>，一起发送到服务器。  </li>
+<li>例如：<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/subscribe&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;subscribe&quot;</span> <span class="attr">value</span>=<span class="string">&quot;yes&quot;</span>&gt;</span> 订阅新闻</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>如果勾选了复选框，提交的数据为：</strong><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">subscribe=yes</span><br></pre></td></tr></table></figure></li>
+<li><strong>如果没有勾选，提交时不会包含 <code>subscribe</code> 这个字段</strong>。</li>
+</ul>
+</li>
+<li><p><strong>在 JavaScript 中获取复选框值</strong></p>
+<ul>
+<li><code>name</code> 可以用作 JavaScript 访问和操作表单字段的标识符：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> checkbox = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;input[name=&quot;subscribe&quot;]&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(checkbox.<span class="property">checked</span>); <span class="comment">// true（选中） or false（未选中）</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>多个复选框共享同一个 <code>name</code></strong></p>
+<ul>
+<li>如果多个复选框 **有相同的 <code>name</code>**，并且都被选中，提交时会以数组的形式传输：<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;reading&quot;</span>&gt;</span> 阅读</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sports&quot;</span>&gt;</span> 运动</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">value</span>=<span class="string">&quot;music&quot;</span>&gt;</span> 音乐</span><br></pre></td></tr></table></figure></li>
+<li>**如果用户勾选了”阅读”和”运动”**，提交的数据可能会是：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hobby=reading&amp;hobby=sports</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="2-name-vs-id-的区别"><a href="#2-name-vs-id-的区别" class="headerlink" title="2. name vs id 的区别"></a><strong>2. <code>name</code> vs <code>id</code> 的区别</strong></h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+<th>作用范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td><strong>用于表单数据提交</strong>，服务器识别</td>
+<td><strong>表单提交时传递数据</strong></td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><strong>用于唯一标识 HTML 元素</strong>，供 CSS 和 JS 选择</td>
+<td><strong>仅在当前 HTML 文档内有效</strong></td>
+</tr>
+</tbody></table>
+<h4 id="示例-13"><a href="#示例-13" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;subscribe&quot;</span>&gt;</span>订阅新闻<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;subscribe&quot;</span> <span class="attr">name</span>=<span class="string">&quot;subscribe&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>for=&quot;subscribe&quot;</code> 绑定 <code>id=&quot;subscribe&quot;</code>，使用户可以点击文本来勾选复选框。</li>
+<li><code>name=&quot;subscribe&quot;</code> 用于表单提交。</li>
+</ul>
+<hr>
+<h3 id="3-重点总结"><a href="#3-重点总结" class="headerlink" title="3. 重点总结"></a><strong>3. 重点总结</strong></h3><p>✅ <code>name</code> <strong>用于表单提交</strong>，服务器会通过它来接收数据。<br>✅ **复选框未选中时，不会提交 <code>name</code>**，避免数据冗余。<br>✅ <strong>多个复选框可以共享相同 <code>name</code>，以数组形式提交多个值</strong>。<br>✅ <code>name</code> 和 <code>id</code> <strong>不要混用</strong>，<code>id</code> 主要用于 CSS&#x2F;JS，<code>name</code> 用于提交数据。  </p>
+<p>💡 <strong>如果复选框没有 <code>name</code>，即使勾选了，也不会在表单提交时传输！</strong> 🚀</p>
+]]></content>
+      <categories>
+        <category>major</category>
+      </categories>
+      <tags>
+        <tag>study</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>250303前端复健记录</title>
+    <url>/2025/03/03/250303%E5%89%8D%E7%AB%AF%E5%A4%8D%E5%81%A5%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="前端板块（html-css-javascript，以及用javascript写算法题）"><a href="#前端板块（html-css-javascript，以及用javascript写算法题）" class="headerlink" title="前端板块（html+css+javascript，以及用javascript写算法题）"></a>前端板块（html+css+javascript，以及用javascript写算法题）</h1><p>前言：<br>复健！目标还是训练出能够从零开始写代码的能力（当然还是从vscode的<code>!+Enter</code>产生出的基本内容为基础~）。<br>说明：个人一年多前较系统地学习过web前端三件套，因此结合实际条件，笔记输出是个人理解+AI辅助，AI生成内容如果与已有理解相符，不额外进行确认。若要保证正确性，请自行通过附录中的回答原文评估。涉及到AI生成相关内容，会以<code>(附录-提问Id)</code>的形式提及。</p>
+<p>先从kimi生成出的代码的照搬入手，从html-&gt;js-&gt;css的方向重温代码结构与作用的理解。<br>（这部分更加生疏也会解释地更加详细。另外，个人理念是，掌握好会的，以项目为基础，因此本身会存在知识体系的盲区，请辩证看待）</p>
+<p>知识补充：（附录-提问01）<br>    注释：HTML注释使用 <code>&lt;!--</code> 和 <code>--&gt;</code> 包裹；CSS注释使用 <code>/*</code> 和 <code>*/</code> 包裹；JS单行注释以 <code>//</code> 开头；JS多行注释以 <code>/*</code> 开头，以 <code>*/</code> 结尾。</p>
+<p>在“照搬”过程中，发现一件趣事：生成的网页自动居中，但是没有找到<code>text-align</code>的相关样式。尝试通过逐步补充css样式，确认到底是什么原因触发了居中。<br><img style="display:block" src="/2025/03/03/250303%E5%89%8D%E7%AB%AF%E5%A4%8D%E5%81%A5%E8%AE%B0%E5%BD%95/001居中显示情况.png" alt="001居中显示情况"><br>在调试样式的过程中，我发现我对页面呈现出的“居中”效果描述有误。它实际上是<code>.container&#123;max-width: 600px; margin: 0 auto;&#125;</code>样式下，在1382px×762px的窗口大小下，<code>block</code>元素的位置居中。实际上，文本之类的显示还是默认的<code>text-align: left;</code>。</p>
+<p>知识补充：（附录-提问02）<br>    - <code>margin: 0 auto;</code> 是以下属性的简写：<br>    <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">margin-top</span>: <span class="number">0</span>;</span><br><span class="line"><span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line"><span class="attribute">margin-left</span>: auto;</span><br><span class="line"><span class="attribute">margin-right</span>: auto;</span><br></pre></td></tr></table></figure><br>    - <code>auto</code> 值会让浏览器自动计算左右外边距，使元素在其父容器中水平居中。<br>    - 要使 <code>margin: 0 auto;</code> 生效，元素必须满足以下条件：<br>        - 元素必须是<strong>块级元素</strong>（默认宽度为父容器的 100%）<br>        - 元素必须有<strong>明确的宽度</strong>，如果元素的宽度是 <code>auto</code>（默认值），它会占据父容器的整个宽度<br>        - 父容器必须有<strong>足够的空间</strong>，父容器的宽度必须大于元素的宽度，否则元素无法居中。（相关：附录-提问04）</p>
+<p>我个人温习的思路是：先实现html部分元素与css之间样式的联动，之后再进行html与js之间的联动，调试JavaScirpt的具体逻辑。<br>对于题目（001），截取其数组<code>[]</code>内的部分输入文本框中。先只考虑<code>nums1</code>与<code>m</code>两个元素。进行一个截取<code>nums1</code>中前<code>m</code>个元素的子功能测试。（这里用到JavaScript 的对数组的 slice() 方法）</p>
+<ul>
+<li><input disabled type="checkbox"> map函数的详细应用</li>
+</ul>
+]]></content>
+      <categories>
+        <category>major</category>
+      </categories>
+      <tags>
+        <tag>study</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>250303算法复健记录</title>
+    <url>/2025/03/03/250303%E7%AE%97%E6%B3%95%E5%A4%8D%E5%81%A5%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>前言：<br>借助AI工具，代码能力有所下降。<br>面向就业，查考“纯手写代码”能力。<br>因此，复健！</p>
+<p>基本目标：对任何题目，必须完整完成输入、输出的代码编写。（点名LeetCode这一“纵容偷懒”的网站）<br>与此同时，记录基本的，可复用的代码结构。</p>
+<hr>
+<h2 id="001-88-合并两个有序数组-from-LeetCode"><a href="#001-88-合并两个有序数组-from-LeetCode" class="headerlink" title="001.88. 合并两个有序数组 from LeetCode"></a>001.<a href="https://leetcode.cn/problems/merge-sorted-array/description" target="_blank">88. 合并两个有序数组 from LeetCode</a></h2><p>具体题解请查看网页。这是一道很简单的题目。<br>主要是手写处理输入输出的部分。<br>对于向量，存储类型为<code>vector&lt;TYPE&gt;</code>，输入形式是<code>[1,2,3]</code>。这对输入处理提出了要求。<br>由于各元素并不是<code>&quot; &quot; &quot;\n&quot;</code>这种友好的分隔，因此不能只用到<code>cin</code>了，我立即想到了处理单个元素的<code>getchar()</code>方法。<br>个人代码风格，估计自己肯定一遍写不出正确代码，因此在初次写代码过程中就写了些debug用的调试代码。<br>由于打算做一系列LeetCode的题目，输入部分必定要复用，因此vector指定类型时用到了TYPE，这样复用时修改TYPE的define就行。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;type_traits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TYPE int</span></span><br><span class="line"><span class="type">bool</span> debug_flag  = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">get_int_from_char</span><span class="params">(<span class="type">char</span>&amp; c)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> num = <span class="built_in">int</span>(c) - (<span class="type">int</span>)<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	<span class="keyword">while</span> ((c = <span class="built_in">getchar</span>()) != <span class="string">&#x27;,&#x27;</span> &amp;&amp; c != <span class="string">&#x27; &#x27;</span> &amp;&amp; c!=<span class="string">&#x27;]&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (debug_flag) cout &lt;&lt;<span class="string">&quot;In get_int_from_char:&quot;</span>&lt;&lt;c;</span><br><span class="line">		num *= <span class="number">10</span>;</span><br><span class="line">		num += <span class="built_in">int</span>(c) - (<span class="type">int</span>)<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;In get_int_from_char, num is :&quot;</span> &lt;&lt; num &lt;&lt; endl;;</span><br><span class="line">	<span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getVector</span><span class="params">(vector&lt;TYPE&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 假定[是左界，]是右界，元素内分隔用&#x27;,&#x27;或&#x27; &#x27;。即[1 , 2 , 3]的形式</span></span><br><span class="line">	<span class="type">char</span> c = <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	<span class="keyword">while</span> (c == <span class="string">&#x27;\n&#x27;</span> || c==<span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">		c = <span class="built_in">getchar</span>();</span><br><span class="line">		<span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;In getVector First filter:&quot;</span> &lt;&lt; c &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (debug_flag &amp;&amp; c != <span class="string">&#x27;[&#x27;</span>) &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Error in function getVector: get unexpected input:&quot;</span> &lt;&lt; c &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (c != <span class="string">&#x27;]&#x27;</span> &amp;&amp; (c = <span class="built_in">getchar</span>()) != <span class="string">&#x27;]&#x27;</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">&#x27;,&#x27;</span> || c == <span class="string">&#x27; &#x27;</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span> (is_same&lt;TYPE, <span class="type">int</span>&gt;::value) &#123;</span><br><span class="line">			<span class="keyword">if</span> (debug_flag) &#123;</span><br><span class="line">				cout &lt;&lt; <span class="string">&quot;TYPE is int!&quot;</span> &lt;&lt; endl;</span><br><span class="line">			&#125;</span><br><span class="line">			vec.<span class="built_in">push_back</span>( <span class="built_in">get_int_from_char</span>(c) );</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cout_Vector</span><span class="params">(vector&lt;TYPE&gt;&amp; vec)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;Enter function cout_vector&quot;</span> &lt;&lt; endl;</span><br><span class="line">	vector&lt;TYPE&gt;::iterator iter = vec.<span class="built_in">begin</span>();</span><br><span class="line">	<span class="keyword">for</span> (; iter != vec.<span class="built_in">end</span>(); iter++) &#123;</span><br><span class="line">		cout &lt;&lt; *iter &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>知识补充：（内容选自KIMI.AI生成的内容，应用时最好自行查找文章印证）<br>在C++中，#define 是预处理器指令，用于简单的文本替换。#define 的作用是在预处理阶段将代码中的 TYPE 替换为 int，而不会保留任何关于 TYPE 的类型信息。<br>在C++中，std::vector 的迭代器需要通过成员函数（如 begin() 或 end()）来获取。示例：<code>std::vector&lt;TYPE&gt;::iterator iter = vec.begin();</code><br><code>&lt;type_traits&gt;</code> 是 C++ 标准库中的一个头文件，它提供了一组模板类和函数，用于在编译时检查和操作类型的各种属性。这些功能通常被称为“类型特征”（Type Traits），它们在模板编程、元编程以及需要类型检查或类型转换的场景中非常有用。对几个基本元素进行判断的示例如下：<br>    std::is_integral<T>::value; &#x2F;&#x2F; 检查 T 是否为整数类型<br>    std::is_floating_point<T>::value; &#x2F;&#x2F; 检查 T 是否为浮点类型<br>    std::is_class<T>::value; &#x2F;&#x2F; 检查 T 是否为类类型<br>这里也用到类型关系检查的方法，类型关系检查用法示例如下：<br>    std::is_same&lt;T1, T2&gt;::value; &#x2F;&#x2F; 检查 T1 和 T2 是否为同一类型<br>    std::is_convertible&lt;T1, T2&gt;::value; &#x2F;&#x2F; 检查 T1 是否可以隐式转换为 T2<br>    std::is_base_of&lt;Base, Derived&gt;::value; &#x2F;&#x2F; 检查 Base 是否为 Derived 的基类<br><type_traits>的所有类型特征的检查都在编译时完成，不会引入运行时开销</type_traits></T></T></T></p>
+<h2 id="002-55-跳跃游戏-from-LeetCode"><a href="#002-55-跳跃游戏-from-LeetCode" class="headerlink" title="002.55. 跳跃游戏 from LeetCode"></a>002.<a href="https://leetcode.cn/problems/jump-game/description" target="_blank">55. 跳跃游戏 from LeetCode</a></h2><p>也是很基础的题目。题目解释看网页。<br>没有额外说明。</p>
+<h2 id="003-42-接雨水-from-LeetCode"><a href="#003-42-接雨水-from-LeetCode" class="headerlink" title="003.42. 接雨水 from LeetCode"></a>003.<a href="https://leetcode.cn/problems/trapping-rain-water" target="_blank">42. 接雨水 from LeetCode</a></h2><p>这道题被LeetCode定为困难，的确需要一些分析思考。分析思考写注释里了。<br>我的输入函数依然可以复用。（另开文件就重新写一遍了）<br>展示一下思路，顺带展示一下调用的方法（要实际运行，需要把上面的那段头文件include+辅助函数定义也加入）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution42</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">trap</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 看起来是找边界的题目。如果非严格递增或递减，就会有“坑”积水</span></span><br><span class="line">		<span class="comment">// 该水平坐标积水还是看左右侧的各自最大值（记为left right），取二者间的较小值减去该水平坐标柱子高度</span></span><br><span class="line">		<span class="comment">// 要知道left right,两次遍历一定能成；思考能否只遍历一次</span></span><br><span class="line">		<span class="comment">// 可以先记录左右两侧最大边界，往中间移动，只要始终移动边界高度较小的一方，就能实时计算水平坐标处的积水值。</span></span><br><span class="line">		<span class="type">int</span> r_index = height.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">		<span class="type">int</span> l_index = <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> r_height = height[r_index];</span><br><span class="line">		<span class="type">int</span> l_height = height[l_index];</span><br><span class="line">		<span class="type">int</span> total = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span> (l_index &lt; r_index<span class="number">-1</span>) &#123;<span class="comment">// index表示该下标已经被计算过了，判断后不能继续++or--，即二者相邻时就得停止了</span></span><br><span class="line">			<span class="keyword">if</span> (l_height &lt; r_height) &#123;<span class="comment">// 左边界向右移动；且左边界“较低”，即=min(left,right)</span></span><br><span class="line">				l_index++;</span><br><span class="line">				<span class="keyword">if</span> (height[l_index] &lt; l_height) </span><br><span class="line">				&#123;total += l_height - height[l_index];&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123;l_height = height[l_index];&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;<span class="comment">// 右边界向左移动；且右边界“较低”，即=min(left,right)</span></span><br><span class="line">				r_index--;</span><br><span class="line">				<span class="keyword">if</span> (height[r_index] &lt; r_height)</span><br><span class="line">				&#123;total += r_height - height[r_index];&#125;</span><br><span class="line">				<span class="keyword">else</span> &#123; r_height = height[r_index]; &#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> total;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">check</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;Solution42 output is:&quot;</span> &lt;&lt; num &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 42. 接雨水 from LeetCode</span></span><br><span class="line">	vector&lt;<span class="type">int</span>&gt; arr1;</span><br><span class="line">	<span class="built_in">getVector</span>(arr1);</span><br><span class="line">	Solution42 solution;</span><br><span class="line">	solution.<span class="built_in">check</span>(solution.<span class="built_in">trap</span>(arr1));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="004-151-反转字符串中的单词-from-LeetCode"><a href="#004-151-反转字符串中的单词-from-LeetCode" class="headerlink" title="004.151. 反转字符串中的单词 from LeetCode"></a>004.<a href="https://leetcode.cn/problems/reverse-words-in-a-string" target="_blank">151. 反转字符串中的单词 from LeetCode</a></h2><p>挑了个字符串的题目。看上去可以只用string库的方法完成。练练字符串的处理。这是一道很经典的题目。<br>输入是string类型，因此include<code>&lt;string&gt;</code>，虽然cin可以输入到string类型中，但cin会以空格与换行符为分隔，无法输入含空格的完整输入。搜索后，发现需要使用getline()方法。</p>
+<p>知识补充：（Deepseek AI生成的内容，实际应用请自行核实真伪，验证真实可以告知作者）<br><code>std::getline</code> 是 C++ 标准库中的一个函数，用于从输入流中读取一行文本。它通常用于从文件或标准输入（如键盘）中读取字符串，直到遇到换行符或指定的分隔符。<br>std::string line; &#x2F;&#x2F; line的定义<br>&#x2F;&#x2F; 从标准输入读取一行<br>std::getline(std::cin, line);<br>&#x2F;&#x2F; 从标准输入读取，直到遇到逗号<br>std::getline(std::cin, line, ‘,’);<br>打开 <code>example.txt</code> 文件，并逐行读取文件内容，直到文件结束<br>std::ifstream file(“example.txt”);<br>std::string line;<br>if (file.is_open()) {<br>    while (std::getline(file, line)) {<br>        std::cout &lt;&lt; line &lt;&lt; std::endl;<br>    }<br>    file.close();<br>}<br>如果要输入到char数组中，而非string中：<br>const int bufferSize &#x3D; 100; &#x2F;&#x2F; 定义缓冲区大小<br>char buffer[bufferSize];    &#x2F;&#x2F; 定义一个 char 数组<br>std::cout &lt;&lt; “Enter a line of text: “;<br>std::cin.getline(buffer, bufferSize); &#x2F;&#x2F; 读取一行到 char 数组</p>
+<p>事实证明，字符串处理这方法，我确实是“眼高手低，’文杂’倒一”（后半句是高中时他人的调侃）。倒是必须通过实际应用才能重建对字符串处理方法的理解。<br>我思索过后，决定添加“要在string进行原地操作”的额外限制。不引入外部数据结构。<br>在string上进行原地操作，最主要还是得想到“reverse两次就是原单词”的思路。<code>string对象</code>的<code>reverse()</code>方法需要通过<code>&lt;algorithm&gt;</code>导入，在面试场景下得ban掉。因此要自己实现一个<code>reverse()</code>方法。<br>另外，随机访问string，有<code>str.at(pos)</code>和<code>str[pos]</code>两种主要方法；另外有通过<code>str.begin()</code>与<code>str.end()</code>的迭代器访问方法。这里暂时忽略迭代器方法。<br>了解怎么访问后，实现还是比较简单的。</p>
+<h3 id="reverse方法的自定义实现"><a href="#reverse方法的自定义实现" class="headerlink" title="reverse方法的自定义实现"></a>reverse方法的自定义实现</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">reverse_a_word</span><span class="params">(string&amp; s, <span class="type">int</span> l_index, <span class="type">int</span> r_index)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 注：处理下标为闭区间[l_index,r_index]</span></span><br><span class="line">	<span class="comment">//bool debug_flag = false;</span></span><br><span class="line">	<span class="type">char</span> temp = <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	<span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;In sulution151 reverse_a_word. string s, l_index,r_index are:&quot;</span> &lt;&lt; s &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; l_index &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; r_index &lt;&lt; endl;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>; l+r &lt; r_index-l_index; l++, r++) &#123;</span><br><span class="line">		temp = s.<span class="built_in">at</span>(l_index+l);</span><br><span class="line">		s.<span class="built_in">at</span>(l_index + l) = s.<span class="built_in">at</span>(r_index - r);</span><br><span class="line">		s.<span class="built_in">at</span>(r_index - r) = temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="初版代码：原地完成，主要使用find和reverse"><a href="#初版代码：原地完成，主要使用find和reverse" class="headerlink" title="初版代码：原地完成，主要使用find和reverse"></a>初版代码：原地完成，主要使用find和reverse</h3><p>直接考虑到主要使用find和reverse，缓慢地写出并修改出了以下代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">string <span class="title">reverseWords</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 查找空格的位置；</span></span><br><span class="line">	<span class="comment">// 确定待处理区间的闭区间下标(l_flame r_flame)</span></span><br><span class="line">	<span class="comment">//看题解，突然想到，不如reverse+find？reverse不能用，但也可以自己写</span></span><br><span class="line">	<span class="type">int</span> l_flame = <span class="number">-1</span>;<span class="comment">//记录最左侧空格的合法位置</span></span><br><span class="line">	<span class="type">int</span> r_flame = s.<span class="built_in">size</span>();<span class="comment">//确认待处理最大下标（闭区间）</span></span><br><span class="line">	<span class="keyword">while</span> (r_flame&gt;<span class="number">0</span> &amp;&amp; s[r_flame - <span class="number">1</span>] == <span class="string">&#x27; &#x27;</span>) &#123; s.<span class="built_in">erase</span>(r_flame - <span class="number">1</span>, <span class="number">1</span>); r_flame--; &#125;</span><br><span class="line">	<span class="type">int</span> space_index = <span class="number">0</span>;</span><br><span class="line">	<span class="type">bool</span> debug_flag = <span class="literal">false</span>;</span><br><span class="line">	<span class="keyword">while</span> (l_flame + <span class="number">1</span> &lt;r_flame) &#123;</span><br><span class="line">		<span class="comment">// 执行过程中，如果find返回了string::npos，space_index被赋值为-1，(space_index == string::npos)能正常运行。</span></span><br><span class="line">		<span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;Now l_flame is:&quot;</span> &lt;&lt; l_flame &lt;&lt; <span class="string">&quot; r_flame is:&quot;</span> &lt;&lt; r_flame &lt;&lt; endl;</span><br><span class="line">		space_index = s.<span class="built_in">find</span>(<span class="string">&#x27; &#x27;</span>, (l_flame+<span class="number">1</span>));</span><br><span class="line">		<span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;Now space_index is:&quot;</span> &lt;&lt; space_index &lt;&lt; <span class="string">&quot;find return:&quot;</span>&lt;&lt; s.<span class="built_in">find</span>(<span class="string">&#x27; &#x27;</span>, l_flame + <span class="number">1</span>)&lt;&lt;endl;</span><br><span class="line">		<span class="comment">//如果没有空格，不用处理，返回原字符串; 在 C++ 中，string::npos 是一个常量，表示 size_t 类型的最大值;这里假定length不超过size_t</span></span><br><span class="line">		<span class="keyword">if</span> (space_index == string::npos) &#123; </span><br><span class="line">			<span class="keyword">if</span> (debug_flag) cout&lt;&lt; <span class="string">&quot;Enter checkpoint&quot;</span> &lt;&lt; endl; </span><br><span class="line">			space_index = r_flame;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (space_index == l_flame + <span class="number">1</span>) &#123; <span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;Enter checkpoint2 space_index:|&quot;</span> &lt;&lt;space_index &lt;&lt; <span class="string">&quot;|&quot;</span> &lt;&lt; endl;  s.<span class="built_in">erase</span>(space_index, <span class="number">1</span>); r_flame--; <span class="keyword">if</span> (debug_flag) cout &lt;&lt;<span class="string">&quot;checkpoint3:|&quot;</span> &lt;&lt; s &lt;&lt;<span class="string">&quot;|&quot;</span> &lt;&lt; endl; <span class="keyword">continue</span>; &#125;</span><br><span class="line">		<span class="built_in">reverse_a_word</span>(s, l_flame+<span class="number">1</span> ,space_index<span class="number">-1</span>);</span><br><span class="line">		l_flame = space_index;</span><br><span class="line">		<span class="keyword">if</span> (debug_flag) cout &lt;&lt; <span class="string">&quot;Checkpoint2 Now l_flame is:&quot;</span> &lt;&lt; l_flame &lt;&lt; <span class="string">&quot; r_flame is:&quot;</span> &lt;&lt; r_flame &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (r_flame == <span class="number">0</span>) <span class="keyword">return</span> s;</span><br><span class="line">	<span class="built_in">reverse_a_word</span>(s, <span class="number">0</span>, r_flame<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个代码的执行用时3ms，在LeetCode的排名中算是慢的。find与erase的实现逻辑概括如下：（内容源于KIMI AI生成，请自行辨别）</p>
+<h3 id="1-std-string-find-的实现原理"><a href="#1-std-string-find-的实现原理" class="headerlink" title="1. std::string::find 的实现原理"></a>1. <code>std::string::find</code> 的实现原理</h3><p><code>std::string::find</code> 用于在字符串中查找指定的字符或子串，并返回其首次出现的位置。它的实现基于简单的线性搜索算法。</p>
+<h4 id="实现细节："><a href="#实现细节：" class="headerlink" title="实现细节："></a>实现细节：</h4><ol>
+<li><strong>线性搜索</strong>：从指定的起始位置 <code>pos</code> 开始，逐个字符地比较，直到找到匹配的子串或字符。</li>
+<li><strong>返回值</strong>：如果找到匹配的子串，返回其起始位置；如果未找到，则返回 <code>std::string::npos</code>。</li>
+<li><strong>时间复杂度</strong>：最坏情况下为 **O(n)**，其中 n 是字符串的长度。</li>
+</ol>
+<h3 id="2-std-string-erase-的实现原理"><a href="#2-std-string-erase-的实现原理" class="headerlink" title="2. std::string::erase 的实现原理"></a>2. <code>std::string::erase</code> 的实现原理</h3><p><code>std::string::erase</code> 用于删除字符串中从指定位置开始的若干字符。它的实现基于内存移动操作。</p>
+<h4 id="实现细节：-1"><a href="#实现细节：-1" class="headerlink" title="实现细节："></a>实现细节：</h4><ol>
+<li><strong>内存移动</strong>：删除指定范围的字符后，需要将后续的字符向前移动，以填补删除后的空位。</li>
+<li><strong>时间复杂度</strong>：为 **O(n)**，其中 n 是字符串的长度。这是因为删除操作可能需要移动大量字符。</li>
+<li><strong>边界检查</strong>：如果指定的删除范围超出字符串的实际范围，行为是未定义的。</li>
+</ol>
+<h3 id="进一步的优化"><a href="#进一步的优化" class="headerlink" title="进一步的优化"></a>进一步的优化</h3><p>在上面这段代码中，多次调用了find与erase，重复地在内存中进行搜索与移动。对于find，在这个问题中，其实单次遍历就可以获得所有需要的信息。对于erase，由于最后输出的字符串可能需要裁剪，因此必定要使用，但要尽可能降低使用次数。<br>基于这些思考，我继续对已有代码进行优化：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">string <span class="title">reverseWords</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 改进版本01. 先颠倒字符，再颠倒整个字符</span></span><br><span class="line">	<span class="comment">//int s_len = s.size();</span></span><br><span class="line">	<span class="comment">//int left = -1;</span></span><br><span class="line">	<span class="comment">//for (int i = 0; i &lt; s_len;) &#123;</span></span><br><span class="line">	<span class="comment">//	if (s[i] == &#x27; &#x27;) &#123;</span></span><br><span class="line">	<span class="comment">//		if (i - left &lt;= 1) &#123; s.erase(i, 1); s_len--; continue; &#125;</span></span><br><span class="line">	<span class="comment">//		else &#123;</span></span><br><span class="line">	<span class="comment">//			reverse_a_word(s, left+1, i-1);</span></span><br><span class="line">	<span class="comment">//			left = i;</span></span><br><span class="line">	<span class="comment">//		&#125;</span></span><br><span class="line">	<span class="comment">//	&#125;</span></span><br><span class="line">	<span class="comment">//	i++;</span></span><br><span class="line">	<span class="comment">//&#125;// 注：如果最后右边有（一个）空格，单词全会正确颠倒，需删掉该空格</span></span><br><span class="line">	<span class="comment">//// 如果没有，最后一个单词并不会被颠倒，需要补充颠倒</span></span><br><span class="line">	<span class="comment">//if (s_len == 0) return s;</span></span><br><span class="line">	<span class="comment">//if (left == s_len - 1) &#123; s.erase(left, 1); s_len--; &#125;</span></span><br><span class="line">	<span class="comment">//else reverse_a_word(s, left + 1, s_len - 1);</span></span><br><span class="line">	<span class="comment">//reverse_a_word(s, 0, s_len - 1);</span></span><br><span class="line">	<span class="comment">//return s;</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 改进版本02. 先反转整个字符串，再针对字符进行颠倒。本质上一样，但改为只用一次erase。</span></span><br><span class="line">	<span class="type">int</span> s_len = s.<span class="built_in">size</span>();</span><br><span class="line">	<span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">reverse_a_word</span>(s, <span class="number">0</span>, s_len - <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s_len; i++) &#123;<span class="comment">// 空格全部跳过，完成一个单词后在单词后添加空格，最后删掉最后一个空格</span></span><br><span class="line">		<span class="keyword">if</span>(s[i]==<span class="string">&#x27; &#x27;</span>)&#123;<span class="comment">//是空格</span></span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="type">int</span> begin = index;</span><br><span class="line">			<span class="keyword">while</span> (s[i] != <span class="string">&#x27; &#x27;</span> &amp;&amp; i &lt; s_len) &#123;</span><br><span class="line">				s[index++] = s[i++];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">reverse_a_word</span>(s, begin, index - <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span> (i != s_len) s[index++] = <span class="string">&#x27; &#x27;</span>;<span class="comment">//添加空格 移动index</span></span><br><span class="line">			<span class="keyword">else</span> index++;<span class="comment">// 不添加空格，但也移动index</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 考虑只有一个单词，没有任何空格的极端情况</span></span><br><span class="line">	<span class="comment">//if (index-1 != s_len &amp;&amp; index!=0) &#123; s.erase(index-1); &#125;</span></span><br><span class="line">	<span class="comment">//else &#123; s.erase(index - 1);&#125;</span></span><br><span class="line">	<span class="keyword">if</span>(index!=<span class="number">0</span>) &#123; s.<span class="built_in">erase</span>(index - <span class="number">1</span>); &#125;</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="c-string（字符串）处理-知识补充"><a href="#c-string（字符串）处理-知识补充" class="headerlink" title="c++ string（字符串）处理 知识补充"></a>c++ string（字符串）处理 知识补充</h3><p><a href="https://blog.csdn.net/wmy0217_/article/details/104069492">https://blog.csdn.net/wmy0217_/article/details/104069492</a><br>erase的基本用法<br>pos为下标<br><code>erase(pos)</code>删除pos及之后的所有内容<br><code>erase(pos,len)</code>从pos开始删除len个内容，若超过字符串实际范围，会自动将其视为到pos到字符串末尾的长度。二者均没返回值。<br>如果是迭代器，<code>iterator erase(iterator pos);</code>会删除该位置字符，并返回指向下一个有效字符的迭代器。<br><code>iterator erase(iterator first, iterator last);</code>左闭右开，返回指向删除范围之后的第一个有效字符的迭代器。例如<code>string::iterator it = s.erase(s.begin() + 1, s.end() - 1);</code>会返回指向最后一个字符的迭代器。</p>
+<p>find的基本用法（c为char类型字符）<br>寻找字符：函数定义为：<code>find(char c, std::size_t pos = 0)</code><br><code>find(c,pos)</code>，从pos开始寻找与c匹配的字符，找不到返回<code>std::string::npos</code>（一个特殊的常量，表示 <code>std::size_t</code> 的最大值）</p>
+<p>（额外知识补充：）string的迭代器</p>
+<hr>
+<h1 id="Javascript版本"><a href="#Javascript版本" class="headerlink" title="Javascript版本"></a>Javascript版本</h1><h2 id="001-88-合并两个有序数组-from-LeetCode-1"><a href="#001-88-合并两个有序数组-from-LeetCode-1" class="headerlink" title="001.88. 合并两个有序数组 from LeetCode"></a>001.<a href="https://leetcode.cn/problems/merge-sorted-array/description" target="_blank">88. 合并两个有序数组 from LeetCode</a></h2>]]></content>
       <categories>
         <category>major</category>
       </categories>
