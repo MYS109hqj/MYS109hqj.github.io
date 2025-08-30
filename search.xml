@@ -2024,123 +2024,324 @@ function SetCwinHeight(){
       </tags>
   </entry>
   <entry>
-    <title>异世界慢生活——大型活动——拉斐尔的舞台活动攻略</title>
-    <url>/2025/08/09/%E5%BC%82%E4%B8%96%E7%95%8C%E6%85%A2%E7%94%9F%E6%B4%BB%E2%80%94%E2%80%94%E5%A4%A7%E5%9E%8B%E6%B4%BB%E5%8A%A8%E2%80%94%E2%80%94%E6%8B%89%E6%96%90%E5%B0%94%E7%9A%84%E8%88%9E%E5%8F%B0%E6%B4%BB%E5%8A%A8%E6%94%BB%E7%95%A5/</url>
-    <content><![CDATA[<h1 id="异世界慢生活——大型活动——拉斐尔的舞台"><a href="#异世界慢生活——大型活动——拉斐尔的舞台" class="headerlink" title="异世界慢生活——大型活动——拉斐尔的舞台"></a>异世界慢生活——大型活动——拉斐尔的舞台</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>异世界慢生活是手机端上的一款休闲类的经营游戏。玩家的终极目标是不断提升村庄收益，让村庄更加繁荣。游戏中存在钓鱼、魔法农庄、餐馆、寻宝等服务于村庄收益的丰富玩法，也存在本服冲榜、跨服冲榜以及大型活动等，在与其它争夺名次的同时争取更好的奖励。</p>
+    <title>250830微小项目阅读笔记-子博客wemark项目</title>
+    <url>/2025/08/30/250830%E5%BE%AE%E5%B0%8F%E9%A1%B9%E7%9B%AE%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-%E5%AD%90%E5%8D%9A%E5%AE%A2wemark%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<blockquote>
+<p>markdown是目前AI输出的主流格式，在前端应用中接入AI，需要考虑将文本格式的md转为可视化更强的html。而md-to-html可以将markdown类型渲染为html展示。</p>
 </blockquote>
-<hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="一、活动介绍"><a href="#一、活动介绍" class="headerlink" title="一、活动介绍"></a>一、活动介绍</h3><p>拉斐尔的舞台是游戏中的一个<strong>限时大型活动</strong>，每期活动<strong>历时一周</strong>。与其他大型活动轮流开启。</p>
-<p>该活动<strong>不依赖于伙伴实力</strong>，玩法为“<strong>布局粉丝-使用应援道具（可选）-消耗体力应援-获得热度吸引新粉丝</strong>”。活动奖励分为<strong>四部分</strong>：一是使用演出中获得的硬币进行扭蛋抽奖；二是在演出中达到指定热度等级领取相应奖励；三是消耗足量的体力获得对应额度的体力消耗奖励；四是与其它玩家进行最高演出热度与最多消耗体力的冲榜。</p>
-<p>本篇攻略<strong>主要聚焦第三个奖励渠道</strong>，即“<strong>消耗足量的体力获得对应额度的体力消耗奖励</strong>”。</p>
-<h3 id="二、具体攻略"><a href="#二、具体攻略" class="headerlink" title="二、具体攻略"></a>二、具体攻略</h3><h4 id="（1）体力规划"><a href="#（1）体力规划" class="headerlink" title="（1）体力规划"></a>（1）体力规划</h4><h5 id="1-体力消耗奖励分布"><a href="#1-体力消耗奖励分布" class="headerlink" title="1.体力消耗奖励分布"></a>1.体力消耗奖励分布</h5><p>体力消耗奖励中，最为重要的是UR角色的碎片。根据消耗额度不同，可以逐级获得奖励。这里只列举出三个常见挡位。</p>
-<table>
-<thead>
-<tr>
-<th align="center">角色碎片数量</th>
-<th align="center">需要消耗体力数</th>
-<th align="center">该挡位累计获得碎片总数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">3</td>
-<td align="center">450</td>
-<td align="center">6</td>
-</tr>
-<tr>
-<td align="center">7</td>
-<td align="center">950</td>
-<td align="center">13</td>
-</tr>
-<tr>
-<td align="center">10</td>
-<td align="center">1700</td>
-<td align="center">23</td>
-</tr>
-</tbody></table>
-<h5 id="2-体力卡购买策略"><a href="#2-体力卡购买策略" class="headerlink" title="2.体力卡购买策略"></a>2.体力卡购买策略</h5><p><strong>2.1 免费体力数</strong></p>
-<p>活动实际游玩时间为5天12个小时，从第二天的10:00开始，第七天的22:00结束。</p>
-<p>在第一次进入活动时，默认有80体力（自然恢复上限为80）。体力每20分钟恢复1点。如果在第二天的10:20前消耗体力，并保证活动期间体力不溢出，则总计可以获得475点体力。</p>
-<p><strong>2.2体力卡购买挡位</strong></p>
-<p>在不考虑氪金购买的情况下，体力卡购买共有三档，每档每天都能购买三次：</p>
-<table>
-<thead>
-<tr>
-<th align="center">体力卡数量</th>
-<th align="center">水晶定价</th>
-<th align="center">单天可购买获得数量</th>
-<th align="center">单天买满消耗水晶</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">4</td>
-<td align="center">188</td>
-<td align="center">12</td>
-<td align="center">564</td>
-</tr>
-<tr>
-<td align="center">8</td>
-<td align="center">988</td>
-<td align="center">24</td>
-<td align="center">2964</td>
-</tr>
-<tr>
-<td align="center">12</td>
-<td align="center">1988</td>
-<td align="center">36</td>
-<td align="center">5964</td>
-</tr>
-</tbody></table>
-<p><strong>2.3体力卡的购买策略</strong></p>
-<p>单张体力卡可以<strong>提供5点体力</strong>，<strong>本段内容假设消耗的免费体力数为470</strong>。对标三档体力消耗奖励，<strong>在优先购买188水晶挡位</strong>，其次购买988挡位的情况下，<strong>须购买体力卡数量与水晶花费如下</strong>：</p>
-<p>（注：活动历时一周，第一天虽然无法游玩，但是仍可以购买体力卡）</p>
-<table>
-<thead>
-<tr>
-<th align="center">目标消耗体力数</th>
-<th align="center">188档购买次数</th>
-<th align="center">988档购买次数</th>
-<th align="center">1988档购买次数</th>
-<th align="center">总计消耗水晶数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">450</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0（无需购买体力卡）</td>
-</tr>
-<tr>
-<td align="center">950</td>
-<td align="center">21</td>
-<td align="center">2</td>
-<td align="center">0</td>
-<td align="center">5924</td>
-</tr>
-<tr>
-<td align="center">1700</td>
-<td align="center">21</td>
-<td align="center">21</td>
-<td align="center">0</td>
-<td align="center">24696</td>
-</tr>
-</tbody></table>
-<h4 id="（2）游戏技巧"><a href="#（2）游戏技巧" class="headerlink" title="（2）游戏技巧"></a>（2）游戏技巧</h4><h5 id="1-活动玩法技巧"><a href="#1-活动玩法技巧" class="headerlink" title="1.活动玩法技巧"></a>1.活动玩法技巧</h5><p>同游戏内的技巧推荐。<strong>前期优先解锁空位；后期观察解锁空位所需的应援值</strong>。如果单次演出获得应援值<strong>不及解锁空位所需的八分之一</strong>，则优先“一键升级”粉丝等级；否则积累应援值，优先解锁空位。</p>
-<h5 id="2-高级体力使用策略"><a href="#2-高级体力使用策略" class="headerlink" title="2.高级体力使用策略"></a>2.高级体力使用策略</h5><p>达到20热度等级以上前，每次演出消耗1点体力；40热度等级以上前2点。如此类推到80热度等级以上，恒定消耗5点体力。<strong>一旦超过某热度等级导致单次演出消耗体力上涨，在当次活动单次演出消耗体力就不再回退。</strong></p>
-<p>单张体力卡提供的体力值是5的倍数。如果你自然恢复获得的总体力数余数不为0，<strong>仅在达到80以上热度等级</strong>前，能消耗余数。<strong>在25&#x2F;08&#x2F;08-25&#x2F;08&#x2F;14的活动中，粉丝实力保持在162.6万以下，即可停留在80热度等级（或更低）。</strong></p>
-<hr>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><blockquote>
-<p>以上攻略基于个人经验整理，如有遗漏或不同意见，欢迎在评论区交流补充。</p>
+<h1 id="微小wemark"><a href="#微小wemark" class="headerlink" title="微小wemark"></a>微小wemark</h1><h2 id="wemark解析markdown的逻辑结构"><a href="#wemark解析markdown的逻辑结构" class="headerlink" title="wemark解析markdown的逻辑结构"></a>wemark解析markdown的逻辑结构</h2><p>wemark解析markdown的逻辑结构可拆解为「<strong>解析层</strong>→<strong>转换层</strong>→<strong>渲染层</strong>」的三级处理流程，核心是将 Markdown 文本转化为小程序可识别的视图结构。</p>
+<p><strong>一、整体架构：三级处理流程</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Markdown 文本 → [解析层] → AST（抽象语法树） → [转换层] → 小程序兼容结构 → [渲染层] → 视图展示</span><br></pre></td></tr></table></figure>
+<p><strong>三层步骤的具体逻辑：</strong></p>
+<ol>
+<li><strong>解析层</strong>：将 MD 文本解析为结构化的 AST  </li>
+<li><strong>转换层</strong>：将 AST 转换为小程序特有的数据结构（适配 <code>template</code> 或 <code>rich-text</code> 组件）  </li>
+<li><strong>渲染层</strong>：通过小程序自定义组件渲染最终视图</li>
+</ol>
+<p><strong>二、核心模块与逻辑拆解</strong></p>
+<ol>
+<li>解析层：基于 <code>remarkable</code> 的语法解析<br><code>wemark</code> 依赖成熟的 Markdown 解析库 <code>remarkable</code>（位于 <code>wemark/remarkable.js</code>）完成核心语法解析，这是工程化选型的合理选择（避免重复开发复杂的语法解析器）。</li>
+</ol>
+<ul>
+<li><p><strong>核心逻辑</strong>：  </p>
+<ul>
+<li><code>remarkable</code> 会扫描输入的 MD 文本，通过正则匹配识别不同语法块（如标题 <code>#</code>、列表 <code>-</code>、代码块 &#96;&#96;&#96;、链接 <code>[]()</code> 等）。  </li>
+<li>将识别出的内容转换为 <strong>AST（抽象语法树）</strong>，每个节点包含 <code>type</code>（如 <code>heading</code>、<code>list</code>、<code>paragraph</code>）、<code>content</code>（内容）、<code>params</code>（参数，如标题级别、列表类型）等信息。</li>
+</ul>
+<p>示例 AST 结构（简化）：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;heading&#x27;</span>,</span><br><span class="line">  <span class="attr">depth</span>: <span class="number">1</span>, <span class="comment">// 对应 # 标题</span></span><br><span class="line">  <span class="attr">content</span>: <span class="string">&#x27;Hello World&#x27;</span>,</span><br><span class="line">  <span class="attr">children</span>: [&#123; <span class="attr">type</span>: <span class="string">&#x27;text&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;Hello World&#x27;</span> &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>扩展能力</strong>：<br><code>wemark</code> 在 <code>remarkable</code> 基础上扩展了小程序特有的语法处理（如图片路径转换、链接跳转适配），通过自定义 <code>renderer</code> 覆盖默认解析规则。</p>
+</li>
+</ul>
+<ol start="2">
+<li>转换层：AST 到小程序视图结构的映射<br>这是 <code>wemark</code> 针对小程序环境的核心适配层，位于 <code>wemark/wemark.js</code> 的 <code>parse</code> 方法中，负责将 AST 转换为可被小程序模板消费的数据结构。</li>
+</ol>
+<ul>
+<li><p><strong>核心逻辑</strong>：  </p>
+<ul>
+<li>递归遍历 AST 节点，根据节点 <code>type</code> 生成对应的「小程序组件描述对象」，包含：  <ul>
+<li><code>type</code>：对应模板名称（如 <code>h1</code>、<code>p</code>、<code>list</code>）；  </li>
+<li><code>attrs</code>：节点属性（如 <code>href</code>、<code>src</code>、<code>class</code>）；  </li>
+<li><code>children</code>：子节点数组（嵌套结构，如列表项包含文本）。</li>
+</ul>
+</li>
+</ul>
+<p>示例转换结果（简化）：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;h1&#x27;</span>,</span><br><span class="line">    <span class="attr">attrs</span>: &#123; <span class="attr">class</span>: <span class="string">&#x27;wemark-h1&#x27;</span> &#125;,</span><br><span class="line">    <span class="attr">children</span>: [&#123; <span class="attr">type</span>: <span class="string">&#x27;text&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;Hello World&#x27;</span> &#125;]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>关键适配处理</strong>：  </p>
+<ul>
+<li><strong>图片路径处理</strong>：将相对路径转换为小程序可识别的本地路径，或对网络图片添加 <code>mode</code> 属性适配显示。  </li>
+<li><strong>链接处理</strong>：将 <code>&lt;a&gt;</code> 标签转换为小程序 <code>navigator</code> 组件的跳转配置（通过 <code>link</code> 参数控制是否启用）。  </li>
+<li><strong>代码高亮</strong>：若开启 <code>highlight</code> 参数，会调用 <code>highlight.js</code> 对代码块进行语法着色，生成带样式的 <code>&lt;span&gt;</code> 结构。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>渲染层：基于小程序模板的视图渲染<br>最终通过 <code>wemark.wxml</code> 中的模板实现视图渲染，核心是利用小程序的 <code>&lt;template&gt;</code> 标签对不同类型的节点进行针对性渲染。</li>
+</ol>
+<ul>
+<li><p><strong>核心逻辑</strong>：  </p>
+<ul>
+<li>定义一系列模板（如 <code>tpl-h1</code>、<code>tpl-p</code>、<code>tpl-list</code>），与转换层生成的 <code>type</code> 一一对应。  </li>
+<li>通过 <code>&lt;template is=&quot;&#123;&#123;item.type&#125;&#125;&quot; data=&quot;&#123;&#123;...item&#125;&#125;&quot; /&gt;</code> 实现动态模板选择，递归渲染嵌套结构（如列表包含列表项，列表项包含文本）。</li>
+</ul>
+<p>示例模板（简化）：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 标题模板 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;tpl-h1&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;wemark-h1 &#123;&#123;item.attrs.class&#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">&quot;renderChildren&quot;</span> <span class="attr">data</span>=<span class="string">&quot;&#123;&#123;children: item.children&#125;&#125;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 递归渲染子节点 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">name</span>=<span class="string">&quot;renderChildren&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;children&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;index&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">template</span> <span class="attr">is</span>=<span class="string">&quot;&#123;&#123;item.type&#125;&#125;&quot;</span> <span class="attr">data</span>=<span class="string">&quot;&#123;&#123;...item&#125;&#125;&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>两种渲染模式</strong>：  </p>
+<ul>
+<li><code>type=&quot;wemark&quot;</code>：使用上述自定义模板渲染，支持完整功能（链接跳转、视频播放等）。  </li>
+<li><code>type=&quot;rich-text&quot;</code>：转换为小程序 <code>rich-text</code> 组件的 <code>nodes</code> 结构，利用原生组件渲染，性能较好但功能受限（如不支持视频）。</li>
+</ul>
+</li>
+</ul>
+<p><strong>三、功能性能分析</strong></p>
+<p><strong>性能局限性：</strong></p>
+<ol>
+<li>递归渲染嵌套结构（如多层列表）可能在数据量大时引发性能问题（小程序模板递归深度有限制）。  </li>
+<li>代码高亮依赖 <code>highlight.js</code>，会增加包体积，需在功能与性能间权衡。</li>
+</ol>
+<p><strong>性能优化方向</strong>：  </p>
+<ul>
+<li><strong>按需解析</strong>：仅在 <code>md</code> 数据变化时重新解析（通过组件生命周期 <code>observers</code> 监听），避免重复计算。  </li>
+<li><strong>代码高亮懒加载</strong>：<code>highlight.js</code> 体积较大，仅在开启 <code>highlight</code> 参数时加载，减少初始包体积。  </li>
+<li><strong>模板复用</strong>：通过递归模板 <code>renderChildren</code> 处理嵌套结构，避免代码冗余。</li>
+</ul>
+<h2 id="如何引用remarkable库？"><a href="#如何引用remarkable库？" class="headerlink" title="如何引用remarkable库？"></a>如何引用<code>remarkable</code>库？</h2><p>注：<code>remarkable</code>库核心参数说明</p>
+<p>初始化 <code>Remarkable</code> 时可配置的常用参数如下：</p>
+<ul>
+<li><code>html: boolean</code>：是否允许解析 HTML 标签（默认 <code>false</code>）。</li>
+<li><code>breaks: boolean</code>：是否将换行符转换为 <code>&lt;br&gt;</code>（默认 <code>false</code>）。</li>
+<li><code>linkify: boolean</code>：是否自动识别链接文本并转换为 <code>&lt;a&gt;</code> 标签（默认 <code>false</code>）。</li>
+<li><code>langPrefix: string</code>：代码块的 class 前缀（默认 <code>language-</code>），用于代码高亮。</li>
+</ul>
+<p>更多配置可参考 <a href="https://github.com/jonschlinkert/remarkable">remarkable 官方文档</a>。</p>
+<p>一、通用方式（原生 JavaScript&#x2F;Node.js 项目）</p>
+<ol>
+<li><p><strong>安装依赖</strong><br>通过 npm 或 yarn 安装 <code>remarkable</code>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install remarkable --save</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">yarn add remarkable</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在代码中引入并使用</strong>  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入 remarkable</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Remarkable</span> = <span class="built_in">require</span>(<span class="string">&#x27;remarkable&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化解析器（可配置参数，如允许 HTML、启用插件等）</span></span><br><span class="line"><span class="keyword">const</span> md = <span class="keyword">new</span> <span class="title class_">Remarkable</span>(&#123;</span><br><span class="line">  <span class="attr">html</span>: <span class="literal">true</span>,       <span class="comment">// 允许解析 HTML 标签</span></span><br><span class="line">  <span class="attr">breaks</span>: <span class="literal">true</span>,     <span class="comment">// 支持换行符转换为 &lt;br&gt;</span></span><br><span class="line">  <span class="attr">linkify</span>: <span class="literal">true</span>     <span class="comment">// 自动链接文本自动转换为链接</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析 Markdown 文本</span></span><br><span class="line"><span class="keyword">const</span> markdownText = <span class="string">&#x27;# 标题\n\n这是一段 **加粗** 的文本&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> htmlOutput = md.<span class="title function_">render</span>(markdownText);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(htmlOutput);</span><br><span class="line"><span class="comment">// 输出: &lt;h1&gt;标题&lt;/h1&gt;\n&lt;p&gt;这是一段 &lt;strong&gt;加粗&lt;/strong&gt; 的文本&lt;/p&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>二、在微信小程序项目中引用（以 <code>wemark</code> 依赖为例）<br>如果是基于 <code>wemark</code> 框架的小程序项目（如示例中 <code>wemark</code> 对 <code>remarkable</code> 的使用），操作如下：</p>
+<ol>
+<li><p><strong>拷贝文件</strong><br>将 <code>remarkable.js</code> 放入项目目录（如 <code>wemark</code> 目录下，参考 <code>wemark</code> 项目结构）。</p>
+</li>
+<li><p><strong>本地引入</strong><br>在需要解析 Markdown 的文件中直接引入本地 <code>remarkable.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例如在 parser.js 中（参考 wemark 的实现）</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Remarkable</span> = <span class="built_in">require</span>(<span class="string">&#x27;./remarkable&#x27;</span>); <span class="comment">// 路径根据实际位置调整</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化解析器</span></span><br><span class="line"><span class="keyword">const</span> parser = <span class="keyword">new</span> <span class="title class_">Remarkable</span>(&#123;</span><br><span class="line">  <span class="attr">html</span>: <span class="literal">true</span> <span class="comment">// 允许解析 HTML 标签（如视频标签）</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析 Markdown 为 tokens（供后续处理）</span></span><br><span class="line"><span class="keyword">const</span> tokens = parser.<span class="title function_">parse</span>(markdownText, &#123;&#125;);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>三、在框架项目中引用（如 Taro&#x2F;mpvue）</p>
+<ol>
+<li><p><strong>安装依赖</strong><br>同通用方式，先通过 npm 安装 <code>remarkable</code>。</p>
+</li>
+<li><p><strong>配置框架忽略编译（如 Taro）</strong><br>若框架编译时对 <code>remarkable.js</code> 处理有问题，需在配置中忽略（参考 <code>wemark</code> 对 Taro 的配置）：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Taro 项目的 config/index.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">weapp</span>: &#123;</span><br><span class="line">    <span class="attr">compile</span>: &#123;</span><br><span class="line">      <span class="attr">exclude</span>: [</span><br><span class="line">        <span class="string">&#x27;src/wemark/remarkable.js&#x27;</span> <span class="comment">// 忽略该文件的编译</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在代码中引入使用</strong><br>同通用方式，通过 <code>require</code> 或 <code>import</code> 引入后初始化解析器。</p>
+</li>
+</ol>
+<h2 id="AST简介"><a href="#AST简介" class="headerlink" title="AST简介"></a>AST简介</h2><p>AST 是 <strong>抽象语法树</strong>（Abstract Syntax Tree）的缩写，它是<strong>源代码语法结构的一种抽象表示</strong>，以树状的形式表现编程语言的语法结构。md-to-html等代码转换（babel）、代码编辑器的高亮显示 与 代码规范化（如vscode的eslint规范化检查插件和preffier代码格式化插件）都用到了AST。</p>
+<p>注：</p>
+<blockquote>
+<p>个人学习AST看的好文：<a href="https://blog.csdn.net/qq_44640313/article/details/134851322?sharetype=blog&shareId=134851322&sharerefer=APP&sharesource=weixin_73791864&sharefrom=link">【AST 技术学习 - CSDN App】</a></p>
 </blockquote>
-<hr>
-<p>作者联系信息：QQ：2646868917</p>
+<blockquote>
+<p>可视化 AST 结构网站：<a href="https://astexplorer.net/">https://astexplorer.net/</a></p>
+</blockquote>
+<p>下面这段内容也许可以帮你快速理解AST的构成与生成过程：</p>
+<p><strong>一、AST是什么</strong></p>
+<ul>
+<li><strong>AST</strong> 是 <strong>源代码经过词法分析和语法分析后生成的树形结构</strong>。</li>
+<li>它<strong>省略了源代码中与语法无关的细节</strong>（例如括号、分号、空格等），只保留程序的结构信息。</li>
+<li>每个节点代表源代码中的一个结构，比如表达式、语句、函数、变量声明等。</li>
+</ul>
+<p><strong>二、AST 的生成过程</strong></p>
+<p>源代码 → AST 的过程通常分为两个阶段：</p>
+<ol>
+<li><p><strong>词法分析（Lexical Analysis &#x2F; Tokenization）</strong></p>
+<ul>
+<li>将源代码分解成一个个有意义的“词法单元”（Token）。</li>
+<li>例如，代码 <code>let x = 10;</code> 会被分解为：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Keyword: &#x27;let&#x27;, Identifier: &#x27;x&#x27;, Operator: &#x27;=&#x27;, Number: &#x27;10&#x27;, Punctuator: &#x27;;&#x27;]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>语法分析（Syntax Analysis &#x2F; Parsing）</strong></p>
+<ul>
+<li>将 Token 流按照语言的语法规则组织成树状结构（AST）。</li>
+<li>这个阶段会检查语法是否正确（如括号是否匹配、语句是否完整）。</li>
+</ul>
+</li>
+</ol>
+<p><strong>三、一个简单的例子（JavaScript）</strong></p>
+<p>我们以这行 JavaScript 代码为例：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">1</span> + <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>它可能生成的 AST（简化版）如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Program&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;VariableDeclaration&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;let&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;declarations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;VariableDeclarator&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Identifier&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;x&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;init&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;BinaryExpression&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;operator&quot;</span><span class="punctuation">:</span> <span class="string">&quot;+&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;left&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Literal&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="number">1</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;right&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">              <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Literal&quot;</span><span class="punctuation">,</span></span><br><span class="line">              <span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="number">2</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里详细地解读一下这个 AST：</p>
+<ul>
+<li><code>Program</code>：整个程序的根节点。</li>
+<li><code>VariableDeclaration</code>：变量声明，<code>kind: &quot;let&quot;</code> 表示是 <code>let</code> 声明。</li>
+<li><code>VariableDeclarator</code>：具体的声明，<code>id</code> 是变量名 <code>x</code>，<code>init</code> 是初始化值。</li>
+<li><code>BinaryExpression</code>：二元表达式，表示 <code>1 + 2</code>。</li>
+<li><code>Literal</code>：字面量，表示常量值。</li>
+</ul>
+<p><strong>四、AST 的特点</strong></p>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>抽象性</strong></td>
+<td>忽略了源码中的具体符号（如分号、括号），只保留结构。</td>
+</tr>
+<tr>
+<td><strong>层次性</strong></td>
+<td>树形结构，父子节点体现语法的嵌套关系。</td>
+</tr>
+<tr>
+<td><strong>可遍历性</strong></td>
+<td>可以通过深度优先或广度优先遍历所有节点。</td>
+</tr>
+<tr>
+<td><strong>可修改性</strong></td>
+<td>修改 AST 节点可以实现代码转换（如 Babel 转译 ES6 → ES5）。</td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
-        <category>game</category>
+        <category>major</category>
       </categories>
       <tags>
-        <tag>game</tag>
+        <tag>study</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>250830微小项目阅读笔记</title>
+    <url>/2025/08/30/250830%E5%BE%AE%E5%B0%8F%E9%A1%B9%E7%9B%AE%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>为了丰富选择微小的架构，我从<a href="https://github.com/zxxuan0525/wechat-weapp?tab=readme-ov-file#UI%E7%BB%84%E4%BB%B6"></a>选取了若干个开源项目进行阅读，快速阅读项目结构与核心逻辑</p>
+</blockquote>
+<blockquote>
+<p>这个文档&#x2F;博客的目的是：了解其它项目使用的架构，进而个人项目的技术方案制定提供参考；帮助自己锻炼产品视角。使用豆包和通义千问辅助阅读，内容参考AI回复进行二次梳理。</p>
+</blockquote>
+<h1 id="组件库类"><a href="#组件库类" class="headerlink" title="组件库类"></a>组件库类</h1><ol>
+<li><a href="https://github.com/youzan/vant-weapp">https://github.com/youzan/vant-weapp</a><br><strong>（一）项目类型</strong>：组件库</li>
+</ol>
+<p><strong>（二）主要功能位置：</strong><br>项目的目录结构大致如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vant-weapp/</span><br><span class="line">├── docs/                  # 文档相关</span><br><span class="line">├── example/               # 示例工程</span><br><span class="line">├── lib/                   # 编译后的组件库（用于发布）</span><br><span class="line">│   ├── common/            # 公共工具和基础组件</span><br><span class="line">│   ├── definitions/       # 类型定义（.d.ts）</span><br><span class="line">│   └── [组件名]/          # 编译后的组件（如 tab、panel 等）</span><br><span class="line">├── packages/              # 源代码（组件开发目录）</span><br><span class="line">│   ├── common/            # 公共逻辑（组件基类、工具函数等）</span><br><span class="line">│   │   ├── component.ts   # VantComponent 核心封装</span><br><span class="line">│   │   └── relation.ts    # 组件间关系管理（父子组件通信）</span><br><span class="line">│   ├── [组件名]/          # 组件源码（如 tab、col、panel 等）</span><br><span class="line">│   │   ├── index.ts       # 组件逻辑</span><br><span class="line">│   │   ├── index.wxml     # 组件模板</span><br><span class="line">│   │   └── demo/          # 组件示例代码</span><br><span class="line">├── package.json           # 项目配置（依赖、脚本、版本等）</span><br><span class="line">└── README.md              # 项目说明</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>（三）亮点or没接触到的地方：</strong><br>若要新增一个组件，流程如下：</p>
+<ol>
+<li><p><strong>创建组件目录</strong><br>新增组件要放在<code>packages</code>目录下。在该目录下创建文件夹<code>my-component</code>与相关核心文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">packages/</span><br><span class="line">  my-component/</span><br><span class="line">    index.ts        # 组件逻辑（属性、方法、生命周期等）</span><br><span class="line">    index.wxml      # 组件模板</span><br><span class="line">    index.wxss      # 组件样式</span><br><span class="line">    index.json      # 组件配置（声明为自定义组件及依赖）微小</span><br><span class="line">    可能需要.wxs</span><br><span class="line">    demo/           # 组件示例（用于文档和演示）</span><br><span class="line">      index.ts</span><br><span class="line">      index.wxml</span><br><span class="line">      index.json</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置组件依赖</strong><br>在组件的 <code>index.json</code> 中声明组件信息及依赖的其他组件(如<code>van-icon</code>)</p>
+</li>
+<li><p><strong>开发环境验证</strong><br>Vant Weapp 通过 npm 脚本和构建工具（如 rsbuild、vant-cli）实现打包，相关脚本可以在<code>package.json</code>中的”scirpts”处查看：如<code>npm run lint</code>：进行代码规范校验。<br>新增组件后，可先在示例工程中引入组件进行调试：</p>
+<ul>
+<li>在 <code>example/pages</code> 中创建示例页面，或在现有页面的 <code>json</code> 中引入组件：<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;usingComponents&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;van-my-component&quot;</span><span class="punctuation">:</span> <span class="string">&quot;../../packages/my-component/index&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>运行开发命令实时编译：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm run dev  <span class="comment"># 监听文件变化，实时生成开发版本</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>正式构建</strong><br>确认组件无误后，执行构建命令生成发布版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 构建组件库（输出到 dist/ 和 lib/ 目录）</span></span><br><span class="line">npm run build:lib</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看构建成果</strong><br>构建后会生成以下目录及文件，用于发布和使用：<br><strong><code>dist/</code> 目录</strong>存放 ES6 版本的组件，保留完整的模块化结构，适用于支持 ES6 模块的环境。<br><strong><code>lib/</code> 目录</strong> 存放 ES5 版本的组件，通过 Babel 转译，兼容更低版本的小程序基础库。<br><strong>类型定义文件(TypeScript 类型定义文件<code>.d.ts</code>)</strong> 存放于 <code>lib/definitions/</code> 或组件目录中,它在构建过程中自动生成，存放于 <code>lib/definitions/</code> 或组件目录中，支持类型提示。</p>
+</li>
+</ol>
+<p>构建成果最终会通过 <code>npm publish</code> 发布到 npm 仓库（包名 <code>@vant/weapp</code>），开发者可通过 npm 安装使用新增组件。</p>
+<p><strong>（四）功能性能分析</strong></p>
+<ol start="2">
+<li><a href="https://github.com/TooBug/wemark">https://github.com/TooBug/wemark</a><br><strong>（一）项目类型</strong>：微小的markdown-to-html组件</li>
+</ol>
+<p><strong>（二）主要功能位置：</strong><br><strong>（三）亮点or没接触到的地方：</strong><br><strong>（四）功能性能分析</strong></p>
+<ul>
+<li><a href="../250830%E5%BE%AE%E5%B0%8F%E9%A1%B9%E7%9B%AE%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-%E5%AD%90%E5%8D%9A%E5%AE%A2wemark%E9%A1%B9%E7%9B%AE">于子文档中查看</a></li>
+</ul>
+<h1 id="项目demo类"><a href="#项目demo类" class="headerlink" title="项目demo类"></a>项目demo类</h1><ol>
+<li><a href="https://github.com/RebeccaHanjw/weapp-wechat-zhihu">https://github.com/RebeccaHanjw/weapp-wechat-zhihu</a></li>
+</ol>
+<p><strong>（一）项目类型</strong>：类似知乎的内容平台</p>
+<p><strong>（二）主要功能位置：</strong><br>列表数据展示: pages&#x2F;index&#x2F; 和 pages&#x2F;discovery&#x2F;<br>下拉刷新与上拉加载更多: 同上<br>tab 切换：底部——app.json；顶部：</p>
+<p><strong>（三）亮点or没接触到的地方：</strong><br>上拉刷新与下拉刷新，用showToast做好了操作响应；预留了网络请求。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// wxml</span><br><span class="line">&lt;scroll-view scroll-y=&quot;true&quot; class=&quot;container&quot; bindscrolltoupper=&quot;upper&quot; upper-threshold=&quot;10&quot; lower-threshold=&quot;5&quot; bindscrolltolower=&quot;lower&quot;  scroll-into-view=&quot;&#123;&#123;toView&#125;&#125;&quot; scroll-top=&quot;&#123;&#123;scrollTop&#125;&#125;&quot;&gt;</span><br><span class="line"></span><br><span class="line">// js</span><br><span class="line">  refresh: function()&#123;</span><br><span class="line">    wx.showToast(&#123;</span><br><span class="line">      title: &#x27;刷新中&#x27;,</span><br><span class="line">      icon: &#x27;loading&#x27;,</span><br><span class="line">      duration: 3000</span><br><span class="line">    &#125;);</span><br><span class="line">    var feed = util.getData2();</span><br><span class="line">    console.log(&quot;loaddata&quot;);</span><br><span class="line">    var feed_data = feed.data;</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      feed:feed_data,</span><br><span class="line">      feed_length: feed_data.length</span><br><span class="line">    &#125;);</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">      wx.showToast(&#123;</span><br><span class="line">        title: &#x27;刷新成功&#x27;,</span><br><span class="line">        icon: &#x27;success&#x27;,</span><br><span class="line">        duration: 2000</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,3000)</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  //使用本地 fake 数据实现继续加载效果</span><br><span class="line">  nextLoad: function()&#123;</span><br><span class="line">    wx.showToast(&#123;</span><br><span class="line">      title: &#x27;加载中&#x27;,</span><br><span class="line">      icon: &#x27;loading&#x27;,</span><br><span class="line">      duration: 4000</span><br><span class="line">    &#125;)</span><br><span class="line">    var next = util.getNext();</span><br><span class="line">    console.log(&quot;continueload&quot;);</span><br><span class="line">    var next_data = next.data;</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      feed: this.data.feed.concat(next_data),</span><br><span class="line">      feed_length: this.data.feed_length + next_data.length</span><br><span class="line">    &#125;);</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">      wx.showToast(&#123;</span><br><span class="line">        title: &#x27;加载成功&#x27;,</span><br><span class="line">        icon: &#x27;success&#x27;,</span><br><span class="line">        duration: 2000</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,3000)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在“发现”页面中，设置了顶部tab：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// wxml</span><br><span class="line">&lt;view class=&quot;top-tab flex-wrp flex-tab &quot; &gt;</span><br><span class="line">  &lt;view class=&quot;toptab flex-item &#123;&#123;currentNavtab==idx ? &#x27;active&#x27; : &#x27;&#x27;&#125;&#125;&quot; wx:for=&quot;&#123;&#123;navTab&#125;&#125;&quot; wx:for-index=&quot;idx&quot; wx:for-item=&quot;itemName&quot; data-idx=&quot;&#123;&#123;idx&#125;&#125;&quot; bindtap=&quot;switchTab&quot;&gt;</span><br><span class="line">    &#123;&#123;itemName&#125;&#125;</span><br><span class="line">  &lt;/view&gt;</span><br><span class="line">&lt;/view&gt;</span><br><span class="line"></span><br><span class="line">&lt;scroll-view&gt;</span><br><span class="line"> &lt;view class=&quot;ctnt0&quot; hidden=&quot;&#123;&#123;currentNavtab==0 ? &#x27;&#x27; : true&#125;&#125;&quot;&gt;</span><br><span class="line">    ...</span><br><span class="line"> &lt;/view&gt;</span><br><span class="line">/&lt;scroll-view&gt;</span><br><span class="line"></span><br><span class="line">// js</span><br><span class="line">  switchTab: function(e)&#123;</span><br><span class="line">    this.setData(&#123;</span><br><span class="line">      currentNavtab: e.currentTarget.dataset.idx</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p><strong>（四）功能性能分析</strong><br>从这个项目，可以了解到小程序设计应该达到的要求：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">1.</span> <span class="strong">**核心交互符合用户预期**</span>  </span><br><span class="line"><span class="bullet">   -</span> 下拉刷新、上拉加载的操作逻辑与主流内容类APP（如微信公众号、微博）一致，用户无需额外学习成本即可上手。  </span><br><span class="line"><span class="bullet">   -</span> 点击问答内容跳转详情页的反馈及时（点击后立即跳转），符合“点击即进入”的直觉式操作预期。  </span><br><span class="line"></span><br><span class="line"><span class="bullet">2.</span> <span class="strong">**状态反馈清晰**</span>  </span><br><span class="line"><span class="bullet">   -</span> 刷新和加载时通过 <span class="code">`wx.showToast`</span> 显示明确的状态提示（“刷新中”“加载中”“刷新成功”），让用户感知操作进度，减少等待焦虑。  </span><br><span class="line"><span class="bullet">   -</span> 加载状态使用“loading”图标，成功状态使用“success”图标，视觉反馈直观，符合小程序设计规范。  </span><br><span class="line"></span><br><span class="line"><span class="bullet">3.</span> <span class="strong">**内容展示优先级合理**</span>  </span><br><span class="line"><span class="bullet">   -</span> 问答列表以“问题+回答摘要+互动数据（点赞/评论）”为核心，信息层级清晰：标题（粗体突出）→ 回答内容（摘要展示）→ 互动数据（次要信息），符合用户“先判断内容价值再决定是否点击”的浏览习惯。  </span><br><span class="line"></span><br><span class="line"><span class="bullet">4.</span> <span class="strong">**轻量化设计减少干扰**</span>  </span><br><span class="line"><span class="bullet">   -</span> 页面无冗余装饰元素，专注于内容展示，符合小程序“轻量工具”的定位，也契合知乎“内容优先”的产品调性。  </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p><a href="https://github.com/giscafer/wechat-weapp-mapdemo">https://github.com/giscafer/wechat-weapp-mapdemo</a><br>地图项目demo；暂不阅读。</p>
+</li>
+<li><p><a href="https://github.com/CFETeam/weapp-demo-session">https://github.com/CFETeam/weapp-demo-session</a><br>暂不阅读</p>
+</li>
+<li><p><a href="https://github.com/harveyqing/BearDiary">https://github.com/harveyqing/BearDiary</a></p>
+</li>
+</ol>
+<p><strong>（一）项目类型</strong>：日志</p>
+<p><strong>（二）主要功能位置：</strong><br>pages中，entry查看日志详情；new进行日志编辑、list查看日志列表。</p>
+<p><strong>（三）亮点or没接触到的地方：</strong><br>在<code>demo/diaries.js</code>中，mock(模拟)了数据;<br>定义数据，然后 <code>module.exports</code>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> diaries = &#123;&#125;;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">diaries</span>: diaries,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>（四）功能性能分析</strong></p>
+<p><strong>a. 功能不足点：</strong></p>
+<p>创作流程断点：“<strong>日记可回溯修改</strong>” 的核心诉求<br>反馈缺失：操作后无明确提示（如保存日记、收藏成功等），无法<strong>确认操作是否生效</strong><br>文本输入体验：<strong>长文本</strong>下频繁滚动<br>模态框交互：新建日记时的标题输入模态框（mine.wxml）无动画过渡，弹出 &#x2F; 关闭生硬，影响<strong>操作流畅</strong>度</p>
+<p><strong>b. 性能优化方向：</strong></p>
+<p><strong>性能问题：</strong></p>
+<ol>
+<li><strong>数据加载与存储效率问题</strong>——一次性加载全部数据、本地存储设计缺陷（全部存储在单键上）；</li>
+<li><strong>多媒体资源处理缺陷</strong>——未限制文件大小与格式：未对选择的图片 &#x2F; 视频进行压缩或尺寸限制，直接存储原始文件路径</li>
+<li><strong>图片预览模式优化不足</strong>——预览swiper一次性渲染，导致初始化卡顿</li>
+<li><strong>页面渲染与生命周期管理问题</strong>——数据同步时机错误、无状态清理机制</li>
+<li><strong>网络请求与依赖管理问题</strong>——地图 API 请求未做缓存、无请求错误处理（没实现重试机制或错误降级策略，如网络异常时使用缓存数据）</li>
+</ol>
+<p><strong>优化方向：</strong><br>优先级：异步数据依赖（避免白屏&#x2F;错误）≈图片压缩（减少内存占用）&gt; 分页加载列表数据（提升滚动流畅度）、拆分本地存储（优化读写效率） &gt; 缓存地理位置、请求重试（优化网络体验）</p>
+<ol>
+<li><strong>数据加载与存储优化</strong></li>
+</ol>
+<ul>
+<li><p>实现分页加载</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在 app.getDiaryList 中增加分页参数（page、size），列表页（list.js）初始只加载前 10 条，滚动到底部时触发下一页加载（结合 scroll-view 的 bindscrolltolower 事件）</span></span><br><span class="line"><span class="comment">// 示例：分页获取日记列表</span></span><br><span class="line"><span class="attr">getDiaryList</span>: <span class="keyword">function</span>(<span class="params">page = <span class="number">1</span>, size = <span class="number">10</span>, cb</span>) &#123;</span><br><span class="line"><span class="comment">// 从本地缓存/服务端按页读取数据</span></span><br><span class="line"><span class="keyword">const</span> start = (page - <span class="number">1</span>) * size;</span><br><span class="line"><span class="keyword">const</span> end = start + size;</span><br><span class="line"><span class="keyword">const</span> paginatedList = <span class="variable language_">this</span>.<span class="property">globalData</span>.<span class="property">diaryList</span>.<span class="title function_">slice</span>(start, end);</span><br><span class="line"><span class="title function_">cb</span>(paginatedList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拆分本地存储结构<br>将单键存储改为按日记 ID 拆分存储（如 bearDiary_${id}），更新时仅操作单条数据，减少 IO 开销：</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>多媒体资源处理优化</strong></li>
+</ol>
+<ul>
+<li>图片&#x2F;视频压缩与尺寸限制：<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在 `new.js` 选择文件后，使用 `wx.compressImage` 压缩图片，限制视频时长和大小： </span></span><br><span class="line"><span class="comment">// 示例：压缩图片</span></span><br><span class="line"><span class="attr">chooseImage</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  wx.<span class="title function_">chooseImage</span>(&#123;</span><br><span class="line">    <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      res.<span class="property">tempFilePaths</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">path</span> =&gt;</span> &#123;</span><br><span class="line">        wx.<span class="title function_">compressImage</span>(&#123;</span><br><span class="line">          <span class="attr">src</span>: path,</span><br><span class="line">          <span class="attr">quality</span>: <span class="number">80</span>, <span class="comment">// 压缩质量</span></span><br><span class="line">          <span class="attr">success</span>: <span class="function">(<span class="params">compressed</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 使用压缩后的路径</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">writeContent</span>(&#123;<span class="attr">tempFilePaths</span>: [compressed.<span class="property">tempFilePath</span>]&#125;, <span class="string">&#x27;IMAGE&#x27;</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>预览图片懒加载：<br><code>entry.js</code> 的预览swiper仅初始化当前可见图片，滑动时动态加载前后2张，减少初始渲染压力（可借助小程序 <code>image</code> 组件的 <code>lazy-load</code> 属性）。</li>
+</ul>
+<ol start="3">
+<li><strong>页面渲染与生命周期优化</strong></li>
+</ol>
+<ul>
+<li>修复异步数据依赖问题：通过回调后Promise链式调用，控制执行顺序<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//   确保 `getMediaList` 在 `getDiary` 完成后执行，通过回调或Promise链式调用：</span></span><br><span class="line"><span class="comment">// entry.js 优化</span></span><br><span class="line"><span class="attr">onLoad</span>: <span class="keyword">function</span>(<span class="params">params</span>) &#123;</span><br><span class="line">  app.<span class="title function_">getDiaryList</span>(<span class="function"><span class="params">list</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 获取日记详情</span></span><br><span class="line">    <span class="keyword">const</span> diary = params.<span class="property">id</span> ? list[params.<span class="property">id</span>] : list[<span class="number">0</span>];</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123; diary &#125;, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 数据更新后再获取媒体列表</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">getMediaList</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>清理页面状态： <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在 `onUnload` 中重置数据，释放内存：</span></span><br><span class="line"><span class="attr">onUnload</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">setData</span>(&#123;</span><br><span class="line">    <span class="attr">diary</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">mediaList</span>: [],</span><br><span class="line">    <span class="attr">previewMode</span>: <span class="literal">false</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li><strong>网络与缓存策略优化</strong></li>
+</ol>
+<ul>
+<li>缓存地理位置信息：  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  在 <span class="string">`app.js`</span> 中缓存已获取的位置信息，有效期设为<span class="number">1</span>小时，避免重复请求： </span><br><span class="line"><span class="comment">// 示例：缓存位置信息</span></span><br><span class="line"><span class="attr">globalData</span>: &#123;</span><br><span class="line">  <span class="attr">locationCache</span>: &#123;</span><br><span class="line">    <span class="attr">data</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">expire</span>: <span class="number">0</span> <span class="comment">// 过期时间戳</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="attr">getLocation</span>: <span class="keyword">function</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> now = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">globalData</span>.<span class="property">locationCache</span>.<span class="property">expire</span> &gt; now) &#123;</span><br><span class="line">    <span class="title function_">cb</span>(<span class="variable language_">this</span>.<span class="property">globalData</span>.<span class="property">locationCache</span>.<span class="property">data</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 重新获取并缓存</span></span><br><span class="line">  wx.<span class="title function_">getLocation</span>(&#123;</span><br><span class="line">    <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">globalData</span>.<span class="property">locationCache</span> = &#123;</span><br><span class="line">        <span class="attr">data</span>: res,</span><br><span class="line">        <span class="attr">expire</span>: now + <span class="number">3600000</span> <span class="comment">// 1小时后过期</span></span><br><span class="line">      &#125;;</span><br><span class="line">      <span class="title function_">cb</span>(res);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>增加请求重试机制：  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//   在 `request.js` 中添加失败重试逻辑（限制重试次数）：  </span></span><br><span class="line"><span class="comment">// 带重试的请求封装</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function">(<span class="params">options, retry = <span class="number">2</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">requestWithRetry</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">      wx.<span class="title function_">request</span>(&#123;</span><br><span class="line">        ...options,</span><br><span class="line">        <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (res.<span class="property">statusCode</span> === <span class="number">200</span>) <span class="title function_">resolve</span>(res.<span class="property">data</span>);</span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span> (retry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            retry--;</span><br><span class="line">            <span class="title function_">requestWithRetry</span>(); <span class="comment">// 重试</span></span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="title function_">reject</span>(res);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">fail</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (retry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            retry--;</span><br><span class="line">            <span class="title function_">requestWithRetry</span>(); <span class="comment">// 重试</span></span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="title function_">reject</span>();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="title function_">requestWithRetry</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>major</category>
+      </categories>
+      <tags>
+        <tag>study</tag>
       </tags>
   </entry>
 </search>
