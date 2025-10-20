@@ -2344,4 +2344,79 @@ function SetCwinHeight(){
         <tag>study</tag>
       </tags>
   </entry>
+  <entry>
+    <title>流水账</title>
+    <url>/2025/10/21/2510%E6%B5%81%E6%B0%B4%E8%B4%A6/</url>
+    <content><![CDATA[<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>I’m dumb, I’m stupid, I’ll never be satisfied. This “done-lists” are built for proving my studying process, maybe can make me focus more on process, not the result? Just update it and prove that I’m alive.</p>
+<h1 id="25-10-20"><a href="#25-10-20" class="headerlink" title="25-10-20"></a>25-10-20</h1><p>专场：浏览器的运行原理 <a href="https://blog.csdn.net/weixin_46726346/article/details/132446223">一篇搞懂浏览器的工作原理（万字详解）</a></p>
+<p>了解下 prettier，看看能不能帮我自动格式化 markdown 文件。 <a href="https://juejin.cn/post/7559797258721034276">VSCode 中 Prettier 工作原理与使用指南</a></p>
+<p>VSCode 中使用 Prettier 时，由 VSCode 触发格式化命令(Shift+Alt+F)，Prettier(VsCode 插件层)决定用哪个 Prettier 实例，确定加载哪个配置文件，PrettierCLI(JS 核心库)格式化 AST 并输出格式后的结果。</p>
+<p>Prettier 对于 markdown 只有以下两个专用选项，用于控制段落折行和空白处理： ​​proseWrap​ 用于控制 Markdown 正文段落的折行策略，可选值 ​​always​​、​​never​​、​​preserve​​，默认为 preserve(原始换行) ；​htmlWhitespaceSensitivity​​ 用于控制 HTML 标签内空白字符的敏感度（影响 Markdown 中内嵌 HTML 的空白处理），可选值 ​​css​​、​​strict​​、​​ignore​​，默认值 ​​css。​</p>
+<p>下面列以下常用 Prettier 配置项及其作用：</p>
+<table>
+<thead>
+<tr>
+<th align="left">选项</th>
+<th align="left">含义</th>
+<th align="left">你当前的值</th>
+<th align="left">可选值与要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">proseWrap</td>
+<td align="left">控制 Markdown 正文段落的折行策略</td>
+<td align="left">“preserve”</td>
+<td align="left">“always”（总是折行以适配 printWidth）、”never”（从不折行）、”preserve”（尽量保留原文换行）</td>
+</tr>
+<tr>
+<td align="left">printWidth</td>
+<td align="left">每行最大宽度，超出会尝试换行</td>
+<td align="left">100</td>
+<td align="left">数值，常用 80&#x2F;100</td>
+</tr>
+<tr>
+<td align="left">tabWidth</td>
+<td align="left">缩进单位宽度</td>
+<td align="left">2</td>
+<td align="left">数值，常见 2&#x2F;4</td>
+</tr>
+<tr>
+<td align="left">useTabs</td>
+<td align="left">是否用制表符缩进</td>
+<td align="left">false</td>
+<td align="left">true&#x2F;false（false 即用空格缩进）</td>
+</tr>
+<tr>
+<td align="left">semi</td>
+<td align="left">语句末尾是否加分号</td>
+<td align="left">false</td>
+<td align="left">true&#x2F;false</td>
+</tr>
+<tr>
+<td align="left">singleQuote</td>
+<td align="left">字符串是否使用单引号</td>
+<td align="left">true</td>
+<td align="left">true&#x2F;false（JS&#x2F;TS&#x2F;JSX 等生效）</td>
+</tr>
+<tr>
+<td align="left">trailingComma</td>
+<td align="left">多行结构是否加尾随逗号</td>
+<td align="left">“none”</td>
+<td align="left">“none”、”es5”（ES5 有效位置）、”all”（尽可能加，含函数参数）</td>
+</tr>
+<tr>
+<td align="left">arrowParens</td>
+<td align="left">箭头函数参数括号策略</td>
+<td align="left">“avoid”</td>
+<td align="left">“always” &#x2F; “avoid”（单参可省括号）</td>
+</tr>
+<tr>
+<td align="left">bracketSpacing</td>
+<td align="left">对象字面量括号内是否加空格</td>
+<td align="left">true</td>
+<td align="left">true（{ foo: bar }）、false（{foo: bar}）</td>
+</tr>
+</tbody></table>
+]]></content>
+  </entry>
 </search>
