@@ -387,7 +387,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    490
+                    1.3k
                 </div>
                 
 
@@ -411,6 +411,7 @@
             <div id="articleContent">
                 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>I’m dumb, I’m stupid, I’ll never be satisfied. This “done-lists” are built for proving my studying process, maybe can make me focus more on process, not the result? Just update it and prove that I’m alive.</p>
 <h1 id="25-10-20"><a href="#25-10-20" class="headerlink" title="25-10-20"></a>25-10-20</h1><p>专场：浏览器的运行原理 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46726346/article/details/132446223">一篇搞懂浏览器的工作原理（万字详解）</a></p>
+<hr>
 <p>了解下 prettier，看看能不能帮我自动格式化 markdown 文件。 <a target="_blank" rel="noopener" href="https://juejin.cn/post/7559797258721034276">VSCode 中 Prettier 工作原理与使用指南</a></p>
 <p>VSCode 中使用 Prettier 时，由 VSCode 触发格式化命令(Shift+Alt+F)，Prettier(VsCode 插件层)决定用哪个 Prettier 实例，确定加载哪个配置文件，PrettierCLI(JS 核心库)格式化 AST 并输出格式后的结果。</p>
 <p>Prettier 对于 markdown 只有以下两个专用选项，用于控制段落折行和空白处理： ​​proseWrap​ 用于控制 Markdown 正文段落的折行策略，可选值 ​​always​​、​​never​​、​​preserve​​，默认为 preserve(原始换行) ；​htmlWhitespaceSensitivity​​ 用于控制 HTML 标签内空白字符的敏感度（影响 Markdown 中内嵌 HTML 的空白处理），可选值 ​​css​​、​​strict​​、​​ignore​​，默认值 ​​css。​</p>
@@ -479,6 +480,27 @@
 <td align="left">true（{ foo: bar }）、false（{foo: bar}）</td>
 </tr>
 </tbody></table>
+<h1 id="25-10-21"><a href="#25-10-21" class="headerlink" title="25-10-21"></a>25-10-21</h1><p>JS 红宝书：Symbol<br>Symbol 出现的目的是，在各个依赖库中独立创建属性，避免字符串类型属性名重名。<br>var pro1 &#x3D; Symbol(‘描述符’)创建唯一属性名，可通过 pro1 操作。<br>Symbol.for(‘描述符’)可以用来查询已有属性，若未创建该属性则返回新的 Symbol。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="title class_">Symbol</span>(<span class="string">&quot;foo&quot;</span>),</span><br><span class="line">  s2 = <span class="title class_">Symbol</span>(<span class="string">&quot;bar&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">  [s1]: <span class="string">&quot;foo val&quot;</span>,</span><br><span class="line">  [s2]: <span class="string">&quot;bar val&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Symbol 相关的常用内置符号：<br>[Symbol.asyncIterator] [Symbol.hasInstance] [Symbol.isConcatSpreadable] [Symbol.iterator] [Symbol.match] [Symbol.replace] [Symbol.search] [Symbol.species] [Symbol.split] [Symbol.toPrimitive] [Symbol.toStringTag]<br>最后两个符号的符号含义如下：<br>[Symbol.toPrimitive] 这个符号作为一个属性表示“一个方法，该方法将对象转换为相应的原始<br>值。由 ToPrimitive 抽象操作使用”；<br>[Symbol.toStringTag] 这个符号作为一个属性表示“一个字符串，该字符串用于创建对象的默认<br>字符串描述。由内置方法 Object.prototype.toString()使用”。<br>通过 toString()方法获取对象标识时，会检索由 Symbol.toStringTag 指定的实例标识符，默<br>认为”Object”。内置类型已经指定了这个值，但自定义类实例还需要明确定义。重写实例如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bar</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>] = <span class="string">&quot;Bar&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> bar = <span class="keyword">new</span> <span class="title class_">Bar</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar); <span class="comment">// Bar &#123;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar.<span class="title function_">toString</span>()); <span class="comment">// [object Bar]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>]); <span class="comment">// Bar</span></span><br></pre></td></tr></table></figure>
+
+<p>Object 类型<br>每个 Object 实例都有如下属性和方法：<br>constructor：用于创建当前对象的函数。默认构造函数未 Object();<br>hasOwnProperty(propertyName)：用于判断当前对象实例（不是原型）上是否存在给定的属<br>性。要检查的属性名必须是字符串（如 o.hasOwnProperty(“name”)）或符号。<br>……<br>其中，我对 toLocaleString()不大熟悉。<br>Object.prototype.toLocaleString()的核心作用是根据指定的地区（locale）和格式选项，返回对象的字符串表示，让输出更符合特定地区的语言、文化和格式习惯。<br>典型使用场景如数字本地化、日期和时间本地化、货币格式化。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(date.<span class="title function_">toLocaleString</span>(<span class="string">&quot;zh-CN&quot;</span>)); <span class="comment">// &quot;2025/10/21 10:30:00&quot;（中文默认）</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">  date.<span class="title function_">toLocaleString</span>(<span class="string">&quot;en-US&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">year</span>: <span class="string">&quot;numeric&quot;</span>,</span><br><span class="line">    <span class="attr">month</span>: <span class="string">&quot;long&quot;</span>,</span><br><span class="line">    <span class="attr">day</span>: <span class="string">&quot;numeric&quot;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">); <span class="comment">// &quot;October 21, 2025&quot;（英语长格式）</span></span><br></pre></td></tr></table></figure>
+
+<p>for-in 语句是一种严格的迭代语句，用于枚举对象中的非符号键属性<br>for-of 语句是一种严格的迭代语句，用于遍历可迭代对象的元素。可迭代对象（Iterable Object） 是指那些实现了 迭代协议（Iterable Protocol） 的对象。<br>一个对象要成为可迭代对象，必须满足：</p>
+<ul>
+<li>拥有一个 默认迭代器方法（在对象的 Symbol.iterator 属性上定义）。</li>
+<li>这个迭代器方法是一个函数，调用后会返回一个 迭代器（Iterator）。</li>
+<li>迭代器是一个包含 next() 方法的对象，next() 方法每次调用会返回一个形如 { value: 值, done: 布尔值 } 的对象：<ul>
+<li>value：当前迭代到的元素。</li>
+<li>done：布尔值，表示迭代是否结束（true 表示结束，false 表示继续）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>JS 引擎与 Node 引擎<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2399974">深入剖析 JavaScript 引擎的工作原理</a><br><a href="https://mys109hqj.github.io/2025/10/21/25-10-21-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-jsV8%E5%BC%95%E6%93%8E%E4%B8%8Enode">JS v8 引擎与 Node.js</a></p>
 
                 
             </div>
@@ -505,7 +527,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://mys109hqj.github.io/2025/10/21/2510%E6%B5%81%E6%B0%B4%E8%B4%A6/">https://mys109hqj.github.io/2025/10/21/2510%E6%B5%81%E6%B0%B4%E8%B4%A6/</a>
+                    <a href="https://mys109hqj.github.io/2025/10/21/25-10-%E6%B5%81%E6%B0%B4%E8%B4%A6/">https://mys109hqj.github.io/2025/10/21/25-10-%E6%B5%81%E6%B0%B4%E8%B4%A6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -600,18 +622,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2025/10/21/2510%E6%B5%81%E6%B0%B4%E8%B4%A6/">
+                <a href="/2025/10/21/25-10-21-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-jsV8%E5%BC%95%E6%93%8E%E4%B8%8Enode/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="流水账">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="25-10-21-学习日志-jsV8引擎与node">
                         
-                        <span class="card-title">流水账</span>
+                        <span class="card-title">25-10-21-学习日志-jsV8引擎与node</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -621,9 +642,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-10-21
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -632,7 +653,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

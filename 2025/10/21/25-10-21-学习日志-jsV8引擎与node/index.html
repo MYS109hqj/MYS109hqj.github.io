@@ -1,0 +1,1415 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="25-10-21-学习日志-jsV8引擎与node, MYS109hqj">
+    <meta name="description" content="Javascript V8 引擎与 Node.js
+这篇文章，目的是记录对 JavaScript 引擎的理解。同时，我在学习过程中冒出一些疑问。“JS 是单线程的”，让我想到操作系统领域“进程与线程”的概念，JS 线程是一个线程，它会属于哪">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>25-10-21-学习日志-jsV8引擎与node | MYS109hqj</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">MYS109hqj</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">MYS109hqj</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">25-10-21-学习日志-jsV8引擎与node</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-10-21
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-10-21
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    8.5k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><strong>Javascript V8 引擎与 Node.js</strong></p>
+<p>这篇文章，目的是<strong>记录对 JavaScript 引擎的理解</strong>。<br>同时，我在学习过程中冒出一些疑问。<br>“JS 是单线程的”，让我想到操作系统领域“进程与线程”的概念，<strong>JS 线程是一个线程，它会属于哪个进程呢？</strong><br>JavaScript 引擎会经过 Parser(解析器)，将源码转成 AST(抽象语法树)，这与编译原理相关。<strong>JS 的“编译原理”又与我最早学的 C++“编译原理”有什么差异呢？**<strong>Babel</strong> 这个工具能将 H5 代码转成 AST，好像跟 Parser 的功能相似，它又</strong>属于哪个领域，功能与 Parser 有什么差别**呢？</p>
+<p>我在利用 AI 提升自己收集、理解信息的能力，向自己“传道解惑”。并在这篇文章中记录我的收获。</p>
+<h1 id="第一部分：JavaScript-引擎原理（可以与-C-的编译过程类比）"><a href="#第一部分：JavaScript-引擎原理（可以与-C-的编译过程类比）" class="headerlink" title="第一部分：JavaScript 引擎原理（可以与 C++的编译过程类比）"></a>第一部分：JavaScript 引擎原理（可以与 C++的编译过程类比）</h1><h2 id="1-JavaScript-引擎的基本概念"><a href="#1-JavaScript-引擎的基本概念" class="headerlink" title="1.JavaScript 引擎的基本概念"></a>1.JavaScript 引擎的基本概念</h2><p>JavaScript 引擎（如 V8、SpiderMonkey、JavaScriptCore 等）是执行 JavaScript 代码的核心组件，其运行机制可概括为“解析-编译-执行”的流水线过程，同时结合了内存管理、垃圾回收等关键机制。以下是其核心运行流程和关键原理：</p>
+<h3 id="一、核心组成部分"><a href="#一、核心组成部分" class="headerlink" title="一、核心组成部分"></a>一、核心组成部分</h3><p>不同 JS 引擎的实现细节有差异，但核心模块基本一致：</p>
+<ol>
+<li><strong>解析器（Parser）</strong>：将源代码转换为抽象语法树（AST）。</li>
+<li><strong>解释器（Interpreter）</strong>：将 AST 转换为字节码（Bytecode）并立即执行，实现快速启动。</li>
+<li><strong>编译器（Compiler）</strong>：将热点代码（频繁执行的字节码）编译为机器码（原生代码），优化执行效率（现代引擎多为“即时编译 JIT”）。</li>
+<li><strong>内存堆（Memory Heap）</strong>：用于分配对象、变量等数据的内存空间。</li>
+<li><strong>调用栈（Call Stack）</strong>：管理函数调用的执行顺序，遵循“后进先出”原则。(相关概念：执行上下文)</li>
+<li><strong>垃圾回收器（Garbage Collector）</strong>：自动回收不再使用的内存，避免内存泄漏。</li>
+<li><strong>事件循环（Event Loop）</strong> 与 <strong>回调队列（Callback Queue）</strong>：处理异步任务（如定时器、网络请求），协调同步&#x2F;异步执行顺序。</li>
+</ol>
+<h3 id="二、完整运行流程"><a href="#二、完整运行流程" class="headerlink" title="二、完整运行流程"></a>二、完整运行流程</h3><h4 id="1-解析（Parsing）：源代码-→-AST"><a href="#1-解析（Parsing）：源代码-→-AST" class="headerlink" title="1. 解析（Parsing）：源代码 → AST"></a>1. <strong>解析（Parsing）：源代码 → AST</strong></h4><ul>
+<li><strong>词法分析（Tokenization）</strong>：将源代码拆分为最小语法单元（Token），如关键字（<code>function</code>）、标识符（变量名）、运算符（<code>+</code>）等。<br>例：<code>const a = 1 + 2;</code> 会拆分为 <code>const</code>、<code>a</code>、<code>=</code>、<code>1</code>、<code>+</code>、<code>2</code>、<code>;</code>。</li>
+<li><strong>语法分析（Syntax Analysis）</strong>：根据语法规则将 Token 组合为 AST（抽象语法树），描述代码的结构和逻辑关系。若语法错误（如缺少括号），会在此阶段抛出错误。</li>
+</ul>
+<h4 id="2-编译与执行：AST-→-字节码-机器码"><a href="#2-编译与执行：AST-→-字节码-机器码" class="headerlink" title="2. 编译与执行：AST → 字节码&#x2F;机器码"></a>2. <strong>编译与执行：AST → 字节码&#x2F;机器码</strong></h4><p>现代 JS 引擎（如 V8）采用“混合执行模型”（解释 + 编译），兼顾启动速度和运行效率：</p>
+<ul>
+<li><p><strong>解释器（如 V8 的 Ignition）</strong>：<br>将 AST 转换为字节码（一种介于源代码和机器码的中间代码，体积小、跨平台），并逐行解释执行。<br>优势：启动快（无需等待全量编译），适合首次执行或低频代码。</p>
+</li>
+<li><p><strong>编译器（如 V8 的 Turbofan）</strong>：<br>监控字节码执行过程，识别“热点代码”（如频繁调用的函数、循环），将其编译为优化后的机器码（直接被 CPU 执行），提升执行速度。<br>优化手段：如常量折叠（<code>1 + 2</code> 直接替换为 <code>3</code>）、类型 specialization（针对固定类型的变量生成更高效的机器码）等。</p>
+</li>
+<li><p><strong>反优化（Deoptimization）</strong>：<br>若编译器的优化假设被打破（如变量类型突然改变），会将机器码还原为字节码，避免执行错误。</p>
+</li>
+</ul>
+<h4 id="3-执行阶段：调用栈与内存管理"><a href="#3-执行阶段：调用栈与内存管理" class="headerlink" title="3. 执行阶段：调用栈与内存管理"></a>3. <strong>执行阶段：调用栈与内存管理</strong></h4><ul>
+<li><p><strong>调用栈（Call Stack）</strong>：<br>函数执行时，会创建“执行上下文”（包含变量、作用域链、this 等信息）并压入栈中；函数执行完毕后，执行上下文出栈。栈溢出（Stack Overflow）会发生在嵌套调用过深时（如无限递归）。</p>
+</li>
+<li><p><strong>内存堆</strong>：<br>对象、数组等引用类型的数据存储在堆中，变量仅保存堆的内存地址。堆的分配是动态的，大小不固定，可能引发内存碎片问题（由垃圾回收器处理）。</p>
+</li>
+</ul>
+<h4 id="4-异步处理：事件循环"><a href="#4-异步处理：事件循环" class="headerlink" title="4. 异步处理：事件循环"></a>4. <strong>异步处理：事件循环</strong></h4><p>JS 是单线程语言（主线程只有一个调用栈），为避免同步执行阻塞（如等待网络请求），通过事件循环处理异步任务：</p>
+<ul>
+<li><strong>同步任务</strong>：直接在调用栈中执行，执行完后出栈。</li>
+<li><strong>异步任务</strong>：<br>由浏览器&#x2F;Node.js 的其他线程（如网络线程、定时器线程）处理，完成后将回调函数放入“回调队列”（如宏任务队列、微任务队列）。</li>
+<li><strong>事件循环</strong>：<br>持续监控调用栈和回调队列，当调用栈为空时，按优先级依次将队列中的回调函数压入栈中执行（先执行微任务，再执行宏任务）。</li>
+</ul>
+<h4 id="5-垃圾回收"><a href="#5-垃圾回收" class="headerlink" title="5. 垃圾回收"></a>5. <strong>垃圾回收</strong></h4><p>引擎自动回收堆中不再被引用的对象，释放内存：</p>
+<ul>
+<li><strong>标记-清除（Mark-and-Sweep）</strong>：主流算法，分为“标记”（遍历所有可达对象，标记为“存活”）和“清除”（回收未标记的对象）两个阶段。</li>
+<li><strong>优化机制</strong>：如分代回收（将对象分为新生代和老生代，针对不同生命周期采用不同策略）、增量标记（避免长时间阻塞主线程）等。</li>
+</ul>
+<h3 id="三、关键特点总结"><a href="#三、关键特点总结" class="headerlink" title="三、关键特点总结"></a>三、关键特点总结</h3><ol>
+<li><strong>混合执行模型</strong>：解释器快速启动，编译器优化热点代码，平衡速度与效率。</li>
+<li><strong>单线程 + 事件循环</strong>：通过异步机制避免阻塞，实现非阻塞 I&#x2F;O。</li>
+<li><strong>自动内存管理</strong>：垃圾回收器自动处理内存释放，减少手动管理成本。</li>
+</ol>
+<p>不同引擎（如 V8 用于 Chrome&#x2F;Node.js，SpiderMonkey 用于 Firefox）在细节上有差异，但核心运行逻辑一致，都是为了高效、安全地执行 JavaScript 代码。</p>
+<h2 id="2-”JS-的单线程的”，这个线程属于哪个进程呢？"><a href="#2-”JS-的单线程的”，这个线程属于哪个进程呢？" class="headerlink" title="2.”JS 的单线程的”，这个线程属于哪个进程呢？"></a>2.”JS 的单线程的”，这个线程属于哪个进程呢？</h2><p>JavaScript 确实是<strong>单线程</strong>的，但这个“单线程”指的是 JavaScript 引擎中负责执行代码的<strong>主线程</strong>（即处理同步任务、执行函数调用的线程）。而这个主线程所属的<strong>进程</strong>（如浏览器进程、Node.js 进程）是<strong>多线程</strong>的，进程内会有其他线程配合主线程工作。</p>
+<h3 id="1-JS-单线程的本质"><a href="#1-JS-单线程的本质" class="headerlink" title="1. JS 单线程的本质"></a>1. JS 单线程的本质</h3><p>JavaScript 的单线程指的是：<strong>在同一个时间点，只有一个线程（主线程）在执行 JavaScript 代码</strong>。这是由 JavaScript 的设计初衷决定的（最初为浏览器设计，避免多线程操作 DOM 导致的冲突，简化开发）。</p>
+<p>例如，在浏览器中，JS 主线程负责：</p>
+<ul>
+<li>执行同步代码（如变量声明、函数调用）；</li>
+<li>处理 DOM 操作（如 <code>document.getElementById</code>）；</li>
+<li>执行异步任务的回调函数（如定时器回调、网络请求回调，由事件循环调度）。</li>
+</ul>
+<p>这个主线程是“单线程”的，意味着代码会按顺序执行，前一个任务未完成，后一个任务只能等待（避免了多线程竞争 DOM 的复杂问题）。</p>
+<h3 id="2-JS-主线程所属的进程：多线程协作"><a href="#2-JS-主线程所属的进程：多线程协作" class="headerlink" title="2. JS 主线程所属的进程：多线程协作"></a>2. JS 主线程所属的进程：多线程协作</h3><p>JS 主线程存在于一个<strong>进程</strong>中（如浏览器的“渲染进程”、Node.js 启动的进程），而这个进程是多线程的，包含多个辅助线程，与主线程配合完成工作。</p>
+<h4 id="以浏览器进程为例（多线程结构）："><a href="#以浏览器进程为例（多线程结构）：" class="headerlink" title="以浏览器进程为例（多线程结构）："></a>以浏览器进程为例（多线程结构）：</h4><p>补充：浏览器中有多少进程，每个进程又包含哪些线程，可以参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/416161636">深入理解浏览器中的进程与线程 -知乎 沐华</a></p>
+<blockquote>
+<p>Chrome 浏览器从关闭到启动，然后新开一个页面至少需要：1 个浏览器进程，1 个 GPU 进程，1 个网络进程，和 1 个渲染进程，一共 4 个进程；再打开新的页面，会为其配置一个渲染进程（除非与已有页面属于<strong>同个站点</strong>，即二者协议和注册域名一致，此时二者会共用一个渲染进程）。浏览器进程，GPU 进程，网络进程都是共享的，不会重新启动。此外还有插件进程，为了防止插件崩溃导致浏览器崩溃，插件需要单独使用一个进程。<br>所以，最新的 Chrome 浏览器包括：1 个浏览器主进程，1 个 GPU 进程，1 个网络进程，多个渲染进程，和多个插件进程。</p>
+</blockquote>
+<p>浏览器中运行 JS 的进程通常是“<strong>渲染进程</strong>”，包含以下关键线程：</p>
+<ul>
+<li><strong>JS 主线程</strong>：执行 JS 代码、处理 DOM、调度事件循环。</li>
+<li><strong>GUI 渲染线程</strong>：负责渲染页面（解析 HTML&#x2F;CSS、绘制页面），与 JS 主线程互斥（避免 JS 操作 DOM 时同时渲染导致混乱）。</li>
+<li><strong>事件触发线程</strong>：管理异步任务的回调队列（如点击事件、定时器到期、网络请求完成后，将回调放入队列，等待主线程执行）。</li>
+<li><strong>计时器线程</strong>：单独计时（如 <code>setTimeout</code>），计时结束后通知事件触发线程将回调入队。</li>
+<li>**网络请求线程(异步 http 请求进程)**：处理 AJAX 请求，请求完成后通知事件触发线程将回调入队。</li>
+</ul>
+<p>这些线程协同工作，例如：</p>
+<ul>
+<li>当你发起一个 <code>fetch</code> 请求时，JS 主线程会将请求交给“网络请求线程”处理，自身继续执行后续代码；</li>
+<li>网络请求完成后，“网络请求线程”会通知“事件触发线程”，将回调函数放入“回调队列”；</li>
+<li>当 JS 主线程空闲时（同步代码执行完毕），事件循环会从队列中取出回调，交给主线程执行。</li>
+</ul>
+<blockquote>
+<p>上面这篇文章的评论区，有个有趣的问题：”网络进程和异步 http 线程的区别是什么？”<br>回复：“网络进程负责客户端与服务端的连接;<br>异步 http 线程负责将 http 请求交给网络进程，在得到请求结果后交给事件触发线程，后由 JS 线程去执行。”</p>
+</blockquote>
+<h4 id="以-Node-js-进程为例（多线程结构）："><a href="#以-Node-js-进程为例（多线程结构）：" class="headerlink" title="以 Node.js 进程为例（多线程结构）："></a>以 Node.js 进程为例（多线程结构）：</h4><p>Node.js 进程同样是多线程的，核心线程包括：</p>
+<ul>
+<li><strong>JS 主线程</strong>：执行 JS 代码、调度事件循环。</li>
+<li><strong>libuv 线程池</strong>：默认 4 个线程，处理耗时的 I&#x2F;O 操作（如文件读写、DNS 解析）。</li>
+<li><strong>其他辅助线程</strong>：如定时器线程（处理 <code>setTimeout</code>）、网络线程（处理 TCP&#x2F;UDP 通信）等。</li>
+</ul>
+<p>例如，当 Node.js 执行 <code>fs.readFile</code>（文件读取）时：</p>
+<ul>
+<li>JS 主线程将任务交给 libuv 线程池的某个线程处理，自身继续执行；</li>
+<li>线程池完成读取后，将结果放入“回调队列”；</li>
+<li>事件循环调度主线程执行回调。</li>
+</ul>
+<h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h3><ul>
+<li><strong>JS 是单线程的</strong>：指的是执行 JS 代码的<strong>主线程</strong>是单线程，同一时间只能处理一个任务。</li>
+<li><strong>主线程所属的进程是多线程的</strong>：进程内有多个辅助线程（如网络、定时器、I&#x2F;O 线程），负责处理耗时操作或异步任务，避免阻塞主线程，最终通过“事件循环”将结果回调交给主线程执行。</li>
+</ul>
+<p>这种“单线程 + 多线程协作”的模式，既保证了 JS 代码执行的简单性（无多线程冲突），又通过异步机制实现了非阻塞的高效运行。</p>
+<h2 id="3-js-的-JIT-（Just-In-Time-Compilation-即时编译）"><a href="#3-js-的-JIT-（Just-In-Time-Compilation-即时编译）" class="headerlink" title="3.js 的 JIT （Just-In-Time Compilation 即时编译）"></a>3.js 的 JIT （Just-In-Time Compilation 即时编译）</h2><p>JIT 是 <strong>Just-In-Time Compilation（即时编译）</strong> 的缩写，是一种程序运行时的编译技术，广泛应用于 JavaScript 引擎（如 V8）、Java 虚拟机（JVM）等环境中，核心目标是<strong>在程序运行时将中间代码（如字节码、解释型代码）动态编译为机器码</strong>，从而平衡“快速启动”和“高效执行”。</p>
+<h3 id="为什么需要-JIT？"><a href="#为什么需要-JIT？" class="headerlink" title="为什么需要 JIT？"></a>为什么需要 JIT？</h3><p>传统的代码执行有两种极端方式，各有优劣：</p>
+<ul>
+<li><strong>解释执行</strong>（如早期 JS 引擎）：代码运行时逐行翻译成机器码并执行，启动快（无需提前编译），但重复执行的代码会被反复翻译，效率低。</li>
+<li><strong>静态编译</strong>（如 C++）：代码运行前完全编译为机器码，执行效率高，但启动慢（需等待全量编译），且无法适应动态类型语言（如 JS 变量类型可随时变化）。</li>
+</ul>
+<p>JIT 则结合了两者的优势：<strong>先快速解释执行，再针对“热点代码”（频繁执行的代码）动态编译为机器码并缓存</strong>，既保证启动速度，又提升运行效率。</p>
+<h3 id="JIT-在-JavaScript-引擎（如-V8）中的工作流程"><a href="#JIT-在-JavaScript-引擎（如-V8）中的工作流程" class="headerlink" title="JIT 在 JavaScript 引擎（如 V8）中的工作流程"></a>JIT 在 JavaScript 引擎（如 V8）中的工作流程</h3><p>以 V8 引擎为例，JIT 的核心流程如下：</p>
+<ol>
+<li><p><strong>解析与字节码生成(覆盖 JS 引擎的”解析”步骤)<strong>：<br>JS 代码先被解析为 AST（抽象语法树），再由解释器（如 V8 的 Ignition）转换为</strong>字节码</strong>（一种介于源代码和机器码的中间代码，体积小、跨平台）。</p>
+</li>
+<li><p><strong>解释执行与监控</strong>：<br>解释器逐行执行字节码，同时记录代码的执行信息（如变量类型、函数调用次数等），识别出“热点代码”（如频繁调用的函数、循环）。</p>
+</li>
+<li><p><strong>编译优化</strong>：<br>当代码被判定为热点时，JIT 编译器（如 V8 的 Turbofan）会将其从字节码<strong>编译为优化后的机器码</strong>，并缓存起来。后续执行时直接使用机器码，跳过解释步骤，大幅提升效率。</p>
+</li>
+<li><p><strong>去优化（Deoptimization）</strong>：<br>若编译器的优化假设被打破（如 JS 变量类型突然改变，从 <code>number</code> 变为 <code>string</code>），会将机器码还原为字节码，由解释器重新执行，避免错误。</p>
+</li>
+</ol>
+<h3 id="JIT-的核心优势"><a href="#JIT-的核心优势" class="headerlink" title="JIT 的核心优势"></a>JIT 的核心优势</h3><ul>
+<li><strong>动态适应</strong>：针对运行时数据优化（如已知变量类型后生成更高效的机器码），特别适合 JS 等动态类型语言。</li>
+<li><strong>平衡速度</strong>：解释执行保证快速启动，编译优化保证高频代码的执行效率。</li>
+<li><strong>资源合理利用</strong>：只编译热点代码，避免对低频代码浪费编译时间。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>JIT 是动态语言（如 JS）实现高效执行的关键技术，通过“解释执行 + 热点编译”的混合模式，解决了传统解释型语言效率低、静态编译语言灵活性差的问题。在 V8 等 JS 引擎中，JIT 让原本低效的脚本语言能够胜任复杂应用（如前端框架、Node.js 服务）的性能需求。</p>
+<h1 id="第二部分：Node-在-JS-基础上做了哪些事"><a href="#第二部分：Node-在-JS-基础上做了哪些事" class="headerlink" title="第二部分：Node 在 JS 基础上做了哪些事"></a>第二部分：Node 在 JS 基础上做了哪些事</h1><p>Node.js 本身并不直接开发或修改 JavaScript 引擎（如 V8），但它基于 V8 引擎构建，并通过一系列<strong>运行时设计、API 封装和性能优化策略</strong>，充分发挥了 V8 的能力，同时针对服务器端场景做了大量适配和增强。可以说，Node.js 对“JavaScript 引擎的使用方式”和“基于引擎的运行环境”进行了深度优化，而非直接修改引擎本身。</p>
+<h3 id="具体优化和增强方向："><a href="#具体优化和增强方向：" class="headerlink" title="具体优化和增强方向："></a>具体优化和增强方向：</h3><h4 id="1-充分利用-V8-的-JIT-编译能力"><a href="#1-充分利用-V8-的-JIT-编译能力" class="headerlink" title="1. 充分利用 V8 的 JIT 编译能力"></a>1. <strong>充分利用 V8 的 JIT 编译能力</strong></h4><p>V8 引擎的核心优势是“即时编译（JIT）”，能将热点代码编译为机器码提升执行效率。Node.js 作为 V8 的宿主环境，通过以下方式最大化 JIT 效果：</p>
+<ul>
+<li><strong>减少动态类型变化</strong>：Node.js 鼓励开发者在服务器端代码中保持变量类型稳定（如避免频繁切换 number&#x2F;string 类型），让 V8 的类型特化优化（Type Specialization）更有效。</li>
+<li><strong>避免过度优化阻碍</strong>：Node.js 运行时尽量减少对 V8 编译过程的干扰，例如避免在高频函数中使用 <code>eval</code> 或动态修改函数体（这类操作会导致 V8 去优化，即 Deoptimization）。</li>
+</ul>
+<h4 id="2-针对服务器场景的异步-I-O-架构"><a href="#2-针对服务器场景的异步-I-O-架构" class="headerlink" title="2. 针对服务器场景的异步 I&#x2F;O 架构"></a>2. <strong>针对服务器场景的异步 I&#x2F;O 架构</strong></h4><p>JavaScript 引擎（如 V8）本身是单线程的，但 Node.js 围绕它设计了<strong>非阻塞 I&#x2F;O 模型</strong>，解决了单线程在服务器端的性能瓶颈：</p>
+<ul>
+<li><strong>事件循环（Event Loop）</strong>：Node.js 实现了自己的事件循环机制（与浏览器的事件循环有差异），将 I&#x2F;O 操作（如文件读写、网络请求）交给底层线程池（libuv 库管理）处理，完成后通过回调通知 V8 执行，避免主线程阻塞。</li>
+<li><strong>libuv 库</strong>：Node.js 集成 libuv 作为跨平台的 I&#x2F;O 抽象层，负责管理线程池、异步 I&#x2F;O 调度和事件循环，让 V8 引擎专注于 JavaScript 代码执行，无需处理底层 I&#x2F;O 细节。</li>
+</ul>
+<p>传统浏览器在 I&#x2F;O 上的实现就有些复杂，大体上可以这样描述：渲染进程内的专用线程（网络、定时器等）与浏览器进程分工合作，通过 IPC 通信，高效处理不同类型的 I&#x2F;O。</p>
+<p>具体任务可能会设计不同的线程：</p>
+<ul>
+<li><strong>网络请求</strong>：渲染进程的“网络线程”接收任务后，通过 IPC 通知浏览器进程的“网络服务”，由浏览器进程实际发起 TCP 连接、传输数据（浏览器进程更适合处理跨进程网络资源）。</li>
+<li><strong>定时器</strong>：渲染进程的“定时器线程”开始计时，计时结束后将回调函数放入“宏任务队列”。</li>
+<li><strong>用户事件（如点击）</strong>：浏览器进程的“输入事件线程”捕获点击，通过 IPC 转发给渲染进程的“事件处理线程”，确定事件目标后将回调放入“宏任务队列”。</li>
+<li><strong>IndexedDB 存储</strong>：渲染进程的“IndexedDB 线程”执行磁盘 I&#x2F;O 操作，完成后将回调放入“微任务队列”。</li>
+</ul>
+<h4 id="3-内存管理和垃圾回收优化"><a href="#3-内存管理和垃圾回收优化" class="headerlink" title="3. 内存管理和垃圾回收优化"></a>3. <strong>内存管理和垃圾回收优化</strong></h4><p>V8 的垃圾回收（GC）机制在浏览器场景中已足够高效，但 Node.js 针对服务器端“长时间运行、高内存占用”的特点做了适配：</p>
+<ul>
+<li><strong>GC 策略调整</strong>：通过 <code>--max-old-space-size</code> 等启动参数，允许开发者调整 V8 堆内存大小（默认约 1.4GB），避免服务器进程因内存限制崩溃。</li>
+<li><strong>内存泄漏监控</strong>：提供 <code>process.memoryUsage()</code> 等 API，方便开发者监控堆内存使用，结合 <code>--inspect</code> 调试工具分析 GC 日志，优化内存占用。</li>
+<li><strong>分代回收适配</strong>：V8 的分代回收（新生代&#x2F;老生代）在 Node.js 中更注重“减少长时间 GC 停顿”，例如通过增量标记（Incremental Marking）降低对服务器响应时间的影响。</li>
+</ul>
+<h5 id="Q-GC-垃圾回收-日志，增量标记都是什么？"><a href="#Q-GC-垃圾回收-日志，增量标记都是什么？" class="headerlink" title="Q:GC(垃圾回收) 日志，增量标记都是什么？"></a>Q:GC(垃圾回收) 日志，增量标记都是什么？</h5><ol>
+<li>GC 日志<br>GC 日志是 V8 引擎在执行垃圾回收时，自动生成的一份详细行为记录，包含 GC 的类型、时间、内存变化、耗时等关键信息。它的核心作用是帮助开发者 “看见” GC 的执行过程，定位内存问题（如频繁 GC、内存泄漏）。<br>在 Node.js 中，可以通过启动参数开启 GC 日志，进而定位问题：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"># 开启基础 <span class="variable constant_">GC</span> 日志，输出到控制台</span><br><span class="line">node --trace-gc app.<span class="property">js</span></span><br><span class="line"># 开启详细 <span class="variable constant_">GC</span> 日志，包含内存分区细节，输出到文件</span><br><span class="line">node --trace-gc --trace-gc-verbose --trace-gc-logfile=gc.<span class="property">log</span> app.<span class="property">js</span></span><br></pre></td></tr></table></figure>
+
+<p>开发者通过分析日志可定位问题：</p>
+<ul>
+<li>若 <code>Scavenge</code> 频繁触发（如每秒多次），可能是新生代内存分配过快（如频繁创建短期对象）。</li>
+<li>若 <code>Mark-sweep</code> 耗时过长（如超过 100ms），可能导致服务器响应延迟，需优化老生代内存占用。</li>
+<li>若 GC 后“已使用内存”持续上升（无下降趋势），大概率存在内存泄漏（如未释放的闭包、定时器）。</li>
+</ul>
+<ol start="2">
+<li>增量标记：<br>增量标记是 V8 针对 “老生代 GC 停顿时间过长” 的优化技术 —— 将原本一次性完成的 “标记阶段”（找出存活对象）拆分成多个小步骤，穿插在 JS 代码执行间隙进行，从而把 “长停顿” 拆成 “短停顿”，降低对程序（尤其是 Node.js 服务器）的影响。<br>V8 老生代 GC 原本用“标记-清除（Mark-Sweep）”算法，核心分两步：</li>
+<li><strong>标记阶段</strong>：从“根对象”（如全局变量、调用栈中的变量）出发，遍历所有可达对象（存活对象），做标记。</li>
+<li><strong>清除阶段</strong>：遍历堆内存，回收未标记的对象（垃圾）。</li>
+</ol>
+<p>问题在于：若堆内存很大（如 Node.js 服务器用了 1GB 堆内存），标记阶段可能需要 <strong>100-200ms</strong> 的连续停顿——期间 JS 主线程完全阻塞，服务器无法处理请求，响应延迟会陡增。</p>
+<p>增量标记把“一次性标记”拆成多个小任务（如每次执行 1-2ms），流程变成：</p>
+<ol>
+<li>V8 先执行一小段“标记任务”（标记部分存活对象），然后暂停 GC，让 JS 主线程继续执行代码（处理请求、运行业务逻辑）。</li>
+<li>当 JS 主线程空闲（如调用栈为空）或满足触发条件（如分配新对象时），再执行下一段“标记任务”。</li>
+<li>重复步骤 1-2，直到所有存活对象标记完成，最后再执行一次性的“清除阶段”。</li>
+</ol>
+<ul>
+<li>通过增量标记拆分任务，原本 100ms 的连续停顿会被拆成 50 个 2ms 的小停顿，穿插在 JS 执行间隙，让用户（或服务器请求）几乎感知不到停顿，响应延迟更平稳。</li>
+<li>这对 Node.js 服务器至关重要：长时间运行的服务器堆内存易增长，增量标记能避免 GC 成为性能瓶颈。</li>
+</ul>
+<h4 id="4-原生模块与引擎桥接优化"><a href="#4-原生模块与引擎桥接优化" class="headerlink" title="4. 原生模块与引擎桥接优化"></a>4. <strong>原生模块与引擎桥接优化</strong></h4><p>Node.js 允许通过 C++ 扩展开发原生模块，这些模块能直接与 V8 引擎交互，提升性能敏感场景的效率：</p>
+<ul>
+<li><strong>高效数据传递</strong>：原生模块通过 V8 提供的 API（如 <code>v8::Value</code>、<code>v8::Object</code>）直接操作 JavaScript 对象，避免了 JavaScript 与原生代码间的序列化开销。</li>
+<li><strong>计算密集型任务卸载</strong>：将 CPU 密集型任务（如数据加密、复杂计算）交给 C++ 模块处理，绕过 JavaScript 解释&#x2F;编译过程，利用 V8 与原生代码的高效桥接机制提升性能。</li>
+</ul>
+<h4 id="5-针对模块系统的优化"><a href="#5-针对模块系统的优化" class="headerlink" title="5. 针对模块系统的优化"></a>5. <strong>针对模块系统的优化</strong></h4><p>Node.js 的 CommonJS 模块系统（及后来的 ES 模块支持）通过 V8 的特性做了加载和缓存优化：</p>
+<ul>
+<li><strong>模块缓存</strong>：模块首次加载后会被缓存到 <code>require.cache</code> 中，后续加载直接复用已编译的模块对象，避免重复解析和编译。</li>
+<li><strong>延迟编译</strong>：模块采用“按需加载”策略，仅在 <code>require</code> 时才由 V8 解析编译，减少启动时的资源消耗。</li>
+<li><strong>ES 模块优化</strong>：对 ES 模块（<code>import</code>&#x2F;<code>export</code>）支持静态分析，V8 可在编译阶段进行更深度的优化（如 tree-shaking 基础）。</li>
+</ul>
+<h4 id="6-工具链和启动优化"><a href="#6-工具链和启动优化" class="headerlink" title="6. 工具链和启动优化"></a>6. <strong>工具链和启动优化</strong></h4><ul>
+<li><strong>字节码缓存</strong>：Node.js 支持通过 <code>--compile-cache</code> 缓存 V8 生成的字节码，加速二次启动（避免重复解析和编译相同代码）。</li>
+<li><strong>快照机制（Snapshot）</strong>：通过 <code>v8.serialize()</code> 等 API 序列化内存中的对象，或使用 <code>node --snapshot</code> 生成启动快照，减少冷启动时的初始化开销（尤其对 CLI 工具和 Serverless 场景有用）。</li>
+</ul>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>Node.js 并未修改 V8 引擎的核心实现，但通过<strong>架构设计（异步 I&#x2F;O、事件循环）、API 封装（原生模块、内存监控）、运行时优化（模块缓存、字节码缓存）</strong> 等方式，充分发挥了 V8 的性能优势，并针对服务器端场景解决了单线程、I&#x2F;O 阻塞、内存管理等关键问题。可以说，Node.js 是对“JavaScript 引擎在服务器端的应用”做了系统性优化，使其从浏览器脚本语言变成了高效的后端开发工具。</p>
+<h1 id="第三部分：Vite-在前端工程化上进行的优化"><a href="#第三部分：Vite-在前端工程化上进行的优化" class="headerlink" title="第三部分：Vite 在前端工程化上进行的优化"></a>第三部分：Vite 在前端工程化上进行的优化</h1><p>Vite 通过优化工程化的构建流程和开发体验，优化代码质量，简洁提升引擎执行效率。</p>
+<p>Vite 本身并不直接优化 JavaScript 引擎（如 V8）的底层实现，它的优化集中在<strong>前端工程化的构建流程和开发体验</strong>上（如依赖预构建、按需编译等）。不过，Vite 会通过工具链集成（如 Babel、ESBuild 等）间接影响代码在引擎中的执行效率，同时其插件生态也覆盖了从解析到转换的全流程。</p>
+<h3 id="一、Vite-对“JS-引擎执行效率”的间接影响"><a href="#一、Vite-对“JS-引擎执行效率”的间接影响" class="headerlink" title="一、Vite 对“JS 引擎执行效率”的间接影响"></a>一、Vite 对“JS 引擎执行效率”的间接影响</h3><p>Vite 不修改 JS 引擎本身，但通过以下方式优化代码质量，间接提升引擎执行效率：</p>
+<ol>
+<li><p><strong>依赖预构建与优化</strong><br>Vite 在开发环境会用 <strong>ESBuild</strong>（基于 Go 语言的超快编译器）将 CommonJS 格式的依赖（如 <code>node_modules</code> 中的包）转换为 ESM 格式，并合并重复依赖。转换后的代码更符合现代 JS 引擎的解析习惯，减少引擎在模块加载时的额外处理。</p>
+</li>
+<li><p><strong>语法降级与兼容性处理</strong><br>通过集成 Babel 或 ESBuild，Vite 可将高版本 ES 语法（如 <code>async/await</code>、箭头函数）降级为低版本（如 ES5），确保代码在旧引擎中正常运行。同时，现代语法（如 <code>let</code>&#x2F;<code>const</code> 块级作用域）本身更利于引擎进行静态分析和优化（如 V8 的 JIT 编译）。</p>
+</li>
+<li><p><strong>Tree-shaking 与代码压缩</strong><br>生产环境下，Vite 基于 Rollup 进行打包，通过 Tree-shaking 移除死代码，减少代码体积；同时通过 Terser 或 ESBuild 压缩代码（如缩短变量名、合并语句），降低引擎的解析和执行成本。</p>
+</li>
+</ol>
+<h3 id="二、Vite-中的“解析阶段”工具与插件生态"><a href="#二、Vite-中的“解析阶段”工具与插件生态" class="headerlink" title="二、Vite 中的“解析阶段”工具与插件生态"></a>二、Vite 中的“解析阶段”工具与插件生态</h3><p>Vite 的核心流程（解析、转换、打包）依赖于各类工具和插件，其中负责“解析阶段”的典型工具包括：</p>
+<h4 id="1-ESBuild：核心解析与转换工具"><a href="#1-ESBuild：核心解析与转换工具" class="headerlink" title="1. ESBuild：核心解析与转换工具"></a>1. <strong>ESBuild：核心解析与转换工具</strong></h4><p>ESBuild 是 Vite 开发环境的“主力军”，负责：</p>
+<ul>
+<li><strong>快速解析</strong>：将 JS&#x2F;TS 代码解析为 AST（抽象语法树），速度远超 Babel（基于 Go 语言，比 JS 实现快 10-100 倍）。</li>
+<li><strong>语法转换</strong>：处理 JSX、TypeScript、装饰器等语法，生成符合标准的 JS 代码。</li>
+<li><strong>依赖预构建</strong>：解析 <code>node_modules</code> 中的依赖，转换格式并合并，减少请求次数。<br>注：ESBuild 的解析逻辑独立于 Babel，但可通过配置实现类似 Babel 的语法转换效果（如降级）。</li>
+</ul>
+<h4 id="2-Babel：通过插件集成，处理复杂转换"><a href="#2-Babel：通过插件集成，处理复杂转换" class="headerlink" title="2. Babel：通过插件集成，处理复杂转换"></a>2. <strong>Babel：通过插件集成，处理复杂转换</strong></h4><p>Vite 本身默认不使用 Babel，但提供官方插件 <code>@vitejs/plugin-react</code> 或 <code>@vitejs/plugin-vue</code> 时，会按需集成 Babel 处理特殊场景：</p>
+<ul>
+<li><strong>React 项目</strong>：解析 JSX 语法，或通过 <code>babel-plugin-transform-react-jsx</code> 转换为 <code>React.createElement</code>。</li>
+<li><strong>兼容性降级</strong>：当 ESBuild 的降级能力不足（如处理某些复杂语法或提案阶段的特性）时，可通过 <code>@vitejs/plugin-babel</code> 引入 Babel，配合 <code>@babel/preset-env</code> 实现更精细的语法降级。<br>例：在 <code>vite.config.js</code> 中配置 Babel 插件：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&quot;vite&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> babel <span class="keyword">from</span> <span class="string">&quot;@vitejs/plugin-babel&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="title function_">babel</span>(&#123;</span><br><span class="line">      <span class="attr">babelHelpers</span>: <span class="string">&quot;bundled&quot;</span>,</span><br><span class="line">      <span class="attr">presets</span>: [[<span class="string">&quot;@babel/preset-env&quot;</span>, &#123; <span class="attr">targets</span>: <span class="string">&quot;defaults&quot;</span> &#125;]],</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-其他解析相关插件"><a href="#3-其他解析相关插件" class="headerlink" title="3. 其他解析相关插件"></a>3. <strong>其他解析相关插件</strong></h4><p>Vite 的插件生态覆盖了不同类型文件的解析和处理，例如：</p>
+<ul>
+<li><strong>TypeScript 解析</strong>：<code>@vitejs/plugin-vue-jsx</code> 处理 Vue 的 JSX，<code>@rollup/plugin-typescript</code> 解析 TS 代码。</li>
+<li><strong>CSS 与静态资源</strong>：虽然不直接处理 JS 解析，但 <code>vite-plugin-css-modules</code> 等插件会解析 CSS 模块，其流程与 JS 解析类似（基于 AST 处理）。</li>
+<li><strong>自定义解析逻辑</strong>：开发者可通过 Vite 插件的 <code>transform</code> 钩子，自定义代码解析和转换逻辑（如替换特定字符串、注入代码等），本质上是在 ESBuild&#x2F;Rollup 解析后添加额外处理步骤。</li>
+</ul>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>Vite 不直接优化 JS 引擎，但其通过 <strong>ESBuild 加速解析</strong>、<strong>依赖预构建减少引擎负担</strong>、<strong>代码压缩优化执行效率</strong> 等方式，间接提升了代码在引擎中的运行表现。</li>
+<li>解析阶段的核心工具是 <strong>ESBuild</strong>，而 Babel 可通过插件集成，用于处理复杂语法转换或兼容性需求。Vite 的插件生态完整覆盖了从解析、转换到打包的全流程，开发者可按需扩展。</li>
+</ul>
+<h1 id="第四部分：C-与-JS-在编译执行流程的对比"><a href="#第四部分：C-与-JS-在编译执行流程的对比" class="headerlink" title="第四部分：C++与 JS 在编译执行流程的对比"></a>第四部分：C++与 JS 在编译执行流程的对比</h1><p>从编译执行流程、核心组件和设计目标来看，C++ 编译执行工具链（可理解为“C++ 引擎”，包括编译器、链接器、运行时等）与 JavaScript 引擎（如 V8）有一定可类比性，但因语言特性（静态 vs 动态、编译型 vs 解释型）差异，核心机制和优化方向大不相同。以下从历史聊天提到的“解析-编译-执行-优化”流程进行类比：</p>
+<h3 id="一、核心流程类比：从代码到执行"><a href="#一、核心流程类比：从代码到执行" class="headerlink" title="一、核心流程类比：从代码到执行"></a>一、核心流程类比：从代码到执行</h3><table>
+<thead>
+<tr>
+<th><strong>阶段</strong></th>
+<th><strong>JavaScript 引擎（如 V8）</strong></th>
+<th><strong>C++ 工具链（编译器+链接器+运行时）</strong></th>
+<th>类比点与差异</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>解析（Parsing）</strong></td>
+<td>词法分析 → 语法分析 → 生成 AST（由引擎内置解析器完成）</td>
+<td>预处理（<code>#include</code>&#x2F;宏）→ 词法&#x2F;语法分析 → 生成 AST（编译器前端，如 Clang 的前端）</td>
+<td>均需将源代码转换为结构化的 AST，检查语法错误；C++ 多了预处理阶段（处理宏和头文件）。</td>
+</tr>
+<tr>
+<td><strong>编译（Compilation）</strong></td>
+<td>解释器生成字节码（如 V8 的 Ignition），JIT 编译器将热点字节码编译为机器码（如 Turbofan）</td>
+<td>编译器后端（如 LLVM）将 AST 转换为汇编代码，再编译为机器码（目标文件 <code>.o</code>）</td>
+<td>均会生成机器码，但 JS 是“动态编译”（运行时按需编译），C++ 是“静态编译”（运行前全量编译）。</td>
+</tr>
+<tr>
+<td><strong>链接（Linking）</strong></td>
+<td>无显式链接阶段（模块依赖在运行时通过 <code>import</code> 动态加载）</td>
+<td>链接器（如 ld）将多个目标文件和库文件合并为可执行程序（解决符号引用、地址分配）</td>
+<td>C++ 必须在编译后通过链接生成完整程序；JS 依赖动态加载，无预链接过程。</td>
+</tr>
+<tr>
+<td><strong>执行（Execution）</strong></td>
+<td>单线程执行（调用栈），结合事件循环处理异步任务</td>
+<td>多线程&#x2F;进程执行（由 OS 调度），直接操作内存和硬件（通过系统调用）</td>
+<td>均需 CPU 执行机器码；JS 受引擎单线程限制，C++ 可直接利用 OS 多线程能力。</td>
+</tr>
+<tr>
+<td><strong>内存管理</strong></td>
+<td>自动垃圾回收（标记-清除、分代回收等）</td>
+<td>手动管理（<code>new</code>&#x2F;<code>delete</code>）或通过智能指针（<code>unique_ptr</code>）半自动管理</td>
+<td>JS 引擎自动释放内存，C++ 依赖开发者或库控制内存生命周期。</td>
+</tr>
+</tbody></table>
+<h3 id="二、核心组件类比：功能对应关系"><a href="#二、核心组件类比：功能对应关系" class="headerlink" title="二、核心组件类比：功能对应关系"></a>二、核心组件类比：功能对应关系</h3><table>
+<thead>
+<tr>
+<th><strong>JS 引擎组件</strong></th>
+<th><strong>C++ 工具链对应组件</strong></th>
+<th>功能类比</th>
+<th>关键差异</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>解析器（Parser）</td>
+<td>编译器前端（如 Clang 前端）</td>
+<td>将源代码转换为 AST，检查语法错误</td>
+<td>C++ 前端需处理更复杂的语法（模板、重载等），JS 解析需处理动态语法（如 <code>eval</code>）。</td>
+</tr>
+<tr>
+<td>解释器（Interpreter）</td>
+<td>无直接对应（C++ 无解释执行阶段）</td>
+<td>快速启动，逐行执行中间代码（字节码）</td>
+<td>JS 解释器是为了动态执行和快速启动，C++ 直接编译为机器码，无需解释。</td>
+</tr>
+<tr>
+<td>JIT 编译器（如 Turbofan）</td>
+<td>编译器后端（如 LLVM 后端）</td>
+<td>将中间表示（字节码&#x2F;AST）优化并编译为机器码</td>
+<td>JS JIT 是“运行时优化”（根据执行数据动态优化），C++ 编译器是“静态优化”（编译时基于代码分析）。</td>
+</tr>
+<tr>
+<td>调用栈（Call Stack）</td>
+<td>程序调用栈（由 OS 维护）</td>
+<td>管理函数调用顺序和局部变量</td>
+<td>原理相同（栈帧结构），但 JS 栈受引擎限制（如最大深度），C++ 栈大小可由 OS 配置。</td>
+</tr>
+<tr>
+<td>垃圾回收器（GC）</td>
+<td>无（依赖手动管理或第三方库）</td>
+<td>回收不再使用的内存</td>
+<td>JS 引擎自动完成，C++ 需开发者显式释放（或用 <code>std::shared_ptr</code> 等）。</td>
+</tr>
+<tr>
+<td>事件循环（Event Loop）</td>
+<td>无（由 OS 调度线程&#x2F;进程）</td>
+<td>处理异步任务（如 I&#x2F;O）</td>
+<td>JS 事件循环是引擎单线程内的任务调度机制，C++ 依赖 OS 多线程和异步 I&#x2F;O 接口（如 <code>epoll</code>）。</td>
+</tr>
+</tbody></table>
+<h3 id="三、核心差异：静态-vs-动态的本质区别"><a href="#三、核心差异：静态-vs-动态的本质区别" class="headerlink" title="三、核心差异：静态 vs 动态的本质区别"></a>三、核心差异：静态 vs 动态的本质区别</h3><ol>
+<li><p><strong>编译时机</strong>：</p>
+<ul>
+<li>C++ 是“ Ahead-of-Time (AOT) 编译”：代码在运行前完全编译为机器码，执行时直接交给 CPU，启动快但缺乏动态性。</li>
+<li>JS 是“ Just-in-Time (JIT) 编译”：代码运行时先解释执行，再根据热点动态编译为机器码，启动慢但支持动态类型和实时优化。</li>
+</ul>
+</li>
+<li><p><strong>类型处理</strong>：</p>
+<ul>
+<li>C++ 是静态类型：编译时确定变量类型，编译器可做严格类型检查和优化（如函数重载、模板特化）。</li>
+<li>JS 是动态类型：变量类型在运行时确定，JS 引擎需通过“类型推测”（如 V8 的 Type Feedback）优化，若类型突变会触发“去优化”。</li>
+</ul>
+</li>
+<li><p><strong>内存与性能</strong>：</p>
+<ul>
+<li>C++ 直接操作内存地址，无 GC 开销，适合高性能场景（如游戏引擎、系统级开发），但需手动避免内存泄漏。</li>
+<li>JS 内存由引擎管理，GC 会带来停顿开销，但开发者无需关注内存细节，适合快速开发（如前端、Node.js 服务）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>C++ 工具链和 JS 引擎在“解析-编译-执行”的核心流程上有功能类比性（如解析生成 AST、编译为机器码），但本质是为两种不同范式的语言设计：</p>
+<ul>
+<li>C++ 工具链追求“静态优化”和“直接硬件控制”，适合高性能、低层面开发；</li>
+<li>JS 引擎追求“动态适应性”和“开发便捷性”，通过 JIT、自动 GC 等机制平衡动态语言的灵活性与执行效率。</li>
+</ul>
+<p>理解这种差异，有助于更好地把握两种语言的设计哲学和适用场景。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qijia Huang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://mys109hqj.github.io/2025/10/21/25-10-21-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-jsV8%E5%BC%95%E6%93%8E%E4%B8%8Enode/">https://mys109hqj.github.io/2025/10/21/25-10-21-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-jsV8%E5%BC%95%E6%93%8E%E4%B8%8Enode/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Qijia Huang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <div class="card" data-aos="fade-up">
+    <div id="utteranc-container" class="card-content">
+        <script src="https://utteranc.es/client.js"
+                repo="liukgg/comment-utterances"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+</div>
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2025/10/21/25-10-21-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-jsV8%E5%BC%95%E6%93%8E%E4%B8%8Enode/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="25-10-21-学习日志-jsV8引擎与node">
+                        
+                        <span class="card-title">25-10-21-学习日志-jsV8引擎与node</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Qijia Huang
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/10/21/25-10-%E6%B5%81%E6%B0%B4%E8%B4%A6/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="流水账">
+                        
+                        <span class="card-title">流水账</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Qijia Huang
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 250428添加的内容 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFunction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2025</span>
+            
+            <a href="/about" target="_blank">Qijia Huang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/MYS109hqj" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:qj.st@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
