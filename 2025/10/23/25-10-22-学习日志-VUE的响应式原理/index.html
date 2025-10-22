@@ -1,0 +1,1326 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="25-10-22-学习日志-VUE的响应式原理, MYS109hqj">
+    <meta name="description" content="
+目标：理解 VUE2 与 VUE3 的响应式原理，深入 VUE3 的响应式源码。
+
+第一部分：阅读相关文章，理解原理回填：这篇文章讲把 Vue3 响应式原理讲得挺细致的，也是真有源码解读部分。如果能读懂的话，”Vue3 部分”可以只看这篇">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>25-10-22-学习日志-VUE的响应式原理 | MYS109hqj</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.0.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">MYS109hqj</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">MYS109hqj</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">25-10-22-学习日志-VUE的响应式原理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/study/">
+                                <span class="chip bg-color">study</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/major/" class="post-category">
+                                major
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-10-23
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-10-23
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.9k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>目标：理解 VUE2 与 VUE3 的响应式原理，深入 VUE3 的响应式源码。</p>
+</blockquote>
+<h2 id="第一部分：阅读相关文章，理解原理"><a href="#第一部分：阅读相关文章，理解原理" class="headerlink" title="第一部分：阅读相关文章，理解原理"></a>第一部分：阅读相关文章，理解原理</h2><p>回填：这篇文章讲把 Vue3 响应式原理讲得挺细致的，也是真有源码解读部分。如果能读懂的话，”Vue3 部分”可以只看这篇：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/635132385">浅谈 Vue3 响应式原理与源码解读</a>。</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7426918825231761419#heading-1">深入解析 Vue2 和 Vue3 响应式原理</a>这篇文章讲解了 VUE2 与 VUE3 的响应式基本实现。文中提到的“VUE3 使用到在 ES6 一并新增的 Reflect，与 Proxy 一同实现响应式”，我对其中 Reflect 的概念有所疑惑。Reflect 基本复刻了 Object 的方法，在复刻方法的前提下添加了“Object 对象的一些明显属于语言内部的方法（比如 Object.defineProperty）”、修改了部分方法的返回值、让 Object 的操作都变成函数行为。具体可以看下面这篇文章，讲述了 Reflect 的产生背景与定义、用法:<a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/reflect">ECMAScript 6 入门-Reflect</a>。</p>
+<p><a target="_blank" rel="noopener" href="https://datasea.cn/go1021213738.html">Vue3 响应式原理揭秘：从源码层面理解 Composition API 的底层机制</a>这篇文章的“第二章和第三章”质量蛮高的，主题是 VUE3 组合式 API 下的”响应式系统&amp;性能优化”。里面提到了关键概念——“<strong>副作用 effect</strong>“。</p>
+<p>副作用函数可以这样定义：如果一个函数引用了外部的数据，这个函数会受到外部数据改变的影响，我们就说这个函数存在副作用，也就是我们所说的副作用函数。（引用自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/635132385">浅谈 Vue3 响应式原理与源码解读</a>）</p>
+<p>阅读完上面三篇文章，我大致理解了“VUE3 响应式原理”是如何实现的。就是通过 Proxy 与 Reflect 的共同作用下代理对象，并维护一个“依赖收集-触发更新”的列表。这个列表是通过全局 WeakMap 的多层映射维护的（第一层：全局 WeakMap，由”原始对象”映射到对象的 “属性 - 副作用” 映射（Map）；第二层：Map， 键是对象的属性名，值是依赖该属性的所有副作用函数（Set，避免重复））。</p>
+<blockquote>
+<p>上面这段表述，ChatGPT 给了 9.5&#x2F;10 分，这里也展示下当前版本 ChatGPT 修改后的文本，填充了“‘依赖收集’是在 effect 触发时收集”这个细节：<br>Vue3 通过 <code>Proxy</code> 与 <code>Reflect</code> 拦截对响应式对象的访问与修改，在副作用函数（<code>effect</code>）执行时进行依赖收集，并在数据变更时触发相应的副作用函数，从而实现响应式更新。<br>依赖关系存储在一个全局的 <code>WeakMap</code>（即 <code>targetMap</code>）中，层级结构如下：</p>
+<ul>
+<li>第一层：<code>WeakMap</code>，键为原始对象（<code>target</code>），值为该对象的 <code>depsMap</code>；</li>
+<li>第二层：<code>Map</code>，键为属性名（<code>key</code>），值为依赖该属性的所有副作用函数集合（<code>Set&lt;ReactiveEffect&gt;</code>），以防重复收集。</li>
+</ul>
+</blockquote>
+<p>源码链接：<br>Vue2:<a target="_blank" rel="noopener" href="https://github.com/vuejs/vue/tree/v2.7.14/src/core/observer">https://github.com/vuejs/vue/tree/v2.7.14/src/core/observer</a>中的 observer.js（数据劫持核心，Observer 类实现）、dep.js（依赖管理器 Dep 类）、watcher.js（观察者 Watcher 类）、array.js（数组响应式处理）<br>Vue3:<a target="_blank" rel="noopener" href="https://github.com/vuejs/core/tree/v3.3.4/packages/reactivity/src">https://github.com/vuejs/core/tree/v3.3.4/packages/reactivity/src</a>中的 reactive.ts（reactive 函数与 Proxy 代理实现）、effect.ts（副作用 effect 与依赖追踪核心）、baseHandlers.ts（Proxy 拦截器的具体实现）、collectionHandlers.ts（集合类型 Map&#x2F;Set 的响应式处理）</p>
+<p>个人通过豆包 AI 了解 Vue2 的源码实现（似懂非懂，勉强了解了大致概念与事件的链路）。 Vue2 就是通过对对象的每个属性设置 Dep.notify()与其中的 Watcher 列表，让 watcher 触发更新逻辑。</p>
+<h2 id="第二部分：针对性提问"><a href="#第二部分：针对性提问" class="headerlink" title="第二部分：针对性提问"></a>第二部分：针对性提问</h2><h3 id="Vue3-的-trigger-与-Vue2-的-trigger-核心差异解析"><a href="#Vue3-的-trigger-与-Vue2-的-trigger-核心差异解析" class="headerlink" title="Vue3 的 trigger 与 Vue2 的 trigger 核心差异解析"></a>Vue3 的 trigger 与 Vue2 的 trigger 核心差异解析</h3><blockquote>
+<p>Q:VUE3 的 trigger 和 VUE2 的 trigger 有什么不同吗？就是一个通过副作用直接触发，一个通过 observer 监听变化进而触发？</p>
+</blockquote>
+<p>要理解 Vue3 的 <code>trigger</code> 与 Vue2 的 <code>trigger</code>（实际对应 Vue2 中 <code>Dep.notify()</code> 主导的更新触发逻辑）的不同，需从“触发前提、依赖关联方式、执行逻辑、功能覆盖范围”四个维度拆解——核心差异并非简单的“副作用直接触发”与“Observer 监听触发”，而是由两者响应式底层机制（Proxy 代理 vs Object.defineProperty 劫持）差异衍生的完整链路区别。</p>
+<h4 id="一、先明确：Vue2-中没有“trigger-函数”，但有等效的“更新触发逻辑”"><a href="#一、先明确：Vue2-中没有“trigger-函数”，但有等效的“更新触发逻辑”" class="headerlink" title="一、先明确：Vue2 中没有“trigger 函数”，但有等效的“更新触发逻辑”"></a>一、先明确：Vue2 中没有“trigger 函数”，但有等效的“更新触发逻辑”</h4><p>首先需澄清一个概念：Vue2 的源码中<strong>没有名为 <code>trigger</code> 的独立函数</strong>，其“数据变化触发更新”的核心逻辑由 <code>Dep</code> 类的 <code>notify()</code> 方法实现（可理解为 Vue2 版的“trigger”）；而 Vue3 中 <code>trigger</code> 是独立的核心函数，统一负责“数据变化后触发依赖更新”。</p>
+<p>两者的本质目标一致——<strong>当数据变化时，找到依赖该数据的“更新逻辑”并执行</strong>，但因底层响应式机制不同，实现路径和能力存在显著差异。</p>
+<h4 id="二、核心差异：从“依赖关联”到“执行逻辑”的全链路对比"><a href="#二、核心差异：从“依赖关联”到“执行逻辑”的全链路对比" class="headerlink" title="二、核心差异：从“依赖关联”到“执行逻辑”的全链路对比"></a>二、核心差异：从“依赖关联”到“执行逻辑”的全链路对比</h4><p>结合你提到的“副作用”“Observer 监听”，以及文档中 Vue3 的 <code>Proxy</code>、Vue2 的 <code>Object.defineProperty</code> 逻辑，两者的差异可通过下表清晰呈现：</p>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>Vue2（Dep.notify() 主导）</th>
+<th>Vue3（trigger 函数）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 触发前提：数据变化的监听方式</td>
+<td>基于 <code>Object.defineProperty</code> 对<strong>单个属性</strong>的 <code>setter</code> 劫持，仅能监听“属性值修改”（无法监听新增&#x2F;删除属性、数组索引修改）。</td>
+<td>基于 <code>Proxy</code> 对<strong>整个对象</strong>的拦截，可监听“属性修改、新增、删除”“数组索引修改、原型方法调用”等几乎所有对象操作。</td>
+</tr>
+<tr>
+<td>2. 依赖关联：“数据-更新逻辑”的绑定方式</td>
+<td>依赖 <code>Dep</code>（每个属性对应一个 <code>Dep</code>）和 <code>Watcher</code>（封装更新逻辑）：<br>- 每个响应式属性绑定一个 <code>Dep</code>，存储依赖该属性的 <code>Watcher</code>；<br>- <code>Watcher</code> 初始化时执行更新逻辑（如 render），触发属性 <code>getter</code>，通过 <code>Dep.depend()</code> 完成“属性-Dep-Watcher”的绑定。</td>
+<td>依赖 <code>targetMap</code>（全局依赖映射）和 <code>effect</code>（副作用函数）：<br>- <code>targetMap</code> 是 <code>WeakMap&lt;原对象, Map&lt;属性名, Set&lt;effect&gt;&gt;&gt;</code>，直接绑定“对象-属性-effect”；<br>- <code>effect</code> 执行时访问 Proxy 对象，触发 <code>get</code> 拦截，通过 <code>track()</code> 函数将 <code>effect</code> 加入 <code>targetMap</code> 对应位置。</td>
+</tr>
+<tr>
+<td>3. 执行逻辑：触发更新时的核心流程</td>
+<td>1. 属性值修改触发 <code>setter</code>；<br>2. 调用属性对应的 <code>Dep.notify()</code>；<br>3. 遍历 <code>Dep</code> 中的 <code>Watcher</code>，调用每个 <code>Watcher</code> 的 <code>update()</code> 方法；<br>4. <code>Watcher</code> 最终执行更新逻辑（如重新 render、计算 computed）。</td>
+<td>1. 对象操作触发 <code>Proxy</code> 拦截（如 <code>set</code>&#x2F;<code>deleteProperty</code>）；<br>2. 调用 <code>trigger()</code> 函数，从 <code>targetMap</code> 中找到该“对象-属性”对应的所有 <code>effect</code>；<br>3. 遍历 <code>effect</code> 集合：<br> - 若 <code>effect</code> 有 <code>scheduler</code>（调度器，如 <code>watch</code> 的 <code>flush: &#39;post&#39;</code>），则执行 <code>scheduler</code>；<br> - 无 <code>scheduler</code> 则直接执行 <code>effect</code> 函数（如组件更新逻辑）。</td>
+</tr>
+<tr>
+<td>4. 功能覆盖：支持的更新场景</td>
+<td>局限性强：<br>- 无法触发“对象新增&#x2F;删除属性”的更新（需手动调用 <code>this.$set</code>&#x2F;<code>this.$delete</code>）；<br>- 无法触发“数组索引修改”的更新（需调用重写的 <code>push</code>&#x2F;<code>splice</code> 等方法）；<br>- 数组的 <code>Dep</code> 绑定在数组对象本身，调用重写方法时触发数组 <code>Dep.notify()</code>，无法精准定位“修改的元素对应的依赖”。</td>
+<td>场景全覆盖：<br>- 天然支持“对象新增&#x2F;删除属性”“数组索引修改”的更新，无需手动调用额外 API；<br>- 数组操作（如 <code>arr[0] = 1</code>、<code>delete arr[0]</code>）直接触发 <code>Proxy</code> 拦截，<code>trigger()</code> 可精准找到依赖该索引的 <code>effect</code>，避免不必要的更新。</td>
+</tr>
+<tr>
+<td>5. 性能优化：避免重复&#x2F;冗余更新</td>
+<td>依赖 <code>Watcher</code> 的 <code>id</code> 去重（<code>Dep</code> 中 <code>subs</code> 数组通过 <code>id</code> 避免重复添加 <code>Watcher</code>），但数组更新时会触发整个数组的 <code>Dep.notify()</code>，可能导致冗余更新。</td>
+<td>1. <code>targetMap</code> 中用 <code>Set</code> 存储 <code>effect</code>，天然去重；<br>2. <code>Proxy</code> 拦截精准定位修改的属性&#x2F;索引，仅触发依赖该位置的 <code>effect</code>，减少冗余更新；<br>3. 支持 <code>scheduler</code> 自定义执行时机（如批量更新、延迟更新），进一步优化性能。</td>
+</tr>
+</tbody></table>
+<h4 id="三、关键补充：你疑问中的“副作用直接触发”与“Observer-监听触发”的准确解读"><a href="#三、关键补充：你疑问中的“副作用直接触发”与“Observer-监听触发”的准确解读" class="headerlink" title="三、关键补充：你疑问中的“副作用直接触发”与“Observer 监听触发”的准确解读"></a>三、关键补充：你疑问中的“副作用直接触发”与“Observer 监听触发”的准确解读</h4><p>你提到的“一个通过副作用直接触发，一个通过 Observer 监听触发”，需要修正并细化：</p>
+<h5 id="1-Vue2：并非“Observer-监听触发”，而是“属性-setter-触发-Dep-通知-Watcher”"><a href="#1-Vue2：并非“Observer-监听触发”，而是“属性-setter-触发-Dep-通知-Watcher”" class="headerlink" title="1. Vue2：并非“Observer 监听触发”，而是“属性 setter 触发 Dep 通知 Watcher”"></a>1. Vue2：并非“Observer 监听触发”，而是“属性 setter 触发 Dep 通知 Watcher”</h5><p>Vue2 中的 <code>Observer</code> 类仅负责“初始化数据劫持”——递归遍历对象，为每个属性添加 <code>Object.defineProperty</code> 的 <code>getter/setter</code>，它本身不直接触发更新，只是“准备监听条件”。<br>真正的更新触发逻辑是：<strong>属性修改 → 触发 <code>setter</code> → 调用 <code>Dep.notify()</code> → 通知 <code>Watcher</code> 执行更新</strong>，核心是“属性-Dep-Watcher”的联动。</p>
+<h5 id="2-Vue3：并非“副作用直接触发”，而是“Proxy-拦截触发-trigger-执行-effect”"><a href="#2-Vue3：并非“副作用直接触发”，而是“Proxy-拦截触发-trigger-执行-effect”" class="headerlink" title="2. Vue3：并非“副作用直接触发”，而是“Proxy 拦截触发 trigger 执行 effect”"></a>2. Vue3：并非“副作用直接触发”，而是“Proxy 拦截触发 trigger 执行 effect”</h5><p>Vue3 中的 <code>effect</code> 是“副作用函数”的封装（如组件 render、<code>watch</code> 回调），但 <code>effect</code> 不会“直接触发”——必须通过 <code>Proxy</code> 拦截数据变化后，由 <code>trigger</code> 函数从 <code>targetMap</code> 中找到对应的 <code>effect</code> 并执行。<br>核心逻辑是：**对象操作 → 触发 <code>Proxy</code> 拦截 → 调用 <code>trigger()</code> → 执行对应 <code>effect</code>**，<code>effect</code> 是“更新逻辑的载体”，而非“触发者”。</p>
+<h4 id="四、总结：差异的本质是“响应式底层机制的升级”"><a href="#四、总结：差异的本质是“响应式底层机制的升级”" class="headerlink" title="四、总结：差异的本质是“响应式底层机制的升级”"></a>四、总结：差异的本质是“响应式底层机制的升级”</h4><p>Vue2 的“更新触发”（<code>Dep.notify()</code>）是“属性级劫持”的必然结果——因 <code>Object.defineProperty</code> 只能针对单个属性，不得不通过 <code>Dep</code> 作为中间层关联 <code>Watcher</code>，导致功能局限和链路冗余；<br>Vue3 的 <code>trigger</code> 是“对象级代理”的优化产物——<code>Proxy</code> 能拦截整个对象的操作，配合 <code>targetMap</code> 直接绑定“对象-属性-effect”，不仅解决了 Vue2 的所有局限性，还通过 <code>scheduler</code> 等设计提升了灵活性和性能。</p>
+<p>简单来说：Vue2 是“属性变了，找依赖该属性的 Watcher 更”；Vue3 是“对象变了，找依赖该对象属性的 effect 更”——后者的链路更短、覆盖场景更广、性能更优。</p>
+<h3 id="Vue3-的-effect-与-Vue2-的-Watcher-之间的差别"><a href="#Vue3-的-effect-与-Vue2-的-Watcher-之间的差别" class="headerlink" title="Vue3 的 effect 与 Vue2 的 Watcher 之间的差别"></a>Vue3 的 effect 与 Vue2 的 Watcher 之间的差别</h3><blockquote>
+<p>Q:那 Vue2 就是通过对对象的每个属性设置 Dep.notify()与其中的 Watcher 列表，让 watcher 触发更新逻辑？ watcher 和 effect 的效果是一样的吗？</p>
+</blockquote>
+<p>你的理解基本正确。Vue2 中确实通过为每个属性关联 <code>Dep</code>（依赖管理器），并在 <code>Dep</code> 中维护 <code>Watcher</code> 列表，当属性变化时通过 <code>Dep.notify()</code> 触发 <code>Watcher</code> 执行更新逻辑；而 Vue3 的 <code>effect</code> 与 Vue2 的 <code>Watcher</code> 核心作用相似——都是“封装需要响应数据变化的逻辑”，但两者在设计和能力上存在显著差异。</p>
+<h4 id="一、Vue2-的更新触发逻辑：Dep-与-Watcher-的协作"><a href="#一、Vue2-的更新触发逻辑：Dep-与-Watcher-的协作" class="headerlink" title="一、Vue2 的更新触发逻辑：Dep 与 Watcher 的协作"></a>一、Vue2 的更新触发逻辑：<code>Dep</code> 与 <code>Watcher</code> 的协作</h4><p>Vue2 中，每个响应式属性会对应一个 <code>Dep</code> 实例，<code>Dep</code> 内部通过 <code>subs</code> 数组存储所有依赖该属性的 <code>Watcher</code>。当属性变化时：</p>
+<ol>
+<li>触发 <code>setter</code> 拦截，调用 <code>Dep.notify()</code>；</li>
+<li><code>Dep.notify()</code> 遍历 <code>subs</code> 数组，调用每个 <code>Watcher</code> 的 <code>update()</code> 方法；</li>
+<li><code>Watcher</code> 最终执行自身封装的更新逻辑（如视图渲染、计算属性重新计算、<code>watch</code> 回调等）。</li>
+</ol>
+<p><strong>核心链路</strong>：<code>属性变化 → setter → Dep.notify() → Watcher.update() → 执行更新逻辑</code>。</p>
+<h4 id="二、Watcher-与-effect-的对比：作用相似，设计不同"><a href="#二、Watcher-与-effect-的对比：作用相似，设计不同" class="headerlink" title="二、Watcher 与 effect 的对比：作用相似，设计不同"></a>二、<code>Watcher</code> 与 <code>effect</code> 的对比：作用相似，设计不同</h4><p>两者的核心目标一致——<strong>将“依赖数据”与“更新逻辑”绑定，数据变化时自动执行逻辑</strong>，但实现方式和灵活性有明显区别：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Vue2 的 <code>Watcher</code></th>
+<th>Vue3 的 <code>effect</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>形态</strong></td>
+<td>类实例（<code>new Watcher(...)</code>）</td>
+<td>函数（<code>effect(fn)</code> 包装的副作用函数）</td>
+</tr>
+<tr>
+<td><strong>依赖关联方式</strong></td>
+<td>双向关联：<code>Watcher</code> 记录依赖的 <code>Dep</code>，<code>Dep</code> 记录依赖的 <code>Watcher</code>（通过 <code>id</code> 去重）。</td>
+<td>临时关联：通过全局 <code>activeEffect</code> 变量，在 <code>effect</code> 执行时临时标记当前副作用，收集依赖后自动解除。</td>
+</tr>
+<tr>
+<td><strong>更新触发方式</strong></td>
+<td><code>Dep.notify()</code> 调用 <code>Watcher.update()</code>，<code>Watcher</code> 内部通过队列（<code>nextTick</code>）优化执行时机。</td>
+<td><code>trigger</code> 函数直接调用 <code>effect</code> 或其 <code>scheduler</code>（调度器），支持自定义执行时机（如 <code>flush: &#39;pre&#39;/&#39;post&#39;/&#39;sync&#39;</code>）。</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>需手动实例化，按场景分为渲染 <code>Watcher</code>、计算属性 <code>Watcher</code>、<code>watch</code> <code>Watcher</code> 等，场景绑定较固定。</td>
+<td>函数式封装，无需区分场景，可直接包裹任意逻辑（组件渲染、计算、自定义回调等），更灵活。</td>
+</tr>
+<tr>
+<td><strong>与数据的绑定粒度</strong></td>
+<td>依赖“属性级 <code>Dep</code>”，一个 <code>Watcher</code> 可能依赖多个属性的 <code>Dep</code>。</td>
+<td>依赖“对象-属性”的全局映射（<code>targetMap</code>），一个 <code>effect</code> 直接关联它访问过的所有“对象-属性”。</td>
+</tr>
+<tr>
+<td><strong>停止响应式</strong></td>
+<td>需手动调用 <code>Watcher.teardown()</code> 清理 <code>Dep</code> 与 <code>Watcher</code> 的双向关联，逻辑复杂。</td>
+<td>调用 <code>effect</code> 返回的停止函数即可，内部自动清理 <code>effect</code> 在 <code>targetMap</code> 中的关联，逻辑简洁。</td>
+</tr>
+</tbody></table>
+<h4 id="三、关键结论"><a href="#三、关键结论" class="headerlink" title="三、关键结论"></a>三、关键结论</h4><ol>
+<li><strong>核心效果一致</strong>：<code>Watcher</code> 和 <code>effect</code> 都是“响应式更新的载体”，负责在数据变化时执行关联的逻辑（如视图更新、回调函数等）。</li>
+<li><strong>设计理念不同</strong>：<ul>
+<li><code>Watcher</code> 是 Vue2 中“面向对象”的设计，通过类实例管理依赖和更新，逻辑较重但职责明确；</li>
+<li><code>effect</code> 是 Vue3 中“函数式”的设计，通过纯函数封装副作用，配合全局变量和弱引用映射简化依赖管理，更灵活轻量。</li>
+</ul>
+</li>
+<li><strong>能力边界差异</strong>：<code>effect</code> 支持自定义调度器、自动清理依赖等特性，解决了 <code>Watcher</code> 在复杂场景下的局限性（如停止响应式的繁琐、更新时机定制困难等）。</li>
+</ol>
+<p>简单来说，<code>effect</code> 可以看作是 <code>Watcher</code> 的“进化版”——保留了核心功能，同时通过设计优化提升了灵活性和易用性。</p>
+<h3 id="Vue3-的-Ref-是如何实现的？"><a href="#Vue3-的-Ref-是如何实现的？" class="headerlink" title="Vue3 的 Ref 是如何实现的？"></a>Vue3 的 Ref 是如何实现的？</h3><blockquote>
+<p>Q:先前你说的都是 reactive 的创建，能否结合 ref 定义源码谈谈 ref 的？ <a target="_blank" rel="noopener" href="https://github.com/vuejs/core/blob/v3.3.4/packages/reactivity/src/ref.ts">https://github.com/vuejs/core/blob/v3.3.4/packages/reactivity/src/ref.ts</a></p>
+</blockquote>
+<p>结合提供的 <code>ref.ts</code> 源码，我们可以从定义、实现原理和核心特性三个方面解析 Vue 的 <code>ref</code> 实现：</p>
+<h4 id="一、ref-的核心定义与类型"><a href="#一、ref-的核心定义与类型" class="headerlink" title="一、ref 的核心定义与类型"></a>一、<code>ref</code> 的核心定义与类型</h4><p><code>ref</code> 是 Vue 中用于将<strong>基本类型值</strong>（或对象）包装为响应式对象的方法，其核心是通过 <code>Ref</code> 接口定义的对象，包含一个 <code>.value</code> 属性用于访问和修改内部值。</p>
+<p>源码中 <code>Ref</code> 接口定义如下：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Ref</span>&lt;T = <span class="built_in">any</span>, S = T&gt; &#123;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">value</span>(): T; <span class="comment">// 读取内部值</span></span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">value</span>(<span class="params">_: S</span>); <span class="comment">// 设置内部值</span></span><br><span class="line">  [<span class="title class_">RefSymbol</span>]: <span class="literal">true</span>; <span class="comment">// 用于类型区分的标记（内部使用）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>[RefSymbol]</code> 是一个私有 Symbol，用于在 <code>isRef</code> 方法中判断是否为 <code>ref</code> 对象，避免与普通对象混淆。</li>
+<li>泛型 <code>T</code> 表示 <code>.value</code> 的返回类型，<code>S</code> 表示设置 <code>.value</code> 时允许的类型。</li>
+</ul>
+<h4 id="二、ref-的创建流程（ref-与-shallowRef）"><a href="#二、ref-的创建流程（ref-与-shallowRef）" class="headerlink" title="二、ref 的创建流程（ref 与 shallowRef）"></a>二、<code>ref</code> 的创建流程（<code>ref</code> 与 <code>shallowRef</code>）</h4><p><code>ref</code> 和 <code>shallowRef</code> 均通过 <code>createRef</code> 函数创建，核心区别在于是否对值进行<strong>深度响应式转换</strong>。</p>
+<h5 id="1-入口函数"><a href="#1-入口函数" class="headerlink" title="1. 入口函数"></a>1. 入口函数</h5><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 普通 ref：对值进行深度响应式处理</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">ref</span>(<span class="params">value?: <span class="built_in">unknown</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createRef</span>(value, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 浅层 ref：仅监听 .value 的替换，不处理内部属性</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">shallowRef</span>(<span class="params">value?: <span class="built_in">unknown</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createRef</span>(value, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-核心创建逻辑（createRef）"><a href="#2-核心创建逻辑（createRef）" class="headerlink" title="2. 核心创建逻辑（createRef）"></a>2. 核心创建逻辑（<code>createRef</code>）</h5><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createRef</span>(<span class="params">rawValue: <span class="built_in">unknown</span>, shallow: <span class="built_in">boolean</span></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isRef</span>(rawValue)) &#123;</span><br><span class="line">    <span class="keyword">return</span> rawValue; <span class="comment">// 如果已经是 ref，直接返回</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RefImpl</span>(rawValue, shallow); <span class="comment">// 否则创建 RefImpl 实例</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>若传入的 <code>rawValue</code> 已经是 <code>ref</code> 对象，则直接返回（避免重复包装）。</li>
+<li>否则通过 <code>RefImpl</code> 类实例化一个新的 <code>ref</code> 对象。</li>
+</ul>
+<h4 id="三、RefImpl：ref-的底层实现类"><a href="#三、RefImpl：ref-的底层实现类" class="headerlink" title="三、RefImpl：ref 的底层实现类"></a>三、<code>RefImpl</code>：<code>ref</code> 的底层实现类</h4><p><code>RefImpl</code> 是 <code>ref</code> 的实际实现类，负责管理响应式依赖追踪和触发更新。</p>
+<h5 id="1-构造函数（初始化值）"><a href="#1-构造函数（初始化值）" class="headerlink" title="1. 构造函数（初始化值）"></a>1. 构造函数（初始化值）</h5><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RefImpl</span>&lt;T = <span class="built_in">any</span>&gt; &#123;</span><br><span class="line">  <span class="attr">_value</span>: T; <span class="comment">// 处理后的值（可能是响应式对象）</span></span><br><span class="line">  <span class="keyword">private</span> <span class="attr">_rawValue</span>: T; <span class="comment">// 原始值（未处理的原始数据）</span></span><br><span class="line">  <span class="attr">dep</span>: <span class="title class_">Dep</span> = <span class="keyword">new</span> <span class="title class_">Dep</span>(); <span class="comment">// 依赖管理容器</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">readonly</span> [<span class="title class_">ReactiveFlags</span>.<span class="property">IS_REF</span>] = <span class="literal">true</span>; <span class="comment">// 标记为 ref</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">readonly</span> [<span class="title class_">ReactiveFlags</span>.<span class="property">IS_SHALLOW</span>]: <span class="built_in">boolean</span> = <span class="literal">false</span>; <span class="comment">// 是否为浅层 ref</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">value: T, isShallow: <span class="built_in">boolean</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_rawValue</span> = isShallow ? value : <span class="title function_">toRaw</span>(value); <span class="comment">// 原始值存储（非浅层时取原始对象）</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_value</span> = isShallow ? value : <span class="title function_">toReactive</span>(value); <span class="comment">// 处理后的值（非浅层时转为响应式）</span></span><br><span class="line">    <span class="variable language_">this</span>[<span class="title class_">ReactiveFlags</span>.<span class="property">IS_SHALLOW</span>] = isShallow;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>**<code>_rawValue</code>**：存储原始值（未经过响应式转换），用于后续对比值是否变化。</li>
+<li>**<code>_value</code>**：存储处理后的值：<ul>
+<li>若为 <code>shallow: false</code>（普通 <code>ref</code>），则通过 <code>toReactive(value)</code> 将对象转为深度响应式（等价于 <code>reactive</code>）。</li>
+<li>若为 <code>shallow: true</code>（<code>shallowRef</code>），则直接存储原始值，不做响应式转换。</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-value-的-getter：依赖追踪"><a href="#2-value-的-getter：依赖追踪" class="headerlink" title="2. .value 的 getter：依赖追踪"></a>2. <code>.value</code> 的 getter：依赖追踪</h5><p>当读取 <code>ref.value</code> 时，会触发依赖追踪，收集当前活跃的副作用（<code>effect</code>）：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">get</span> <span class="title function_">value</span>() &#123;</span><br><span class="line">  <span class="keyword">if</span> (__DEV__) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">dep</span>.<span class="title function_">track</span>(&#123;  <span class="comment">// 开发环境：带详细信息的追踪</span></span><br><span class="line">      <span class="attr">target</span>: <span class="variable language_">this</span>,</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">TrackOpTypes</span>.<span class="property">GET</span>,</span><br><span class="line">      <span class="attr">key</span>: <span class="string">&#x27;value&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">dep</span>.<span class="title function_">track</span>()  <span class="comment">// 生产环境：简化追踪</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_value</span>  <span class="comment">// 返回处理后的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过 <code>dep.track()</code> 将当前 <code>effect</code> 收集到 <code>dep</code> 容器中，后续值变化时会触发这些 <code>effect</code>。</li>
+</ul>
+<h5 id="3-value-的-setter：触发更新"><a href="#3-value-的-setter：触发更新" class="headerlink" title="3. .value 的 setter：触发更新"></a>3. <code>.value</code> 的 setter：触发更新</h5><p>当修改 <code>ref.value</code> 时，会检查值是否变化，若变化则更新值并触发依赖更新：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="title function_">value</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> oldValue = <span class="variable language_">this</span>.<span class="property">_rawValue</span></span><br><span class="line">  <span class="comment">// 决定是否直接使用新值（浅层 ref 或新值是浅层/只读对象时）</span></span><br><span class="line">  <span class="keyword">const</span> useDirectValue = <span class="variable language_">this</span>[<span class="title class_">ReactiveFlags</span>.<span class="property">IS_SHALLOW</span>] || <span class="title function_">isShallow</span>(newValue) || <span class="title function_">isReadonly</span>(newValue)</span><br><span class="line">  newValue = useDirectValue ? newValue : <span class="title function_">toRaw</span>(newValue)  <span class="comment">// 非浅层时取新值的原始对象</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">hasChanged</span>(newValue, oldValue)) &#123;  <span class="comment">// 检查值是否真的变化（使用 Vue 内部的 hasChanged 比较）</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_rawValue</span> = newValue  <span class="comment">// 更新原始值</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_value</span> = useDirectValue ? newValue : <span class="title function_">toReactive</span>(newValue)  <span class="comment">// 更新处理后的值</span></span><br><span class="line">    <span class="comment">// 触发依赖更新</span></span><br><span class="line">    <span class="keyword">if</span> (__DEV__) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">dep</span>.<span class="title function_">trigger</span>(&#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="variable language_">this</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="title class_">TriggerOpTypes</span>.<span class="property">SET</span>,</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&#x27;value&#x27;</span>,</span><br><span class="line">        newValue,</span><br><span class="line">        oldValue</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">dep</span>.<span class="title function_">trigger</span>()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>值变化检查</strong>：通过 <code>hasChanged</code> 比较新旧值（支持对象、数组等引用类型的深层比较）。</li>
+<li><strong>触发更新</strong>：若值变化，调用 <code>dep.trigger()</code> 通知所有收集的 <code>effect</code> 重新执行。</li>
+</ul>
+<h4 id="四、ref-的关键辅助函数"><a href="#四、ref-的关键辅助函数" class="headerlink" title="四、ref 的关键辅助函数"></a>四、<code>ref</code> 的关键辅助函数</h4><ol>
+<li><p>**<code>isRef</code>**：判断一个值是否为 <code>ref</code> 对象</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">isRef</span>(<span class="params">r: <span class="built_in">any</span></span>): r is <span class="title class_">Ref</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> r ? r[<span class="title class_">ReactiveFlags</span>.<span class="property">IS_REF</span>] === <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过检查对象是否有 <code>ReactiveFlags.IS_REF</code> 标记（<code>true</code>）来判断。</p>
+</li>
+<li><p>**<code>unref</code>**：获取 <code>ref</code> 的原始值（若不是 <code>ref</code> 则直接返回自身）</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> unref&lt;T&gt;(<span class="attr">ref</span>: <span class="title class_">MaybeRef</span>&lt;T&gt; | <span class="title class_">ComputedRef</span>&lt;T&gt;): T &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">isRef</span>(ref) ? ref.<span class="property">value</span> : ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>常用于简化对 <code>ref</code> 值的访问（如 <code>unref(countRef)</code> 等价于 <code>countRef.value</code>）。</p>
+</li>
+<li><p>**<code>triggerRef</code>**：强制触发 <code>shallowRef</code> 的更新</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">triggerRef</span>(<span class="params">ref: Ref</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> ((ref <span class="keyword">as</span> <span class="built_in">unknown</span> <span class="keyword">as</span> <span class="title class_">RefImpl</span>).<span class="property">dep</span>) &#123;</span><br><span class="line">    (ref <span class="keyword">as</span> <span class="built_in">unknown</span> <span class="keyword">as</span> <span class="title class_">RefImpl</span>).<span class="property">dep</span>.<span class="title function_">trigger</span>(...)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于 <code>shallowRef</code> 不追踪内部属性变化，当手动修改其内部属性后，可通过此方法强制触发依赖更新。</p>
+</li>
+<li><p>**<code>customRef</code>**：自定义 <code>ref</code> 逻辑</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> customRef&lt;T&gt;(<span class="attr">factory</span>: <span class="title class_">CustomRefFactory</span>&lt;T&gt;): <span class="title class_">Ref</span>&lt;T&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CustomRefImpl</span>(factory) <span class="keyword">as</span> <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>允许开发者自定义 <code>get</code> 和 <code>set</code> 逻辑，例如实现防抖、节流等功能（需手动调用 <code>track</code> 和 <code>trigger</code> 管理依赖）。</p>
+</li>
+</ol>
+<h4 id="五、ref-与-reactive-的核心区别"><a href="#五、ref-与-reactive-的核心区别" class="headerlink" title="五、ref 与 reactive 的核心区别"></a>五、<code>ref</code> 与 <code>reactive</code> 的核心区别</h4><ol>
+<li><strong>包装类型</strong>：<code>ref</code> 可包装<strong>基本类型</strong>（如 <code>number</code>、<code>string</code>）和对象，而 <code>reactive</code> 仅能包装对象。</li>
+<li><strong>访问方式</strong>：<code>ref</code> 通过 <code>.value</code> 访问&#x2F;修改值，<code>reactive</code> 直接访问属性。</li>
+<li><strong>响应式深度</strong>：<ul>
+<li>普通 <code>ref</code> 对对象进行深度响应式转换（等价于 <code>reactive</code>）。</li>
+<li><code>shallowRef</code> 仅追踪 <code>.value</code> 的替换，不处理内部属性。</li>
+</ul>
+</li>
+<li><strong>适用场景</strong>：<ul>
+<li>基本类型值的响应式处理（必用 <code>ref</code>）。</li>
+<li>需要明确控制响应式深度时（<code>shallowRef</code>）。</li>
+<li>自定义响应式逻辑时（<code>customRef</code>）。</li>
+</ul>
+</li>
+</ol>
+<p>通过以上源码分析可见，<code>ref</code> 的核心是通过 <code>RefImpl</code> 类封装值，并利用 <code>getter</code>&#x2F;<code>setter</code> 实现依赖追踪和更新触发，同时提供灵活的辅助函数满足不同场景需求。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Qijia Huang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://mys109hqj.github.io/2025/10/23/25-10-22-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-VUE%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">https://mys109hqj.github.io/2025/10/23/25-10-22-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-VUE%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Qijia Huang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/study/">
+                                    <span class="chip bg-color">study</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+        <div class="card" data-aos="fade-up">
+    <div id="utteranc-container" class="card-content">
+        <script src="https://utteranc.es/client.js"
+                repo="liukgg/comment-utterances"
+                issue-term="pathname"
+                theme="github-light"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+</div>
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2025/10/23/25-10-22-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-VUE%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="25-10-22-学习日志-VUE的响应式原理">
+                        
+                        <span class="card-title">25-10-22-学习日志-VUE的响应式原理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/major/" class="post-category">
+                                    major
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/study/">
+                        <span class="chip bg-color">study</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/10/21/25-10-21-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-jsV8%E5%BC%95%E6%93%8E%E4%B8%8Enode/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="25-10-21-学习日志-jsV8引擎与node">
+                        
+                        <span class="card-title">25-10-21-学习日志-jsV8引擎与node</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/major/" class="post-category">
+                                    major
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/study/">
+                        <span class="chip bg-color">study</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 250428添加的内容 -->
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFunction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2025</span>
+            
+            <a href="/about" target="_blank">Qijia Huang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/MYS109hqj" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:qj.st@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
