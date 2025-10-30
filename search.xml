@@ -2697,7 +2697,12 @@ function SetCwinHeight(){
     <title>流水账</title>
     <url>/2025/10/21/25-10-%E6%B5%81%E6%B0%B4%E8%B4%A6/</url>
     <content><![CDATA[<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>I’m dumb, I’m stupid, I’ll never be satisfied. This “done-lists” are built for proving my studying process, maybe can make me focus more on process, not the result? Just update it and prove that I’m alive.</p>
-<h1 id="25-10-20"><a href="#25-10-20" class="headerlink" title="25-10-20"></a>25-10-20</h1><p>专场：浏览器的运行原理 <a href="https://blog.csdn.net/weixin_46726346/article/details/132446223">一篇搞懂浏览器的工作原理（万字详解）</a></p>
+<h1 id="25-10-20"><a href="#25-10-20" class="headerlink" title="25-10-20"></a>25-10-20</h1><p>专场：浏览器的运行原理 <a href="https://blog.csdn.net/weixin_46726346/article/details/132446223">一篇搞懂浏览器的工作原理（万字详解）</a><br>回填：(25&#x2F;10&#x2F;29 <a href="https://zhuanlan.zhihu.com/p/357572542">浏览器工作原理（各线程介绍）</a>这篇好像也不错？但对渲染进程外的进程涉及较少)</p>
+<p>浏览器里，除渲染进程外，其它进程下有哪些线程？</p>
+<p><a href="https://juejin.cn/post/7525698215272398894">😁 深入 JS(六): 一文让你完全理解浏览器进程与线程</a>里，如此拆解“浏览器的进程与线程”</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">浏览器架构</span><br><span class="line">├── 浏览器主进程（UI 进程）</span><br><span class="line">│   ├── UI线程</span><br><span class="line">│   ├── IO线程</span><br><span class="line">│   └── 浏览器事件处理线程</span><br><span class="line">├── 渲染进程（每个页面一个）</span><br><span class="line">│   ├── 主线程（JS 执行 / DOM 操作）</span><br><span class="line">│   ├── 样式计算线程</span><br><span class="line">│   ├── 合成线程</span><br><span class="line">│   ├── 光栅线程（Raster）</span><br><span class="line">│   └── Web Worker / Service Worker线程</span><br><span class="line">├── 网络进程</span><br><span class="line">│   ├── 网络线程</span><br><span class="line">│   └── 缓存管理线程</span><br><span class="line">├── GPU 进程</span><br><span class="line">│   ├── GPU 执行线程</span><br><span class="line">│   └── 合成线程（与渲染协同）</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://blog.51cto.com/u_19261/13719843">Browser 进程中的线程</a>：<br>UI 线程：该线程是程序运行的主线程，是程序的入口点，用来处理用户交互，如监听用户输入、前进后退等。同时，会分发<br>　　　　 IO 线程：处理 Browser 进程与其他进程进行进程间通信，下载 Renderer 进程所需的资源文件等<br>　　　　 File 线程：读取磁盘文件、下载文件到磁盘等<br>　　　　数据库线程：进行一些数据库操作，如保存 Cookie 到数据库<br>　　　　历史记录线程<br>　　　　 http 服务代理线程<br>　　　　……</p>
 <hr>
 <p>了解下 prettier，看看能不能帮我自动格式化 markdown 文件。 <a href="https://juejin.cn/post/7559797258721034276">VSCode 中 Prettier 工作原理与使用指南</a></p>
 <p>VSCode 中使用 Prettier 时，由 VSCode 触发格式化命令(Shift+Alt+F)，Prettier(VsCode 插件层)决定用哪个 Prettier 实例，确定加载哪个配置文件，PrettierCLI(JS 核心库)格式化 AST 并输出格式后的结果。</p>
@@ -2767,25 +2772,7 @@ function SetCwinHeight(){
 <td align="left">true（{ foo: bar }）、false（{foo: bar}）</td>
 </tr>
 </tbody></table>
-<h1 id="25-10-21"><a href="#25-10-21" class="headerlink" title="25-10-21"></a>25-10-21</h1><p>JS 红宝书：Symbol<br>Symbol 出现的目的是，在各个依赖库中独立创建属性，避免字符串类型属性名重名。<br>var pro1 &#x3D; Symbol(‘描述符’)创建唯一属性名，可通过 pro1 操作。<br>Symbol.for(‘描述符’)可以用来查询已有属性，若未创建该属性则返回新的 Symbol。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="title class_">Symbol</span>(<span class="string">&quot;foo&quot;</span>),</span><br><span class="line">  s2 = <span class="title class_">Symbol</span>(<span class="string">&quot;bar&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> o = &#123;</span><br><span class="line">  [s1]: <span class="string">&quot;foo val&quot;</span>,</span><br><span class="line">  [s2]: <span class="string">&quot;bar val&quot;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Symbol 相关的常用内置符号：<br>[Symbol.asyncIterator] [Symbol.hasInstance] [Symbol.isConcatSpreadable] [Symbol.iterator] [Symbol.match] [Symbol.replace] [Symbol.search] [Symbol.species] [Symbol.split] [Symbol.toPrimitive] [Symbol.toStringTag]<br>最后两个符号的符号含义如下：<br>[Symbol.toPrimitive] 这个符号作为一个属性表示“一个方法，该方法将对象转换为相应的原始<br>值。由 ToPrimitive 抽象操作使用”；<br>[Symbol.toStringTag] 这个符号作为一个属性表示“一个字符串，该字符串用于创建对象的默认<br>字符串描述。由内置方法 Object.prototype.toString()使用”。<br>通过 toString()方法获取对象标识时，会检索由 Symbol.toStringTag 指定的实例标识符，默<br>认为”Object”。内置类型已经指定了这个值，但自定义类实例还需要明确定义。重写实例如下：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bar</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>] = <span class="string">&quot;Bar&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> bar = <span class="keyword">new</span> <span class="title class_">Bar</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar); <span class="comment">// Bar &#123;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar.<span class="title function_">toString</span>()); <span class="comment">// [object Bar]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bar[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>]); <span class="comment">// Bar</span></span><br></pre></td></tr></table></figure>
-
-<p>Object 类型<br>每个 Object 实例都有如下属性和方法：<br>constructor：用于创建当前对象的函数。默认构造函数未 Object();<br>hasOwnProperty(propertyName)：用于判断当前对象实例（不是原型）上是否存在给定的属<br>性。要检查的属性名必须是字符串（如 o.hasOwnProperty(“name”)）或符号。<br>……<br>其中，我对 toLocaleString()不大熟悉。<br>Object.prototype.toLocaleString()的核心作用是根据指定的地区（locale）和格式选项，返回对象的字符串表示，让输出更符合特定地区的语言、文化和格式习惯。<br>典型使用场景如数字本地化、日期和时间本地化、货币格式化。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(date.<span class="title function_">toLocaleString</span>(<span class="string">&quot;zh-CN&quot;</span>)); <span class="comment">// &quot;2025/10/21 10:30:00&quot;（中文默认）</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(</span><br><span class="line">  date.<span class="title function_">toLocaleString</span>(<span class="string">&quot;en-US&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">year</span>: <span class="string">&quot;numeric&quot;</span>,</span><br><span class="line">    <span class="attr">month</span>: <span class="string">&quot;long&quot;</span>,</span><br><span class="line">    <span class="attr">day</span>: <span class="string">&quot;numeric&quot;</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">); <span class="comment">// &quot;October 21, 2025&quot;（英语长格式）</span></span><br></pre></td></tr></table></figure>
-
-<p>for-in 语句是一种严格的迭代语句，用于枚举对象中的非符号键属性<br>for-of 语句是一种严格的迭代语句，用于遍历可迭代对象的元素。可迭代对象（Iterable Object） 是指那些实现了 迭代协议（Iterable Protocol） 的对象。<br>一个对象要成为可迭代对象，必须满足：</p>
-<ul>
-<li>拥有一个 默认迭代器方法（在对象的 Symbol.iterator 属性上定义）。</li>
-<li>这个迭代器方法是一个函数，调用后会返回一个 迭代器（Iterator）。</li>
-<li>迭代器是一个包含 next() 方法的对象，next() 方法每次调用会返回一个形如 { value: 值, done: 布尔值 } 的对象：<ul>
-<li>value：当前迭代到的元素。</li>
-<li>done：布尔值，表示迭代是否结束（true 表示结束，false 表示继续）。</li>
-</ul>
-</li>
-</ul>
+<h1 id="25-10-21"><a href="#25-10-21" class="headerlink" title="25-10-21"></a>25-10-21</h1><p><a href="https://mys109hqj.github.io/2025/10/27/js%E7%BA%A2%E5%AE%9D%E4%B9%A6%E7%AC%94%E8%AE%B0">JS 红宝书：Symbol</a></p>
 <hr>
 <p>JS 引擎与 Node 引擎<br><a href="https://cloud.tencent.com/developer/article/2399974">深入剖析 JavaScript 引擎的工作原理</a><br><a href="https://mys109hqj.github.io/2025/10/21/25-10-21-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-jsV8%E5%BC%95%E6%93%8E%E4%B8%8Enode">JS v8 引擎与 Node.js</a></p>
 <h1 id="25-10-22"><a href="#25-10-22" class="headerlink" title="25-10-22"></a>25-10-22</h1><ol>
@@ -2794,6 +2781,37 @@ function SetCwinHeight(){
 <li><p>避免痴呆的算法练习</p>
 </li>
 </ol>
+<h1 id="25-10-23"><a href="#25-10-23" class="headerlink" title="25-10-23"></a>25-10-23</h1><ol>
+<li>JS 红宝书：内存管理——基本引用类型</li>
+<li>算法训练——避免痴呆</li>
+</ol>
+<h1 id="25-10-25"><a href="#25-10-25" class="headerlink" title="25-10-25"></a>25-10-25</h1><p>淘天笔试，JS 基础题还有待提高，这是前端自学的劣势。这点半年的长线内，读 JS 红宝书+Vue 源码，不断提升就好。现在相对国庆前，水平估计涨了 1.3 倍吧。<br>笔试栽在卡时间和空间复杂度的题了。<br>第一道的代码逻辑是：“初始数组-&gt;更新索引 i 处的值 | 指定 K 值，返回数组中能整除 K 的值的数量”。这类估计就是取余优化的专项题。<br>第二道题，一维动态规划，把<code>int</code> 换成 <code>long long</code>，过了全部用例。（前面有次面试除了 LeetCode 股票系列题，考的是中等题的贪心，我默认这类题都是困难难度的一维&#x2F;多维动态规划，遂挂）<br>第三道的代码逻辑是：“10<sup>9</sup>量级的‘爬楼梯’”。现在看来可以模拟“页表”的思路，做桶排序？在不超内存的情况下，大概能创建 10<sup>6</sup>量级的整形数组。时间复杂度可以让它为 10<sup>9</sup>+10<sup>3</sup>n 吧。</p>
+<p>人无远虑，必有近忧。其实现在的核心任务还是提升自身的技术水平，首先是 JS 基础，其次是 Vue 框架，可以了解一下前言内容，扩宽知识面。<br>其实我觉得可以考虑前端技术差不多了，就去学学 java，打打全栈的底子。职业发展可能就是互联网大厂的前端精通或中小厂的全栈。</p>
+<p><strong>Vite 构建原理</strong></p>
+<ul>
+<li>在<strong>开发调试阶段</strong>：利用浏览器的 ESM（就是让浏览器的 JS 引擎自己通过 ESModule 的 import export 语法去分析代码依赖关系，进而链接、执行代码）。<br>在调试阶段，服务器和浏览器建立 websocket 链接，通过 <strong>HMR(Hot Module Replacement，可以粗暴理解为热更新)技术</strong>在源码更新时通知浏览器，结合<strong>模块依赖图</strong>确定代码的更新范围，让浏览器重新请求更新的代码（对原来的已经运行代码呢？对于业务代码，请求头<code>Cache-Contorl</code> 设为 <code>no-cache</code>，即使用协商缓存；对于与构建的依赖模块，变动频率低，在首次启动 时由 esbuild 进行预构建(将 commonJS 模块语法转为 ESModule 语法，将多文件代码合并为单文件)，这类资源的<code>Cache-Control</code>设为 <code>max-age=31536000, immutable</code>即不可变）。相比 webpack 节省了开发阶段的“打包等待”时间。</li>
+<li>在<strong>生产构建阶段</strong>：使用 rollup ，利用其 <code>ESM tree shaking</code> 能力在打包时“删除”无用的代码块。除此之外，Vite 生产构建还会做：<ol>
+<li>代码压缩（Terser 压缩 JS、CSSNano 压缩 CSS）；</li>
+<li>静态资源处理（如图片、字体的 base64 内联、哈希命名）；</li>
+<li>代码分割（Code Splitting）：按路由、组件拆分代码，实现按需加载；</li>
+<li>生成 sourcemap（可选），便于线上调试。</li>
+</ol>
+</li>
+</ul>
+<h1 id="25-10-26"><a href="#25-10-26" class="headerlink" title="25-10-26"></a>25-10-26</h1><p>JS 红宝书的基本引用类型——集合引用类型</p>
+<p><a href="https://blog.csdn.net/qq_38060125/article/details/147983392">【vue 源码 04】深入学习 vue 源码实现——v-model 指令的底层实现</a></p>
+<h1 id="25-10-27-整理一下近期的学习内容-历史项目经历"><a href="#25-10-27-整理一下近期的学习内容-历史项目经历" class="headerlink" title="25-10-27 整理一下近期的学习内容&amp;历史项目经历"></a>25-10-27 整理一下近期的学习内容&amp;历史项目经历</h1><p>整理一下：<br><a href="https://developer.aliyun.com/article/1419909">VUE 与微小的区别</a></p>
+<p>（Vite 构建原理加段“新增属性”的源码处理逻辑）</p>
+<p>我<strong>追求可叠加的进步</strong>，经常<strong>进行总结、复盘，以文档的形式进行输出</strong>，并对一些如环境配置等一次性但耗时的操作写 stepbystep 的配置文档，帮助自己与他人在后续工作中提升效率。<br>在工作中，我书写了“环境配置文档”与业务逻辑的总结文档。</p>
+<p>项目与实习经历方面，我基于自己组织活动与实践所学内容的需求，我基于 VUE3+python 的前后端架构，开发并部署了一个在线问答游戏，包含账号登录、在线通信的功能。在这个暑假在美团实习，主要接触团购的前端业务，其中参与度最大的是“微信小程序的优化项目”，在 13pd 的需求里负责 UI 优化以及模板重构的任务，并进行了性能优化（优化埋点监听逻辑，显著降低监听器的数量。长列表的子项目看见埋点监听，原来是在各个商卡组件内设定监听器，我将其改为了由长列表容器统一监听；其它的就是节省堆头看见埋点的监听器；）。实习过程中锻炼出了扎实的业务能力。在此之后我也对微小的 skyline 框架、以及浏览器引擎、 VUE3 的原理进行补充学习，磨练技术水平。</p>
+<h1 id="25-10-28"><a href="#25-10-28" class="headerlink" title="25-10-28"></a>25-10-28</h1><p>红宝书 Promise<br>Promise 原来有这么多细节，先前就只知道三种状态+PromiseAPI，笔试要求手写 Promise.all()就有点抓瞎。<br>这里记录一个我目前对<code>.then</code>的理解：</p>
+<blockquote>
+<p>Q:.then 相当于给 promise 注册一个事件触发函数，若 Promise 已经 resolved 或 rejected，就触发.then 的回调函数。我的理解正确吗？<br>A: 核心逻辑是对的：<code>.then()</code> 本质上是为 Promise 注册状态变更的回调函数，当 Promise 处于已决议（resolved）或已拒绝（rejected）状态时，会立即触发对应的回调（如果回调存在）……</p>
+</blockquote>
+<p>可以复盘做下没 All Kill 的笔试题：<br><a href="https://www.nowcoder.com/discuss/812771442856091648">https://www.nowcoder.com/discuss/812771442856091648</a><br>它质量还是高的，能提供稀缺的资源。<br>不过我现在对算法题是这个态度：有的企业的笔试要求较高，但我想勉强合格就行，深钻的意愿不高。</p>
+<p>考虑一下手写几个经典的原型方法</p>
+<h1 id="25-10-29"><a href="#25-10-29" class="headerlink" title="25-10-29"></a>25-10-29</h1><p>SSE，部署下自己的项目</p>
+<h1 id="25-10-30"><a href="#25-10-30" class="headerlink" title="25-10-30"></a>25-10-30</h1><p>JS 红宝书迭代器和 class<br><a href="https://blog.csdn.net/weixin_73791864/article/details/154156638">练习手写 Promise.all、Array.flat、Promise.retry</a></p>
 ]]></content>
       <categories>
         <category>major</category>
@@ -3011,6 +3029,29 @@ function SetCwinHeight(){
 </li>
 </ol>
 <p>通过以上源码分析可见，<code>ref</code> 的核心是通过 <code>RefImpl</code> 类封装值，并利用 <code>getter</code>&#x2F;<code>setter</code> 实现依赖追踪和更新触发，同时提供灵活的辅助函数满足不同场景需求。</p>
+]]></content>
+      <categories>
+        <category>major</category>
+      </categories>
+      <tags>
+        <tag>study</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>25-10-29-SSE学习笔记</title>
+    <url>/2025/10/31/25-10-29-SSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>本文为<a href="https://www.bilibili.com/video/BV18Q4mzTEMq">SSE</a>视频的学习笔记</p>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><ol>
+<li><p>实现原理：<br>前端 ContextType 设置为”text&#x2F;event-stram;chatset&#x3D;utf-8”<br>后端：每次往响应写入数据就会往前端发一个消息，调用 end 结束响应就会断开（但是这样断开，前端会主动重连）</p>
+</li>
+<li><p>一个坑：SSE 的网络协议要求，write 的格式得是<code>data: $&#123;arr[counter]&#125;\n\n</code>，否则会出现前端 onMessage 无法接受到相应相应的问题。<br>服务器一定不能主动断开，这样会导致前端无法重连，除非前端关闭再连，否则无法主动发消息。前端也是一样，一旦 close，除非重新创建实例，否则无法用同一个实例重连。（服务器通过 end 的响应断开，前端还是会重连；服务器要通过状态码断开）</p>
+</li>
+<li><p>默认使用 EventSource 来获取 readableStream 对象，但这个方法不支持 token（虽然可以放进 query 里，但就将 token 暴露给了用户）；<br>可以使用 EventSourcePolyfill(url)调库来支持 cookie 的 token，或者手写自定义 SSE 类。</p>
+</li>
+</ol>
+<h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&quot;cors&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>());</span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/sse&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/event-stream;charset=utf-8&quot;</span>, <span class="comment">//声明这是事件流</span></span><br><span class="line">    <span class="title class_">Connection</span>: <span class="string">&quot;keep-alive&quot;</span>, <span class="comment">// 一般默认是keep-alive</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;链接上了&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> counter = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> intervalId = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> arr = [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>, <span class="string">&quot;6&quot;</span>];</span><br><span class="line">    res.<span class="title function_">write</span>(<span class="string">`data: <span class="subst">$&#123;arr[counter]&#125;</span>\n\n`</span>);</span><br><span class="line">    counter++;</span><br><span class="line">    <span class="keyword">if</span> (counter &gt;= arr.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="built_in">clearInterval</span>(intervalId);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">  req.<span class="title function_">on</span>(<span class="string">&quot;close&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;客户端断开连接&quot;</span>);</span><br><span class="line">    <span class="built_in">clearInterval</span>(intervalId);</span><br><span class="line">    res.<span class="title function_">end</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;服务器运行在端口 3000&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> message = <span class="title function_">ref</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> eventSource = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&quot;http://localhost:3000/api/sse&quot;</span>);</span><br><span class="line">eventSource.<span class="property">onmessage</span> = <span class="function">(<span class="params">valueText</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(valueText);</span><br><span class="line">  message.<span class="property">value</span> = message.<span class="property">value</span> + valueText.<span class="property">data</span>;</span><br><span class="line">&#125;;</span><br><span class="line">eventSource.<span class="title function_">addEventListener</span>(<span class="string">&quot;newMessage&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;触发了事件后：&quot;</span>, event);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>major</category>
