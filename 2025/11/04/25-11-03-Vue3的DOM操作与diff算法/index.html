@@ -4,10 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="25-10-29-SSE学习笔记, MYS109hqj">
-    <meta name="description" content="本文为SSE视频的学习笔记
-笔记
-实现原理：前端 ContextType 设置为”text&amp;#x2F;event-stram;chatset&amp;#x3D;utf-8”后端：每次往响应写入数据就会往前端发一个消息，调用 end 结束响应就会断开">
+    <meta name="keywords" content="25-11-03-Vue3的DOM操作与diff算法, MYS109hqj">
+    <meta name="description" content="
+学习《Vue.js 设计与实现》的笔记
+
+目录
+命令类型与三种 DOM 操作方式
+VUE3 的 Diff
+
+命令类型声明式和命令式：以&amp;lt;input v-model=&amp;quot;value&amp;quot;/&amp;gt;为例，这段代码是声明式的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +24,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>25-10-29-SSE学习笔记 | MYS109hqj</title>
+    <title>25-11-03-Vue3的DOM操作与diff算法 | MYS109hqj</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -334,12 +339,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">25-10-29-SSE学习笔记</h1>
+                    <h1 class="description center-align post-title">25-11-03-Vue3的DOM操作与diff算法</h1>
                 </div>
             </div>
         </div>
@@ -388,21 +393,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-10-31
+                    2025-11-04
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-10-31
+                    2025-11-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    505
+                    1.4k
                 </div>
                 
 
@@ -424,18 +429,79 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本文为<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18Q4mzTEMq">SSE</a>视频的学习笔记</p>
-<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><ol>
-<li><p>实现原理：<br>前端 ContextType 设置为”text&#x2F;event-stram;chatset&#x3D;utf-8”<br>后端：每次往响应写入数据就会往前端发一个消息，调用 end 结束响应就会断开（但是这样断开，前端会主动重连）</p>
+                <blockquote>
+<p>学习《Vue.js 设计与实现》的笔记</p>
+</blockquote>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#%E5%91%BD%E4%BB%A4%E7%B1%BB%E5%9E%8B">命令类型与三种 DOM 操作方式</a></li>
+<li><a href="#VUE3%E7%9A%84Diff">VUE3 的 Diff</a></li>
+</ul>
+<h2 id="命令类型"><a href="#命令类型" class="headerlink" title="命令类型"></a>命令类型</h2><p>声明式和命令式：<br>以<code>&lt;input v-model=&quot;value&quot;/&gt;</code>为例，这段代码是声明式的，是 Vue 提供的“语法糖”。书写这段声明式代码，本质上是在调用渲染函数这类命令式代码。</p>
+<p>虚拟 DOM、模板字符串、Javascript 都能挂载、更新 DOM。</p>
+<h3 id="三种-DOM-操作方式的挂载与更新逻辑"><a href="#三种-DOM-操作方式的挂载与更新逻辑" class="headerlink" title="三种 DOM 操作方式的挂载与更新逻辑"></a>三种 DOM 操作方式的挂载与更新逻辑</h3><ol>
+<li>JavaScript（原生 DOM API）</li>
+</ol>
+<ul>
+<li><strong>挂载</strong>：直接通过<code>document.createElement</code>创建节点，<code>appendChild</code>插入 DOM 树（如<code>const div = document.createElement(&#39;div&#39;); document.body.appendChild(div)</code>）。</li>
+<li><strong>更新</strong>：手动定位需要修改的节点，调用 DOM API 更新（如<code>div.textContent = &#39;new content&#39;</code>）。</li>
+</ul>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>效率“理论上可能最高”——如果开发者能精准定位到最小更新范围，避免冗余操作，效率可以接近最优。但实际开发中，复杂场景下手动维护更新逻辑极易出错（如漏更、多更），反而可能写出低效代码。</li>
+</ul>
+<ol start="2">
+<li>虚拟 DOM（如 Vue 的 VNode）</li>
+</ol>
+<ul>
+<li><strong>挂载</strong>：<ol>
+<li>先创建虚拟 DOM 对象（描述节点类型、属性、子节点等，如<code>&#123; type: &#39;div&#39;, props: &#123; id: &#39;app&#39; &#125;, children: [] &#125;</code>）；</li>
+<li>框架通过渲染函数（<code>render</code>）将虚拟 DOM 转换为真实 DOM（递归调用<code>createElement</code>），插入页面。</li>
+</ol>
 </li>
-<li><p>一个坑：SSE 的网络协议要求，write 的格式得是<code>data: $&#123;arr[counter]&#125;\n\n</code>，否则会出现前端 onMessage 无法接受到相应相应的问题。<br>服务器一定不能主动断开，这样会导致前端无法重连，除非前端关闭再连，否则无法主动发消息。前端也是一样，一旦 close，除非重新创建实例，否则无法用同一个实例重连。（服务器通过 end 的响应断开，前端还是会重连；服务器要通过状态码断开）</p>
+<li><strong>更新</strong>：<ol>
+<li>数据变化时生成新的虚拟 DOM；</li>
+<li>通过 Diff 算法对比新旧虚拟 DOM，找出最小更新差异（如属性变化、子节点增删移）；</li>
+<li>只将差异部分转换为真实 DOM 操作（如<code>patchProps</code>更新属性、<code>insertBefore</code>移动节点）。</li>
+</ol>
 </li>
-<li><p>默认使用 EventSource 来获取 readableStream 对象，但这个方法不支持 token（虽然可以放进 query 里，但就将 token 暴露给了用户）；<br>可以使用 EventSourcePolyfill(url)调库来支持 cookie 的 token，或者手写自定义 SSE 类。</p>
+</ul>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>“在复杂场景下效率更稳定”——Diff 算法会自动优化更新范围，避免开发者手动操作的疏漏。但相比“最优手动操作”，多了虚拟 DOM 创建和 Diff 的计算开销（这部分开销在 Vue3 中通过静态标记、编译时优化大幅降低）。</li>
+</ul>
+<ol start="3">
+<li>模板字符串（如<code>innerHTML</code>）</li>
+</ol>
+<ul>
+<li><strong>挂载</strong>：通过字符串拼接描述 DOM 结构（如<code>const html = </code><div>${content}</div><code>; element.innerHTML = html</code>），浏览器解析字符串并创建 DOM 树。</li>
+<li><strong>更新</strong>：重新拼接完整的模板字符串，通过<code>innerHTML</code>覆盖原有内容（即使只有一个字符变化，也会销毁旧 DOM 树并重建）。</li>
+</ul>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>效率最低——每次更新都会销毁整个旧 DOM 树（包括解绑事件、移除子节点），重新解析字符串并创建新 DOM 树，性能开销极大（尤其包含大量节点或事件绑定时）。</li>
+<li>且存在 XSS 风险（若字符串包含未过滤的用户输入），Vue 等框架的模板会自动转义，本质是对模板字符串的安全封装，而非直接使用原生<code>innerHTML</code>。</li>
+</ul>
+<h3 id="效率对比："><a href="#效率对比：" class="headerlink" title="效率对比："></a><strong>效率对比</strong>：</h3><p>在 DOM 操作的简单场景下 Javascript 最高效，虚拟 DOM 次之，模板字符串还得经过 parsing，效率最低。<br>但通过 Javascript 和模板字符串加载的心智负担重，而虚拟 DOM 不需要手动管理所有 DOM 操作细节，开发者只需要关注数据变化。因此，在复杂场景下使用虚拟 DOM 的效率最高。</p>
+<h2 id="VUE3-的-Diff"><a href="#VUE3-的-Diff" class="headerlink" title="VUE3 的 Diff"></a>VUE3 的 Diff</h2><ol>
+<li>先对比父节点的 type 和 key，一致且父节点是动态节点（即会发生改变的节点，如传入数据可能变动的节点；与之相比的是静态节点）时，进一步对比节点的 props、children 等内容，进行子节点 Diff 环节；</li>
+<li>对有多个子节点的情况，（双端 Diff 算法）先对比新旧 DOM 链表的首尾，通过 key 值判断节点是否相同：<br>以对比头节点为例，如果新旧 DOM 链表的 key 值一样，则可以“直接”复用，否则尝试尾尾；之后再尝试头尾、尾头，后两种如果可以复用，则移动对应 DOM 节点；</li>
+<li>确定可复用的首尾部分后，先遍历剩余的<code>oldChildren</code>(旧节点列表)，构建<code>keyToOldIdx</code>的映射表（把后续遍历<code>newChildren+oldChildren</code>的 O(n^2)的查找操作优化成 O(n)）；<br>再遍历<code>newChildren</code>，通过<code>keyToOldIdx</code>判断当前节点是否在旧列表中；<ul>
+<li>若不存在，直接创建新节点；</li>
+<li>若存在，记录旧节点的索引，生成 “需要处理的索引数组”（<code>source</code>）；<br>最后<code>source</code>数组对进行“最长递增子序列”的计算，不移动该序列对应的节点，只移动其它节点，最大化复用原有的节点；</li>
+</ul>
+</li>
+<li>对剩余部分，根据 key 与实时处理标识 j，判断节点的新增、移动与删除。<br>“j” 是最长递增子序列的 “指针”，用于标记当前已处理到的 “无需移动” 节点的位置。遍历 source 数组时：<ul>
+<li>若当前节点索引不在最长递增子序列中，说明需要移动，从 j 对应的位置插入；</li>
+<li>遍历结束后，若旧列表还有剩余节点，直接删除；若新列表还有剩余节点，直接创建。</li>
+</ul>
 </li>
 </ol>
-<h2 id="后端代码"><a href="#后端代码" class="headerlink" title="后端代码"></a>后端代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> cors = <span class="built_in">require</span>(<span class="string">&quot;cors&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">cors</span>());</span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&quot;/api/sse&quot;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/event-stream;charset=utf-8&quot;</span>, <span class="comment">//声明这是事件流</span></span><br><span class="line">    <span class="title class_">Connection</span>: <span class="string">&quot;keep-alive&quot;</span>, <span class="comment">// 一般默认是keep-alive</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;链接上了&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> counter = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> intervalId = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> arr = [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>, <span class="string">&quot;6&quot;</span>];</span><br><span class="line">    res.<span class="title function_">write</span>(<span class="string">`data: <span class="subst">$&#123;arr[counter]&#125;</span>\n\n`</span>);</span><br><span class="line">    counter++;</span><br><span class="line">    <span class="keyword">if</span> (counter &gt;= arr.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="built_in">clearInterval</span>(intervalId);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">  req.<span class="title function_">on</span>(<span class="string">&quot;close&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;客户端断开连接&quot;</span>);</span><br><span class="line">    <span class="built_in">clearInterval</span>(intervalId);</span><br><span class="line">    res.<span class="title function_">end</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;服务器运行在端口 3000&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> message = <span class="title function_">ref</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> eventSource = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&quot;http://localhost:3000/api/sse&quot;</span>);</span><br><span class="line">eventSource.<span class="property">onmessage</span> = <span class="function">(<span class="params">valueText</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(valueText);</span><br><span class="line">  message.<span class="property">value</span> = message.<span class="property">value</span> + valueText.<span class="property">data</span>;</span><br><span class="line">&#125;;</span><br><span class="line">eventSource.<span class="title function_">addEventListener</span>(<span class="string">&quot;newMessage&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;触发了事件后：&quot;</span>, event);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Vue3 Diff 的核心优化点（笔记缺失，需补充）</p>
+<ol>
+<li><strong>静态标记（PatchFlags）</strong>：编译时给动态节点打上标记（如<code>TEXT</code>、<code>PROPS</code>），Diff 时仅处理带标记的节点，跳过静态节点，减少对比范围；</li>
+<li><strong>最长递增子序列优化</strong>：Vue2 中未排序的子节点 Diff 会导致大量移动，Vue3 通过该算法将移动次数降到最低，时间复杂度从 O(n²)优化为 O(n log n)；</li>
+<li><strong>key 映射表</strong>：快速查找可复用节点，避免遍历查找的冗余计算。</li>
+</ol>
 
                 
             </div>
@@ -462,7 +528,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://mys109hqj.github.io/2025/10/31/25-10-29-SSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://mys109hqj.github.io/2025/10/31/25-10-29-SSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a>
+                    <a href="https://mys109hqj.github.io/2025/11/04/25-11-03-Vue3%E7%9A%84DOM%E6%93%8D%E4%BD%9C%E4%B8%8Ediff%E7%AE%97%E6%B3%95/">https://mys109hqj.github.io/2025/11/04/25-11-03-Vue3%E7%9A%84DOM%E6%93%8D%E4%BD%9C%E4%B8%8Ediff%E7%AE%97%E6%B3%95/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -561,9 +627,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2025/11/04/25-11-03-Vue3%E7%9A%84DOM%E6%93%8D%E4%BD%9C%E4%B8%8Ediff%E7%AE%97%E6%B3%95/">
                     <div class="card-image">
@@ -581,9 +648,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-11-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-11-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -596,6 +663,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -614,13 +682,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/10/23/25-10-22-%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97-VUE%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/">
+                <a href="/2025/10/31/25-10-29-SSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="25-10-22-学习日志-VUE的响应式原理">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="25-10-29-SSE学习笔记">
                         
-                        <span class="card-title">25-10-22-学习日志-VUE的响应式原理</span>
+                        <span class="card-title">25-10-29-SSE学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -631,7 +699,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-31
                             </span>
                         <span class="publish-author">
                             
