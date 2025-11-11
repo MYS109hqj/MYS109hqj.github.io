@@ -3144,4 +3144,161 @@ function SetCwinHeight(){
         <tag>study</tag>
       </tags>
   </entry>
+  <entry>
+    <title>25-11-11-z-index与Vue3的静态提升</title>
+    <url>/2025/11/11/25-11-11-z-index%E4%B8%8EVue3%E7%9A%84%E9%9D%99%E6%80%81%E6%8F%90%E5%8D%87/</url>
+    <content><![CDATA[<h2 id="z-index-和-CSS-堆叠上下文"><a href="#z-index-和-CSS-堆叠上下文" class="headerlink" title="z-index 和 CSS 堆叠上下文"></a>z-index 和 CSS 堆叠上下文</h2><ul>
+<li>浏览器中的默认堆叠情况</li>
+<li>CSS 堆叠上下文</li>
+<li>z-index 的原理</li>
+</ul>
+<h3 id="一、浏览器中的默认堆叠情况（无堆叠上下文干扰时）"><a href="#一、浏览器中的默认堆叠情况（无堆叠上下文干扰时）" class="headerlink" title="一、浏览器中的默认堆叠情况（无堆叠上下文干扰时）"></a>一、浏览器中的默认堆叠情况（无堆叠上下文干扰时）</h3><p>在没有手动堆叠上下文（Stacking Context）的情况下，浏览器对元素的默认堆叠规则完全依赖于<strong>元素在文档流中的位置</strong>和<strong>元素类型</strong>，核心规则如下：</p>
+<ol>
+<li><p><strong>文档流顺序（DOM 顺序）优先</strong><br>对于<strong>非定位元素</strong>（<code>position: static</code>），后出现在 HTML 中的元素会覆盖先出现的元素（“后来居上”）。<br>例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box1&quot;</span>&gt;</span>先出现<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box2&quot;</span>&gt;</span>后出现<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：<code>box2</code> 会覆盖 <code>box1</code> 重叠的部分。</p>
+</li>
+<li><p><strong>定位元素（非 static）优先于非定位元素</strong><br>当元素设置 <code>position: relative/absolute/fixed/sticky</code> 时，会脱离文档流（或部分脱离），其堆叠层级高于所有非定位元素，无论 DOM 顺序如何。<br>例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box1&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: relative;&quot;</span>&gt;</span>定位元素（先出现）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box2&quot;</span>&gt;</span>非定位元素（后出现）<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：<code>box1</code> 覆盖 <code>box2</code>（定位元素层级更高）。</p>
+</li>
+<li><p><strong>定位元素之间的默认顺序</strong><br>若多个元素都是定位元素，且未设置 <code>z-index</code>（或 <code>z-index: auto</code>），则仍遵循“后来居上”的 DOM 顺序。</p>
+</li>
+</ol>
+<h3 id="二、CSS-堆叠上下文（Stacking-Context）"><a href="#二、CSS-堆叠上下文（Stacking-Context）" class="headerlink" title="二、CSS 堆叠上下文（Stacking Context）"></a>二、CSS 堆叠上下文（Stacking Context）</h3><p>堆叠上下文是浏览器渲染时创建的<strong>独立堆叠区域</strong>，区域内的元素堆叠顺序仅影响内部，无法直接穿透到外部。理解堆叠上下文是掌握 <code>z-index</code> 的核心。</p>
+<h4 id="1-堆叠上下文的创建条件"><a href="#1-堆叠上下文的创建条件" class="headerlink" title="1. 堆叠上下文的创建条件"></a>1. 堆叠上下文的创建条件</h4><p>一个元素会创建堆叠上下文的常见场景：</p>
+<ul>
+<li><strong>根元素</strong>（<code>&lt;html&gt;</code> 标签，默认创建“根堆叠上下文”）；</li>
+<li><strong>定位元素</strong>（<code>position</code> 为 <code>relative/absolute/fixed/sticky</code>）且 <code>z-index</code> 不为 <code>auto</code>（包括数值 <code>0</code> 或正负整数）；</li>
+<li><strong>flex&#x2F;grid 子元素</strong>且 <code>z-index</code> 不为 <code>auto</code>（即使不是定位元素）；</li>
+<li><strong>CSS3 特殊属性</strong>：<code>opacity &lt; 1</code>、<code>transform</code> 非 <code>none</code>、<code>filter</code> 非 <code>none</code>、<code>perspective</code> 非 <code>none</code>、<code>isolation: isolate</code> 等（无需定位也能创建）。</li>
+</ul>
+<h4 id="2-堆叠上下文的特性"><a href="#2-堆叠上下文的特性" class="headerlink" title="2. 堆叠上下文的特性"></a>2. 堆叠上下文的特性</h4><ul>
+<li><strong>独立性</strong>：每个堆叠上下文都是“封闭”的，内部元素的堆叠顺序不会影响外部，外部元素也无法直接影响内部（除非通过父级堆叠上下文的层级）。</li>
+<li><strong>层级继承</strong>：子元素的堆叠层级受限于父级堆叠上下文的层级。例如，若父级堆叠上下文在底层，即使子元素 <code>z-index: 9999</code>，也无法覆盖父级上层的其他堆叠上下文。</li>
+</ul>
+<h3 id="三、z-index-的原理"><a href="#三、z-index-的原理" class="headerlink" title="三、z-index 的原理"></a>三、z-index 的原理</h3><p><code>z-index</code> 用于控制<strong>同一堆叠上下文内</strong>元素的堆叠顺序，其工作机制依赖于堆叠上下文，核心原理如下：</p>
+<h4 id="1-z-index-的生效条件"><a href="#1-z-index-的生效条件" class="headerlink" title="1. z-index 的生效条件"></a>1. z-index 的生效条件</h4><p>仅对以下元素有效：</p>
+<ul>
+<li>定位元素（<code>position: relative/absolute/fixed/sticky</code>）；</li>
+<li>flex&#x2F;grid 子元素（即使 <code>position: static</code>）。<br><strong>注意</strong>：非定位且非 flex&#x2F;grid 子元素的 <code>z-index</code> 完全无效。<blockquote>
+<p>“非定位元素”指的是未通过 <code>position</code> 属性进行定位设置，或明确设置 <code>position: static</code> 的元素（<code>static</code> 是 <code>position</code> 的默认值）。这类元素遵循正常的文档流（normal flow），其位置由 HTML 结构和默认布局规则（如块级元素独占一行、行内元素并排）决定，无法通过 <code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code> 调整位置，也不会脱离文档流。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-z-index-的值与含义"><a href="#2-z-index-的值与含义" class="headerlink" title="2. z-index 的值与含义"></a>2. z-index 的值与含义</h4><ul>
+<li><code>auto</code>：默认值。元素不会创建新的堆叠上下文（除非是 flex&#x2F;grid 子元素），其堆叠顺序由 DOM 顺序和定位状态决定。</li>
+<li><strong>数值</strong>（包括正负整数和 0）：<ul>
+<li>定位元素设置数值 <code>z-index</code> 时，会创建新的堆叠上下文；</li>
+<li>数值越大，在同一堆叠上下文内的层级越高（但受限于父级堆叠上下文的层级）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-同一堆叠上下文内的堆叠顺序（从后到前）"><a href="#3-同一堆叠上下文内的堆叠顺序（从后到前）" class="headerlink" title="3. 同一堆叠上下文内的堆叠顺序（从后到前）"></a>3. 同一堆叠上下文内的堆叠顺序（从后到前）</h4><p>在一个堆叠上下文内部，元素的堆叠层级按以下顺序排列（优先级从低到高）：</p>
+<ol>
+<li>堆叠上下文的<strong>背景和边框</strong>（最底层）；</li>
+<li><code>z-index</code> 为<strong>负数</strong>的定位元素（及其创建的子堆叠上下文）；</li>
+<li><strong>非定位元素</strong>（按 DOM 顺序排列）；</li>
+<li><code>z-index</code> 为 <code>auto</code> 或 <code>0</code> 的元素（包括未创建堆叠上下文的定位元素、flex&#x2F;grid 子元素等）；</li>
+<li><code>z-index</code> 为<strong>正数</strong>的定位元素（及其创建的子堆叠上下文）。</li>
+</ol>
+<blockquote>
+<p><code>z-index: auto</code>：默认不创建堆叠上下文（特殊情况除外）</p>
+<ul>
+<li><strong>普通元素</strong>（非 flex&#x2F;grid 子元素）：<br>当元素设置 <code>z-index: auto</code> 时（这是默认值，可省略），即使它是定位元素（<code>position: relative/absolute</code> 等），也<strong>不会创建新的堆叠上下文</strong>。<br>此时，该元素的堆叠顺序由以下规则决定：<ul>
+<li>若为定位元素：层级高于非定位元素，与其他定位元素的顺序遵循“后来居上”（DOM 顺序）。</li>
+<li>其内部子元素的堆叠顺序可以“穿透”它，直接与外部元素比较（因为它没有创建独立的堆叠区域）。</li>
+</ul>
+</li>
+<li><strong>特殊情况：flex&#x2F;grid 子元素</strong>：<br>若元素是 flex 容器（<code>display: flex</code>）或 grid 容器（<code>display: grid</code>）的直接子元素，即使设置 <code>z-index: auto</code>，也<strong>会创建新的堆叠上下文</strong>（这是 flex&#x2F;grid 布局的特殊规则）。</li>
+</ul>
+</blockquote>
+<h4 id="4-跨堆叠上下文的层级比较"><a href="#4-跨堆叠上下文的层级比较" class="headerlink" title="4. 跨堆叠上下文的层级比较"></a>4. 跨堆叠上下文的层级比较</h4><p>若两个元素属于不同的堆叠上下文，则<strong>父级堆叠上下文的层级决定最终顺序</strong>，子元素的 <code>z-index</code> 仅在自身堆叠上下文内有效。<br>例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父元素 A：创建堆叠上下文，z-index: 1 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;A&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: relative; z-index: 1;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;A-child&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: absolute; z-index: 999;&quot;</span>&gt;</span>A 的子元素<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 父元素 B：创建堆叠上下文，z-index: 2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;B&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: relative; z-index: 2;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;B-child&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: absolute; z-index: 1;&quot;</span>&gt;</span>B 的子元素<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：<code>B-child</code> 覆盖 <code>A-child</code>（因为 B 的堆叠上下文层级高于 A，子元素的 <code>z-index</code> 不影响父级比较）。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>无堆叠上下文时，元素堆叠依赖 DOM 顺序和定位状态；</li>
+<li>堆叠上下文是独立的堆叠区域，由特定 CSS 属性触发，子元素层级受限于父级；</li>
+<li><code>z-index</code> 仅在同一堆叠上下文内有效，用于调整元素顺序，其生效依赖定位或 flex&#x2F;grid 子元素特性。</li>
+</ol>
+<p>理解堆叠上下文的创建条件和层级规则，是避免 <code>z-index</code> 陷阱的关键。</p>
+<h2 id="VUE3-的静态提升"><a href="#VUE3-的静态提升" class="headerlink" title="VUE3 的静态提升"></a>VUE3 的静态提升</h2><p>在《Vue.js 设计与实现》一书中，“静态提升”属于第 17 章编译优化的内容。<br>下面展示一下小标题，展示一下书籍的展示思路：</p>
+<hr>
+<p><strong>17.1 动态节点收集与补丁标志</strong><br><strong>17.1.1 传统 Diff 算法的问题</strong></p>
+<ul>
+<li>（静态节点不会被更新，但在 Diff 算法中仍然会进行比对；传统 Diif 算法在由渲染器执行，无法利用编译时提取到的任何关键信息，导致无法做相关优化。Vue.js3 则将编译时获得的关键信息附着到“虚拟 DOM”上，通过“虚拟 DOM”传递给渲染器）</li>
+</ul>
+<p><strong>17.1.2 Block 与 PatchFlags</strong></p>
+<ul>
+<li><p>（传统虚拟 DOM 中无任何标志能够体现出节点的动态性，而 Vue.js3 则会在编译器中将该信息“附着”到虚拟 DOM 上，如<code>&#123;tag: &#39;p&#39;, children: ctx.bar, patchFlag:1&#125;</code>里的<code>patchFlag</code>，不同数字值由不同含义）。有了这些信息，就可以在虚拟节点的创建阶段，把它的动态子节点提取出来，并存储到该虚拟节点的 dynamicChildren 数组内。我们把带有该属性的虚拟节点称为“块”，即<code>Block</code>。一个 Block 不仅能够收集它的直接动态子节点，还能够收集所有动态子代节点。</p>
+</li>
+<li><p>所有模板的根节点都会时一个 Block 节点；任何带有 v-for、v-if&#x2F;v-else-if&#x2F;velse 等指令的节点都需要作为 Block 节点。（ block 本质上也是一个 vnode ）</p>
+<p><strong>17.1.3 收集动态节点</strong></p>
+<ul>
+<li>前言：渲染函数代码会使用来创建虚拟 DOM 节点的辅助函数<code>createVNode</code>。createVNode 函数的返回值是一个虚拟 DOM 节点。在 createVNode 函数内部，通常还会对 props 和 children 做一些额外的处理工作。</li>
+<li>编译器优化提取的信息，体现在于创建虚拟 DOM 节点的辅助函数上。例如由模板<code>&lt;p class=&quot;bar&quot;&gt;&#123;&#123; text &#125;&#125;&lt;/p&gt;</code>，优化后就会生成带有补丁标志(<code>patch flag</code>)的渲染函数，如<code>createVNode(&#39;p&#39;, &#123; class: &#39;bar&#39; &#125;, text, PatchFlags.TEXT) // PatchFlags.TEXT 就是补丁标志</code></li>
+<li>接下来的问题就是如何收集动态节点。首先，渲染辅助函数是嵌套调用的，先执行内层函数，再执行外层函数。为了让外层 Block 节点收集内层动态节点，就需要一个栈结构的数据来临时存储内层的动态节点<code>dynamicChildrenStack</code>。在迭代收集完毕后，将<code>currentDynamicChildren</code>赋值给<code>block.dynamicChildren</code></li>
+</ul>
+<p><strong>17.1.4 渲染器的运行时支持</strong></p>
+<ul>
+<li>有了动态节点集合 vnode.dynamicChildren，以及附着其上的补丁标志，我们就可以在渲染器中实现靶向更新。现在我们的节点更新函数<code>patchElement</code>可以直接对比动态节点，在其中调用<code>patchBlockChildren(n1, n2)</code>方法更新动态节点。这样就可以跳过所有静态节点。</li>
+<li>对于具体的节点，可以针对<code>patch flag</code>的值，针对性地完成靶向更新。如<code>patch flag=1</code>表示只有 class 会变更，只需要更新 class。</li>
+</ul>
+<p><strong>17.2 Block 树</strong><br>除了组件模板的根节点，还有其它节点会作为 Block 角色</p>
+<p><strong>17.2.1 带有 v-if 指令的节点</strong><br>dynamicChildren 数组中收集的动态节点是忽略虚拟 DOM 树层级的。结构化指令会导致更新前后模板的结构发生变化，即模板结构不稳定。因此要让带有 v-if&#x2F;v-else-if&#x2F;v-else 等结构化指令的节点也作为 Block 角色。</p>
+<p><strong>17.2.2 带有 v-for 指令的节点</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">01</span> <span class="keyword">const</span> block = &#123;</span><br><span class="line"><span class="number">02</span>   <span class="attr">tag</span>: <span class="string">&#x27;div&#x27;</span>,</span><br><span class="line"><span class="number">03</span>   <span class="attr">dynamicChildren</span>: [</span><br><span class="line"><span class="number">04</span>     <span class="comment">// 这是一个 Block，它有 dynamicChildren</span></span><br><span class="line"><span class="number">05</span>     &#123; <span class="attr">tag</span>: <span class="title class_">Fragment</span>, <span class="attr">dynamicChildren</span>: [<span class="comment">/* v-for 的节点 */</span>] &#125;</span><br><span class="line"><span class="number">06</span>     &#123; <span class="attr">tag</span>: <span class="string">&#x27;i&#x27;</span>, <span class="attr">children</span>: ctx.<span class="property">foo</span>, <span class="number">1</span> <span class="comment">/* TEXT */</span> &#125;,</span><br><span class="line"><span class="number">07</span>     &#123; <span class="attr">tag</span>: <span class="string">&#x27;i&#x27;</span>, <span class="attr">children</span>: ctx.<span class="property">bar</span>, <span class="number">1</span> <span class="comment">/* TEXT */</span> &#125;,</span><br><span class="line"><span class="number">08</span>   ]</span><br><span class="line"><span class="number">09</span> &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>17.2.3 Fragment 的稳定性</strong><br>在上一节中，我们使用了一个 Fragment 来表达 v-for 循环产生的虚拟节点，并让其充当 Block 的角色来解决 v-for 指令导致的虚拟 DOM 树结构不稳定问题。但是，我们需要仔细研究这个 Fragment 节点本身。<br>Fragment 本身收集的动态节点仍然面临结构不稳定的情况。所谓结构不稳定，从结果上看，指的是更新前后一个 block 的 dynamicChildren 数组中收集的动态节点的数量或顺序不一致。这种不一致会导致我们无法直接进行靶向更新。但对于这种情况，没有更好的解决办法，智能回退到传统虚拟 DOM 的 Diff 手段。</p>
+<p><strong>17.3 静态提升</strong><br>没静态提升时，静态的虚拟节点也会随着渲染函数重新渲染：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">01</span> <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="number">02</span>   <span class="keyword">return</span> (<span class="title function_">openBlock</span>(), <span class="title function_">createBlock</span>(<span class="string">&#x27;div&#x27;</span>, <span class="literal">null</span>, [</span><br><span class="line"><span class="number">03</span>     <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, <span class="string">&#x27;static text&#x27;</span>),</span><br><span class="line"><span class="number">04</span>     <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, ctx.<span class="property">title</span>, <span class="number">1</span> <span class="comment">/* TEXT */</span>)</span><br><span class="line"><span class="number">05</span>   ]))</span><br><span class="line"><span class="number">06</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是没有必要的，而解决方案就是所谓的“静态提升”，即把纯静态的节点提升到渲染函数之外：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="number">01</span> <span class="comment">// 把静态节点提升到渲染函数之外</span></span><br><span class="line"><span class="number">02</span> <span class="keyword">const</span> hoist1 = <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, <span class="string">&#x27;text&#x27;</span>)</span><br><span class="line"><span class="number">03</span></span><br><span class="line"><span class="number">04</span> <span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="number">05</span>   <span class="keyword">return</span> (<span class="title function_">openBlock</span>(), <span class="title function_">createBlock</span>(<span class="string">&#x27;div&#x27;</span>, <span class="literal">null</span>, [</span><br><span class="line"><span class="number">06</span>     hoist1, <span class="comment">// 静态节点引用</span></span><br><span class="line"><span class="number">07</span>     <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, ctx.<span class="property">title</span>, <span class="number">1</span> <span class="comment">/* TEXT */</span>)</span><br><span class="line"><span class="number">08</span>   ]))</span><br><span class="line"><span class="number">09</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要强调的是，静态节点是以树为单位的；<br>包含动态绑定的节点本身不会被提升，但是该动态节点上仍然可能存在纯静态的属性，最终生成渲染函数时，我们可以将纯静态的 props 提升到渲染函数之外。<br><strong>17.4 预字符串化</strong><br>基于静态提升，我们还可以进一步采用预字符串化的优化手段。预字符串化是基于静态提升的一种优化策略。如果静态提升的虚拟节点或虚拟节点树本身是静态的，就可以进行预字符串化，把这些静态节点序列化为字符串，并生成一个 Static 类型的 VNode。<br>优势：</p>
+<pre><code>- 大块的静态内容可以通过 innerHTML 进行设置，在性能上具有一定优势。
+- 减少创建虚拟节点产生的性能开销。
+- 减少内存占用
+</code></pre>
+<p><strong>17.5 缓存内联事件处理函数 (略)</strong><br><strong>17.6 v-once</strong><br>编译器遇到 v-once 指令时，会利用我们上一节介绍的 cache 数组来缓存渲染函数的全部或者部分执行结果；<br>从编译结果中可以看到，该 div 标签对应的虚拟节点被缓存到了 cache 数组中。既然虚拟节点已经被缓存了，那么后续更新导致渲染函数重新执行时，会优先读取缓存的内容，而不会重新创建虚拟节点。同时，由于虚拟节点被缓存，意味着更新前后的虚拟节点不会发生变化，因此也就不需要这些被缓存的虚拟节点参与 Diff 操作了。<br>v-once 指令通常用于不会发生改变的动态绑定中，例如绑定一个常量。</p>
+<hr>
+<p><strong>《Vue.js 设计预实现》已经把静态提升讲得很清除了。下面也展示 AI 对静态提升的讲述，或许未看过上面提到的这本书的读者更容易接受下面的表述。</strong></p>
+<p>在 Vue 3 中，<strong>静态提升（Static Hoisting）</strong> 是编译器层面的优化技术，用于提升模板中静态节点（不依赖任何动态数据、不会被更新的节点）的性能。</p>
+<h3 id="一、静态提升的核心原理"><a href="#一、静态提升的核心原理" class="headerlink" title="一、静态提升的核心原理"></a>一、静态提升的核心原理</h3><p>当 Vue 3 编译器解析模板时，会识别出完全静态的节点（如纯文本、无动态绑定的元素），并将其<strong>从渲染函数中“提升”出来</strong>，成为一个独立的、可复用的常量。</p>
+<p>这样做的好处是：</p>
+<ul>
+<li>避免在每次组件重新渲染时（如响应式数据变化触发更新）重复创建这些静态节点的虚拟 DOM（VNode）；</li>
+<li>减少渲染函数的执行时间和内存开销，提升性能。</li>
+</ul>
+<h3 id="二、示例对比"><a href="#二、示例对比" class="headerlink" title="二、示例对比"></a>二、示例对比</h3><p>假设模板中有一段静态内容（无任何动态绑定）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;static-container&quot;&gt;</span><br><span class="line">    &lt;h1&gt;这是一个静态标题&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;这是一段静态文本，不依赖任何响应式数据。&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;当前时间: &#123;&#123; time &#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;!-- 动态节点 --&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="未启用静态提升时（模拟）："><a href="#未启用静态提升时（模拟）：" class="headerlink" title="未启用静态提升时（模拟）："></a>未启用静态提升时（模拟）：</h4><p>每次次组件渲染（如 <code>time</code> 变化时），渲染函数会重新创建所有节点的 VNode，包括静态的 <code>&lt;h1&gt;</code> 和 <code>&lt;p&gt;</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createVNode</span>(<span class="string">&#x27;div&#x27;</span>, &#123; <span class="attr">class</span>: <span class="string">&#x27;static-container&#x27;</span> &#125;, [</span><br><span class="line">    <span class="title function_">createVNode</span>(<span class="string">&#x27;h1&#x27;</span>, <span class="literal">null</span>, <span class="string">&#x27;这是一个静态标题&#x27;</span>), <span class="comment">// 重复创建静态节点</span></span><br><span class="line">    <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, <span class="string">&#x27;这是一段静态文本...&#x27;</span>), <span class="comment">// 重复创建静态节点</span></span><br><span class="line">    <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, <span class="string">`当前时间: <span class="subst">$&#123;time&#125;</span>`</span>) <span class="comment">// 动态节点</span></span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="启用静态提升后（Vue-3-实际编译结果）："><a href="#启用静态提升后（Vue-3-实际编译结果）：" class="headerlink" title="启用静态提升后（Vue 3 实际编译结果）："></a>启用静态提升后（Vue 3 实际编译结果）：</h4><p>静态节点被提升为渲染函数外部的常量，仅在组件初始化时创建一次，后续渲染直接复用：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 静态节点被提升为常量，只创建一次</span></span><br><span class="line"><span class="keyword">const</span> hoistedStaticNodes = [</span><br><span class="line">  <span class="title function_">createVNode</span>(<span class="string">&#x27;h1&#x27;</span>, <span class="literal">null</span>, <span class="string">&#x27;这是一个静态标题&#x27;</span>),</span><br><span class="line">  <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, <span class="string">&#x27;这是一段静态文本...&#x27;</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createVNode</span>(<span class="string">&#x27;div&#x27;</span>, &#123; <span class="attr">class</span>: <span class="string">&#x27;static-container&#x27;</span> &#125;, [</span><br><span class="line">    ...hoistedStaticNodes, <span class="comment">// 直接复用静态节点</span></span><br><span class="line">    <span class="title function_">createVNode</span>(<span class="string">&#x27;p&#x27;</span>, <span class="literal">null</span>, <span class="string">`当前时间: <span class="subst">$&#123;time&#125;</span>`</span>) <span class="comment">// 仅动态节点重新创建</span></span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、静态提升技术的背景"><a href="#三、静态提升技术的背景" class="headerlink" title="三、静态提升技术的背景"></a>三、静态提升技术的背景</h3><p>Vue 3 引入静态提升的核心背景是<strong>提升大型应用的渲染性能</strong>，主要源于对 Vue 2 渲染机制的优化：</p>
+<ol>
+<li><p><strong>Vue 2 的性能瓶颈</strong>：<br>在 Vue 2 中，无论节点是否静态，每次组件更新都会重新创建所有 VNode，然后通过 Diff 算法对比新旧 VNode 树。对于包含大量静态内容（如页面布局、固定文本）的组件，这种重复创建和对比会产生不必要的性能开销。</p>
+</li>
+<li><p><strong>编译器与运行时的协同优化</strong>：<br>Vue 3 重构了编译器和响应式系统，强调“编译器主导的优化”。通过编译阶段识别静态节点并提升，减少运行时的 VNode 创建和 Diff 工作量，实现“按需更新”（只处理动态节点）。</p>
+</li>
+<li><p><strong>针对静态内容占比高的场景</strong>：<br>在实际业务中，很多页面包含大量静态内容（如导航栏、页脚、说明文本），静态提升能显著减少这些内容在更新时的性能损耗，尤其在高频更新场景（如数据实时刷新）中效果明显。</p>
+</li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>静态提升是 Vue 3 编译器对静态节点的优化，通过复用静态 VNode 减少渲染开销。其背景是解决 Vue 2 中静态内容重复创建的性能问题，通过编译器与运行时的协同，让 Vue 3 在处理大量静态内容时更高效。</p>
+]]></content>
+      <categories>
+        <category>major</category>
+      </categories>
+      <tags>
+        <tag>study</tag>
+      </tags>
+  </entry>
 </search>
