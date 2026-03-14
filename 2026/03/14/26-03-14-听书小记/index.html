@@ -4,15 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="25-11-03-Vue3的DOM操作与diff算法, MYS109hqj">
+    <meta name="keywords" content="26-03-14-听书小记, MYS109hqj">
     <meta name="description" content="
-学习《Vue.js 设计与实现》的笔记
-
-目录
-命令类型与三种 DOM 操作方式
-VUE3 的 Diff
-
-命令类型声明式和命令式：以&amp;lt;input v-model=&amp;quot;value&amp;quot;/&amp;gt;为例，这段代码是声明式的">
+总起 美食的性价比我们吃美食时，总会追求性价比，想要花少钱品最美味的食物。美食的价格由很多因素决定，咱就谈论其中几点。一是新鲜度。在非临海的城市，想要吃上新鲜的海鲜，就得冷藏空运，价格自然也就贵了。不过好在我家乡在临海区域，因此能够相对便">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -24,7 +18,7 @@ VUE3 的 Diff
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>25-11-03-Vue3的DOM操作与diff算法 | MYS109hqj</title>
+    <title>26-03-14-听书小记 | MYS109hqj</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -339,12 +333,12 @@ VUE3 的 Diff
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">25-11-03-Vue3的DOM操作与diff算法</h1>
+                    <h1 class="description center-align post-title">26-03-14-听书小记</h1>
                 </div>
             </div>
         </div>
@@ -368,23 +362,14 @@ VUE3 的 Diff
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/study/">
-                                <span class="chip bg-color">study</span>
+                            <a href="/tags/daily/">
+                                <span class="chip bg-color">daily</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/major/" class="post-category">
-                                major
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -393,21 +378,21 @@ VUE3 的 Diff
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-11-04
+                    2026-03-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-11-04
+                    2026-03-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    460
                 </div>
                 
 
@@ -429,79 +414,12 @@ VUE3 的 Diff
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>学习《Vue.js 设计与实现》的笔记</p>
-</blockquote>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><a href="#%E5%91%BD%E4%BB%A4%E7%B1%BB%E5%9E%8B">命令类型与三种 DOM 操作方式</a></li>
-<li><a href="#VUE3%E7%9A%84Diff">VUE3 的 Diff</a></li>
-</ul>
-<h2 id="命令类型"><a href="#命令类型" class="headerlink" title="命令类型"></a>命令类型</h2><p>声明式和命令式：<br>以<code>&lt;input v-model=&quot;value&quot;/&gt;</code>为例，这段代码是声明式的，是 Vue 提供的“语法糖”。书写这段声明式代码，本质上是在调用渲染函数这类命令式代码。</p>
-<p>虚拟 DOM、模板字符串、Javascript 都能挂载、更新 DOM。</p>
-<h3 id="三种-DOM-操作方式的挂载与更新逻辑"><a href="#三种-DOM-操作方式的挂载与更新逻辑" class="headerlink" title="三种 DOM 操作方式的挂载与更新逻辑"></a>三种 DOM 操作方式的挂载与更新逻辑</h3><ol>
-<li>JavaScript（原生 DOM API）</li>
-</ol>
-<ul>
-<li><strong>挂载</strong>：直接通过<code>document.createElement</code>创建节点，<code>appendChild</code>插入 DOM 树（如<code>const div = document.createElement(&#39;div&#39;); document.body.appendChild(div)</code>）。</li>
-<li><strong>更新</strong>：手动定位需要修改的节点，调用 DOM API 更新（如<code>div.textContent = &#39;new content&#39;</code>）。</li>
-</ul>
-<p><strong>特点</strong>：</p>
-<ul>
-<li>效率“理论上可能最高”——如果开发者能精准定位到最小更新范围，避免冗余操作，效率可以接近最优。但实际开发中，复杂场景下手动维护更新逻辑极易出错（如漏更、多更），反而可能写出低效代码。</li>
-</ul>
-<ol start="2">
-<li>虚拟 DOM（如 Vue 的 VNode）</li>
-</ol>
-<ul>
-<li><strong>挂载</strong>：<ol>
-<li>先创建虚拟 DOM 对象（描述节点类型、属性、子节点等，如<code>&#123; type: &#39;div&#39;, props: &#123; id: &#39;app&#39; &#125;, children: [] &#125;</code>）；</li>
-<li>框架通过渲染函数（<code>render</code>）将虚拟 DOM 转换为真实 DOM（递归调用<code>createElement</code>），插入页面。</li>
-</ol>
+                <ul>
+<li><p>总起 美食的性价比<br>我们吃美食时，总会追求性价比，想要花少钱品最美味的食物。美食的价格由很多因素决定，咱就谈论其中几点。<br>一是新鲜度。在非临海的城市，想要吃上新鲜的海鲜，就得冷藏空运，价格自然也就贵了。不过好在我家乡在临海区域，因此能够相对便宜地吃到鱿鱼、贝壳。<br>二是餐品是否标准化。例如瓶装汽水，平时550毫升一罐三块半，你在店里卖贵了，客人就能很快地识别出来。但如果你不卖瓶装可乐，把可乐自己加工成自定义标准地柠檬可乐，再装杯出售，客人对价格的敏感度就会降低。其中的要点是，如果你出售的是自定义标准的产品，就可以争取到定价权，扩大商品的利润。<br>三是店铺的性质。有些店主打盈利、有些店主打实惠，大家都知道实惠店是性价比的选择。但是如何找到实惠又好吃的店铺呢？可以找那些老年人多的店铺，因为那些店铺经过了老年人长期的选择；可以找那些非外卖主营的店铺，那些店铺积累了常客，靠常客的客流盈利。</p>
 </li>
-<li><strong>更新</strong>：<ol>
-<li>数据变化时生成新的虚拟 DOM；</li>
-<li>通过 Diff 算法对比新旧虚拟 DOM，找出最小更新差异（如属性变化、子节点增删移）；</li>
-<li>只将差异部分转换为真实 DOM 操作（如<code>patchProps</code>更新属性、<code>insertBefore</code>移动节点）。</li>
-</ol>
+<li><p>子话题：“交叉补贴”<br>此外，有一个叫做“交叉补贴”的概念。在一家餐馆里，不是每一个商品都会给商家带来相同的利润。有些商品盈利很低，而有些盈利很高。盈利高的典型商品就是酒水。因此，我们在外面吃饭时，若想追求高性价比，少买点酒水是一个让我们被补贴的好办法。</p>
 </li>
 </ul>
-<p><strong>特点</strong>：</p>
-<ul>
-<li>“在复杂场景下效率更稳定”——Diff 算法会自动优化更新范围，避免开发者手动操作的疏漏。但相比“最优手动操作”，多了虚拟 DOM 创建和 Diff 的计算开销（这部分开销在 Vue3 中通过静态标记、编译时优化大幅降低）。</li>
-</ul>
-<ol start="3">
-<li>模板字符串（如<code>innerHTML</code>）</li>
-</ol>
-<ul>
-<li><strong>挂载</strong>：通过字符串拼接描述 DOM 结构（如<code>const html = </code><div>${content}</div><code>; element.innerHTML = html</code>），浏览器解析字符串并创建 DOM 树。</li>
-<li><strong>更新</strong>：重新拼接完整的模板字符串，通过<code>innerHTML</code>覆盖原有内容（即使只有一个字符变化，也会销毁旧 DOM 树并重建）。</li>
-</ul>
-<p><strong>特点</strong>：</p>
-<ul>
-<li>效率最低——每次更新都会销毁整个旧 DOM 树（包括解绑事件、移除子节点），重新解析字符串并创建新 DOM 树，性能开销极大（尤其包含大量节点或事件绑定时）。</li>
-<li>且存在 XSS 风险（若字符串包含未过滤的用户输入），Vue 等框架的模板会自动转义，本质是对模板字符串的安全封装，而非直接使用原生<code>innerHTML</code>。</li>
-</ul>
-<h3 id="效率对比："><a href="#效率对比：" class="headerlink" title="效率对比："></a><strong>效率对比</strong>：</h3><p>在 DOM 操作的简单场景下 Javascript 最高效，虚拟 DOM 次之，模板字符串还得经过 parsing，效率最低。<br>但通过 Javascript 和模板字符串加载的心智负担重，而虚拟 DOM 不需要手动管理所有 DOM 操作细节，开发者只需要关注数据变化。因此，在复杂场景下使用虚拟 DOM 的效率最高。</p>
-<h2 id="VUE3-的-Diff"><a href="#VUE3-的-Diff" class="headerlink" title="VUE3 的 Diff"></a>VUE3 的 Diff</h2><ol>
-<li>先对比父节点的 type 和 key，一致且父节点是动态节点（即会发生改变的节点，如传入数据可能变动的节点；与之相比的是静态节点）时，进一步对比节点的 props、children 等内容，进行子节点 Diff 环节；</li>
-<li>对有多个子节点的情况，（双端 Diff 算法）先对比新旧 DOM 链表的首尾，通过 key 值判断节点是否相同：<br>以对比头节点为例，如果新旧 DOM 链表的 key 值一样，则可以“直接”复用，否则尝试尾尾；之后再尝试头尾、尾头，后两种如果可以复用，则移动对应 DOM 节点；</li>
-<li>确定可复用的首尾部分后，先遍历剩余的<code>oldChildren</code>(旧节点列表)，构建<code>keyToOldIdx</code>的映射表（把后续遍历<code>newChildren+oldChildren</code>的 O(n^2)的查找操作优化成 O(n)）；<br>再遍历<code>newChildren</code>，通过<code>keyToOldIdx</code>判断当前节点是否在旧列表中；<ul>
-<li>若不存在，直接创建新节点；</li>
-<li>若存在，记录旧节点的索引，生成 “需要处理的索引数组”（<code>source</code>）；<br>最后<code>source</code>数组对进行“最长递增子序列”的计算，不移动该序列对应的节点，只移动其它节点，最大化复用原有的节点；</li>
-</ul>
-</li>
-<li>对剩余部分，根据 key 与实时处理标识 j，判断节点的新增、移动与删除。<br>“j” 是最长递增子序列的 “指针”，用于标记当前已处理到的 “无需移动” 节点的位置。遍历 source 数组时：<ul>
-<li>若当前节点索引不在最长递增子序列中，说明需要移动，从 j 对应的位置插入；</li>
-<li>遍历结束后，若旧列表还有剩余节点，直接删除；若新列表还有剩余节点，直接创建。</li>
-</ul>
-</li>
-</ol>
-<p>Vue3 Diff 的核心优化点（笔记缺失，需补充）</p>
-<ol>
-<li><strong>静态标记（PatchFlags）</strong>：编译时给动态节点打上标记（如<code>TEXT</code>、<code>PROPS</code>），Diff 时仅处理带标记的节点，跳过静态节点，减少对比范围；</li>
-<li><strong>最长递增子序列优化</strong>：Vue2 中未排序的子节点 Diff 会导致大量移动，Vue3 通过该算法将移动次数降到最低，时间复杂度从 O(n²)优化为 O(n log n)；</li>
-<li><strong>key 映射表</strong>：快速查找可复用节点，避免遍历查找的冗余计算。</li>
-</ol>
 
                 
             </div>
@@ -528,7 +446,7 @@ VUE3 的 Diff
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://mys109hqj.github.io/2025/11/04/25-11-03-Vue3%E7%9A%84DOM%E6%93%8D%E4%BD%9C%E4%B8%8Ediff%E7%AE%97%E6%B3%95/">https://mys109hqj.github.io/2025/11/04/25-11-03-Vue3%E7%9A%84DOM%E6%93%8D%E4%BD%9C%E4%B8%8Ediff%E7%AE%97%E6%B3%95/</a>
+                    <a href="https://mys109hqj.github.io/2026/03/14/26-03-14-%E5%90%AC%E4%B9%A6%E5%B0%8F%E8%AE%B0/">https://mys109hqj.github.io/2026/03/14/26-03-14-%E5%90%AC%E4%B9%A6%E5%B0%8F%E8%AE%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -566,8 +484,8 @@ VUE3 的 Diff
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/study/">
-                                    <span class="chip bg-color">study</span>
+                                <a href="/tags/daily/">
+                                    <span class="chip bg-color">daily</span>
                                 </a>
                             
                         </div>
@@ -627,9 +545,56 @@ VUE3 的 Diff
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/03/14/26-03-14-%E5%90%AC%E4%B9%A6%E5%B0%8F%E8%AE%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="26-03-14-听书小记">
+                        
+                        <span class="card-title">26-03-14-听书小记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-03-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Qijia Huang
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/daily/">
+                        <span class="chip bg-color">daily</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2025/11/11/25-11-11-z-index%E4%B8%8EVue3%E7%9A%84%E9%9D%99%E6%80%81%E6%8F%90%E5%8D%87/">
                     <div class="card-image">
@@ -647,57 +612,8 @@ VUE3 的 Diff
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-11-11
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/major/" class="post-category">
-                                    major
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/study/">
-                        <span class="chip bg-color">study</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/10/31/25-10-29-SSE%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="25-10-29-SSE学习笔记">
-                        
-                        <span class="card-title">25-10-29-SSE学习笔记</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-11-11
                             </span>
                         <span class="publish-author">
                             
